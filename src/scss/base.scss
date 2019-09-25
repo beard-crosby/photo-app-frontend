@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap');
 
 $color-1: #464647;
-$color-2: #096625;
 $black: #333333;
 $white: #f1f1f1;
 $pure-white: #ffffff;
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 100;
+  margin: 0;
+  cursor: default;
+}
 
 body {
   margin: 0;
@@ -22,9 +27,14 @@ body {
     justify-content: space-between;
     align-items: center;
     min-height: 100vh;
-  }
-}
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 100;
+    main {
+      width: 100%;
+      flex-grow: 1;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
 }
