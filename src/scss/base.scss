@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap');
+
+$color-1: #464647;
+$color-2: #096625;
+$black: #333333;
+$white: #f1f1f1;
+$pure-white: #ffffff;
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $black;
+  width: 100vw;
+  height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Roboto', sans-serif;
+
+  #root {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 100;
+}
