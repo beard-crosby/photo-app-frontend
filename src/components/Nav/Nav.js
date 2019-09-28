@@ -13,9 +13,10 @@ const Nav = () =>
       </div>
     </div>
     <div className={classes.NavBottom}>
-      <NavLink><p>Profile</p></NavLink>
-      <NavLink><p>Following</p></NavLink>
-      <NavLink><p>Settings</p></NavLink>
+      <NavLink to="/"><p>Wall</p></NavLink>
+      <NavLink to="/profile"><p>Profile</p></NavLink>
+      <NavLink to="/following"><p>Following</p></NavLink>
+      <NavLink to="/settings"><p>Settings</p></NavLink>
     </div>
   </nav>
 
