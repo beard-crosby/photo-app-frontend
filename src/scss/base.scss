@@ -1,25 +1,29 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap');
 
-$color-1: #464647;
-$black: #333333;
+$color-1: #EEEEEE;
+$color-2: #525252;
+$black: #000000;
 $white: #f1f1f1;
 $pure-white: #ffffff;
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 100;
+h1, h2, h3, h4, h5, h6, p, a {
   margin: 0;
   cursor: default;
+  text-decoration: none;
+}
+
+p {
+  font-size: 0.9em;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: $black;
   width: 100vw;
   height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 
   #root {
     display: flex;
@@ -29,12 +33,16 @@ body {
     min-height: 100vh;
 
     main {
-      width: 100%;
+      width: 1000px;
       flex-grow: 1;
       display: flex;
       flex-flow: column nowrap;
       justify-content: flex-start;
       align-items: center;
+
+      @media (max-width: 1000px) {
+        width: 100%;
+      }
     }
   }
 }

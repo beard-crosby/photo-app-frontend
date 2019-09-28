@@ -3,7 +3,7 @@ import * as classes from './Footer.module.scss'
 
 const Footer = () => 
   <div className={classes.Footer}>
-    <h3>Beard-Crosby</h3>
+    <p>Beard-Crosby &copy;</p>
   </div>
 
 export default Footer
