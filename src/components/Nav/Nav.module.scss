@@ -24,6 +24,8 @@ $color-2: #525252;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
+    padding: 0 40px;
 
     .NavTopRight {
       width: 220px;
@@ -51,6 +53,8 @@ $color-2: #525252;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    box-sizing: border-box;
+    padding: 0 40px;
 
     p, a {
       color: $color-2;
