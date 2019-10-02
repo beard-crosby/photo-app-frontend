@@ -33,6 +33,19 @@ $black: #000000;
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      svg {
+        display: none;
+        margin-right: 20px;
+      }
+
+      @media (max-width: 600px) {
+        width: auto;
+
+        svg {
+          display: block;
+        }
+      }
     }
 
     .ProfilePicture {
@@ -45,6 +58,10 @@ $black: #000000;
 
     @media (max-width: 1000px) {
       width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      padding: 0;
     }
   }
 
@@ -61,8 +78,12 @@ $black: #000000;
       color: $color-2;
       margin-right: 20px;
       height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       p {
+        margin: 0;
         cursor: pointer;
       }
 
@@ -73,6 +94,10 @@ $black: #000000;
 
     @media (max-width: 1000px) {
       width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      padding: 0;
     }
   }
 }

@@ -15,3 +15,9 @@ $black: #000000;
     margin: 0;
   }
 }
+
+.HideMobile {
+  @media (max-width: 600px) {
+    display: none;
+  }
+}

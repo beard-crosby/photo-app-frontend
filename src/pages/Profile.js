@@ -24,7 +24,7 @@ const Profile = () =>
         <img alt="Test Img" src={require('../static/testPictures/5.jpg')}/>
         <img alt="Test Img" src={require('../static/testPictures/6.jpg')}/>
       </div>
-      <div className="ContentColumn">
+      <div className="ContentColumn Hide-Mobile">
         <img alt="Test Img" src={require('../static/testPictures/7.jpg')}/>
         <img alt="Test Img" src={require('../static/testPictures/8.jpg')}/>
         <img alt="Test Img" src={require('../static/testPictures/9.jpg')}/>

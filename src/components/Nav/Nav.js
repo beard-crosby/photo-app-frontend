@@ -2,13 +2,15 @@ import React from 'react'
 import * as classes from './Nav.module.scss'
 import { NavLink } from 'react-router-dom'
 import Button from '../UI/Button'
+import { Upload } from 'react-feather'
 
 const Nav = () => 
   <nav className={classes.Nav}>
     <div className={classes.NavTop}>
       <h1>PHOTO APP</h1>
       <div className={classes.NavTopRight}>
-        <Button text="Upload"/>
+        <Upload/>
+        <Button text="Upload" HideMobile={true}/>
         <div className={classes.ProfilePicture}/>
       </div>
     </div>
