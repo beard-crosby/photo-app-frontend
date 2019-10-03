@@ -26,6 +26,7 @@ $pure-white: #ffffff;
       background-image: url('../static/defaults/placeholder.png');
       background-size: cover;
       background-repeat: no-repeat;
+      flex-shrink: 0;
     }
 
     .BasicInfo {
@@ -53,6 +54,10 @@ $pure-white: #ffffff;
           padding: 10px 0;
         }
       }
+    }
+
+    @media (max-width: 600px) {
+      padding: 0 20px;
     }
   }
 }

@@ -54,6 +54,7 @@ $black: #000000;
       border-radius: 30px;
       background-image: url('../../static/defaults/placeholder.png');
       background-size: contain;
+      cursor: pointer;
     }
 
     @media (max-width: 1000px) {
