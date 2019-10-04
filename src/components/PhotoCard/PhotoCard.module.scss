@@ -9,15 +9,20 @@ $black: #000000;
   align-items: flex-start;
   box-sizing: border-box;
   border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.16), 0 2px 6px rgba(0,0,0,0.2);
 
   .ImgWrapper {
     display: flex;
     width: 100%;
-
+    
     img {
       width: 100%;
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
+
+      @media (max-width: 600px) {
+        border-radius: 0;
+      }
     }
   }
 
@@ -29,10 +34,7 @@ $black: #000000;
     .Creator {
       width: 100%;
       display: flex;
-      justify-content: center;
       padding: 10px;
-      overflow: hidden;
-      overflow-x: auto;
       box-sizing: border-box;
 
       .ProfilePicture {
@@ -44,6 +46,12 @@ $black: #000000;
         cursor: pointer;
         margin-right: 10px;
         flex-shrink: 0;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 40px;
+        }
       }
 
       .ProfileInfo {
@@ -68,6 +76,24 @@ $black: #000000;
       width: 100%;
       display: flex;
       flex-flow: column nowrap;
+      background: #525252;
+
+      input {
+        border: none;
+        border-top: 1px solid $color-1;
+        font-size: 0.9em;
+        padding: 5px 10px;
+        box-sizing: border-box;
+      }
     }
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    flex-flow: column nowrap;
+    border-radius: 0;
   }
 }
