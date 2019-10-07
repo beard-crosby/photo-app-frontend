@@ -1,7 +1,7 @@
 import React from 'react'
 import * as classes from './PhotoCard.module.scss'
 
-const PhotoCard = ({ img, name, username, profileImg, style }) => 
+const PhotoCard = ({ img, name, profileImg, style }) => 
   <div className={classes.PhotoCardWrapper} style={style}>
     <div className={classes.ImgWrapper}>
       {img}
@@ -13,7 +13,6 @@ const PhotoCard = ({ img, name, username, profileImg, style }) =>
         </div>
         <div className={classes.ProfileInfo}>
           <h5>{name}</h5>
-          <p>{username}</p>
         </div>
       </div>
       <div className={classes.Comments}>
