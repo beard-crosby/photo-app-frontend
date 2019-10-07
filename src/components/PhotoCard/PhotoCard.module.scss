@@ -5,8 +5,6 @@ $black: #000000;
 .PhotoCardWrapper {
   width: 100%;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
   box-sizing: border-box;
 
   .ImgWrapper {
@@ -15,11 +13,12 @@ $black: #000000;
     
     img {
       width: 100%;
-      margin-right: 25px;
     }
   }
 
   .Sidebar {
+    background-color: #000000;
+    color: #ffffff;
     width: 300px;
     padding-top: 25px;
     display: flex;
@@ -28,17 +27,27 @@ $black: #000000;
     .Creator {
       width: 100%;
       display: flex;
+      flex-direction: column;
+      // justify-content: center;
+      align-items: center;
+      text-align: center;
       padding: 10px;
       box-sizing: border-box;
+
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        margin-bottom: 10px;
+      }
 
       .ProfilePicture {
         width: 40px;
         height: 40px;
         border-radius: 40px;
-        background-image: url('../../static/defaults/placeholder.png');
-        background-size: contain;
         cursor: pointer;
         margin-right: 20px;
+        flex-shrink: 0;
 
         img {
           width: 100%;
@@ -68,11 +77,12 @@ $black: #000000;
       width: 100%;
       display: flex;
       flex-flow: column nowrap;
-      border-top: 1px solid $color-1;
       margin-top: 25px;
       padding-top: 15px;
 
       input {
+        background: none;
+        color: white;
         border: none;
         font-size: 0.9em;
         padding: 5px 10px;
