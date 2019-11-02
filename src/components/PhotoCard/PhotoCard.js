@@ -16,7 +16,7 @@ const PhotoCard = ({ ident, img, name, profileImg, style}) => {
       <div className={classes.ImgWrapper}>
         {img}
       </div>
-      <div className={classes.Overlay} style={{ height: height - 0.5, width: width }}>
+      {overlay && <div className={classes.Overlay} style={{ height: height - 0.5, width: width }}>
         <div className={classes.SidebarL}>
           <div className={classes.Creator}>
             <div className={classes.ProfilePicture}>
@@ -31,7 +31,7 @@ const PhotoCard = ({ ident, img, name, profileImg, style}) => {
           <div className={classes.Comments}/>
           <input type="text" name="comment" id="comment" placeholder="Write a comment" />
         </div>
-      </div>
+      </div>}
     </div>
   )
 }
