@@ -12,7 +12,10 @@ const PhotoCard = ({ ident, img, name, profileImg, style}) => {
   }, [])
   console.log(height, width)
   return (
-    <div className={classes.PhotoCardWrapper} style={style} onMouseEnter={() => setOverlay(true)} onMouseLeave={() => setOverlay(false)}>
+    <div className={classes.PhotoCardWrapper} style={style} 
+      onMouseEnter={() => setOverlay(true)} 
+      onClick={() => setOverlay(true)}
+      onMouseLeave={() => setOverlay(false)}>
       <div className={classes.ImgWrapper}>
         {img}
       </div>
