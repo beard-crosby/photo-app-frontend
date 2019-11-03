@@ -1,10 +1,10 @@
 import React from 'react'
-import '../scss/following.scss'
+import '../scss/_following.scss'
 import PhotoCard from '../components/PhotoCard'
 import testData from '../testData'
 
 const Following = () => 
-  <div className="Following-Wrapper">
+  <div className="following-wrapper">
     {testData.map((testData, i) => 
       <PhotoCard
         key={i}

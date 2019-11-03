@@ -1,5 +1,5 @@
 import React from 'react'
-import * as classes from './Button.module.scss'
+import * as classes from './_Button.module.scss'
 
 const Button = ({ text, style, HideMobile }) => {
   const classArr = [classes.Button]

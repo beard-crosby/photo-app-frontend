@@ -1,5 +1,5 @@
 import React from 'react'
-import * as classes from './UploadBtn.module.scss'
+import * as classes from './_UploadBtn.module.scss'
 import { Upload } from 'react-feather'
 
 const UploadBtn = () => 

@@ -1,14 +1,17 @@
-.Footer {
+.settings-wrapper {
   width: 1000px;
+  padding: 40px;
   box-sizing: border-box;
-  padding: 0 40px;
-  height: 60px;
   display: flex;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  font-weight: 400;
 
   @media (max-width: 1000px) {
     width: 100%;
+  }
+
+  @media (max-width: 600px) {
+    padding: 40px 0;
   }
 }

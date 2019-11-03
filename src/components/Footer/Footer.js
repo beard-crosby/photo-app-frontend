@@ -1,8 +1,7 @@
 import React from 'react'
-import * as classes from './Footer.module.scss'
 
 const Footer = () => 
-  <footer className={classes.Footer}>
+  <footer className="footer">
     <p>Beard-Crosby &copy;</p>
   </footer>
 

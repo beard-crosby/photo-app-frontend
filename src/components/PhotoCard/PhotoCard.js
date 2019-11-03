@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import * as classes from './PhotoCard.module.scss'
+import * as classes from './_PhotoCard.module.scss'
 
 const PhotoCard = ({ ident, img, name, profileImg }) => {
   const [height, setHeight] = useState(null)
-  useEffect(() => setHeight(document.getElementsByClassName('PhotoCard_ImgWrapper__1IPFj').item(ident).clientHeight), [])
+  useEffect(() => setHeight(document.getElementsByClassName('_PhotoCard_ImgWrapper__3S6GQ').item(ident).clientHeight), [])
 
   const creatorJSX = (
     <>

@@ -4,7 +4,7 @@ $black: #000000;
 $white: #f1f1f1;
 $pure-white: #ffffff;
 
-.ProfileInfo {
+.profile-info {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -12,14 +12,14 @@ $pure-white: #ffffff;
   box-sizing: border-box;
   padding: 40px 0;
 
-  .InfoWrapper {
+  .info-wrapper {
     display: flex;
     align-items: center;
     width: 100%;
     padding: 0 40px;
     box-sizing: border-box;
 
-    .ProfilePicture {
+    .profile-picture {
       width: 100px;
       height: 100px;
       border-radius: 100px;
@@ -29,7 +29,7 @@ $pure-white: #ffffff;
       flex-shrink: 0;
     }
 
-    .BasicInfo {
+    .basic-info {
       height: 90px;
       display: flex;
       flex-flow: column nowrap;
@@ -37,7 +37,7 @@ $pure-white: #ffffff;
       margin-left: 30px;
       letter-spacing: 2px;
 
-      .User-Contact {
+      .user-contact {
         color: $color-2;
       }
     }
@@ -45,7 +45,7 @@ $pure-white: #ffffff;
     @media (max-width: 600px) {
       flex-flow: column nowrap;
 
-      .BasicInfo {
+      .basic-info {
         margin: 0;
         text-align: center;
         height: auto;
@@ -62,14 +62,14 @@ $pure-white: #ffffff;
   }
 }
 
-.ContentRow {
+.content-row {
   width: 100%;
   padding: 0 20px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
 
-  .ContentColumn {
+  .content-column {
     width: 50%;
     display: flex;
     flex-wrap: wrap;
@@ -87,7 +87,7 @@ $pure-white: #ffffff;
     }
   }
 
-  .Hide-Mobile {
+  .hide-mobile {
     @media (max-width: 600px) {
       display: none;
     }

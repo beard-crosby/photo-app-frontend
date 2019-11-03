@@ -1,9 +1,9 @@
 import React from 'react'
-import '../scss/settings.scss'
+import '../scss/_settings.scss'
 import Button from '../components/UI/Button'
 
 const Settings = () =>
-  <div className="SettingsWrapper">
+  <div className="settings-wrapper">
     <Button text="Logout"/>
   </div>
 

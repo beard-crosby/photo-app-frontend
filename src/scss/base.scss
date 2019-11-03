@@ -55,3 +55,126 @@ body {
     }
   }
 }
+
+.nav {
+  width: 100%;
+  height: 90px;
+  padding: 0 15px;
+  border-bottom: 1px solid $color-1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  background: $white;
+
+  h1 {
+    font-weight: 300;
+    letter-spacing: 2px;
+    font-size: 1.7em;
+    cursor: pointer;
+    color: $black;
+  }
+
+  h5 {
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: $black;
+  }
+
+  .nav-top {
+    width: 1000px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 40px;
+
+    .nav-top-right {
+      width: 220px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      .login {
+        margin-left: 20px;
+        cursor: pointer;
+      }
+
+      @media (max-width: 600px) {
+        width: auto;
+      }
+    }
+
+    .profile-picture {
+      width: 30px;
+      height: 30px;
+      border-radius: 30px;
+      background-image: url('../static/defaults/placeholder.png');
+      background-size: contain;
+      cursor: pointer;
+    }
+
+    @media (max-width: 1000px) {
+      width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      padding: 0;
+    }
+  }
+
+  .nav-bottom {
+    width: 1000px;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 40px;
+
+    a {
+      color: $color-2;
+      margin-right: 20px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        margin: 0;
+        cursor: pointer;
+      }
+
+      &:hover, &:active {
+        color: $black;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      padding: 0;
+    }
+  }
+}
+
+.footer {
+  width: 1000px;
+  box-sizing: border-box;
+  padding: 0 40px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
+}
