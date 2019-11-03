@@ -1,0 +1,32 @@
+$black: #000000;
+
+.UploadBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  color: $black;
+
+  h5 {
+    font-weight: 300;
+    letter-spacing: 2px;
+    cursor: pointer;
+  }
+
+  svg {
+    height: 15px;
+    width: 15px;
+    margin-left: 5px;
+  }
+
+  @media (max-width: 370px) {
+    h5 {
+      display: none;
+    }
+
+    svg {
+      height: 20px;
+      width: 20px;
+    }
+  }
+}

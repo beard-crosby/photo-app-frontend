@@ -25,6 +25,12 @@ $pure-white: #ffffff;
     color: $black;
   }
 
+  h5 {
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: $black;
+  }
+
   .NavTop {
     width: 1000px;
     height: 50px;
@@ -37,21 +43,16 @@ $pure-white: #ffffff;
     .NavTopRight {
       width: 220px;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
 
-      svg {
-        display: none;
-        margin-right: 20px;
+      .Login {
+        margin-left: 20px;
+        cursor: pointer;
       }
 
       @media (max-width: 600px) {
         width: auto;
-
-        svg {
-          display: block;
-          cursor: pointer;
-        }
       }
     }
 
