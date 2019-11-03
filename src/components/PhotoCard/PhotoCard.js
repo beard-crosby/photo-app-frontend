@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import * as classes from './PhotoCard.module.scss'
 
-const PhotoCard = ({ ident, img, name, profileImg, style }) => {
+const PhotoCard = ({ ident, img, name, profileImg }) => {
   const [height, setHeight] = useState(null)
   useEffect(() => setHeight(document.getElementsByClassName('PhotoCard_ImgWrapper__1IPFj').item(ident).clientHeight), [])
 
@@ -17,7 +17,7 @@ const PhotoCard = ({ ident, img, name, profileImg, style }) => {
   )
 
   return (
-    <div className={classes.PhotoCardWrapper} style={style}>
+    <div className={classes.PhotoCardWrapper} style={window.matchMedia("(min-width: 600px)").matches ? { marginBottom: 40 } : { marginBottom: 20 }}>
       <div className={classes.CreatorMobile}>
         {creatorJSX}
       </div>

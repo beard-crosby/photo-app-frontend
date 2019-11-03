@@ -2,8 +2,8 @@ import React from 'react'
 import * as classes from './Footer.module.scss'
 
 const Footer = () => 
-  <div className={classes.Footer}>
+  <footer className={classes.Footer}>
     <p>Beard-Crosby &copy;</p>
-  </div>
+  </footer>
 
 export default Footer

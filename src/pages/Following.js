@@ -12,7 +12,7 @@ const Following = () =>
         img={<img alt="Test Img" src={require(`../static/testPictures/${testData.img}`)}/>}
         name={testData.name}
         profileImg={<img alt="Test Img" src={require(`../static/defaults/${testData.profileImg}`)}/>}
-        style={window.matchMedia("(min-width: 600px)").matches ? { marginBottom: 40 } : { marginBottom: 20 }}/>)}
+      />)}
   </div>
 
 export default Following
