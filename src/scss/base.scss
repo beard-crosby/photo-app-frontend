@@ -94,7 +94,6 @@ body {
     padding: 0 40px;
 
     .nav-top-right {
-      width: 220px;
       display: flex;
       justify-content: flex-end;
       align-items: center;
@@ -102,10 +101,6 @@ body {
       .login {
         margin-left: 20px;
         cursor: pointer;
-      }
-
-      @media (max-width: 600px) {
-        width: auto;
       }
     }
 
