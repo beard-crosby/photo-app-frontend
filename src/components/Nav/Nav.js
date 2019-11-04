@@ -9,7 +9,7 @@ const Nav = ({ token }) =>
     <div className="nav-top">
       <Link to="/"><h1>PHOTO APP</h1></Link>
       <div className="nav-top-right">
-      {window.matchMedia("(min-width: 451px)").matches && <Slider SvgFalse={<Moon/>} SvgTrue={<Sun/>} style={{ marginRight: 20 }} />}
+      <Slider SvgFalse={<Moon/>} SvgTrue={<Sun/>} hideMobile style={{ marginRight: 25 }} />
         <Link to="/"><UploadBtn/></Link>
         {token ? <Link to="/profile"><div className="profile-picture"/></Link> : 
         <Link to="/"><h5 className="login">LOGIN</h5></Link>}
@@ -21,7 +21,7 @@ const Nav = ({ token }) =>
         <NavLink to="/profile"><p>Profile</p></NavLink>
         <NavLink to="/settings"><p>Settings</p></NavLink>
       </div>
-      {window.matchMedia("(max-width: 450px)").matches && <Slider SvgFalse={<Moon/>} SvgTrue={<Sun/>}/>}
+      <Slider SvgFalse={<Moon/>} SvgTrue={<Sun/>} hideDesktop />
     </div>
   </nav>
 
