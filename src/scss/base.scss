@@ -131,27 +131,37 @@ body {
     width: 1000px;
     height: 40px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
     padding: 0 40px;
 
-    a {
-      color: $color-2;
-      margin-right: 20px;
-      height: 100%;
+    .nav-bottom-left {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      justify-content: flex-start;
 
-      p {
-        margin: 0;
-        cursor: pointer;
+      a {
+        color: $color-2;
+        margin-right: 20px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  
+        p {
+          margin: 0;
+          cursor: pointer;
+        }
+  
+        &:hover, &:active {
+          color: $black;
+        }
       }
+    }
 
-      &:hover, &:active {
-        color: $black;
-      }
+    svg {
+      height: 20px;
+      width: 20px;
     }
 
     @media (max-width: 1000px) {
