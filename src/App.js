@@ -1,16 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react'
 import './scss/base.scss'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Router from './Router'
 
-const App = () => 
-  <>
-    <Nav/>
-    <main>
-      <Router/>
-    </main>
-    <Footer/>
-  </>
+const UserContext = React.createContext()
 
-export default App;
+const App = () => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [darkMode, setDarkMode] = useState(false)
+  const [user, setUser] = useState({
+    id: null,
+    token: null,
+    refreshToken: null,
+    name: null,
+    username: null,
+    email: null,
+    uploads: {
+      photographs: [],
+      videos: []
+    }
+  })
+
+  return (
+    <UserContext.Provider value={{ isLoading, darkMode, user }}>
+      <Nav/>
+      <main>
+        <Router/>
+      </main>
+      <Footer/>
+    </UserContext.Provider>
+  )
+}
+
+export default App
+
+export { UserContext }
