@@ -22,8 +22,10 @@ const App = () => {
     }
   })
 
+  console.log({isLoading, darkMode, user})
+
   return (
-    <UserContext.Provider value={{ isLoading, darkMode, user }}>
+    <UserContext.Provider value={{ isLoading, setIsLoading, darkMode, setDarkMode, user, setUser }}>
       <Nav/>
       <main>
         <Router/>
