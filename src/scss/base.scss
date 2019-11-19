@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap');
 
 $black: #000000;
-$color-2: #525252;
 $white: #ffffff;
-$background-white: #f5f5f5;
 $color-1: #EEEEEE;
+$color-2: #525252;
+$background-white: #f5f5f5;
+$dm-background-white: #0A0A0A;
+$dm-color-1: #2A2A2A;
 
 h1, h2, h3, h4, h5, h6, p {
   cursor: default;
@@ -53,134 +55,153 @@ body {
         width: 100%;
       }
     }
-  }
-}
 
-.nav {
-  width: 100%;
-  height: 90px;
-  padding: 0 15px;
-  border-bottom: 1px solid $color-1;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-  position: sticky;
-  top: 0;
-  background: $white;
-
-  h1 {
-    font-weight: 300;
-    letter-spacing: 2px;
-    font-size: 1.7em;
-    cursor: pointer;
-    color: $black;
-  }
-
-  h5 {
-    font-weight: 300;
-    letter-spacing: 2px;
-    color: $black;
-  }
-
-  .nav-top {
-    width: 1000px;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 0 40px;
-
-    .nav-top-right {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-
-      .login {
-        margin-left: 20px;
-        cursor: pointer;
-      }
-    }
-
-    .profile-picture {
-      width: 25px;
-      height: 25px;
-      border-radius: 25px;
-      margin-left: 20px;
-      background-image: url('../static/defaults/placeholder.png');
-      background-size: contain;
-      cursor: pointer;
-    }
-
-    @media (max-width: 1000px) {
+    .nav {
       width: 100%;
-    }
-
-    @media (max-width: 600px) {
-      padding: 0;
-    }
-  }
-
-  .nav-bottom {
-    width: 1000px;
-    height: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 0 40px;
-
-    .nav-bottom-left {
+      height: 90px;
+      padding: 0 15px;
       display: flex;
-      justify-content: flex-start;
-
-      a {
-        color: $color-2;
-        margin-right: 20px;
-        height: 100%;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      position: sticky;
+      top: 0;
+      background: $white;
+      border-bottom: 1px solid $color-1;
+    
+      h1 {
+        font-weight: 300;
+        letter-spacing: 2px;
+        font-size: 1.7em;
+        cursor: pointer;
+        color: $black;
+      }
+    
+      h5 {
+        font-weight: 300;
+        letter-spacing: 2px;
+        color: $black;
+      }
+    
+      .nav-top {
+        width: 1000px;
+        height: 50px;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-  
-        p {
-          margin: 0;
+        box-sizing: border-box;
+        padding: 0 40px;
+    
+        .nav-top-right {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+    
+          .login {
+            margin-left: 20px;
+            cursor: pointer;
+          }
+        }
+    
+        .profile-picture {
+          width: 25px;
+          height: 25px;
+          border-radius: 25px;
+          margin-left: 20px;
+          background-image: url('../static/defaults/placeholder.png');
+          background-size: contain;
           cursor: pointer;
         }
-  
-        &:hover, &:active {
-          color: $black;
+    
+        @media (max-width: 1000px) {
+          width: 100%;
+        }
+    
+        @media (max-width: 600px) {
+          padding: 0;
+        }
+      }
+    
+      .nav-bottom {
+        width: 1000px;
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 40px;
+    
+        .nav-bottom-left {
+          display: flex;
+          justify-content: flex-start;
+    
+          a {
+            color: $color-2;
+            margin-right: 20px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+      
+            p {
+              margin: 0;
+              cursor: pointer;
+            }
+      
+            &:hover, &:active {
+              color: $black;
+            }
+          }
+        }
+    
+        svg {
+          height: 20px;
+          width: 20px;
+        }
+    
+        @media (max-width: 1000px) {
+          width: 100%;
+        }
+    
+        @media (max-width: 600px) {
+          padding: 0;
         }
       }
     }
-
-    svg {
-      height: 20px;
-      width: 20px;
-    }
-
-    @media (max-width: 1000px) {
-      width: 100%;
-    }
-
-    @media (max-width: 600px) {
-      padding: 0;
+    
+    .footer {
+      width: 1000px;
+      box-sizing: border-box;
+      padding: 0 40px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 400;
+    
+      @media (max-width: 1000px) {
+        width: 100%;
+      }
     }
   }
 }
 
-.footer {
-  width: 1000px;
-  box-sizing: border-box;
-  padding: 0 40px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 400;
+.dark-mode {
+  background: $dm-background-white;
 
-  @media (max-width: 1000px) {
-    width: 100%;
+  #root {
+    .nav {
+      background: $black;
+      border-bottom: 1px solid $dm-color-1;
+
+      p, h1, h5, svg {
+        color: $white;
+      }
+    }
+
+    .footer {
+      color: $white;
+    }
   }
 }

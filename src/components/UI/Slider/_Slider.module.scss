@@ -3,7 +3,7 @@ $color-2: #525252;
 $color-1: #EEEEEE;
 $white: #ffffff;
 
-.Slider {
+.slider {
   height: 20px;
   display: flex;
   justify-content: flex-start;
@@ -20,14 +20,14 @@ $white: #ffffff;
     margin-right: 2px;
   }
 
-  .SliderBG {
+  .sliderBG {
     height: 6px;
     width: 25px;
     border-radius: 6px;
     background-color: $color-2;
     z-index: 5;
 
-    .Slider {
+    .sliderBall {
       position: absolute;
       z-index: 10;
       height: 13px;
@@ -39,7 +39,7 @@ $white: #ffffff;
       transition: 0.3s ease-out;
     }
 
-    .SliderMove {
+    .sliderMove {
       transform: translate(10px, -5px);
       transition: 0.3s ease-out;
     }
@@ -55,5 +55,14 @@ $white: #ffffff;
 .hideDesktop {
   @media (min-width: 601px) {
     display: none;
+  }
+}
+
+.darkMode {
+  background-color: $color-1 !important;
+
+  .sliderBall {
+    background-color: $black !important;
+    border: 1.5px solid $white !important;
   }
 }

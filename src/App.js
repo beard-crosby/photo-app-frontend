@@ -24,6 +24,12 @@ const App = () => {
 
   console.log({isLoading, darkMode, user})
 
+  if (darkMode) {
+    document.body.classList.add('dark-mode')
+  } else {
+    document.body.classList.remove('dark-mode')
+  }
+
   return (
     <UserContext.Provider value={{ isLoading, setIsLoading, darkMode, setDarkMode, user, setUser }}>
       <Nav/>

@@ -1,5 +1,6 @@
 $color-1: #EEEEEE;
 $color-2: #525252;
+$dm-color-1: #2A2A2A;
 $black: #000000;
 $white: #ffffff;
 
@@ -11,6 +12,7 @@ $white: #ffffff;
   box-sizing: border-box;
   border-radius: 6px;
   border: 1px solid $color-1;
+  background-color: $white;
 
   h5 {
     font-weight: 500;
@@ -148,5 +150,30 @@ $white: #ffffff;
     border: none;
     border-top: 1px solid $color-1;
     border-bottom: 1px solid $color-1;
+  }
+}
+
+.darkMode {
+  color: $white;
+  background: $black;
+  border: 1px solid $dm-color-1;
+  
+  .Creator {
+    border-bottom: 1px solid $dm-color-1;
+  }
+
+  .Sidebar {
+    background: $black;
+
+    input {
+      color: $white;
+      background: $black;
+      border-top: 1px solid $dm-color-1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    border-top: 1px solid $dm-color-1;
+    border-bottom: 1px solid $dm-color-1;
   }
 }

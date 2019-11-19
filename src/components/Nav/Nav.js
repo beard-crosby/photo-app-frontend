@@ -13,7 +13,7 @@ const Nav = () => {
       <div className="nav-top">
         <Link to="/"><h1>PHOTO APP</h1></Link>
         <div className="nav-top-right">
-        <Slider SvgFalse={<Moon/>} SvgTrue={<Sun/>} hideMobile style={{ marginRight: 25 }} onClick={() => setDarkMode(!darkMode)}/>
+        <Slider SvgFalse={<Moon/>} SvgTrue={<Sun/>} hideMobile style={{ marginRight: 25 }} onClick={() => setDarkMode(!darkMode)} darkMode={darkMode}/>
           <Link to="/"><UploadBtn/></Link>
           {user.token ? <Link to="/profile"><div className="profile-picture"/></Link> : <Link to="/auth"><h5 className="login">LOGIN</h5></Link>}
         </div>

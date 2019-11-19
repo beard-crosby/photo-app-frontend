@@ -3,7 +3,7 @@ import '../scss/_following.scss'
 import PhotoCard from '../components/PhotoCard'
 import testData from '../testData'
 
-const Following = () => 
+const Following = () =>
   <div className="following-wrapper">
     {testData.map((testData, i) => 
       <PhotoCard

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import * as classes from './_Slider.module.scss'
 
-const Slider = ({ textFalse, textTrue, SvgFalse, SvgTrue, style, hideMobile, hideDesktop, onClick }) => {
+const Slider = ({ textFalse, textTrue, SvgFalse, SvgTrue, style, hideMobile, hideDesktop, onClick, darkMode }) => {
   const [sliderState, setSliderState] = useState(false)
 
   const onClickHandler = () => {
@@ -11,13 +11,13 @@ const Slider = ({ textFalse, textTrue, SvgFalse, SvgTrue, style, hideMobile, hid
 
   return (
     <div 
-      className={`${classes.Slider} ${hideMobile && classes.hideMobile} ${hideDesktop && classes.hideDesktop}`} 
+      className={`${classes.slider} ${hideMobile && classes.hideMobile} ${hideDesktop && classes.hideDesktop}`} 
       style={style} 
       onClick={onClickHandler}>
       {sliderState ? SvgTrue : SvgFalse}
       {sliderState ? <p>{textTrue}</p> : <p>{textFalse}</p>}
-      <div className={classes.SliderBG}>
-        <div className={`${classes.Slider} ${sliderState && classes.SliderMove}`}/>
+      <div className={darkMode ? `${classes.sliderBG} ${classes.darkMode}` : classes.sliderBG}>
+        <div className={`${classes.sliderBall} ${sliderState && classes.sliderMove}`}/>
       </div>
     </div>
   )

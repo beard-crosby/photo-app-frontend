@@ -1,8 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
+import { UserContext } from '../../App'
 import * as classes from './_PhotoCard.module.scss'
 
 const PhotoCard = ({ ident, img, name, profileImg }) => {
+  const { darkMode } = useContext(UserContext)
   const [height, setHeight] = useState(null)
+  
   useEffect(() => setHeight(document.getElementsByClassName('_PhotoCard_ImgWrapper__3S6GQ').item(ident).clientHeight), [])
 
   const creatorJSX = (
@@ -17,7 +20,7 @@ const PhotoCard = ({ ident, img, name, profileImg }) => {
   )
 
   return (
-    <div className={classes.PhotoCardWrapper} style={window.matchMedia("(min-width: 600px)").matches ? { marginBottom: 40 } : { marginBottom: 20 }}>
+    <div className={darkMode ? `${classes.darkMode} ${classes.PhotoCardWrapper}` : classes.PhotoCardWrapper} style={window.matchMedia("(min-width: 600px)").matches ? { marginBottom: 40 } : { marginBottom: 20 }}>
       <div className={classes.CreatorMobile}>
         {creatorJSX}
       </div>
