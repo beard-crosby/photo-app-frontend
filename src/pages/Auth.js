@@ -7,11 +7,28 @@ import LoginBtn from '../components/UI/Button/AuthButton/LoginBtn'
 
 const Auth = () => {
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+    email: null,
+    username: null,
+    password: null,
   })
-
+  
   const updateField = e => {
+    if (e.target.name === 'username_or_email') {
+      if (e.target.value.includes('@')) {
+        setForm({
+          ...form,
+          email: e.target.value,
+          username: null,
+        })
+        return
+      } else {
+        setForm({
+          ...form,
+          username: e.target.value,
+        })
+        return
+      }
+    }
     setForm({
         ...form,
         [e.target.name]: e.target.value,
