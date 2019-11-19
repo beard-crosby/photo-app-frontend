@@ -152,39 +152,3 @@ $white: #ffffff;
     border-bottom: 1px solid $color-1;
   }
 }
-
-.darkMode {
-  color: $white;
-  background: $black;
-  border: 1px solid $dm-color-1;
-  
-  
-  .Creator, .CreatorMobile {
-    border-bottom: 1px solid $dm-color-1;
-  }
-
-  .CreatorMobile {
-    background: $black;
-    color: $white;
-  }
-
-  .Sidebar {
-    background: $black;
-
-    input {
-      color: $white;
-      background: $black;
-      border-top: 1px solid $dm-color-1;
-
-      &::placeholder {
-        color: $white;
-      }
-    }
-  }
-
-  @media (max-width: 600px) {
-    border: none;
-    border-top: 1px solid $dm-color-1;
-    border-bottom: 1px solid $dm-color-1;
-  }
-}
