@@ -24,7 +24,7 @@ const Nav = () => {
           <NavLink to="/profile"><p>Profile</p></NavLink>
           <NavLink to="/settings"><p>Settings</p></NavLink>
         </div>
-        <Slider SvgFalse={<Moon/>} SvgTrue={<Sun/>} hideDesktop />
+        <Slider SvgFalse={<Moon/>} SvgTrue={<Sun/>} hideDesktop onClick={() => setDarkMode(!darkMode)} darkMode={darkMode}/>
       </div>
     </nav>
   )
