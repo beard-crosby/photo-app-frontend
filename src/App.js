@@ -22,7 +22,7 @@ const App = () => {
     }
   })
 
-  console.log({isLoading, darkMode, user})
+  process.env.NODE_ENV === 'development' && console.log({isLoading, darkMode, user})
 
   if (darkMode) {
     document.body.classList.add('dark-mode')
