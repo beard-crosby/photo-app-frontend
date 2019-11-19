@@ -43,11 +43,11 @@ const Auth = () => {
       <div className="auth-buttons">
         <LoginBtn text="Login"/>
         <GoogleLogin
-          text="Sign In With Google"
+          text="Login With Google"
           onSuccess={res => console.log(res)}
           onFail={res => console.log(res)}/>
         <FacebookLogin 
-          text="Sign In With Facebook"
+          text="Login With Facebook"
           res={res => console.log(res)}/>
       </div>
     </Form>
