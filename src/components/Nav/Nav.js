@@ -6,7 +6,7 @@ import { Moon, Sun } from 'react-feather'
 import Slider from '../UI/Slider'
 
 const Nav = () => {
-  const { darkMode, setDarkMode } = useContext(UserContext)
+  const { user, darkMode, setDarkMode } = useContext(UserContext)
 
   return (
     <nav className="nav">
@@ -15,8 +15,7 @@ const Nav = () => {
         <div className="nav-top-right">
         <Slider SvgFalse={<Moon/>} SvgTrue={<Sun/>} hideMobile style={{ marginRight: 25 }} onClick={() => setDarkMode(!darkMode)}/>
           <Link to="/"><UploadBtn/></Link>
-          {/* {token ? <Link to="/profile"><div className="profile-picture"/></Link> :  */}
-          <Link to="/auth"><h5 className="login">LOGIN</h5></Link>
+          {user.token ? <Link to="/profile"><div className="profile-picture"/></Link> : <Link to="/auth"><h5 className="login">LOGIN</h5></Link>}
         </div>
       </div>
       <div className="nav-bottom">
