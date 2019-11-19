@@ -1,19 +1,11 @@
 import React from 'react'
 import * as classes from './_form.module.scss'
 
-const Form = ({ topLeft, topMiddle, topRight, children, bottomLeft, bottomMiddle, bottomRight, style }) => 
-  <div className={classes.form} style={style}>
-    <div className={classes.top}>
-      {topLeft}
-      {topMiddle}
-      {topRight}
-    </div>
+const Form = ({ top, topStyle, children, bottom, bottomStyle, style, submit }) => 
+  <form className={classes.form} style={style} onSubmit={submit}>
+    {top && <div className={classes.top} style={topStyle}>{top}</div>}
     {children}
-    <div className={classes.bottom}>
-      {bottomLeft}
-      {bottomMiddle}
-      {bottomRight}
-    </div>
-  </div>
+    {bottom && <div className={classes.bottom} style={bottomStyle}>{bottom}</div>}
+  </form>
 
 export default Form
