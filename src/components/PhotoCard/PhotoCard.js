@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import * as classes from './_PhotoCard.module.scss'
+import PropTypes from 'prop-types'
 
 const PhotoCard = ({ ident, img, name, profileImg }) => {
   const [height, setHeight] = useState(null)
@@ -36,6 +37,13 @@ const PhotoCard = ({ ident, img, name, profileImg }) => {
       </div>
     </div>
   )
+}
+
+PhotoCard.propTypes = {
+  ident: PropTypes.number,
+  img: PropTypes.element,
+  name: PropTypes.string,
+  profileImg: PropTypes.element,
 }
 
 export default PhotoCard

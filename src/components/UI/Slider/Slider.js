@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import * as classes from './_Slider.module.scss'
+import PropTypes from 'prop-types'
 
 const Slider = ({ textFalse, textTrue, SvgFalse, SvgTrue, style, hideMobile, hideDesktop, onClick, darkMode }) => {
   const [sliderState, setSliderState] = useState(false)
@@ -21,6 +22,18 @@ const Slider = ({ textFalse, textTrue, SvgFalse, SvgTrue, style, hideMobile, hid
       </div>
     </div>
   )
+}
+
+Slider.propTypes = {
+  textFalse: PropTypes.string,
+  textTrue: PropTypes.string,
+  SvgFalse: PropTypes.element,
+  SvgTrue: PropTypes.element,
+  style: PropTypes.object,
+  hideMobile: PropTypes.bool,
+  hideDesktop: PropTypes.bool,
+  onClick: PropTypes.func,
+  darkMode: PropTypes.bool,
 }
 
 export default Slider
