@@ -28,7 +28,7 @@ $white: #ffffff;
   }
 
   label {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
 
   input {
@@ -39,6 +39,12 @@ $white: #ffffff;
     box-sizing: border-box;
     border-radius: 5px;
     margin-bottom: 20px;
+    box-shadow: rgba(120, 120, 120, 1) 0px -2px 0px 0px inset, rgba(120, 120, 120, 1) 0px 0px 1px 0px inset;
+    border: 1px solid $color-1;
+
+    &:hover {
+      box-shadow: rgba(70, 70, 70, 1) 0px -2px 0px 0px inset, rgba(70, 70, 70, 1) 0px 0px 1px 0px inset;
+    }
   }
 
   .top {

@@ -173,7 +173,7 @@ body {
     .auth-buttons {
       display: flex;
       justify-content: space-between;
-      margin: 5px 0 15px;
+      margin: 15px 0;
 
       @media (max-width: 600px) {
         flex-flow: column nowrap;
