@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 const PhotoCard = ({ ident, img, name, profileImg }) => {
   const [height, setHeight] = useState(null)
   
-  useEffect(() => setHeight(document.getElementsByClassName('_PhotoCard_ImgWrapper__3S6GQ').item(ident).clientHeight), [])
+  useEffect(() => setHeight(document.getElementsByClassName('_PhotoCard_ImgWrapper__3S6GQ').item(ident).clientHeight), [ident])
 
   const creatorJSX = (
     <>
