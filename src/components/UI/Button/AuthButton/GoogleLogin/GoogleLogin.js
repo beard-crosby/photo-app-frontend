@@ -13,10 +13,9 @@ const GoogleBtn = ({ text, onSuccess, onFail, style }) =>
         className={classes.btnStyle}
         style={style}>
         <img alt="Google Logo" src={require('../../../../../static/logo/google.png')}/>
-        <h4>Login With Google</h4>
+        <h4>{text}</h4>
       </button>
     )}
-    buttonText={text}
     onSuccess={onSuccess}
     onFailure={onFail}
     cookiePolicy={'single_host_origin'}/>

@@ -13,52 +13,37 @@ const Auth = () => {
   })
 
   const updateField = e => {
-    if (e.target.name === 'username_or_email') {
-      if (e.target.value.includes('@')) {
-        setForm({
-          ...form,
-          email: e.target.value,
-          username: null,
-        })
-        return
-      } else {
-        setForm({
-          ...form,
-          email: null,
-          username: e.target.value,
-        })
-        return
-      }
-    }
     setForm({
         ...form,
         [e.target.name]: e.target.value,
     })
   }
 
-  const onSignIn = event => {
+  const onSignUp = event => {
     event.preventDefault()
     // backend request
   }
 
   return (
-    <Form submit={event => onSignIn(event)}
+    <Form submit={event => onSignUp(event)}
       top={
         <>
-          <h5>LOGIN</h5>
+          <h5>CREATE AN ACCOUNT</h5>
           <Link to="/"><h5>BACK</h5></Link>
         </>}
-      bottom={
-        <>
-          <Link to="/create"><h5>CREATE AN ACCOUNT</h5></Link>
-          <Link to="/forgot"><h5>FORGOT PASSWORD</h5></Link>
-        </>
-      }>
-      <label htmlFor="username_or_email"><h5>Username or Email</h5></label>
+      bottom={<Link to="/auth"><h5>BACK TO SIGN IN</h5></Link>}>
+      <label htmlFor="email"><h5>Email</h5></label>
+      <input 
+        type="email" 
+        name="email" 
+        id="email" 
+        onChange={updateField}>
+      </input>
+      <label htmlFor="username"><h5>Username</h5></label>
       <input 
         type="text" 
-        name="username_or_email" 
-        id="username_or_email" 
+        name="username" 
+        id="username" 
         onChange={updateField}>
       </input>
       <label htmlFor="password"><h5>Password</h5></label>
@@ -68,14 +53,21 @@ const Auth = () => {
         id="password" 
         onChange={updateField}>
       </input>
+      <label htmlFor="password"><h5>Password Check</h5></label>
+      <input 
+        type="password" 
+        name="password" 
+        id="password" 
+        onChange={updateField}>
+      </input>
       <div className="auth-buttons">
-        <SubmitBtn text="Login"/>
+        <SubmitBtn text="Sign Up"/>
         <GoogleLogin
-          text="Login With Google"
+          text="Sign Up With Google"
           onSuccess={res => console.log(res)}
           onFail={res => console.log(res)}/>
         <FacebookLogin 
-          text="Login With Facebook"
+          text="Sign Up With Facebook"
           res={res => console.log(res)}/>
       </div>
     </Form>
