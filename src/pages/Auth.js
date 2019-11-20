@@ -11,7 +11,7 @@ const Auth = () => {
     username: null,
     password: null,
   })
-  
+
   const updateField = e => {
     if (e.target.name === 'username_or_email') {
       if (e.target.value.includes('@')) {
@@ -24,6 +24,7 @@ const Auth = () => {
       } else {
         setForm({
           ...form,
+          email: null,
           username: e.target.value,
         })
         return
@@ -54,9 +55,19 @@ const Auth = () => {
         </>
       }>
       <label htmlFor="username_or_email"><h5>Username or Email</h5></label>
-      <input type="text" name="username_or_email" id="username_or_email" onChange={updateField}></input>
+      <input 
+        type="text" 
+        name="username_or_email" 
+        id="username_or_email" 
+        onChange={updateField}>
+      </input>
       <label htmlFor="password"><h5>Password</h5></label>
-      <input type="password" name="password" id="password" onChange={updateField}></input>
+      <input 
+        type="password" 
+        name="password" 
+        id="password" 
+        onChange={updateField}>
+      </input>
       <div className="auth-buttons">
         <LoginBtn text="Login"/>
         <GoogleLogin

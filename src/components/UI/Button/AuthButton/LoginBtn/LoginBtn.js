@@ -1,10 +1,12 @@
 import React from 'react'
-import * as classes from './LoginBtn.module.scss'
+import * as classes from '../_AuthBtn.module.scss'
+import { LogIn } from 'react-feather'
 import PropTypes from 'prop-types'
 
 const Login = ({ text }) => 
   <button type="submit" className={classes.btnStyle}>
-    <span className={classes.textStyle}>{text}</span>
+    <LogIn/>
+    <h4>{text}</h4>
   </button>
 
 Login.propTypes = {
