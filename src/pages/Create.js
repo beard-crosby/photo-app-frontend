@@ -53,11 +53,11 @@ const Auth = () => {
         id="password" 
         onChange={updateField}>
       </input>
-      <label htmlFor="password"><h5>Password Check</h5></label>
+      <label htmlFor="password-check"><h5>Password Check</h5></label>
       <input 
         type="password" 
-        name="password" 
-        id="password" 
+        name="password-check" 
+        id="password-check" 
         onChange={updateField}>
       </input>
       <div className="auth-buttons">
