@@ -15,6 +15,10 @@ $white: #ffffff;
   justify-content: center;
   align-items: center;
 
+  p, h1, h5, svg {
+    color: $black !important;
+  }
+
   .wrapper {
     width: 500px;
     min-height: 100px;

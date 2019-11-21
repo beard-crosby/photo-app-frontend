@@ -16,9 +16,9 @@ const UploadModel = ({ onClick, display }) => {
     })
   }
 
-  const uploadHandler = () => {
-    // upload requests here
-  }
+  // const uploadHandler = () => {
+  //   // upload requests here
+  // }
 
   return (
     <Model 
