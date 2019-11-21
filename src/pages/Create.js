@@ -5,7 +5,7 @@ import GoogleLogin from '../components/UI/Button/AuthButton/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/AuthButton/FacebookLogin'
 import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
 
-const Auth = () => {
+const Create = ({ history }) => {
   const [form, setForm] = useState({
     email: null,
     username: null,
@@ -29,7 +29,7 @@ const Auth = () => {
       top={
         <>
           <h5>CREATE AN ACCOUNT</h5>
-          <Link to="/"><h5>BACK</h5></Link>
+          <h5 onClick={() => history.goBack()}>BACK</h5>
         </>}
       bottom={<Link to="/auth"><h5>BACK TO SIGN IN</h5></Link>}>
       <label htmlFor="email"><h5>Email</h5></label>
@@ -74,4 +74,4 @@ const Auth = () => {
   )
 }
 
-export default Auth
+export default Create

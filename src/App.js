@@ -3,6 +3,7 @@ import './scss/base.scss'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Router from './Router'
+import { withRouter } from 'react-router-dom'
 
 const UserContext = React.createContext()
 
@@ -41,6 +42,6 @@ const App = () => {
   )
 }
 
-export default App
+export default withRouter(App)
 
 export { UserContext }

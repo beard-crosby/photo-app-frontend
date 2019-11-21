@@ -3,7 +3,7 @@ import Form from '../components/UI/Form'
 import { Link } from 'react-router-dom'
 import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
 
-const Auth = () => {
+const Auth = ({ history }) => {
   const [form, setForm] = useState({
     email: null,
   })
@@ -25,7 +25,7 @@ const Auth = () => {
       top={
         <>
           <h5>FORGOT PASSWORD</h5>
-          <Link to="/"><h5>BACK</h5></Link>
+          <h5 onClick={() => history.goBack()}>BACK</h5>
         </>}
       bottom={
         <>
