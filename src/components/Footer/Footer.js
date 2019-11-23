@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Footer = () => 
-  <footer className="footer">
+  <footer>
     <p>Beard-Crosby &copy;</p>
   </footer>
 

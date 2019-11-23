@@ -11,7 +11,7 @@ const Nav = () => {
   const [ displayModel, setDisplayModel ] = useState(false)
 
   return (
-    <nav className="nav">
+    <nav>
       <div className="nav-top">
         <Link to="/"><h1>PHOTO APP</h1></Link>
         <div className="nav-top-right">

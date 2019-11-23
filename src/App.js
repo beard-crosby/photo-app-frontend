@@ -17,6 +17,7 @@ const App = () => {
     name: null,
     username: null,
     email: null,
+    bio: null,
     uploads: {
       photographs: [],
       videos: []
