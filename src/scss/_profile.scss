@@ -50,6 +50,12 @@ h2 {
         background-repeat: no-repeat;
         flex-shrink: 0;
         margin-right: 20px;
+
+        @media (max-width: 600px) {
+          width: 75px;
+          height: 75px;
+          border-radius: 75px;
+        }
       }
   
       .info {
@@ -58,6 +64,17 @@ h2 {
         display: flex;
         flex-flow: column nowrap;
         justify-content: space-between;
+
+        @media (max-width: 600px) {
+          height: 75px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        width: 100%;
+        height: auto;
+        padding: 0 0 20px;
+        border-bottom: 1px solid $color-1;
       }
     }
   
@@ -71,8 +88,12 @@ h2 {
       justify-content: space-between;
       padding: 0 20px;
   
-      p {
+      .bio-title {
         margin-bottom: 5px;
+
+        @media (max-width: 600px) {
+          margin-bottom: 10px;
+        }
       }
       
       .bio-body {
@@ -80,24 +101,22 @@ h2 {
         flex-grow: 1;
         overflow: hidden;
       }
-    }
-  
-    @media (max-width: 600px) {
-      flex-flow: column nowrap;
-  
-      .basic-info {
-        margin: 0;
-        text-align: center;
+
+      @media (max-width: 600px) {
+        width: 100%;
         height: auto;
-  
-        h1 {
-          padding: 10px 0;
-        }
+        padding: 20px 0 0;
+        border: none;
       }
     }
   
     @media (max-width: 600px) {
-      padding: 0 20px;
+      border-radius: 0px;
+      flex-flow: column nowrap;
+      height: auto;
+      border: none;
+      border-top: 1px solid $color-1;
+      border-bottom: 1px solid $color-1;
     }
   }
   
@@ -166,6 +185,13 @@ h2 {
           height: 100%;
         }
       }
+    }
+
+    @media (max-width: 600px) {
+      border-radius: 0px;
+      border: none;
+      border-top: 1px solid $color-1;
+      border-bottom: 1px solid $color-1;
     }
   }
 }

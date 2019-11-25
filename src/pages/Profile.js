@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import '../scss/_profile.scss'
 import { Uploads } from '../testData'
 import { Clock, Grid, HelpCircle, Search } from 'react-feather'
@@ -17,9 +17,9 @@ const Profile = () =>
         </div>
       </div>
       <div className="bio">
-        <p>Biography:</p>
+        <p className="bio-title">Biography:</p>
         <div className="bio-body">
-        <p>The longest bio ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and</p>
+        <p>The longest bio ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever and ever </p>
         </div>
       </div>
     </div>
