@@ -169,13 +169,10 @@ $white: #ffffff;
     display: none;
   }
 
-  .ImgWrapper {
-
-    img {
-      border-radius: 0px;
-      max-width: 100vw;
-      max-height: 100vh;
-      object-fit: contain;
-    }
+  img {
+    border-radius: 0px;
+    max-width: 100vw;
+    max-height: 100vh;
+    object-fit: contain;
   }
 }
