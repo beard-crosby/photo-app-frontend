@@ -1,4 +1,4 @@
-This is a React project using the minimal amount of dependencies while maintaining a non convoluted or inconvenient work flow.
+This is a React project using a minimal amount of dependencies while maintaining a non convoluted or inconvenient work flow.
 
 To run photo-app-frontend:
 
