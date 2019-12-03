@@ -46,7 +46,7 @@ const Auth = ({ history }) => {
       top={
         <>
           <h5>LOGIN</h5>
-          <h5 onClick={() => history.goBack()}>BACK</h5>
+          <h5 className="back" onClick={() => history.goBack()}>BACK</h5>
         </>}
       bottom={
         <>

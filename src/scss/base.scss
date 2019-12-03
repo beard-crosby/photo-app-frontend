@@ -176,6 +176,10 @@ body {
       }
     }
 
+    .back {
+      cursor: pointer;
+    }
+
     .auth-buttons {
       display: flex;
       justify-content: space-between;

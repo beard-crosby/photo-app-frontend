@@ -5,7 +5,7 @@ import GoogleLogin from '../components/UI/Button/AuthButton/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/AuthButton/FacebookLogin'
 import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
 
-const Create = ({ history }) => {
+const Create = ({ history, style, btnStyle, topRight, hideBottom }) => {
   const [form, setForm] = useState({
     email: null,
     username: null,
@@ -26,12 +26,14 @@ const Create = ({ history }) => {
 
   return (
     <Form submit={event => onSignUp(event)}
+      style={style}
       top={
         <>
           <h5>CREATE AN ACCOUNT</h5>
-          <h5 onClick={() => history.goBack()}>BACK</h5>
+          {topRight ? topRight : <h5 className="back" onClick={() => history.goBack()}>BACK</h5>}
         </>}
-      bottom={<Link to="/auth"><h5>BACK TO SIGN IN</h5></Link>}>
+      hideBottom={hideBottom}  
+      bottom={<Link to="/auth"><h5>BACK TO LOGIN</h5></Link>}>
       <label htmlFor="email"><h5>Email</h5></label>
       <input 
         type="email" 
@@ -60,7 +62,7 @@ const Create = ({ history }) => {
         id="password-check" 
         onChange={updateField}>
       </input>
-      <div className="auth-buttons">
+      <div className="auth-buttons" style={btnStyle}>
         <SubmitBtn text="Sign Up"/>
         <GoogleLogin
           text="Sign Up With Google"
