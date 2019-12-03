@@ -137,6 +137,12 @@ h2 {
       align-items: center;
       box-sizing: border-box;
       padding: 5px 0;
+
+      .menu-btn {
+        @media (min-width: 600px) {
+          display: none;
+        }
+      }
   
       .uploads-bar-section {
         height: 100%;
@@ -159,6 +165,14 @@ h2 {
           color: $black !important;
           cursor: pointer;
         }
+
+        @media (max-width: 600px) {
+          display: none;
+        }
+      }
+
+      @media (max-width: 600px) {
+        justify-content: center;
       }
     }
   

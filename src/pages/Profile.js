@@ -1,7 +1,7 @@
 import React from 'react'
 import '../scss/_profile.scss'
 import { Uploads } from '../testData'
-import { Clock, Grid, HelpCircle, Search } from 'react-feather'
+import { Clock, Grid, HelpCircle, Search, Menu } from 'react-feather'
 
 const Profile = () => 
   <div className="profile-wrapper">
@@ -25,6 +25,7 @@ const Profile = () =>
     </div>
     <div className="uploads">
       <div className="uploads-bar">
+        <Menu className="menu-btn"/>
         <div className="uploads-bar-section" style={{ borderRight: '1px solid #EEEEEE' }}>
           <p>Search</p>
           <Search/>
