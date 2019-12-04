@@ -5,6 +5,7 @@ import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
 
 const Splash = () => 
   <>
+    <Create className="hideDesktop" hideBottom topRight={<></>}/>
     <div className="app-and-signup">
       <div className="app">
         <img alt="iPhone 11" src={require("../static/misc/iphone-template.png")}/>
@@ -23,7 +24,7 @@ const Splash = () =>
     </div>
     <div className="splash-content">
       <div className="splash-row">
-        <div className="splash-img-container">
+        <div className={`splash-img-container hideMobile`}>
           <img className="icon" alt="heart icon" src={require("../static/misc/heart.png")}/>
           <img className="icon" alt="like icon" src={require("../static/misc/like.png")}/>
           <img className="icon" alt="comments icon" src={require("../static/misc/comments.png")}/>
@@ -31,6 +32,11 @@ const Splash = () =>
         <div className="splash-col">
           <h1>No accumulative data!</h1>
           <p>We don't count likes or comments. Just share your work or enjoy the work of others without any ulterior motive.</p>
+        </div>
+        <div className={`splash-img-container hideDesktop`}>
+          <img className="icon" alt="heart icon" src={require("../static/misc/heart.png")}/>
+          <img className="icon" alt="like icon" src={require("../static/misc/like.png")}/>
+          <img className="icon" alt="comments icon" src={require("../static/misc/comments.png")}/>
         </div>
       </div>
       <div className="splash-row">
@@ -43,12 +49,15 @@ const Splash = () =>
         </div>
       </div>
       <div className="splash-row">
-        <div className="splash-img-container">
+        <div className={`splash-img-container hideMobile`}>
           <img alt="resolution icon" src={require("../static/misc/resolution.png")}/>
         </div>
         <div className="splash-col">
           <h1>Large file sizes!</h1>
           <p>We accept high resolution images with large file sizes to preserve the quality of your work.</p>
+        </div>
+        <div className={`splash-img-container hideDesktop`}>
+          <img alt="resolution icon" src={require("../static/misc/resolution.png")}/>
         </div>
       </div>
       <div className="splash-row">
@@ -61,13 +70,23 @@ const Splash = () =>
         </div>
       </div>
       <div className="splash-row">
-        <div className="splash-img-container">
+        <div className={`splash-img-container hideMobile`}>
           <h2>- PHOTO APP -</h2>
         </div>
         <div className="splash-col">
           <h1>Easy Watermarking!</h1>
           <p>If you're cautious about protecting your work, we offer the ability to apply a watermark as you upload.</p>
         </div>
+        <div className={`splash-img-container hideDesktop`} style={{ height: '120px' }}>
+          <h2>- PHOTO APP -</h2>
+        </div>
+      </div>
+    </div>
+    <div className={`app hideDesktop`} style={{ marginTop: '40px' }}>
+      <img alt="iPhone 11" src={require("../static/misc/iphone-template.png")}/>
+      <div className="app-btn-wrapper" style={{ margin: '40px 0 0 0' }}>
+        <a href="https://www.apple.com/uk/ios/app-store/"><SubmitBtn apple text="App Store"/></a>
+        <a href="https://play.google.com/store/apps?hl=en"><SubmitBtn google text="Google Play"/></a>
       </div>
     </div>
   </>

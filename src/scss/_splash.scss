@@ -12,33 +12,41 @@ $dm-color-1: #111111;
   box-sizing: border-box;
   margin-bottom: 40px;
 
-  .app, .signup {
-    padding: 0 20px;
-  }
-
-  .app {
-    width: 50%;
-    border-right: 1px solid $color-1;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
-    align-items: center;
-
-    img {
-      width: 70%;
-    }
-
-    .app-btn-wrapper {
-      width: 100%;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      margin: 0 0 35px 0;
-    }
-  }
-
   .signup {
     width: 50%;
+  }
+
+  @media (max-width: 700px) {
+    display: none;
+  }
+}
+
+.app, .signup {
+  padding: 0 20px;
+}
+
+.app {
+  width: 50%;
+  border-right: 1px solid $color-1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  img {
+    width: 70%;
+  }
+
+  .app-btn-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 0 35px 0;
+  }
+
+  @media (max-width: 700px) {
+    width: 100%;
   }
 }
 
@@ -65,6 +73,10 @@ $dm-color-1: #111111;
       display: flex;
       flex-flow: column nowrap;
       justify-content: center;
+
+      @media (max-width: 700px) {
+        width: 100%;
+      }
     }
 
     .splash-img-container {
@@ -85,7 +97,30 @@ $dm-color-1: #111111;
         height: 50px;
         width: 50px;
         margin: 0 20px;
+        flex-shrink: 0;
+      }
+
+      @media (max-width: 700px) {
+        width: 100%;
+        margin-top: 40px;
       }
     }
+
+    @media (max-width: 700px) {
+      flex-flow: column nowrap;
+      padding: 40px;
+    }
+  }
+}
+
+.hideMobile {
+  @media (max-width: 700px) {
+    display: none !important;
+  }
+}
+
+.hideDesktop {
+  @media (min-width: 701px) {
+    display: none !important;
   }
 }

@@ -69,5 +69,9 @@ $white: #ffffff;
 
   @media (max-width: 600px) {
     width: 100%;
+    border-radius: 0px;
+    border: none;
+    border-bottom: 1px solid $color-1;
+    border-top: 1px solid $color-1;
   }
 }

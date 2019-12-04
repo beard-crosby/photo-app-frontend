@@ -5,7 +5,7 @@ import GoogleLogin from '../components/UI/Button/AuthButton/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/AuthButton/FacebookLogin'
 import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
 
-const Create = ({ history, style, btnStyle, topRight, hideBottom }) => {
+const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) => {
   const [form, setForm] = useState({
     email: null,
     username: null,
@@ -25,7 +25,7 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom }) => {
   }
 
   return (
-    <Form submit={event => onSignUp(event)}
+    <Form className={className} submit={event => onSignUp(event)}
       style={style}
       top={
         <>
