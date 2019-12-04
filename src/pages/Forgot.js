@@ -48,7 +48,7 @@ const Auth = ({ history }) => {
         onChange={updateField}>
       </input>
       <div className="auth-buttons">
-        <SubmitBtn text="Submit"/>
+        <SubmitBtn login text="Submit"/>
       </div>
     </Form>
   )

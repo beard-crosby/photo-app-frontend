@@ -16,10 +16,15 @@ const Router = () => {
 
   return (
     <Switch>
-      {user.token ? <Route exact path="/" component={Following}/> : 
+      {user.token ? 
+      <Route exact path="/" component={Following}/> : 
       <Route exact path="/" component={Splash}/>}
-      <Route path="/profile" component={Profile}/>
-      <Route path="/settings" component={Settings}/>
+      {user.token && 
+        <>
+          <Route path="/profile" component={Profile}/>
+          <Route path="/settings" component={Settings}/>
+        </>
+      }
       <Route path="/auth" component={Auth}/>
       <Route path="/create" component={Create}/>
       <Route path="/forgot" component={Forgot}/>

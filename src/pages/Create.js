@@ -63,7 +63,7 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom }) => {
         onChange={updateField}>
       </input>
       <div className="auth-buttons" style={btnStyle}>
-        <SubmitBtn text="Sign Up"/>
+        <SubmitBtn login text="Sign Up"/>
         <GoogleLogin
           text="Sign Up With Google"
           onSuccess={res => console.log(res)}

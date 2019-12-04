@@ -69,7 +69,7 @@ const Auth = ({ history }) => {
         onChange={updateField}>
       </input>
       <div className="auth-buttons">
-        <SubmitBtn text="Login"/>
+        <SubmitBtn login text="Login"/>
         <GoogleLogin
           text="Login With Google"
           onSuccess={res => console.log(res)}
