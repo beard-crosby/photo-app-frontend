@@ -4,25 +4,14 @@ import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Router from './Router'
 import { withRouter } from 'react-router-dom'
+import { userData } from './testData' 
 
 const UserContext = React.createContext()
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
-  const [user, setUser] = useState({
-    id: null,
-    token: null,
-    refreshToken: null,
-    name: null,
-    username: null,
-    email: null,
-    bio: null,
-    uploads: {
-      photographs: [],
-      videos: []
-    }
-  })
+  const [user, setUser] = useState(userData)
 
   process.env.NODE_ENV === 'development' && console.log({isLoading, darkMode, user})
 
