@@ -46,7 +46,7 @@ const Auth = ({ history }) => {
       top={
         <>
           <h5>LOGIN</h5>
-          <h5 onClick={() => history.goBack()}>BACK</h5>
+          <h5 className="back" onClick={() => history.goBack()}>BACK</h5>
         </>}
       bottom={
         <>
@@ -69,7 +69,7 @@ const Auth = ({ history }) => {
         onChange={updateField}>
       </input>
       <div className="auth-buttons">
-        <SubmitBtn text="Login"/>
+        <SubmitBtn login text="Login"/>
         <GoogleLogin
           text="Login With Google"
           onSuccess={res => console.log(res)}

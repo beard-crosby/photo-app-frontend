@@ -25,7 +25,7 @@ const Auth = ({ history }) => {
       top={
         <>
           <h5>FORGOT PASSWORD</h5>
-          <h5 onClick={() => history.goBack()}>BACK</h5>
+          <h5 className="back" onClick={() => history.goBack()}>BACK</h5>
         </>}
       bottom={
         <>
@@ -48,7 +48,7 @@ const Auth = ({ history }) => {
         onChange={updateField}>
       </input>
       <div className="auth-buttons">
-        <SubmitBtn text="Submit"/>
+        <SubmitBtn login text="Submit"/>
       </div>
     </Form>
   )
