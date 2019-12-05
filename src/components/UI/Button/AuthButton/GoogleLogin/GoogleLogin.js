@@ -21,10 +21,10 @@ const GoogleBtn = ({ text, onSuccess, onFail, style }) =>
     cookiePolicy={'single_host_origin'}/>
 
 GoogleLogin.propTypes = {
-  onSuccess: PropTypes.func,
-  onFail: PropTypes.func,
-  text: PropTypes.string,
-  style: PropTypes.object
+  onSuccess: PropTypes.func, // oAuth success res.
+  onFail: PropTypes.func, // oAuth fail res.
+  text: PropTypes.string, // Text on the button.
+  style: PropTypes.object // Can change style on Component call.
 }
 
 export default GoogleBtn

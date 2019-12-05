@@ -19,10 +19,10 @@ const Button = ({ text, style, HideMobile, darkMode }) => {
 }
 
 Button.propTypes = {
-  text: PropTypes.string,
-  style: PropTypes.object,
-  HideMobile: PropTypes.bool,
-  darkMode: PropTypes.bool
+  text: PropTypes.string, // Text on the button.
+  style: PropTypes.object, // Can change style on Component call.
+  HideMobile: PropTypes.bool, // True = hide for mobile devices.
+  darkMode: PropTypes.bool // True = Change styling for mobile devices. 
 }
 
 export default Button

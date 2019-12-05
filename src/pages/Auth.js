@@ -12,6 +12,7 @@ const Auth = ({ history }) => {
     password: null,
   })
 
+  // Identify if the data in username_or_email input field is an email or a username.
   const updateField = e => {
     if (e.target.name === 'username_or_email') {
       if (e.target.value.includes('@')) {

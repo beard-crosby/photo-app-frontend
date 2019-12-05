@@ -10,9 +10,9 @@ const UploadBtn = ({ style, onClick, text }) =>
   </div>
 
 UploadBtn.propTypes = {
-  onClick: PropTypes.func,
-  style: PropTypes.object,
-  text: PropTypes.string
+  onClick: PropTypes.func, // Passing up the onClick event.
+  style: PropTypes.object, // Can change style on Component call.
+  text: PropTypes.string, // Text on the button.
 }
 
 export default UploadBtn

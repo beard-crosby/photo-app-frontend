@@ -1,6 +1,6 @@
 export const userData = {
   id: null,
-  token: 'as',
+  token: 'ajsbfkrbgksrnl',
   refreshToken: null,
   name: 'Maximilian Crosby',
   username: 'Maxiscoolerthansam6969',
@@ -83,53 +83,72 @@ export const userData = {
   following: [
     {
       name: "Maximilian Crosby",
+      username: 'Maxiscoolerthansam6969',
+      email: 'www.samissupergay.com',
       profileImg: 'placeholder.png',
       uploads: [
         {
           img: '8.jpg',
-          date: '03/10/1995'
+          title: 'na',
+          comments: [],
+          date: '03/10/2019'
         },
-      ]
+      ],
     },
     {
       name: "Samuel Beard",
+      username: 'Maxiscoolerthansam6969',
+      email: 'www.samissupergay.com',
       profileImg: 'placeholder.png',
       uploads: [
         {
           img: '9.jpg',
-          date: '03/10/1995'
-        }
-      ]
+          title: 'na',
+          comments: [],
+          date: '06/11/1995'
+        },
+        {
+          img: '6.jpg',
+          title: 'na',
+          comments: [],
+          date: '01/01/1995'
+        },
+      ],
     },
     {
       name: "Stupidly Long and Convoluted Name",
+      username: 'Maxiscoolerthansam6969',
+      email: 'www.samissupergay.com',
       profileImg: 'placeholder.png',
       uploads: [
         {
           img: '7.jpg',
-          date: '03/10/1995'
-        }
-      ]
+          title: 'na',
+          comments: [],
+          date: '03/10/2010'
+        },
+      ],
     },
     {
       name: "Im Gonna Get Them",
+      username: 'Maxiscoolerthansam6969',
+      email: 'www.samissupergay.com',
       profileImg: 'placeholder.png',
-      uploads: [
-        {
-          img: '11.jpg',
-          date: '03/10/1995'
-        }
-      ]
+      uploads: [],
     },
     {
       name: "I feel the need",
+      username: 'Maxiscoolerthansam6969',
+      email: 'www.samissupergay.com',
       profileImg: 'placeholder.png',
       uploads: [
         {
           img: 'Infographic.jpg',
-          date: '03/10/1995'
-        }
-      ]
+          title: 'na',
+          comments: [],
+          date: '06/07/1800'
+        },
+      ],
     },
   ]
 }

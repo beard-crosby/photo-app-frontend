@@ -13,7 +13,11 @@ const SubmitBtn = ({ text, check, login, apple, google }) =>
   </button>
 
 SubmitBtn.propTypes = {
-  text: PropTypes.string
+  text: PropTypes.string, // Text on the button.
+  check: PropTypes.bool, // True = display SVG.
+  login: PropTypes.bool, // True = display SVG.
+  apple: PropTypes.bool, // True = display IMG.
+  google: PropTypes.bool, // True = display IMG.
 }
 
 export default SubmitBtn

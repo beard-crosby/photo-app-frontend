@@ -41,8 +41,8 @@ const UploadModel = ({ onClick, display }) => {
 }
 
 UploadModel.propTypes = {
-  onClick: PropTypes.func,
-  display: PropTypes.bool
+  onClick: PropTypes.func, // Passes up the onClick event.
+  display: PropTypes.bool, // Model by default is set to display: 'none'. Display = true will display the component.
 }
 
 export default UploadModel

@@ -10,12 +10,14 @@ const Form = ({ className, hideBottom, top, topStyle, children, bottom, bottomSt
   </form>
 
 Form.propTypes = {
-  top: PropTypes.element,
-  topStyle: PropTypes.object,
-  bottom: PropTypes.element,
-  bottomStyle: PropTypes.object,
-  style: PropTypes.object,
-  submit: PropTypes.func,
+  top: PropTypes.element, // JSX to include at the top of the form.
+  topStyle: PropTypes.object, // Style the top of the form. Common use case: justifyContent: 'flex-start'.
+  bottom: PropTypes.element, // JSX to include at the bottom of the form.
+  bottomStyle: PropTypes.object, // Style the top of the form. Common use case: justifyContent: 'flex-start'.
+  className: PropTypes.string, // Programatically add or remove classes to the form.
+  style: PropTypes.object, // Can change style on Component call.
+  submit: PropTypes.func, // Passing up the Submit event.
+  hideBottom: PropTypes.bool, // True = hide the bottom bar if no content. 
 }
 
 export default Form

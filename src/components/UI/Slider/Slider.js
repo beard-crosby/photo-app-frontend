@@ -24,16 +24,17 @@ const Slider = ({ textFalse, textTrue, SvgFalse, SvgTrue, style, hideMobile, hid
   )
 }
 
+// text and svg's are optional.
 Slider.propTypes = {
-  textFalse: PropTypes.string,
-  textTrue: PropTypes.string,
-  SvgFalse: PropTypes.element,
-  SvgTrue: PropTypes.element,
-  style: PropTypes.object,
-  hideMobile: PropTypes.bool,
-  hideDesktop: PropTypes.bool,
-  onClick: PropTypes.func,
-  darkMode: PropTypes.bool,
+  textFalse: PropTypes.string, // If sliderState = false, display this text.
+  textTrue: PropTypes.string, // If sliderState = true, display this text.
+  SvgFalse: PropTypes.element, // If sliderState = false, display this SVG.
+  SvgTrue: PropTypes.element, // If sliderState = true, display this SVG.
+  style: PropTypes.object, // Can change style on Component call.
+  hideMobile: PropTypes.bool, // True = hide for mobile viewports.
+  hideDesktop: PropTypes.bool, // True = hide for desktop viewports.
+  onClick: PropTypes.func, // Passing up the onClick event.
+  darkMode: PropTypes.bool, // True = change styling for darkMode.
 }
 
 export default Slider

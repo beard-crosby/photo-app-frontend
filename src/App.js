@@ -13,8 +13,10 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(false)
   const [user, setUser] = useState(userData)
 
+  // If in develop mode, console log every time any state used in context is mutated. 
   process.env.NODE_ENV === 'development' && console.log({isLoading, darkMode, user})
 
+  // If darkMode = true, add 'dark-mode' class to body. Else remove it. 'dark-mode' scss class is in base.scss. 
   if (darkMode) {
     document.body.classList.add('dark-mode')
   } else {

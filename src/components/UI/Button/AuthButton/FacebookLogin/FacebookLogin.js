@@ -20,9 +20,9 @@ const FacebookBtn = ({ res, text, style}) =>
     )} />
 
 FacebookBtn.propTypes = {
-  res: PropTypes.func,
-  style: PropTypes.object,
-  text: PropTypes.string
+  res: PropTypes.func, // oAuth res.
+  style: PropTypes.object, // Can change style on Component call.
+  text: PropTypes.string // Text on the button.
 }
 
 export default FacebookBtn
