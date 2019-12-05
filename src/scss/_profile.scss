@@ -125,6 +125,7 @@ h2 {
     display: flex;
     flex-flow: column;
     border-radius: 6px;
+    overflow: hidden;
     border: 1px solid $color-1;
     background-color: $white;
   
