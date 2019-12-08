@@ -127,7 +127,7 @@ export const userData = {
       profileImg: 'placeholder.png',
       uploads: [
         {
-          id: 'jafgjhasbg',
+          id: 'hbj423bhjk234bhj432',
           img: '7.jpg',
           title: 'na',
           comments: [],

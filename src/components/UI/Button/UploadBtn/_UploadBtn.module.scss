@@ -14,9 +14,10 @@ $black: #000000;
   }
 
   svg {
-    height: 15px;
-    width: 15px;
-    margin-left: 5px;
+    width: 15px !important;
+    height: 15px !important;
+    margin: 0 0 0 5px !important;
+    display: block !important;
   }
 
   @media (max-width: 370px) {
