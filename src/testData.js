@@ -1,6 +1,8 @@
+import moment from 'moment'
+
 export const userData = {
   id: null,
-  token: 'ajsbfkrbgksrnl',
+  token: 'asjhbd',
   refreshToken: null,
   name: 'Maximilian Crosby',
   username: 'Maxiscoolerthansam6969',
@@ -88,10 +90,11 @@ export const userData = {
       profileImg: 'placeholder.png',
       uploads: [
         {
+          id: 'jafgjhasbg',
           img: '8.jpg',
           title: 'na',
           comments: [],
-          date: '03/10/2019'
+          date: moment().format('YYYY-MM-DD 00:00:00'),
         },
       ],
     },
@@ -102,16 +105,18 @@ export const userData = {
       profileImg: 'placeholder.png',
       uploads: [
         {
+          id: '3jkh3k6jhkjv',
           img: '9.jpg',
           title: 'na',
           comments: [],
-          date: '06/11/1995'
+          date: '2010-11-17 18:47:07'
         },
         {
+          id: '4hjkdf',
           img: '6.jpg',
           title: 'na',
           comments: [],
-          date: '01/01/1995'
+          date: '1995-12-07 18:47:07'
         },
       ],
     },
@@ -122,10 +127,11 @@ export const userData = {
       profileImg: 'placeholder.png',
       uploads: [
         {
+          id: 'jafgjhasbg',
           img: '7.jpg',
           title: 'na',
           comments: [],
-          date: '03/10/2010'
+          date: '2010-12-07 01:30:00'
         },
       ],
     },
@@ -143,12 +149,14 @@ export const userData = {
       profileImg: 'placeholder.png',
       uploads: [
         {
+          id: 'j1kvv51jhvjk5',
           img: 'Infographic.jpg',
           title: 'na',
           comments: [],
-          date: '06/07/1800'
+          date: '1900-12-07 15:47:07'
         },
       ],
     },
   ]
 }
+

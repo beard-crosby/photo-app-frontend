@@ -32,7 +32,7 @@ const PhotoCard = ({ ident, img, name, profileImg }) => {
       </div>
     </>
   )
-
+  
   return (
     <div className={`${classes.PhotoCardWrapper} ${imgClicked}`} style={window.matchMedia("(min-width: 600px)").matches ? { marginBottom: 40 } : { marginBottom: 20 }}>
       <div className={classes.CreatorMobile}>
