@@ -1,20 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import * as classes from './_PhotoCard.module.scss'
+import React, { useState } from 'react'
+import './_PhotoCard.scss'
 import PropTypes from 'prop-types'
 
-const PhotoCard = ({ ident, img, name, profileImg }) => {
-  const [height, setHeight] = useState(null)
+const PhotoCard = ({ img, name, profileImg }) => {
   const [imgClicked, setImgClicked] = useState(null)
 
-  // Target the specific DOM element with ident and find the height and update height state with the px number. 
-  useEffect(() => setHeight(document.getElementsByClassName('_PhotoCard_ImgWrapper__3S6GQ').item(ident).clientHeight), [ident])
-  height === 0 && PhotoCard() // re-render the PhotoCard if there's no height data.
-
-  // When image is clicked add the imgClicked class, making the image full screen. Also, stop the user from being able to scroll by adding overflow: 'hidden' to body.
-  // When image is clicked again, remove the imgClicked class and remove overflow: 'hidden' from body.
   const imgClickedHandler = () => {
     if (imgClicked === null) {
-      setImgClicked(classes.imgClicked)
+      setImgClicked("img-clicked")
       document.body.style.overflow = "hidden"
     } else {
       setImgClicked(null)
@@ -22,31 +15,15 @@ const PhotoCard = ({ ident, img, name, profileImg }) => {
     }
   }
 
-  const creatorJSX = (
-    <>
-      <div className={classes.ProfilePicture}>
-        {profileImg}
-      </div>
-      <div className={classes.ProfileInfo}>
-        <h5>{name}</h5>
-      </div>
-    </>
-  )
-  
   return (
-    <div className={`${classes.PhotoCardWrapper} ${imgClicked}`} style={window.matchMedia("(min-width: 600px)").matches ? { marginBottom: 40 } : { marginBottom: 20 }}>
-      <div className={classes.CreatorMobile}>
-        {creatorJSX}
-      </div>
-      <div className={classes.ImgWrapper} onClick={() => imgClickedHandler()}>
+    <div className={`photo-card-wrapper ${imgClicked}`}>
+      <div className="img-wrapper" onClick={() => imgClickedHandler()}>
         {img}
       </div>
-      <div className={classes.Sidebar} style={window.matchMedia("(min-width: 600px)").matches ? { height: height } : null}>
-        <div className={classes.SidebarTop}>
-          <div className={classes.Creator}>
-            {creatorJSX}
-          </div>
-          <div className={classes.Comments}/>
+      <div className="sidebar">
+        <div className="creator">
+          {profileImg}
+          <h5>{name}</h5>
         </div>
         <input type="text" name="comment" id="comment" placeholder="Write a comment" />
       </div>

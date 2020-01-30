@@ -10,6 +10,7 @@ const Following = () => {
   // Render uploads of followed users in order of date time.
   for (let i = 0; i <= 20; i++) { // Do this 20 times.
     let earliestArrDate = { date: moment().format('YYYY-MM-DD HH:mm:ss') } // Get the earliest date in the photoCardsArr.
+
     photoCardsArr.map(photoCard => {
       if (moment(photoCard.date).isBefore(earliestArrDate.date)) {
         earliestArrDate = photoCard
@@ -33,7 +34,6 @@ const Following = () => {
       {photoCardsArr.map((upload, i) => 
         <PhotoCard
           key={i}
-          ident={i}
           img={<img alt="Test Img" src={require(`../static/testPictures/${upload.img}`)}/>}
           name={upload.user.name}
           profileImg={<img alt="Test Img" src={require(`../static/defaults/${upload.user.profileImg}`)}/>}
