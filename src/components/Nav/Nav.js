@@ -5,6 +5,7 @@ import UploadBtn from '../UI/Button/UploadBtn'
 import { Moon, Sun } from 'react-feather'
 import UploadModel from '../Model/UploadModel'
 import { withRouter } from 'react-router-dom'
+import Search from '../UI/Search'
 
 const Nav = () => {
   const { user, darkMode, setDarkMode } = useContext(UserContext)
@@ -27,6 +28,7 @@ const Nav = () => {
             <NavLink to="/"><p>Following</p></NavLink>
             <NavLink to="/profile"><p>Profile</p></NavLink>
             <NavLink to="/settings"><p>Settings</p></NavLink>
+            <Search darkMode={darkMode}/>
           </div>
         </div>}
     </nav>
