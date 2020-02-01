@@ -92,15 +92,75 @@ export const userData = {
         {
           id: 'jafgjhasbg',
           img: '8.jpg',
-          title: 'na',
-          comments: [],
+          title: 'Tiger tigerson!',
+          comments: [
+            {
+              name: "Samuel Beard",
+              profileImg: "placeholder.png",
+              comment: "laaaaaaaame!"
+            },
+            {
+              name: "Stupidly Long and Convoluted Name",
+              profileImg: "placeholder.png",
+              comment: "Super laaaaaame!"
+            },
+            {
+              name: "Santa8756",
+              profileImg: "placeholder.png",
+              comment: "Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho!"
+            },
+            {
+              name: "Bob Ross",
+              profileImg: "placeholder.png",
+              comment: "... Still lame ..."
+            },
+            {
+              name: "Samuel Beard",
+              profileImg: "placeholder.png",
+              comment: "laaaaaaaame!"
+            },
+            {
+              name: "Stupidly Long and Convoluted Name",
+              profileImg: "placeholder.png",
+              comment: "Super laaaaaame!"
+            },
+            {
+              name: "Santa8756",
+              profileImg: "placeholder.png",
+              comment: "Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho!"
+            },
+            {
+              name: "Bob Ross",
+              profileImg: "placeholder.png",
+              comment: "... Still lame ..."
+            },{
+              name: "Samuel Beard",
+              profileImg: "placeholder.png",
+              comment: "laaaaaaaame!"
+            },
+            {
+              name: "Stupidly Long and Convoluted Name",
+              profileImg: "placeholder.png",
+              comment: "Super laaaaaame!"
+            },
+            {
+              name: "Santa8756",
+              profileImg: "placeholder.png",
+              comment: "Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho!"
+            },
+            {
+              name: "Bob Ross",
+              profileImg: "placeholder.png",
+              comment: "... Still lame ..."
+            },
+          ],
           date: moment().format('YYYY-MM-DD 00:00:00'),
         },
       ],
     },
     {
       name: "Samuel Beard",
-      username: 'Maxiscoolerthansam6969',
+      username: 'Dickdastardly',
       email: 'www.samissupergay.com',
       profileImg: 'placeholder.png',
       uploads: [
@@ -122,7 +182,7 @@ export const userData = {
     },
     {
       name: "Stupidly Long and Convoluted Name",
-      username: 'Maxiscoolerthansam6969',
+      username: 'Pinomitus38',
       email: 'www.samissupergay.com',
       profileImg: 'placeholder.png',
       uploads: [
@@ -137,14 +197,14 @@ export const userData = {
     },
     {
       name: "Im Gonna Get Them",
-      username: 'Maxiscoolerthansam6969',
+      username: 'Gimmecoffe3r',
       email: 'www.samissupergay.com',
       profileImg: 'placeholder.png',
       uploads: [],
     },
     {
-      name: "I feel the need",
-      username: 'Maxiscoolerthansam6969',
+      name: "Santa8756",
+      username: 'Dudethatsmycar!',
       email: 'www.samissupergay.com',
       profileImg: 'placeholder.png',
       uploads: [

@@ -19,6 +19,7 @@ $white: #ffffff;
 
   p {
     font-size: 0.7em;
+    cursor: pointer;
     color: $color-2;
   }
 
@@ -55,6 +56,45 @@ $white: #ffffff;
         background-size: contain;
         margin-right: 10px;
         flex-shrink: 0;
+      }
+
+      .creator-info {
+        height: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+      }
+    }
+
+    .comments {
+      width: 100%;
+      padding: 10px;
+      flex-grow: 1;
+      box-sizing: border-box;
+      display: flex;
+      flex-flow: column nowrap;
+      overflow: auto;
+
+      .comment {
+        margin-bottom: 10px;
+        display: flex;
+        cursor: pointer;
+
+        p {
+          background-color: $color-1;
+          border-radius: 5px;
+          padding: 2px 5px;
+        }
+
+        img {
+          width: 20px;
+          height: 20px;
+          border-radius: 20px;
+          background-image: url('../../static/defaults/placeholder.png');
+          background-size: contain;
+          margin-right: 5px;
+          flex-shrink: 0;
+        }
       }
     }
 
