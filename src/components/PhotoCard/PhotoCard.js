@@ -19,7 +19,7 @@ const PhotoCard = ({ img, name, username, profileImg, comments, ident }) => {
       document.body.style = "none"
     }
   }
-  
+
   return (
     <div className={`photo-card-wrapper ${imgClicked}`}>
       <div className="img-wrapper" onClick={() => imgClickedHandler()}>
