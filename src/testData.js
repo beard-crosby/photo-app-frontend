@@ -114,46 +114,6 @@ export const userData = {
               profileImg: "placeholder.png",
               comment: "... Still lame ..."
             },
-            {
-              name: "Samuel Beard",
-              profileImg: "placeholder.png",
-              comment: "laaaaaaaame!"
-            },
-            {
-              name: "Stupidly Long and Convoluted Name",
-              profileImg: "placeholder.png",
-              comment: "Super laaaaaame!"
-            },
-            {
-              name: "Santa8756",
-              profileImg: "placeholder.png",
-              comment: "Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho!"
-            },
-            {
-              name: "Bob Ross",
-              profileImg: "placeholder.png",
-              comment: "... Still lame ..."
-            },
-            {
-              name: "Samuel Beard",
-              profileImg: "placeholder.png",
-              comment: "laaaaaaaame!"
-            },
-            {
-              name: "Stupidly Long and Convoluted Name",
-              profileImg: "placeholder.png",
-              comment: "Super laaaaaame!"
-            },
-            {
-              name: "Santa8756",
-              profileImg: "placeholder.png",
-              comment: "Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho! Ho Ho Ho!"
-            },
-            {
-              name: "Bob Ross",
-              profileImg: "placeholder.png",
-              comment: "... Still lame ..."
-            },
           ],
           date: moment().format('YYYY-MM-DD 00:00:00'),
         },
