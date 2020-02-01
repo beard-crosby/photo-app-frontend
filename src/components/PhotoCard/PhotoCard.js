@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './_PhotoCard.scss'
 import PropTypes from 'prop-types'
 
-const PhotoCard = ({ img, name, profileImg }) => {
+const PhotoCard = ({ img, name, username, profileImg, comments }) => {
   const [imgClicked, setImgClicked] = useState(null)
 
   const imgClickedHandler = () => {
@@ -23,7 +23,18 @@ const PhotoCard = ({ img, name, profileImg }) => {
       <div className="sidebar">
         <div className="creator">
           {profileImg}
-          <h5>{name}</h5>
+          <div className="creator-info">
+            <h5>{name}</h5>
+            <p>{username}</p>
+          </div>
+        </div>
+        <div className="comments">
+          {comments.map(comment => (
+            <div className="comment">
+              <img alt="Profile Image" src={require(`../../static/defaults/${comment.profileImg}`)}/>
+              <p>{comment.comment}</p>
+            </div>
+          ))}
         </div>
         <input type="text" name="comment" id="comment" placeholder="Write a comment" />
       </div>
@@ -32,7 +43,6 @@ const PhotoCard = ({ img, name, profileImg }) => {
 }
 
 PhotoCard.propTypes = {
-  ident: PropTypes.number, // Identity number of the element. Need this to find the specific Photocard element on the page to calculate the height for the sidebar.
   img: PropTypes.element, // The image. Height of the image decides the height of the component thus preserving aspect ratio.
   name: PropTypes.string, // Name of the user that uploaded the photo.
   profileImg: PropTypes.element, // Image of the user that uploaded the photo. 
