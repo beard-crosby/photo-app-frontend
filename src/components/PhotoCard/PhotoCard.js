@@ -29,14 +29,14 @@ const PhotoCard = ({ img, name, username, profileImg, comments }) => {
           </div>
         </div>
         <div className="comments">
-          {comments.map(comment => (
-            <div className="comment">
+          {comments.map((comment, i) => (
+            <div className="comment" key={i}>
               <img alt="Profile Image" src={require(`../../static/defaults/${comment.profileImg}`)}/>
               <p>{comment.comment}</p>
             </div>
           ))}
         </div>
-        <input type="text" name="comment" id="comment" placeholder="Write a comment" />
+        <input type="text" name="comment" placeholder="Write a comment" />
       </div>
     </div>
   )
