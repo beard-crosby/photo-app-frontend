@@ -7,7 +7,7 @@ const PhotoCard = ({ img, name, username, profileImg, comments, ident }) => {
   const [imgClicked, setImgClicked] = useState(null)
 
   // Target the specific DOM element with ident and find the height and update height state with the px number. 
-  useEffect(() => setHeight(document.getElementsByClassName('photo-card-wrapper').item(ident).clientHeight), [ident])
+  useEffect(() => setHeight(document.getElementsByClassName('img-wrapper').item(ident).clientHeight), [ident])
   height === 0 && PhotoCard() // re-render the PhotoCard if there's no height data.
 
   const imgClickedHandler = () => {
