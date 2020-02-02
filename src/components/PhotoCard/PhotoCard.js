@@ -20,6 +20,8 @@ const PhotoCard = ({ img, name, username, profileImg, comments, ident }) => {
     }
   }
 
+  console.log(height)
+
   return (
     <div className={`photo-card-wrapper ${imgClicked}`}>
       <div className="img-wrapper" onClick={() => imgClickedHandler()}>
@@ -34,8 +36,8 @@ const PhotoCard = ({ img, name, username, profileImg, comments, ident }) => {
           </div>
         </div>
         <div className="comments" style={{ height: height - 96 }}>
-          {comments.map(comment => (
-            <div className="comment">
+          {comments.map((comment, i) => (
+            <div className="comment" key={i}>
               <img alt="Profile Image" src={require(`../../static/defaults/${comment.profileImg}`)}/>
               <p>{comment.comment}</p>
             </div>
