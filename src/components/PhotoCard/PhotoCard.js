@@ -21,22 +21,24 @@ const PhotoCard = ({ img, name, username, profileImg, comments }) => {
         {img}
       </div>
       <div className="sidebar">
-        <div className="creator">
-          {profileImg}
-          <div className="creator-info">
-            <h5>{name}</h5>
-            <p>{username}</p>
-          </div>
-        </div>
-        <div className="comments">
-          {comments.map((comment, i) => (
-            <div className="comment" key={i}>
-              <img alt="Profile Image" src={require(`../../static/defaults/${comment.profileImg}`)}/>
-              <p>{comment.comment}</p>
+        <div className="sidebar-wrapper">
+          <div className="creator">
+            {profileImg}
+            <div className="creator-info">
+              <h5>{name}</h5>
+              <p>{username}</p>
             </div>
-          ))}
+          </div>
+          <div className="comments">
+            {comments.map((comment, i) => (
+              <div className="comment" key={i}>
+                <img alt="Profile Image" src={require(`../../static/defaults/${comment.profileImg}`)}/>
+                <p>{comment.comment}</p>
+              </div>
+            ))}
+          </div>
+          <input type="text" name="comment" placeholder="Write a comment" />
         </div>
-        <input type="text" name="comment" placeholder="Write a comment" />
       </div>
     </div>
   )
