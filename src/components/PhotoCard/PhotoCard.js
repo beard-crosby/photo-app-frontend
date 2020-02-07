@@ -15,8 +15,6 @@ const PhotoCard = ({ img, name, username, profileImg, comments }) => {
     }
   }
 
-  console.log(comments)
-
   return (
     <div className={`photo-card-wrapper ${imgClicked}`}>
       <div className="img-wrapper" onClick={() => imgClickedHandler()}>
@@ -24,21 +22,26 @@ const PhotoCard = ({ img, name, username, profileImg, comments }) => {
       </div>
       <div className="sidebar">
         <div className="sidebar-wrapper">
-          <div className="creator">
-            {profileImg}
-            <div className="creator-info">
-              <h5>{name}</h5>
-              <p>{username}</p>
+          <div className="top">
+            <div className="creator">
+              {profileImg}
+              <div className="creator-info">
+                <h5>{name}</h5>
+                <p>{username}</p>
+              </div>
+            </div>
+            <div className="toolbar">
+              <p>Comments</p>
             </div>
           </div>
-          {comments.length > 0 && <div className="comments" >
+          <div className="comments" >
             {comments.map((comment, i) => (
               <div className="comment" key={i}>
                 <img alt="Profile Image" src={require(`../../static/defaults/${comment.profileImg}`)}/>
                 <p>{comment.comment}</p>
               </div>
             ))}
-          </div>}
+          </div>
           <input type="text" name="comment" placeholder="Write a comment" />
         </div>
       </div>
