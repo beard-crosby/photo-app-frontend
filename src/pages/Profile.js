@@ -31,19 +31,15 @@ const Profile = () => {
           <Menu className="menu-btn"/>
           <div className="uploads-bar-section" style={{ borderRight: '1px solid #EEEEEE' }}>
             <p>Search</p>
-            <Search/>
           </div>
           <div className="uploads-bar-section" style={{ borderRight: '1px solid #EEEEEE' }}>
             <p>Sort Alphabetically</p>
-            <HelpCircle/>
           </div>
           <div className="uploads-bar-section" style={{ borderRight: '1px solid #EEEEEE' }}>
             <p>Sort By Date</p>
-            <Clock/>
           </div>
           <div className="uploads-bar-section">
             <p>Random</p>
-            <Grid/>
           </div>
         </div>
         {user.uploads.length === 0 ? 

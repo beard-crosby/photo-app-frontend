@@ -57,8 +57,12 @@ body {
         width: 100%;
       }
 
+      @media (max-width: 800px) {
+        padding: 20px;
+      }
+
       @media (max-width: 600px) {
-        padding: 40px 0;
+        padding: 20px 0;
       }
     }
 
