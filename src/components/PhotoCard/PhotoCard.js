@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './_PhotoCard.scss'
+import { MessageSquare } from "react-feather"
 import PropTypes from 'prop-types'
 
 const PhotoCard = ({ img, name, username, profileImg, comments }) => {
@@ -31,10 +32,13 @@ const PhotoCard = ({ img, name, username, profileImg, comments }) => {
               </div>
             </div>
             <div className="toolbar">
-              <p>Comments</p>
+              <div className="comments-btn">
+                <p>Comments</p>
+                <MessageSquare/>
+              </div>
             </div>
           </div>
-          <div className="comments" >
+          <div className="comments">
             {comments.map((comment, i) => (
               <div className="comment" key={i}>
                 <img alt="Profile Image" src={require(`../../static/defaults/${comment.profileImg}`)}/>
@@ -52,7 +56,9 @@ const PhotoCard = ({ img, name, username, profileImg, comments }) => {
 PhotoCard.propTypes = {
   img: PropTypes.element, // The image. Height of the image decides the height of the component thus preserving aspect ratio.
   name: PropTypes.string, // Name of the user that uploaded the photo.
-  profileImg: PropTypes.element, // Image of the user that uploaded the photo. 
+  username: PropTypes.string, // Username of the user that uploaded the photo.
+  profileImg: PropTypes.element, // Image of the user that uploaded the photo.
+  comments: PropTypes.array // An array of comments
 }
 
 export default PhotoCard

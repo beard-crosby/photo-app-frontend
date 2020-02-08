@@ -100,6 +100,19 @@ $white: #ffffff;
             cursor: pointer;
           }
 
+          .comments-btn {
+            display: flex;
+            align-items: center;
+
+            svg {
+              width: 10px;
+              height: 10px;
+              color: $color-2;
+              padding-left: 3px;
+              margin-top: 2px;
+            }
+          }
+
           @media (max-width: 800px) {
             display: flex;
             justify-content: flex-end;
