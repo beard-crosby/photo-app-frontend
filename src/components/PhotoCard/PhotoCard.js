@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 
 const PhotoCard = ({ img, name, username, profileImg, comments }) => {
   const [imgClicked, setImgClicked] = useState(null)
+  const [showComments, setShowComments] = useState(false)
 
   const imgClickedHandler = () => {
     if (imgClicked === null) {
@@ -23,30 +24,28 @@ const PhotoCard = ({ img, name, username, profileImg, comments }) => {
       </div>
       <div className="sidebar">
         <div className="sidebar-wrapper">
-          <div className="top">
-            <div className="creator">
-              {profileImg}
-              <div className="creator-info">
-                <h5>{name}</h5>
+          <div className="creator">
+            {profileImg}
+            <div className="creator-info">
+              <h5>{name}</h5>
+              <div className="username-btns">
                 <p>{username}</p>
-              </div>
-            </div>
-            <div className="toolbar">
-              <div className="comments-btn">
-                <p>Comments</p>
-                <MessageSquare/>
+                <div className="comments-btn" onClick={() => setShowComments(!showComments)}>
+                  <p>Comments</p>
+                  <MessageSquare/>
+                </div>
               </div>
             </div>
           </div>
-          <div className="comments">
+          {showComments && <div className={`comments ${showComments}`}>
             {comments.map((comment, i) => (
               <div className="comment" key={i}>
                 <img alt="Profile Image" src={require(`../../static/defaults/${comment.profileImg}`)}/>
                 <p>{comment.comment}</p>
               </div>
             ))}
-          </div>
-          <input type="text" name="comment" placeholder="Write a comment" />
+          </div>}
+          {showComments && <input type="text" name="comment" placeholder="Write a comment" />}
         </div>
       </div>
     </div>

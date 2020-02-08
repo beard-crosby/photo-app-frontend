@@ -14,7 +14,6 @@ $white: #ffffff;
   h5 {
     font-weight: 400;
     letter-spacing: 1px;
-    cursor: pointer;
   }
 
   p {
@@ -53,11 +52,6 @@ $white: #ffffff;
       flex-direction: column;
       justify-content: space-between;
 
-      .top {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-
         .creator {
           width: 100%;
           padding: 10px;
@@ -65,7 +59,6 @@ $white: #ffffff;
           align-items: center;
           border-bottom: 1px solid $color-1;
           box-sizing: border-box;
-          cursor: pointer;
     
           img {
             width: 40px;
@@ -79,47 +72,39 @@ $white: #ffffff;
     
           .creator-info {
             height: 100%;
+            width: 100%;
             display: flex;
             flex-flow: column nowrap;
             justify-content: space-evenly;
-          }
 
-          @media (max-width: 800px) {
-            width: 80%;
-          }
-        }
+            .username-btns {
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
 
-        .toolbar {
-          display: none;
-          width: 20%;
-          padding: 10px;
-          border-bottom: 1px solid $color-1;
-          box-sizing: border-box;
+              .comments-btn {
+                display: flex;
+                align-items: center;
 
-          p {
-            cursor: pointer;
-          }
+                p, svg {
+                  cursor: pointer;
+                }
+    
+                svg {
+                  width: 10px;
+                  height: 10px;
+                  color: $color-2;
+                  padding-left: 3px;
+                  margin-top: 2px;
+                }
 
-          .comments-btn {
-            display: flex;
-            align-items: center;
-
-            svg {
-              width: 10px;
-              height: 10px;
-              color: $color-2;
-              padding-left: 3px;
-              margin-top: 2px;
+                @media (min-width: 800px) {
+                  display: none;
+                }
+              }
             }
           }
-
-          @media (max-width: 800px) {
-            display: flex;
-            justify-content: flex-end;
-            align-items: flex-start;
-          }
         }
-      }
   
       .comments {
         width: 100%;
@@ -170,7 +155,7 @@ $white: #ffffff;
     }
 
     @media (max-width: 800px) {
-      height: 200px;
+      min-height: 200px;
       width: 100%;
     }
   }
