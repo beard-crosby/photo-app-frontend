@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './_PhotoCard.scss'
 import { MessageSquare } from "react-feather"
 import PropTypes from 'prop-types'
@@ -6,6 +6,8 @@ import PropTypes from 'prop-types'
 const PhotoCard = ({ img, name, username, profileImg, comments }) => {
   const [imgClicked, setImgClicked] = useState(null)
   const [showComments, setShowComments] = useState(false)
+
+  useEffect(() => {window.matchMedia("(min-width: 800px)").matches && setShowComments(true)}, [])
 
   const imgClickedHandler = () => {
     if (imgClicked === null) {
@@ -37,7 +39,7 @@ const PhotoCard = ({ img, name, username, profileImg, comments }) => {
               </div>
             </div>
           </div>
-          {showComments && <div className={`comments ${showComments}`}>
+          {showComments && <div className="comments">
             {comments.map((comment, i) => (
               <div className="comment" key={i}>
                 <img alt="Profile Image" src={require(`../../static/defaults/${comment.profileImg}`)}/>

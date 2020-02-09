@@ -11,9 +11,12 @@ $white: #ffffff;
   margin-bottom: 15px;
   border: 1px solid $color-1;
 
+  img, h5, p, svg {
+    cursor: pointer;
+  }
+
   h5 {
     font-weight: 400;
-    letter-spacing: 1px;
   }
 
   p {
@@ -85,17 +88,13 @@ $white: #ffffff;
               .comments-btn {
                 display: flex;
                 align-items: center;
-
-                p, svg {
-                  cursor: pointer;
-                }
     
                 svg {
                   width: 10px;
                   height: 10px;
                   color: $color-2;
                   padding-left: 3px;
-                  margin-top: 2px;
+                  margin-top: 1px;
                 }
 
                 @media (min-width: 800px) {
