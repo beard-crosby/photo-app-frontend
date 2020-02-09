@@ -7,8 +7,9 @@ import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
 
 const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) => {
   const [form, setForm] = useState({
-    email: null,
+    name: null,
     username: null,
+    email: null,
     password: null,
   })
 
@@ -34,11 +35,11 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) =
         </>}
       hideBottom={hideBottom}  
       bottom={<Link to="/auth"><h5>BACK TO LOGIN</h5></Link>}>
-      <label htmlFor="email"><h5>Email</h5></label>
+      <label htmlFor="username"><h5>Name</h5></label>
       <input 
-        type="email" 
-        name="email" 
-        id="email" 
+        type="text" 
+        name="username" 
+        id="username" 
         onChange={updateField}>
       </input>
       <label htmlFor="username"><h5>Username</h5></label>
@@ -46,6 +47,13 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) =
         type="text" 
         name="username" 
         id="username" 
+        onChange={updateField}>
+      </input>
+      <label htmlFor="email"><h5>Email</h5></label>
+      <input 
+        type="email" 
+        name="email" 
+        id="email" 
         onChange={updateField}>
       </input>
       <label htmlFor="password"><h5>Password</h5></label>
