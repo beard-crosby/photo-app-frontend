@@ -39,7 +39,7 @@ const PhotoCard = ({ img, name, username, profileImg, comments }) => {
               </div>
             </div>
           </div>
-          {showComments && <div className="comments">
+          {comments.length > 0 && showComments && <div className="comments">
             {comments.map((comment, i) => (
               <div className="comment" key={i}>
                 <img alt="Profile Image" src={require(`../../static/defaults/${comment.profileImg}`)}/>
@@ -47,7 +47,7 @@ const PhotoCard = ({ img, name, username, profileImg, comments }) => {
               </div>
             ))}
           </div>}
-          {showComments && <input type="text" name="comment" placeholder="Write a comment" />}
+          <input type="text" name="comment" placeholder="Write a comment" />
         </div>
       </div>
     </div>

@@ -113,6 +113,7 @@ $white: #ffffff;
         display: flex;
         flex-flow: column nowrap;
         overflow: auto;
+        border-bottom: 1px solid $color-1;
   
         .comment {
           margin-bottom: 10px;
@@ -136,6 +137,12 @@ $white: #ffffff;
           }
         }
       }
+
+      @media (max-width: 800px) {
+        position: relative;
+        width: 100%;
+        max-height: 250px;
+      }
     }
 
     input {
@@ -145,7 +152,6 @@ $white: #ffffff;
       padding: 5px 10px;
       box-sizing: border-box;
       border-bottom-right-radius: 5px;
-      border-top: 1px solid $color-1;
       flex-shrink: 0;
     }
 
@@ -154,7 +160,7 @@ $white: #ffffff;
     }
 
     @media (max-width: 800px) {
-      min-height: 200px;
+      max-height: 250px;
       width: 100%;
     }
   }
