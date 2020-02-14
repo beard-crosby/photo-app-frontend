@@ -19,9 +19,9 @@ const Following = () => {
 
     let temp = { date: '1800-01-01 00:00:00' }
     user.following.map(followed => // Loop through all the users that the user is following.
-      followed.posts.map(upload => { // Loop through all the posts each user has.
-        if (moment(upload.date).isAfter(temp.date) && moment(upload.date).isBefore(earliestArrDate.date)) { // If upload date is later than the date in temp AND earlier than the date in earliestArrDate,
-          temp = { ...upload, user: { name: followed.name, username: followed.username, profileImg: followed.profileImg }} // temp = upload && the name and profileImg of the user that made the upload. 
+      followed.posts.map(post => { // Loop through all the posts each user has.
+        if (moment(post.date).isAfter(temp.date) && moment(post.date).isBefore(earliestArrDate.date)) { // If post date is later than the date in temp AND earlier than the date in earliestArrDate,
+          temp = { ...post, user: { name: followed.name, username: followed.username, profileImg: followed.profileImg }} // temp = upload && the name and profileImg of the user that made the upload. 
         }
       })
     )
@@ -31,14 +31,14 @@ const Following = () => {
 
   return (
     <>
-      {photoCardsArr.map((upload, i) => 
+      {photoCardsArr.map((photoCard, i) => 
         <PhotoCard
           key={i}
-          img={<img alt="Test Img" src={require(`../static/testPictures/${upload.img}`)}/>}
-          name={upload.user.name}
-          username={upload.user.username}
-          profileImg={<img alt="Test Img" src={require(`../static/defaults/${upload.user.profileImg}`)}/>}
-          comments={upload.comments}
+          img={<img alt="Test Img" src={require(`../static/testPictures/${photoCard.img}`)}/>}
+          name={photoCard.user.name}
+          username={photoCard.user.username}
+          profileImg={<img alt="Test Img" src={require(`../static/defaults/${photoCard.user.profileImg}`)}/>}
+          comments={photoCard.comments}
         />
       )}
     </>
