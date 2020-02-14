@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../App' 
 import '../scss/_profile.scss'
-import { Clock, Grid, HelpCircle, Search, Menu } from 'react-feather'
+import { Menu } from 'react-feather'
 
 const Profile = () => {
   const { user } = useContext(UserContext)
@@ -26,30 +26,30 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div className="uploads">
-        <div className="uploads-bar">
+      <div className="posts">
+        <div className="posts-bar">
           <Menu className="menu-btn"/>
-          <div className="uploads-bar-section" style={{ borderRight: '1px solid #EEEEEE' }}>
+          <div className="posts-bar-section" style={{ borderRight: '1px solid #EEEEEE' }}>
             <p>Search</p>
           </div>
-          <div className="uploads-bar-section" style={{ borderRight: '1px solid #EEEEEE' }}>
+          <div className="posts-bar-section" style={{ borderRight: '1px solid #EEEEEE' }}>
             <p>Sort Alphabetically</p>
           </div>
-          <div className="uploads-bar-section" style={{ borderRight: '1px solid #EEEEEE' }}>
+          <div className="posts-bar-section" style={{ borderRight: '1px solid #EEEEEE' }}>
             <p>Sort By Date</p>
           </div>
-          <div className="uploads-bar-section">
+          <div className="posts-bar-section">
             <p>Random</p>
           </div>
         </div>
-        {user.uploads.length === 0 ? 
-        <div className="uploads-content" style={{ alignContent: 'center', justifyContent: 'center', alignItems: 'center', height: '100px' }}>
-          <h2>You have no uploads!</h2>
+        {user.posts.length === 0 ? 
+        <div className="posts-content" style={{ alignContent: 'center', justifyContent: 'center', alignItems: 'center', height: '100px' }}>
+          <h2>You have no Posts!</h2>
         </div> : 
-        <div className="uploads-content">
-          {user.uploads.map((Upload, i) =>
+        <div className="posts-content">
+          {user.posts.map((Post, i) =>
             <div key={i} className="img-wrapper">
-              <img alt="Test Img" src={require(`../static/testPictures/${Upload.img}.jpg`)}/>
+              <img alt="Test Img" src={require(`../static/testPictures/${Post.img}.jpg`)}/>
             </div>
           )}
         </div>}

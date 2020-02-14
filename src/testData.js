@@ -8,7 +8,7 @@ export const userData = {
   username: 'Maxiscoolerthansam6969',
   email: 'www.samissupergay.com',
   bio: 'I am well good, init!',
-  uploads: [
+  posts: [
     {
       img: '0',
       title: 'na',
@@ -88,7 +88,7 @@ export const userData = {
       username: 'Maxiscoolerthansam6969',
       email: 'www.samissupergay.com',
       profileImg: 'placeholder.png',
-      uploads: [
+      posts: [
         {
           id: 'jafgjhasbg',
           img: '8.jpg',
@@ -164,7 +164,7 @@ export const userData = {
       username: 'Dickdastardly',
       email: 'www.samissupergay.com',
       profileImg: 'placeholder.png',
-      uploads: [
+      posts: [
         {
           id: '3jkh3k6jhkjv',
           img: '9.jpg',
@@ -192,7 +192,7 @@ export const userData = {
       username: 'Pinomitus38',
       email: 'www.samissupergay.com',
       profileImg: 'placeholder.png',
-      uploads: [
+      posts: [
         {
           id: 'hbj423bhjk234bhj432',
           img: '7.jpg',
@@ -207,14 +207,14 @@ export const userData = {
       username: 'Gimmecoffe3r',
       email: 'www.samissupergay.com',
       profileImg: 'placeholder.png',
-      uploads: [],
+      posts: [],
     },
     {
       name: "Santa8756",
       username: 'Dudethatsmycar!',
       email: 'www.samissupergay.com',
       profileImg: 'placeholder.png',
-      uploads: [
+      posts: [
         {
           id: 'j1kvv51jhvjk5',
           img: 'Infographic.jpg',
