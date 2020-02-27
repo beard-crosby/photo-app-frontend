@@ -17,6 +17,7 @@ export const localStore = () => {
       const profileImg = localStorage.getItem('profileImg')
       const posts = localStorage.getItem('posts')
       const following = localStorage.getItem('following')
+
       const userData = {
         localStorage: true,
         _id: _id,
@@ -30,6 +31,7 @@ export const localStore = () => {
         posts: JSON.parse(posts),
         following: JSON.parse(following),
       }
+
       return userData
     }
   }
@@ -47,24 +49,25 @@ export const logOut = () => {
   localStorage.removeItem('posts')
   localStorage.removeItem('following')
 
-  return {
-    userData: {
-      _id: null,
-      token: null,
-      tokenExpiry: null,
-      name: null,
-      username: null,
-      email: null,
-      bio: null,
-      profileImg: null,
-      posts: null,
-      following: null,
-    }
+  const userData = {
+    _id: null,
+    token: null,
+    tokenExpiry: null,
+    name: null,
+    username: null,
+    email: null,
+    bio: null,
+    profileImg: null,
+    posts: null,
+    following: null,
   }
+
+  return userData
 }
 
 export const logInSuccess = userData => {
   if (!userData.localStorage) {
+    localStorage.setItem('_id', userData._id)
     localStorage.setItem('token', userData.token)
     localStorage.setItem('tokenExpiry', new Date(new Date().getTime() + userData.tokenExpiry * 100000000))
     localStorage.setItem('name', userData.name)
@@ -75,6 +78,7 @@ export const logInSuccess = userData => {
     localStorage.setItem('posts', JSON.stringify(userData.posts))
     localStorage.setItem('following', JSON.stringify(userData.following))
   }
+  
   return userData
 }
 

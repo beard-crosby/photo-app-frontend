@@ -11,7 +11,7 @@ const UserContext = React.createContext()
 const App = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
-  const [user, setUser] = useState(localStore().userData)
+  const [user, setUser] = useState(localStore())
   
   // If in develop mode, console log every time any state used in context is mutated. 
   process.env.NODE_ENV === 'development' && console.log({isLoading, darkMode, user})
