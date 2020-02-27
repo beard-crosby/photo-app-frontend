@@ -62,7 +62,9 @@ export const logOut = () => {
     following: null,
   }
 
-  return userData
+  console.log(`[requests.js] Logged Out...`)
+  console.log(userData)
+  return userData 
 }
 
 export const logInSuccess = userData => {
@@ -78,13 +80,13 @@ export const logInSuccess = userData => {
     localStorage.setItem('posts', JSON.stringify(userData.posts))
     localStorage.setItem('following', JSON.stringify(userData.following))
   }
-  
+
   return userData
 }
 
 export const signUp = formData => {
   // start spinner
-  axios.post('', {
+  let getData = axios.post('', {
     variables: {
       name: formData.name,
       username: formData.username,
@@ -116,7 +118,6 @@ export const signUp = formData => {
     `
   }).then(res => {
     if (res.data.errors) {
-      console.log(res.data.errors[0].message)
       return res.data.errors[0].message
     } else {
       // checkTimeout(res.data.data.createUser.tokenExpiry)
@@ -124,6 +125,138 @@ export const signUp = formData => {
       return res.data.data.createUser
     }
   }).catch(err => console.log(err))
+  return getData
+}
+
+export const login = formData => {
+  // start spinner
+  if (formData.email) {
+    axios.post('', {
+      variables: {
+        email: formData.email,
+        password: formData.password,
+      },
+      query: `
+        query Login($email: String!, $password: String!) {
+          login(email: $email, password: $password) {
+            _id
+            token
+            tokenExpiry
+            name
+            username
+            email
+            bio
+            profileImg
+            posts {
+              _id
+              img
+              title
+              description
+              comments {
+                _id
+                comment
+                author {
+                  _id
+                }
+              }
+            }
+            following {
+              _id
+              name
+              username
+              email
+              bio
+              profileImg
+              posts {
+                _id
+                img
+                title
+                description
+                comments {
+                  _id
+                  comment
+                  author {
+                    _id
+                  }
+                }
+              }
+            }
+          }
+        }
+      `
+    }).then(res => {
+      if (res.data.errors) {
+        return res.data.errors[0].message
+      } else {
+        // checkTimeout(res.data.data.login.tokenExpiry)
+        logInSuccess(res.data.data.login)
+        return res.data.data.login
+      }
+    }).catch(err => console.log(err))
+  } else {
+    axios.post('', {
+      variables: {
+        username: formData.username,
+        password: formData.password,
+      },
+      query: `
+        query Login($username: String!, $password: String!) {
+          login(username: $username, password: $password) {
+            _id
+            token
+            tokenExpiry
+            name
+            username
+            email
+            bio
+            profileImg
+            posts {
+              _id
+              img
+              title
+              description
+              comments {
+                _id
+                comment
+                author {
+                  _id
+                }
+              }
+            }
+            following {
+              _id
+              name
+              username
+              email
+              bio
+              profileImg
+              posts {
+                _id
+                img
+                title
+                description
+                comments {
+                  _id
+                  comment
+                  author {
+                    _id
+                  }
+                }
+              }
+            }
+          }
+        }
+      `
+    }).then(res => {
+      if (res.data.errors) {
+        return res.data.errors[0].message
+      } else {
+        // checkTimeout(res.data.data.login.tokenExpiry)
+        logInSuccess(res.data.data.login)
+        return res.data.data.login
+      }
+    }).catch(err => console.log(err))
+  }
 }
 
 // export const checkTimeout = expirationTime => {

@@ -5,7 +5,6 @@ import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
 
 const Splash = () => 
   <>
-    <Create className="hideDesktop" hideBottom topRight={<></>}/>
     <div className="app-and-signup">
       <div className="app">
         <img alt="iPhone 11" src={require("../static/misc/iphone-template.png")}/>

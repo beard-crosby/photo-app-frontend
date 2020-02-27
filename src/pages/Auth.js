@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import GoogleLogin from '../components/UI/Button/AuthButton/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/AuthButton/FacebookLogin'
 import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
+import { login } from '../shared/requests'
 
 const Auth = ({ history }) => {
   const [form, setForm] = useState({
@@ -39,7 +40,7 @@ const Auth = ({ history }) => {
 
   const onSignIn = event => {
     event.preventDefault()
-    // backend request
+    login(form)
   }
 
   return (

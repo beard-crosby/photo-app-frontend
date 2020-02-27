@@ -14,11 +14,11 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) =
     password: null,
     passConfirm: null,
   })
-  console.log(form)
+
   const updateField = e => {
     setForm({
-        ...form,
-        [e.target.name]: e.target.value,
+      ...form,
+      [e.target.name]: e.target.value,
     })
   }
 

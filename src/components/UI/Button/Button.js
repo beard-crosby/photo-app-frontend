@@ -2,7 +2,7 @@ import React from 'react'
 import * as classes from './_Button.module.scss'
 import PropTypes from 'prop-types'
 
-const Button = ({ text, style, HideMobile, darkMode }) => {
+const Button = ({ text, style, HideMobile, darkMode, onClick }) => {
   const classArr = [classes.Button]
 
   if (HideMobile) {
@@ -12,7 +12,7 @@ const Button = ({ text, style, HideMobile, darkMode }) => {
   }
 
   return (
-    <div className={classArr.join(' ')} style={style}>
+    <div className={classArr.join(' ')} style={style} onClick={onClick}>
       <p>{text}</p>
     </div>
   )
