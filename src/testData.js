@@ -8,6 +8,7 @@ export const userData = {
   username: 'Maxiscoolerthansam6969',
   email: 'www.samissupergay.com',
   bio: 'I am well good, init!',
+  profileImg: 'placeholder.png',
   posts: [
     {
       img: '0',

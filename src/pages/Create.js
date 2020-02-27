@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import GoogleLogin from '../components/UI/Button/AuthButton/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/AuthButton/FacebookLogin'
 import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
+import { signUp } from '../shared/requests'
 
 const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) => {
   const [form, setForm] = useState({
@@ -11,8 +12,9 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) =
     username: null,
     email: null,
     password: null,
+    passConfirm: null,
   })
-
+  console.log(form)
   const updateField = e => {
     setForm({
         ...form,
@@ -22,7 +24,7 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) =
 
   const onSignUp = event => {
     event.preventDefault()
-    // backend request
+    signUp(form)
   }
 
   return (
@@ -35,11 +37,11 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) =
         </>}
       hideBottom={hideBottom}  
       bottom={<Link to="/auth"><h5>BACK TO LOGIN</h5></Link>}>
-      <label htmlFor="username"><h5>Name</h5></label>
+      <label htmlFor="name"><h5>Name</h5></label>
       <input 
         type="text" 
-        name="username" 
-        id="username" 
+        name="name" 
+        id="name" 
         onChange={updateField}>
       </input>
       <label htmlFor="username"><h5>Username</h5></label>
@@ -63,11 +65,11 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) =
         id="password" 
         onChange={updateField}>
       </input>
-      <label htmlFor="password-check"><h5>Password Check</h5></label>
+      <label htmlFor="passConfirm"><h5>Password Check</h5></label>
       <input 
         type="password" 
-        name="password-check" 
-        id="password-check" 
+        name="passConfirm" 
+        id="passConfirm" 
         onChange={updateField}>
       </input>
       <div className="auth-buttons" style={btnStyle}>
