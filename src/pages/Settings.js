@@ -1,13 +1,24 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { UserContext } from '../App'
 import Button from '../components/UI/Button'
-import { logOut } from '../shared/requests'
+import { logout } from '../shared/localStorage'
+import { Redirect } from 'react-router-dom'
 
 const Settings = () => {
-  const { darkMode } = useContext(UserContext)
+  const { setUser, darkMode } = useContext(UserContext)
+  const [ redirect, setRedirect ] = useState(false)
+  
+  if (redirect) {
+    return <Redirect to="/"/>
+  }
+
+  const logoutClickedHandler = () => {
+    setRedirect(true)
+    setUser(logout())
+  }
 
   return (
-    <Button text="Logout" onClick={() => logOut()} darkMode={darkMode}/>
+    <Button text="Logout" onClick={() => logoutClickedHandler()} darkMode={darkMode}/>
   )
 }
 

@@ -1,19 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { UserContext } from '../App'
 import Form from '../components/UI/Form'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import GoogleLogin from '../components/UI/Button/AuthButton/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/AuthButton/FacebookLogin'
 import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
-import { signUp } from '../shared/requests'
+import axios from 'axios'
+import { logInSuccess } from '../shared/localStorage'
 
 const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) => {
-  const [form, setForm] = useState({
+  const { setUser } = useContext(UserContext)
+  const [ redirect, setRedirect ] = useState(false)
+  const [ form, setForm ] = useState({
     name: null,
     username: null,
     email: null,
     password: null,
     passConfirm: null,
   })
+
+  if (redirect) {
+    return <Redirect to="/"/>
+  }
 
   const updateField = e => {
     setForm({
@@ -24,7 +32,45 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) =
 
   const onSignUp = event => {
     event.preventDefault()
-    signUp(form)
+    axios.post('', {
+      variables: {
+        name: form.name,
+        username: form.username,
+        email: form.email,
+        password: form.password,
+        passConfirm: form.passConfirm,
+        bio: form.bio,
+        profileImg: form.profileImg,
+      },
+      query: `
+        mutation CreateUser($name: String!, $username: String!, $email: String!, $password: String!, $passConfirm: String!, $bio: String, $profileImg: String) {
+          createUser(userInput: { name: $name, username: $username, email: $email, password: $password, passConfirm: $passConfirm, bio: $bio, profileImg: $profileImg }) {
+            _id
+            token
+            tokenExpiry
+            name
+            username
+            email
+            bio  
+            profileImg
+            posts {
+              _id
+            }
+            following {
+              _id
+            }
+          }
+        }
+      `
+    }).then(res => {
+      if (res.data.errors) {
+        return res.data.errors[0].message
+      } else {
+        setRedirect(true)
+        logInSuccess(res.data.data.createUser)
+        setUser(res.data.data.createUser)
+      }
+    }).catch(err => console.log(err))
   }
 
   return (

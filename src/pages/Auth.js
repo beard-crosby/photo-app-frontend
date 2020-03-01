@@ -1,17 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { UserContext } from '../App'
 import Form from '../components/UI/Form'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import GoogleLogin from '../components/UI/Button/AuthButton/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/AuthButton/FacebookLogin'
 import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
-import { login } from '../shared/requests'
+import { logInSuccess } from '../shared/localStorage'
+import axios from 'axios'
 
 const Auth = ({ history }) => {
-  const [form, setForm] = useState({
+  const { setUser } = useContext(UserContext)
+  const [ redirect, setRedirect ] = useState(false)
+  const [ form, setForm ] = useState({
     email: null,
     username: null,
     password: null,
   })
+
+  if (redirect) {
+    return <Redirect to="/"/>
+  }
 
   // Identify if the data in username_or_email input field is an email or a username.
   const updateField = e => {
@@ -40,7 +48,68 @@ const Auth = ({ history }) => {
 
   const onSignIn = event => {
     event.preventDefault()
-    login(form)
+    axios.post('', {
+      variables: {
+        email: form.email,
+        password: form.password,
+      },
+      query: `
+        query Login($email: String!, $password: String!) {
+          login(email: $email, password: $password) {
+            _id
+            token
+            tokenExpiry
+            name
+            username
+            email
+            bio
+            profileImg
+            posts {
+              _id
+              img
+              title
+              description
+              comments {
+                _id
+                comment
+                author {
+                  _id
+                }
+              }
+            }
+            following {
+              _id
+              name
+              username
+              email
+              bio
+              profileImg
+              posts {
+                _id
+                img
+                title
+                description
+                comments {
+                  _id
+                  comment
+                  author {
+                    _id
+                  }
+                }
+              }
+            }
+          }
+        }
+      `
+    }).then(res => {
+      if (res.data.errors) {
+        console.log(res.data.errors[0].message)
+      } else {
+        setRedirect(true)
+        logInSuccess(res.data.data.login)
+        setUser(res.data.data.login)
+      }
+    }).catch(err => console.log(err))
   }
 
   return (
