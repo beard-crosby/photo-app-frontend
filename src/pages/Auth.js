@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom'
 import GoogleLogin from '../components/UI/Button/AuthButton/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/AuthButton/FacebookLogin'
 import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
-import { logInSuccess } from '../shared/localStorage'
-import axios from 'axios'
+import { login } from '../shared/requests'
 
 const Auth = ({ history }) => {
   const { setUser } = useContext(UserContext)
@@ -36,76 +35,14 @@ const Auth = ({ history }) => {
       }
     }
     setForm({
-        ...form,
-        [e.target.name]: e.target.value,
+      ...form,
+      [e.target.name]: e.target.value,
     })
   }
 
   const onSignIn = event => {
     event.preventDefault()
-    axios.post('', {
-      variables: {
-        email: form.email,
-        username: form.username,
-        password: form.password,
-      },
-      query: `
-        query Login(${form.email ? `$email: String!` : `$username: String!`}, $password: String!) {
-          login(${form.email ? `email: $email` : `username: $username`}, password: $password) {
-            _id
-            token
-            tokenExpiry
-            name
-            username
-            email
-            bio
-            profileImg
-            posts {
-              _id
-              img
-              title
-              description
-              comments {
-                _id
-                comment
-                author {
-                  _id
-                }
-              }
-            }
-            following {
-              _id
-              name
-              username
-              email
-              bio
-              profileImg
-              posts {
-                _id
-                img
-                title
-                description
-                comments {
-                  _id
-                  comment
-                  author {
-                    _id
-                  }
-                }
-              }
-            }
-          }
-        }
-      `
-    }).then(res => {
-      if (res.data.errors) {
-        console.log(`Error: ${res.data.errors[0].message}`)
-      } else {
-        logInSuccess(res.data.data.login)
-        setUser(res.data.data.login)
-        history.push("/")
-      }
-    }).catch(err => console.log(err))
+    login(form, history, setUser)
   }
 
   return (

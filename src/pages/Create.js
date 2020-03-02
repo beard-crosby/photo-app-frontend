@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom'
 import GoogleLogin from '../components/UI/Button/AuthButton/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/AuthButton/FacebookLogin'
 import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
-import { logInSuccess } from '../shared/localStorage'
-import axios from 'axios'
+import { createUser } from '../shared/requests'
 
 const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) => {
   const { setUser } = useContext(UserContext)
@@ -27,45 +26,7 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) =
 
   const onSignUp = event => {
     event.preventDefault()
-    axios.post('', {
-      variables: {
-        name: form.name,
-        username: form.username,
-        email: form.email,
-        password: form.password,
-        passConfirm: form.passConfirm,
-        bio: form.bio,
-        profileImg: form.profileImg,
-      },
-      query: `
-        mutation CreateUser($name: String!, $username: String!, $email: String!, $password: String!, $passConfirm: String!, $bio: String, $profileImg: String) {
-          createUser(userInput: { name: $name, username: $username, email: $email, password: $password, passConfirm: $passConfirm, bio: $bio, profileImg: $profileImg }) {
-            _id
-            token
-            tokenExpiry
-            name
-            username
-            email
-            bio  
-            profileImg
-            posts {
-              _id
-            }
-            following {
-              _id
-            }
-          }
-        }
-      `
-    }).then(res => {
-      if (res.data.errors) {
-        console.log(`Error: ${res.data.errors[0].message}`)
-      } else {
-        logInSuccess(res.data.data.createUser)
-        setUser(res.data.data.createUser)
-        history.push("/")
-      }
-    }).catch(err => console.log(err))
+    createUser(form, history, setUser)
   }
 
   return (
