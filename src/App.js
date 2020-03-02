@@ -3,17 +3,18 @@ import './scss/base.scss'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Router from './Router'
+import Spinner from './components/UI/Spinner'
 import { checkLocalStorage } from './shared/localStorage'
 
 const UserContext = React.createContext()
 
 const App = () => {
-  const [ isLoading, setIsLoading ] = useState(false)
+  const [ loading, setLoading ] = useState(false)
   const [ darkMode, setDarkMode ] = useState(false)
   const [ user, setUser ] = useState(checkLocalStorage())
   
   // If in develop mode, console log every time any state used in context is mutated. 
-  process.env.NODE_ENV === 'development' && console.log({isLoading, darkMode, user})
+  process.env.NODE_ENV === 'development' && console.log({loading, darkMode, user})
 
   // If darkMode = true, add 'dark-mode' class to body. Else remove it. 'dark-mode' scss class is in base.scss. 
   if (darkMode) {
@@ -23,10 +24,10 @@ const App = () => {
   }
 
   return (
-    <UserContext.Provider value={{ isLoading, setIsLoading, darkMode, setDarkMode, user, setUser }}>
+    <UserContext.Provider value={{ loading, setLoading, darkMode, setDarkMode, user, setUser }}>
       <Nav/>
       <main>
-        <Router/>
+        {loading ? <Spinner/> : <Router/>}
       </main>
       <Footer/>
     </UserContext.Provider>

@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { logout, logInSuccess } from './localStorage'
 
-export const createUser = (formData, history, setUser) => {
+export const createUser = (formData, history, setUser, setLoading) => {
+  setLoading(true)
   axios.post('', {
     variables: {
       name: formData.name,
@@ -40,10 +41,15 @@ export const createUser = (formData, history, setUser) => {
       history.push("/")
       process.env.NODE_ENV === 'development' && console.log(res)
     }
-  }).catch(err => console.log(err))
+    setLoading(false)
+  }).catch(err => {
+    console.log(err)
+    setLoading(false)
+  })
 }
 
-export const login = (formData, history, setUser) => {
+export const login = (formData, history, setUser, setLoading) => {
+  setLoading(true)
   axios.post('', {
     variables: {
       email: formData.email,
@@ -106,10 +112,15 @@ export const login = (formData, history, setUser) => {
       history.push("/")
       process.env.NODE_ENV === 'development' && console.log(res)
     }
-  }).catch(err => console.log(err))
+    setLoading(false)
+  }).catch(err => {
+    console.log(err)
+    setLoading(false)
+  })
 }
 
-export const deleteAccount = (_id, history, setUser) => {
+export const deleteAccount = (_id, history, setUser, setLoading) => {
+  setLoading(true)
   axios.post('', {
     variables: {
       _id: _id
@@ -134,5 +145,9 @@ export const deleteAccount = (_id, history, setUser) => {
       history.push("/")
       process.env.NODE_ENV === 'development' && console.log(res)
     }
-  }).catch(err => console.log(err))
+    setLoading(false)
+  }).catch(err => {
+    console.log(err)
+    setLoading(false)
+  })
 }

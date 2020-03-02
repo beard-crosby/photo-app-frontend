@@ -8,7 +8,7 @@ import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
 import { login } from '../shared/authRequests'
 
 const Auth = ({ history }) => {
-  const { setUser } = useContext(UserContext)
+  const { setUser, setLoading } = useContext(UserContext)
   const [ form, setForm ] = useState({
     email: null,
     username: null,
@@ -42,7 +42,7 @@ const Auth = ({ history }) => {
 
   const onSignIn = event => {
     event.preventDefault()
-    login(form, history, setUser)
+    login(form, history, setUser, setLoading)
   }
 
   return (

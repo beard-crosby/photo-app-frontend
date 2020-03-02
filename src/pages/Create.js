@@ -8,7 +8,7 @@ import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
 import { createUser } from '../shared/authRequests'
 
 const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) => {
-  const { setUser } = useContext(UserContext)
+  const { setUser, setLoading } = useContext(UserContext)
   const [ form, setForm ] = useState({
     name: null,
     username: null,
@@ -26,7 +26,7 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) =
 
   const onSignUp = event => {
     event.preventDefault()
-    createUser(form, history, setUser)
+    createUser(form, history, setUser, setLoading)
   }
 
   return (

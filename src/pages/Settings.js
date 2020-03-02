@@ -5,12 +5,12 @@ import { logout } from '../shared/localStorage'
 import { deleteAccount } from '../shared/authRequests'
 
 const Settings = ({ history }) => {
-  const { user, setUser, darkMode } = useContext(UserContext)
+  const { user, setUser, darkMode, setLoading } = useContext(UserContext)
 
   return (
     <>
       <Button text="Logout" onClick={() => setUser(logout(history))} darkMode={darkMode}/>
-      <Button text="Delete Account" onClick={() => deleteAccount(user._id, history, setUser)} darkMode={darkMode} style={{ marginTop: 10 }}/>
+      <Button text="Delete Account" onClick={() => deleteAccount(user._id, history, setUser, setLoading)} darkMode={darkMode} style={{ marginTop: 10 }}/>
     </>
   )
 }
