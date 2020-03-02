@@ -3,7 +3,7 @@ import './scss/base.scss'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Router from './Router'
-import { checkLocalStorage } from './shared/requests'
+import { checkLocalStorage } from './shared/localStorage'
 
 const UserContext = React.createContext()
 

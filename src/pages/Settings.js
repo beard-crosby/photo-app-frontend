@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../App'
 import Button from '../components/UI/Button'
-import { logout, deleteAccount } from '../shared/requests'
+import { logout } from '../shared/localStorage'
+import { deleteAccount } from '../shared/authRequests'
 
 const Settings = ({ history }) => {
   const { user, setUser, darkMode } = useContext(UserContext)

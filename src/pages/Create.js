@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import GoogleLogin from '../components/UI/Button/AuthButton/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/AuthButton/FacebookLogin'
 import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
-import { createUser } from '../shared/requests'
+import { createUser } from '../shared/authRequests'
 
 const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) => {
   const { setUser } = useContext(UserContext)
