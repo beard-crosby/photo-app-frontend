@@ -19,12 +19,8 @@ const Router = () => {
       {user.token ? 
         <Route exact path="/" component={Following}/> : 
         <Route exact path="/" component={Splash}/>}
-      {user.token &&
-        <>
-          <Route path="/profile" component={Profile}/>
-          <Route path="/settings" component={Settings}/>
-        </>
-      }
+      <Route path="/profile" component={Profile}/>
+      <Route path="/settings" component={Settings}/>
       <Route path="/auth" component={Auth}/>
       <Route path="/create" component={Create}/>
       <Route path="/forgot" component={Forgot}/>
