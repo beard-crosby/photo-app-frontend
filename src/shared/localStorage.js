@@ -72,8 +72,8 @@ export const logInSuccess = userData => {
     localStorage.setItem('name', userData.name)
     localStorage.setItem('username', userData.username)
     localStorage.setItem('email', userData.email)
-    localStorage.setItem('bio', userData.bio)
-    localStorage.setItem('profileImg', userData.profileImg)
+    userData.bio && localStorage.setItem('bio', userData.bio)
+    userData.profileImg && localStorage.setItem('profileImg', userData.profileImg)
     localStorage.setItem('posts', JSON.stringify(userData.posts))
     localStorage.setItem('following', JSON.stringify(userData.following))
   }

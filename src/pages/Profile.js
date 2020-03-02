@@ -9,7 +9,7 @@ const Profile = () => {
   return (
     <div className="profile-wrapper">
       <div className="profile">
-        <div className="profile-info">
+        <div className="profile-info" style={!user.bio && { width: '100%' }}>
           <div className="profile-picture"/>
           <div className="info">
             <h2>{user.name}</h2>
@@ -19,12 +19,12 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <div className="bio">
+        {user.bio && <div className="bio">
           <p className="bio-title">Biography:</p>
           <div className="bio-body">
             <p>{user.bio}</p>
           </div>
-        </div>
+        </div>}
       </div>
       <div className="posts">
         <div className="posts-bar">
