@@ -1,16 +1,15 @@
 import React, { useState, useContext } from 'react'
 import { UserContext } from '../App'
 import Form from '../components/UI/Form'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import GoogleLogin from '../components/UI/Button/AuthButton/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/AuthButton/FacebookLogin'
 import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
-import axios from 'axios'
 import { logInSuccess } from '../shared/localStorage'
+import axios from 'axios'
 
 const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) => {
   const { setUser } = useContext(UserContext)
-  const [ redirect, setRedirect ] = useState(false)
   const [ form, setForm ] = useState({
     name: null,
     username: null,
@@ -18,10 +17,6 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) =
     password: null,
     passConfirm: null,
   })
-
-  if (redirect) {
-    return <Redirect to="/"/>
-  }
 
   const updateField = e => {
     setForm({
@@ -64,11 +59,11 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) =
       `
     }).then(res => {
       if (res.data.errors) {
-        return res.data.errors[0].message
+        console.log(`Error: ${res.data.errors[0].message}`)
       } else {
-        setRedirect(true)
         logInSuccess(res.data.data.createUser)
         setUser(res.data.data.createUser)
+        history.push("/")
       }
     }).catch(err => console.log(err))
   }

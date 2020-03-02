@@ -19,7 +19,7 @@ const Router = () => {
       {user.token ? 
         <Route exact path="/" component={Following}/> : 
         <Route exact path="/" component={Splash}/>}
-      {user.token && 
+      {user.token &&
         <>
           <Route path="/profile" component={Profile}/>
           <Route path="/settings" component={Settings}/>

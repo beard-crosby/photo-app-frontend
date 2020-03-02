@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { UserContext } from '../App'
 import Form from '../components/UI/Form'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import GoogleLogin from '../components/UI/Button/AuthButton/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/AuthButton/FacebookLogin'
 import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
@@ -10,16 +10,11 @@ import axios from 'axios'
 
 const Auth = ({ history }) => {
   const { setUser } = useContext(UserContext)
-  const [ redirect, setRedirect ] = useState(false)
   const [ form, setForm ] = useState({
     email: null,
     username: null,
     password: null,
   })
-
-  if (redirect) {
-    return <Redirect to="/"/>
-  }
 
   // Identify if the data in username_or_email input field is an email or a username.
   const updateField = e => {
@@ -51,11 +46,12 @@ const Auth = ({ history }) => {
     axios.post('', {
       variables: {
         email: form.email,
+        username: form.username,
         password: form.password,
       },
       query: `
-        query Login($email: String!, $password: String!) {
-          login(email: $email, password: $password) {
+        query Login(${form.email ? `$email: String!` : `$username: String!`}, $password: String!) {
+          login(${form.email ? `email: $email` : `username: $username`}, password: $password) {
             _id
             token
             tokenExpiry
@@ -103,11 +99,11 @@ const Auth = ({ history }) => {
       `
     }).then(res => {
       if (res.data.errors) {
-        console.log(res.data.errors[0].message)
+        console.log(`Error: ${res.data.errors[0].message}`)
       } else {
-        setRedirect(true)
         logInSuccess(res.data.data.login)
         setUser(res.data.data.login)
+        history.push("/")
       }
     }).catch(err => console.log(err))
   }

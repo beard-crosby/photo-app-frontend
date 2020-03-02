@@ -42,7 +42,7 @@ const PhotoCard = ({ img, name, username, profileImg, comments }) => {
           {comments.length > 0 && showComments && <div className="comments">
             {comments.map((comment, i) => (
               <div className="comment" key={i}>
-                <img alt="Profile Image" src={require(`../../static/defaults/${comment.profileImg}`)}/>
+                <img alt="Profile" src={require(`../../static/defaults/${comment.profileImg}`)}/>
                 <p>{comment.comment}</p>
               </div>
             ))}

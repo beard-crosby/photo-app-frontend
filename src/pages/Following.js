@@ -15,6 +15,7 @@ const Following = () => {
       if (moment(photoCard.date).isBefore(earliestArrDate.date)) {
         earliestArrDate = photoCard
       }
+      return null // get rid of err msg
     })
 
     let temp = { date: '1800-01-01 00:00:00' }
@@ -23,6 +24,7 @@ const Following = () => {
         if (moment(post.date).isAfter(temp.date) && moment(post.date).isBefore(earliestArrDate.date)) { // If post date is later than the date in temp AND earlier than the date in earliestArrDate,
           temp = { ...post, user: { name: followed.name, username: followed.username, profileImg: followed.profileImg }} // temp = upload && the name and profileImg of the user that made the upload. 
         }
+        return null // get rid of err msg
       })
     )
 

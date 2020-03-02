@@ -1,4 +1,4 @@
-export const localStore = () => {
+export const checkLocalStorage = () => {
   const token = localStorage.getItem('token')
   if (!token) {
     return logout()

@@ -3,15 +3,14 @@ import './scss/base.scss'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Router from './Router'
-import { withRouter } from 'react-router-dom'
-import { localStore } from './shared/localStorage'
+import { checkLocalStorage } from './shared/localStorage'
 
 const UserContext = React.createContext()
 
 const App = () => {
   const [ isLoading, setIsLoading ] = useState(false)
   const [ darkMode, setDarkMode ] = useState(false)
-  const [ user, setUser ] = useState(localStore())
+  const [ user, setUser ] = useState(checkLocalStorage())
   
   // If in develop mode, console log every time any state used in context is mutated. 
   process.env.NODE_ENV === 'development' && console.log({isLoading, darkMode, user})
@@ -34,6 +33,6 @@ const App = () => {
   )
 }
 
-export default withRouter(App)
+export default App
 
 export { UserContext }
