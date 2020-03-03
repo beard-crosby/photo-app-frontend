@@ -13,7 +13,7 @@ const Nav = () => {
 
   const darkModeClickedHandler = () => {
     setUser({...user, dark_mode: !user.dark_mode}) // set State
-    changeDarkMode(user._id, user.token) // request
+    user.token && changeDarkMode(user._id, user.token) // request
   }
 
   return (
