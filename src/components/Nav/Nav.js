@@ -9,7 +9,7 @@ import { changeDarkMode } from '../../shared/miscRequests'
 
 const Nav = () => {
   const { user, setUser } = useContext(UserContext)
-  const [ Model, setModel ] = useState(false)
+  const [ model, setModel ] = useState(false)
 
   const darkModeClickedHandler = () => {
     setUser({...user, dark_mode: !user.dark_mode}) // set State
@@ -23,7 +23,7 @@ const Nav = () => {
         <div className="nav-top-right">
           {user.token && user.dark_mode ? <Sun onClick={() => darkModeClickedHandler()}/> : <Moon onClick={() => darkModeClickedHandler()}/>}
           {user.token && <UploadBtn text="UPLOAD" onClick={() => setModel(true)}/>}
-          <UploadModel display={Model} onClick={() => setModel(false)}/>
+          <UploadModel display={model} onClick={() => setModel(false)}/> 
           {user.token ? <Link to="/profile"><div className="profile-picture"/></Link> : <Link to="/auth"><h5 className="login">LOGIN</h5></Link>}
         </div>
       </div>

@@ -3,8 +3,8 @@ import * as classes from '../_AuthBtn.module.scss'
 import { LogIn, Check } from 'react-feather'
 import PropTypes from 'prop-types'
 
-const SubmitBtn = ({ text, check, login, apple, google }) => 
-  <button type="submit" className={classes.btnStyle}>
+const SubmitBtn = ({ text, check, login, apple, google, style, onClick }) => 
+  <button type="submit" className={classes.btnStyle} style={style} onClick={onClick}>
     {check && <Check/>}
     {login && <LogIn/>}
     {apple && <img alt="apple logo" src={require("../../../../../static/logo/apple.png")}/>}
@@ -13,6 +13,8 @@ const SubmitBtn = ({ text, check, login, apple, google }) =>
   </button>
 
 SubmitBtn.propTypes = {
+  style: PropTypes.object, // Can change style on Component call.
+  onClick: PropTypes.func, // Pass up onClick event.
   text: PropTypes.string, // Text on the button.
   check: PropTypes.bool, // True = display SVG.
   login: PropTypes.bool, // True = display SVG.
