@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { logout, logInSuccess, checkTimeout } from './localStorage'
+import { logout, logInSuccess } from './localStorage'
+import { headers, checkTimeout } from './utility'
 
 export const createUser = (formData, history, setUser, setLoading) => {
   setLoading(true)
@@ -35,7 +36,7 @@ export const createUser = (formData, history, setUser, setLoading) => {
     `
   }).then(res => {
     if (res.data.errors) {
-      console.log(res.data.errors[0].message)
+      process.env.NODE_ENV === 'development' && console.log(`Error: ${res.data.errors[0].message}`)
     } else {
       setUser(logInSuccess(res.data.data.createUser))
       checkTimeout(res.data.data.createUser.tokenExpiry)
@@ -107,7 +108,7 @@ export const login = (formData, history, setUser, setLoading) => {
     `
   }).then(res => {
     if (res.data.errors) {
-      process.env.NODE_ENV === 'development' && console.log(res.data.errors[0].message)
+      process.env.NODE_ENV === 'development' && console.log(`Error: ${res.data.errors[0].message}`)
     } else {
       setUser(logInSuccess(res.data.data.login))
       checkTimeout(res.data.data.login.tokenExpiry)
@@ -121,7 +122,7 @@ export const login = (formData, history, setUser, setLoading) => {
   })
 }
 
-export const deleteAccount = (_id, history, setUser, setLoading) => {
+export const deleteAccount = (_id, history, setUser, setLoading, token) => {
   setLoading(true)
   axios.post('', {
     variables: {
@@ -139,9 +140,9 @@ export const deleteAccount = (_id, history, setUser, setLoading) => {
         }
       }
     `
-  }).then(res => {
+  }, { headers: headers(token) }).then(res => {
     if (res.data.errors) {
-      console.log(res.data.errors[0].message)
+      process.env.NODE_ENV === 'development' && console.log(`Error: ${res.data.errors[0].message}`)
     } else {
       setUser(logout())
       history.push("/")

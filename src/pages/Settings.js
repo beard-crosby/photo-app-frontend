@@ -10,7 +10,7 @@ const Settings = ({ history }) => {
   return (
     <>
       <Button text="Logout" onClick={() => setUser(logout(history))} darkMode={darkMode}/>
-      <Button text="Delete Account" onClick={() => deleteAccount(user._id, history, setUser, setLoading)} darkMode={darkMode} style={{ marginTop: 10 }}/>
+      <Button text="Delete Account" onClick={() => deleteAccount(user._id, history, setUser, setLoading, user.token)} darkMode={darkMode} style={{ marginTop: 10 }}/>
     </>
   )
 }

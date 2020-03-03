@@ -40,13 +40,13 @@ const Auth = ({ history }) => {
     })
   }
 
-  const onSignIn = event => {
+  const onLoginClicked = event => {
     event.preventDefault()
     login(form, history, setUser, setLoading)
   }
 
   return (
-    <Form submit={event => onSignIn(event)}
+    <Form submit={event => onLoginClicked(event)}
       top={
         <>
           <h5>LOGIN</h5>

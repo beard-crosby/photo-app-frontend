@@ -80,10 +80,3 @@ export const logInSuccess = userData => {
 
   return userData
 }
-
-export const checkTimeout = expirationTime => {
-  setTimeout(() => {
-    logout()
-    process.env.NODE_ENV === 'development' && console.log(`[localStorage.js] Token Expired!`)
-  }, expirationTime * 3600000)
-}
