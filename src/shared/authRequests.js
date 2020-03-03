@@ -16,15 +16,16 @@ export const createUser = (formData, history, setUser, setLoading) => {
     },
     query: `
       mutation CreateUser($name: String!, $username: String!, $email: String!, $password: String!, $passConfirm: String!, $bio: String, $profileImg: String) {
-        createUser(userInput: { name: $name, username: $username, email: $email, password: $password, passConfirm: $passConfirm, bio: $bio, profileImg: $profileImg }) {
+        createUser(userInput: { name: $name, username: $username, email: $email, password: $password, pass_confirm: $passConfirm, bio: $bio, profile_img: $profileImg }) {
           _id
           token
-          tokenExpiry
+          token_expiry
           name
           username
           email
           bio  
-          profileImg
+          profile_img
+          dark_mode
           posts {
             _id
           }
@@ -39,7 +40,7 @@ export const createUser = (formData, history, setUser, setLoading) => {
       process.env.NODE_ENV === 'development' && console.log(`Error: ${res.data.errors[0].message}`)
     } else {
       setUser(logInSuccess(res.data.data.createUser))
-      checkTimeout(res.data.data.createUser.tokenExpiry)
+      checkTimeout(res.data.data.createUser.token_expiry)
       history.push("/")
       process.env.NODE_ENV === 'development' && console.log(res)
     }
@@ -63,12 +64,13 @@ export const login = (formData, history, setUser, setLoading) => {
         login(${formData.email ? `email: $email` : `username: $username`}, password: $password) {
           _id
           token
-          tokenExpiry
+          token_expiry
           name
           username
           email
           bio
-          profileImg
+          profile_img
+          dark_mode
           posts {
             _id
             img
@@ -88,7 +90,7 @@ export const login = (formData, history, setUser, setLoading) => {
             username
             email
             bio
-            profileImg
+            profile_img
             posts {
               _id
               img
@@ -111,7 +113,7 @@ export const login = (formData, history, setUser, setLoading) => {
       process.env.NODE_ENV === 'development' && console.log(`Error: ${res.data.errors[0].message}`)
     } else {
       setUser(logInSuccess(res.data.data.login))
-      checkTimeout(res.data.data.login.tokenExpiry)
+      checkTimeout(res.data.data.login.token_expiry)
       history.push("/")
       process.env.NODE_ENV === 'development' && console.log(res)
     }
@@ -136,7 +138,7 @@ export const deleteAccount = (_id, history, setUser, setLoading, token) => {
           username
           email
           bio
-          profileImg
+          profile_img
         }
       }
     `

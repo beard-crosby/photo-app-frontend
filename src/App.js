@@ -10,21 +10,20 @@ const UserContext = React.createContext()
 
 const App = () => {
   const [ loading, setLoading ] = useState(false)
-  const [ darkMode, setDarkMode ] = useState(false)
   const [ user, setUser ] = useState(checkLocalStorage())
   
   // If in develop mode, console log every time any state used in context is mutated. 
-  process.env.NODE_ENV === 'development' && console.log({loading, darkMode, user})
+  process.env.NODE_ENV === 'development' && console.log({loading, user})
 
-  // If darkMode = true, add 'dark-mode' class to body. Else remove it. 'dark-mode' scss class is in base.scss. 
-  if (darkMode) {
+  // If user.dark_mode = true, add 'dark-mode' class to body. Else remove it. 'dark-mode' scss class is in base.scss. 
+  if (user.dark_mode) {
     document.body.classList.add('dark-mode')
   } else {
     document.body.classList.remove('dark-mode')
   }
 
   return (
-    <UserContext.Provider value={{ loading, setLoading, darkMode, setDarkMode, user, setUser }}>
+    <UserContext.Provider value={{ loading, setLoading, user, setUser }}>
       <Nav/>
       <main>
         {loading ? <Spinner/> : <Router/>}
