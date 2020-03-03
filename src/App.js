@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import Router from './Router'
 import Spinner from './components/UI/Spinner'
 import { checkLocalStorage } from './shared/localStorage'
+import { switchDarkMode } from './shared/utility'
 
 const UserContext = React.createContext()
 
@@ -15,12 +16,8 @@ const App = () => {
   // If in develop mode, console log every time any state used in context is mutated. 
   process.env.NODE_ENV === 'development' && console.log({loading, user})
 
-  // If user.dark_mode = true, add 'dark-mode' class to body. Else remove it. 'dark-mode' scss class is in base.scss. 
-  if (user.dark_mode) {
-    document.body.classList.add('dark-mode')
-  } else {
-    document.body.classList.remove('dark-mode')
-  }
+  // on load, check user state dark_mode.
+  switchDarkMode(user)
 
   return (
     <UserContext.Provider value={{ loading, setLoading, user, setUser }}>
