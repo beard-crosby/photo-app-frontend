@@ -26,7 +26,7 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) =
 
   const onSignUp = event => {
     event.preventDefault()
-    createUser(form, history, setUser, setLoading)
+    createUser(form, history, setUser, setLoading) // request
   }
 
   return (
