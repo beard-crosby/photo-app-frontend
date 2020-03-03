@@ -68,7 +68,7 @@ export const logInSuccess = userData => {
   if (!userData.localStorage) {
     localStorage.setItem('_id', userData._id)
     localStorage.setItem('token', userData.token)
-    localStorage.setItem('tokenExpiry', new Date(new Date().getTime() + userData.tokenExpiry * 100000000))
+    localStorage.setItem('tokenExpiry', new Date(new Date().getTime() + userData.tokenExpiry * 3600000))
     localStorage.setItem('name', userData.name)
     localStorage.setItem('username', userData.username)
     localStorage.setItem('email', userData.email)
@@ -79,4 +79,11 @@ export const logInSuccess = userData => {
   }
 
   return userData
+}
+
+export const checkTimeout = expirationTime => {
+  setTimeout(() => {
+    logout()
+    process.env.NODE_ENV === 'development' && console.log(`[localStorage.js] Token Expired!`)
+  }, expirationTime * 3600000)
 }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { logout, logInSuccess } from './localStorage'
+import { logout, logInSuccess, checkTimeout } from './localStorage'
 
 export const createUser = (formData, history, setUser, setLoading) => {
   setLoading(true)
@@ -35,15 +35,16 @@ export const createUser = (formData, history, setUser, setLoading) => {
     `
   }).then(res => {
     if (res.data.errors) {
-      console.log(`Error: ${res.data.errors[0].message}`)
+      console.log(res.data.errors[0].message)
     } else {
       setUser(logInSuccess(res.data.data.createUser))
+      checkTimeout(res.data.data.createUser.tokenExpiry)
       history.push("/")
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)
   }).catch(err => {
-    console.log(err)
+    process.env.NODE_ENV === 'development' && console.log(err)
     setLoading(false)
   })
 }
@@ -106,15 +107,16 @@ export const login = (formData, history, setUser, setLoading) => {
     `
   }).then(res => {
     if (res.data.errors) {
-      console.log(`Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(res.data.errors[0].message)
     } else {
       setUser(logInSuccess(res.data.data.login))
+      checkTimeout(res.data.data.login.tokenExpiry)
       history.push("/")
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)
   }).catch(err => {
-    console.log(err)
+    process.env.NODE_ENV === 'development' && console.log(err)
     setLoading(false)
   })
 }
@@ -139,7 +141,7 @@ export const deleteAccount = (_id, history, setUser, setLoading) => {
     `
   }).then(res => {
     if (res.data.errors) {
-      console.log(`Error: ${res.data.errors[0].message}`)
+      console.log(res.data.errors[0].message)
     } else {
       setUser(logout())
       history.push("/")
@@ -147,7 +149,7 @@ export const deleteAccount = (_id, history, setUser, setLoading) => {
     }
     setLoading(false)
   }).catch(err => {
-    console.log(err)
+    process.env.NODE_ENV === 'development' && console.log(err)
     setLoading(false)
   })
 }
