@@ -5,7 +5,7 @@ const NotFound = () => {
   const { user } = useContext(UserContext)
   
   return (
-    <h2 style={user.dark_mode && { color: '#EEEEEE' }}>Wups! Page Not Found...</h2>
+    <h2 className={user.dark_mode && `not-found-dark-mode`}>Wups! Page Not Found...</h2>
   )
 }
 
