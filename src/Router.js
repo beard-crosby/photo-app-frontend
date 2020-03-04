@@ -12,6 +12,7 @@ import Forgot from './pages/Forgot'
 import Splash from './pages/Splash'
 import Upload from './pages/Upload'
 import DeleteUser from './pages/DeleteUser'
+import ProfileImg from './pages/ProfileImg'
 
 const Router = () => {
   const { user } = useContext(UserContext)
@@ -28,6 +29,7 @@ const Router = () => {
       <Route path="/auth" component={Auth}/>
       <Route path="/create" component={Create}/>
       <Route path="/forgot" component={Forgot}/>
+      <Route path="/profileimg" component={ProfileImg}/>
       <Route component={Notfound}/>
     </Switch>
   )

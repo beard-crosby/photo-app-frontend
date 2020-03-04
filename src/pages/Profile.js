@@ -3,14 +3,16 @@ import { UserContext } from '../App'
 import '../scss/_profile.scss'
 import { Menu } from 'react-feather'
 
-const Profile = () => {
+const Profile = ({ history }) => {
   const { user } = useContext(UserContext)
 
   return (
     <div className="profile-wrapper">
       <div className="profile">
         <div className="profile-info" style={!user.bio && { width: '100%' }}>
-          <div className="profile-picture"/>
+          <div className="profile-picture" onClick={() => history.push("/profileimg")}>
+            <h2>Change</h2>
+          </div>
           <div className="info">
             <h2>{user.name}</h2>
             <div className="username-email">
