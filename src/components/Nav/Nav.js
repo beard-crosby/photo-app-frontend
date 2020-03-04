@@ -27,7 +27,8 @@ const Nav = ({ history }) => {
       {user.token &&
         <div className="nav-bottom">
           <div className="nav-bottom-left">
-            <NavLink to="/"><p>Following</p></NavLink>
+            <NavLink to="/"><p>Wall</p></NavLink>
+            <NavLink to="/discover"><p>Discover</p></NavLink>
             <NavLink to="/profile"><p>Profile</p></NavLink>
             <NavLink to="/settings"><p>Settings</p></NavLink>
           </div>

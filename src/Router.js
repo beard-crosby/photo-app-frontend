@@ -4,7 +4,8 @@ import { Route, Switch } from 'react-router-dom'
 
 import Notfound from './pages/NotFound'
 import Profile from './pages/Profile'
-import Following from './pages/Following'
+import Discover from './pages/Discover'
+import Wall from './pages/Wall'
 import Settings from './pages/Settings'
 import Auth from './pages/Auth'
 import Create from './pages/Create'
@@ -20,9 +21,10 @@ const Router = () => {
   return (
     <Switch>
       {user.token ? 
-        <Route exact path="/" component={Following}/> : 
+        <Route exact path="/" component={Wall}/> : 
         <Route exact path="/" component={Splash}/>}
       <Route path="/profile" component={Profile}/>
+      <Route path="/discover" component={Discover}/>
       <Route path="/settings" component={Settings}/>
       <Route path="/upload" component={Upload}/>
       <Route path="/deleteuser" component={DeleteUser}/>
