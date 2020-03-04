@@ -10,6 +10,8 @@ import Auth from './pages/Auth'
 import Create from './pages/Create'
 import Forgot from './pages/Forgot'
 import Splash from './pages/Splash'
+import Upload from './pages/Upload'
+import DeleteUser from './pages/DeleteUser'
 
 const Router = () => {
   const { user } = useContext(UserContext)
@@ -21,6 +23,8 @@ const Router = () => {
         <Route exact path="/" component={Splash}/>}
       <Route path="/profile" component={Profile}/>
       <Route path="/settings" component={Settings}/>
+      <Route path="/upload" component={Upload}/>
+      <Route path="/deleteuser" component={DeleteUser}/>
       <Route path="/auth" component={Auth}/>
       <Route path="/create" component={Create}/>
       <Route path="/forgot" component={Forgot}/>

@@ -2,9 +2,10 @@ $white: #ffffff;
 $color-1: #EEEEEE;
 $color-2: #525252;
 
-.btnStyle {
+.button {
   height: 35px;
   display: inline-flex;
+  justify-content: center;
   align-items: center;
   box-sizing: border-box;
   margin: 0;
@@ -21,7 +22,7 @@ $color-2: #525252;
     height: 20px;
   }
 
-  h4 {
+  h4, p {
     font-weight: 400;
     font-size: 1.1em;
     cursor: pointer;
@@ -30,4 +31,8 @@ $color-2: #525252;
   &:hover {
     box-shadow: rgba(70, 70, 70, 1) 0px 2px 2px 0px, rgba(70, 70, 70, 1) 0px 0px 1px 0px;
   }
+}
+
+.hide-mobile {
+  display: none;
 }

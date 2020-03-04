@@ -47,7 +47,7 @@ $white: #ffffff;
     }
   }
 
-  .top {
+  .top, .bottom {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -58,13 +58,10 @@ $white: #ffffff;
   }
 
   .bottom {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    border: none;
     border-top: 1px solid $color-1;
-    padding-top: 5px;
-    margin-top: 20px;
+    padding: 5px 0 0;
+    margin: 20px 0 0;
   }
 
   @media (max-width: 600px) {

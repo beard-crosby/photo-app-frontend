@@ -1,7 +1,7 @@
 import React from 'react'
 import '../scss/_splash.scss'
 import Create from './Create'
-import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
+import SubmitBtn from '../components/UI/Button/SubmitBtn'
 
 const Splash = () => 
   <>

@@ -16,7 +16,7 @@ const App = () => {
   // If in develop mode, console log every time any state used in context is mutated. 
   process.env.NODE_ENV === 'development' && console.log({loading, user})
 
-  // on load, check user state dark_mode.
+  // on load, update dark_mode class and localStorage.
   switchDarkMode(user)
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Form from '../components/UI/Form'
 import { Link } from 'react-router-dom'
-import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
+import SubmitBtn from '../components/UI/Button/SubmitBtn'
 
 const Auth = ({ history }) => {
   const [form, setForm] = useState({

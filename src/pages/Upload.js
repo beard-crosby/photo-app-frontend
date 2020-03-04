@@ -1,0 +1,60 @@
+import React, { useState } from 'react'
+import '../scss/_model.scss'
+import { Upload as UploadSVG } from 'react-feather'
+import SubmitBtn from '../components/UI/Button/SubmitBtn'
+
+const Upload = ({ history }) => {
+  const [ form, setForm ] = useState({
+    img: null,
+    title: null,
+    description: null,
+  })
+
+  const updateField = e => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const onUploadClicked = event => {
+    event.preventDefault()
+    // request
+  }
+
+  const descriptionHeight = () => document.getElementById("description").style.height = '100px'
+
+  return (
+    <form className="model" onClick={event => onUploadClicked(event)} style={{ width: 500 }}>
+      <div className="top">
+        <div className="top-left">
+          <h4>Post</h4>
+          <UploadSVG/>
+        </div>
+        <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
+      </div>
+      <label htmlFor="title"><h5>Title</h5></label>
+      <input 
+        type="text" 
+        name="title" 
+        id="title"
+        onChange={updateField}>
+      </input>
+      <div className="upload-box">
+        <UploadSVG/>
+        <h1>Drag and Drop</h1>
+      </div>
+      <label htmlFor="description"><h5>Description</h5></label>
+      <textarea 
+        type="text" 
+        name="description" 
+        id="description"
+        onMouseDown={() => descriptionHeight()}
+        onChange={updateField}>
+      </textarea>
+      <SubmitBtn text="Post" style={{ marginTop: 20 }}/>
+    </form>
+  )
+}
+
+export default Upload

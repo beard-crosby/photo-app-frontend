@@ -1,5 +1,5 @@
 import React from 'react'
-import * as classes from '../_AuthBtn.module.scss'
+import '../_button.scss'
 import GoogleLogin from 'react-google-login'
 import PropTypes from 'prop-types'
 
@@ -10,9 +10,9 @@ const GoogleBtn = ({ text, onSuccess, onFail, style }) =>
       <button 
         onClick={renderProps.onClick} 
         disabled={renderProps.disabled}
-        className={classes.btnStyle}
+        className="button"
         style={style}>
-        <img alt="Google Logo" src={require('../../../../../static/logo/google.png')}/>
+        <img alt="Google Logo" src={require('../../../../static/logo/google.png')}/>
         <h4>{text}</h4>
       </button>
     )}

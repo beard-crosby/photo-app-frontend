@@ -29,7 +29,7 @@ export const checkLocalStorage = () => {
         profile_img: profile_img,
         posts: JSON.parse(posts),
         following: JSON.parse(following),
-        dark_mode: dark_mode,
+        dark_mode: JSON.parse(dark_mode.toLowerCase()),
       }
 
       return userData

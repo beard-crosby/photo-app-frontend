@@ -2,9 +2,9 @@ import React, { useState, useContext } from 'react'
 import { UserContext } from '../App'
 import Form from '../components/UI/Form'
 import { Link } from 'react-router-dom'
-import GoogleLogin from '../components/UI/Button/AuthButton/GoogleLogin'
-import FacebookLogin from '../components/UI/Button/AuthButton/FacebookLogin'
-import SubmitBtn from '../components/UI/Button/AuthButton/SubmitBtn'
+import GoogleLogin from '../components/UI/Button/GoogleLogin'
+import FacebookLogin from '../components/UI/Button/FacebookLogin'
+import SubmitBtn from '../components/UI/Button/SubmitBtn'
 import { login } from '../shared/authRequests'
 
 const Auth = ({ history }) => {

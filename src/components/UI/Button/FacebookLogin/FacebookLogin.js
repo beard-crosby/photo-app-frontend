@@ -1,5 +1,5 @@
 import React from 'react'
-import * as classes from '../_AuthBtn.module.scss'
+import '../_button.scss'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import PropTypes from 'prop-types'
 
@@ -11,10 +11,10 @@ const FacebookBtn = ({ res, text, style}) =>
     render={renderProps => (
       <button 
         onClick={renderProps.onClick} 
-        className={classes.btnStyle}
+        className="button"
         style={style}
         type="button">
-        <img alt="Google Logo" src={require('../../../../../static/logo/facebook.png')}/>
+        <img alt="Google Logo" src={require('../../../../static/logo/facebook.png')}/>
         <h4>{text}</h4>
       </button>
     )} />

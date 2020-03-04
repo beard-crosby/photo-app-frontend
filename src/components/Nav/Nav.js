@@ -1,15 +1,13 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { UserContext } from '../../App'
 import { NavLink, Link } from 'react-router-dom'
 import UploadBtn from '../UI/Button/UploadBtn'
 import { Moon, Sun } from 'react-feather'
-import UploadModel from '../Model/UploadModel'
 import { withRouter } from 'react-router-dom'
 import { changeDarkMode } from '../../shared/miscRequests'
 
-const Nav = () => {
+const Nav = ({ history }) => {
   const { user, setUser } = useContext(UserContext)
-  const [ model, setModel ] = useState(false)
 
   const darkModeClickedHandler = () => {
     setUser({...user, dark_mode: !user.dark_mode}) // set State
@@ -22,8 +20,7 @@ const Nav = () => {
         <Link to="/"><h1>PHOTO APP</h1></Link>
         <div className="nav-top-right">
           {user.token && user.dark_mode ? <Sun onClick={() => darkModeClickedHandler()}/> : <Moon onClick={() => darkModeClickedHandler()}/>}
-          {user.token && <UploadBtn text="UPLOAD" onClick={() => setModel(true)}/>}
-          <UploadModel display={model} onClick={() => setModel(false)}/> 
+          {user.token && <UploadBtn text="UPLOAD" onClick={() => history.push("/upload")}/>}
           {user.token ? <Link to="/profile"><div className="profile-picture"/></Link> : <Link to="/auth"><h5 className="login">LOGIN</h5></Link>}
         </div>
       </div>
