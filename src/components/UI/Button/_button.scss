@@ -31,6 +31,28 @@ $color-2: #525252;
   &:hover {
     box-shadow: rgba(70, 70, 70, 1) 0px 2px 2px 0px, rgba(70, 70, 70, 1) 0px 0px 1px 0px;
   }
+  &:focus {outline:0;}
+}
+
+.hide-border {
+  background: none;
+  box-shadow: none;
+  border: none;
+
+  &:hover {
+    box-shadow: none;
+  }
+}
+
+.nav-btn {
+  height: 20px;
+  padding: 0;
+
+  img, svg {
+    margin: 0 0 0 4px !important;
+    width: 13px !important;
+    height: 13px !important;
+  }
 }
 
 .hide-mobile {

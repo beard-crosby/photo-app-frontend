@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../scss/_model.scss'
 import { Upload as UploadSVG } from 'react-feather'
-import SubmitBtn from '../components/UI/Button/SubmitBtn'
+import Button from '../components/UI/Button'
 
 const Upload = ({ history }) => {
   const [ form, setForm ] = useState({
@@ -52,7 +52,7 @@ const Upload = ({ history }) => {
         onMouseDown={() => descriptionHeight()}
         onChange={updateField}>
       </textarea>
-      <SubmitBtn text="Post" style={{ marginTop: 20 }}/>
+      <Button text="Post" style={{ marginTop: 20 }}/>
     </form>
   )
 }

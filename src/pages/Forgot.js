@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Form from '../components/UI/Form'
 import { Link } from 'react-router-dom'
-import SubmitBtn from '../components/UI/Button/SubmitBtn'
+import Button from '../components/UI/Button'
 
 const Auth = ({ history }) => {
   const [form, setForm] = useState({
@@ -48,7 +48,7 @@ const Auth = ({ history }) => {
         onChange={updateField}>
       </input>
       <div className="auth-buttons">
-        <SubmitBtn login text="Submit"/>
+        <Button submit loginSVG text="Submit"/>
       </div>
     </Form>
   )

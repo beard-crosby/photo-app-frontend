@@ -1,7 +1,7 @@
 import React from 'react'
 import '../scss/_splash.scss'
 import Create from './Create'
-import SubmitBtn from '../components/UI/Button/SubmitBtn'
+import Button from '../components/UI/Button'
 
 const Splash = () => 
   <>
@@ -9,8 +9,8 @@ const Splash = () =>
       <div className="app">
         <img alt="iPhone 11" src={require("../static/misc/iphone-template.png")}/>
         <div className="app-btn-wrapper">
-          <a href="https://www.apple.com/uk/ios/app-store/"><SubmitBtn apple text="App Store"/></a>
-          <a href="https://play.google.com/store/apps?hl=en"><SubmitBtn google text="Google Play"/></a>
+          <a href="https://www.apple.com/uk/ios/app-store/"><Button appleIMG text="App Store"/></a>
+          <a href="https://play.google.com/store/apps?hl=en"><Button googleIMG text="Google Play"/></a>
         </div>
       </div>
       <div className="signup">
@@ -84,8 +84,8 @@ const Splash = () =>
     <div className={`app hideDesktop`} style={{ marginTop: '40px' }}>
       <img alt="iPhone 11" src={require("../static/misc/iphone-template.png")}/>
       <div className="app-btn-wrapper" style={{ margin: '40px 0 0 0' }}>
-        <a href="https://www.apple.com/uk/ios/app-store/"><SubmitBtn apple text="App Store"/></a>
-        <a href="https://play.google.com/store/apps?hl=en"><SubmitBtn google text="Google Play"/></a>
+        <a href="https://www.apple.com/uk/ios/app-store/"><Button appleIMG text="App Store"/></a>
+        <a href="https://play.google.com/store/apps?hl=en"><Button googleIMG text="Google Play"/></a>
       </div>
     </div>
   </>

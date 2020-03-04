@@ -4,7 +4,7 @@ import Form from '../components/UI/Form'
 import { Link } from 'react-router-dom'
 import GoogleLogin from '../components/UI/Button/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/FacebookLogin'
-import SubmitBtn from '../components/UI/Button/SubmitBtn'
+import Button from '../components/UI/Button'
 import { createUser } from '../shared/authRequests'
 
 const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) => {
@@ -75,7 +75,7 @@ const Create = ({ history, style, btnStyle, topRight, hideBottom, className }) =
         onChange={updateField}>
       </input>
       <div className="auth-buttons" style={btnStyle}>
-        <SubmitBtn login text="Sign Up"/>
+        <Button submit loginSVG text="Sign Up"/>
         <GoogleLogin
           text="Sign Up With Google"
           onSuccess={res => console.log(res)}
