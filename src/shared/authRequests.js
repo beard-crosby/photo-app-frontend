@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { logout, logInSuccess } from './localStorage'
-import { headers, checkTimeout } from './utility'
+import { headers, timeout, checkGeolocation } from './utility'
 
 export const createUser = (formData, history, setUser, setLoading) => {
   setLoading(true)
@@ -20,6 +20,8 @@ export const createUser = (formData, history, setUser, setLoading) => {
           _id
           token
           token_expiry
+          logged_in_at
+          geolocation
           name
           username
           email
@@ -39,9 +41,11 @@ export const createUser = (formData, history, setUser, setLoading) => {
     if (res.data.errors) {
       process.env.NODE_ENV === 'development' && console.log(`Error: ${res.data.errors[0].message}`)
     } else {
-      setUser(logInSuccess(res.data.data.createUser))
-      checkTimeout(res.data.data.createUser.token_expiry)
-      history.push("/")
+      const userData = {...res.data.data.createUser, geolocation: JSON.parse(res.data.data.createUser.geolocation)}
+      setUser(logInSuccess(userData))
+      timeout(userData.token_expiry)
+      history && history.push("/")
+      checkGeolocation(userData, setUser)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)
@@ -65,6 +69,8 @@ export const login = (formData, history, setUser, setLoading) => {
           _id
           token
           token_expiry
+          logged_in_at
+          geolocation
           name
           username
           email
@@ -112,9 +118,11 @@ export const login = (formData, history, setUser, setLoading) => {
     if (res.data.errors) {
       process.env.NODE_ENV === 'development' && console.log(`Error: ${res.data.errors[0].message}`)
     } else {
-      setUser(logInSuccess(res.data.data.login))
-      checkTimeout(res.data.data.login.token_expiry)
+      const userData = {...res.data.data.login, geolocation: JSON.parse(res.data.data.login.geolocation)}
+      setUser(logInSuccess(userData))
+      timeout(userData.token_expiry)
       history.push("/")
+      checkGeolocation(userData, setUser)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)
