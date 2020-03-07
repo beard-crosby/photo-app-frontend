@@ -53,7 +53,7 @@ const Upload = ({ history }) => {
           onMouseDown={() => descriptionHeight()}
           onChange={updateField}>
         </textarea>
-        <Button submit text="Post" style={{ marginBottom: 25 }}/>
+        <Button submit text="Post" style={{ marginBottom: 20 }}/>
       </div>
     </form>
   )

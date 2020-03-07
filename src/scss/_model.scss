@@ -40,7 +40,7 @@ $background-white: #f5f5f5;
   }
 
   label {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   input, textarea {
@@ -117,7 +117,6 @@ $background-white: #f5f5f5;
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    margin-bottom: 20px;
     border-bottom: 1px solid $color-1;
 
     .top-left {
@@ -129,13 +128,12 @@ $background-white: #f5f5f5;
   .bottom {
     border: none;
     border-top: 1px solid $color-1;
-    margin: 20px 0 0;
   }
 
   .middle {
     width: 100%;
     box-sizing: border-box;
-    padding: 0 20px;
+    padding: 20px;
     display: flex;
     flex-flow: column nowrap;
 
@@ -149,11 +147,11 @@ $background-white: #f5f5f5;
 
   .stackButtons {
     flex-flow: column nowrap;
-    margin: 0 0 20px !important;
+    margin: 0 0 15px !important;
 
     button {
       width: 100%;
-      margin-top: 20px;
+      margin-top: 15px;
     }
   }
 }
