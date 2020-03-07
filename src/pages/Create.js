@@ -6,6 +6,7 @@ import FacebookLogin from '../components/UI/Button/FacebookLogin'
 import Button from '../components/UI/Button'
 import { createUser } from '../shared/authRequests'
 import { updateForm, checkFormValid } from '../shared/formValidation'
+import PropTypes from 'prop-types'
 
 const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
   const { setUser, setLoading } = useContext(UserContext)
@@ -90,6 +91,14 @@ const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
       </div>}
     </form>
   )
+}
+
+Create.propTypes = {
+  history: PropTypes.func, // react-router-dom function obtained with withRouter.
+  style: PropTypes.func, // pass up style.
+  stackButtons: PropTypes.bool, // True = Stack buttons in the buttons div vertically.
+  hideTopRight: PropTypes.bool, // True = Hide the back button.
+  hideBottom: PropTypes.bool, // True = Hide the "bottom" div.
 }
 
 export default withRouter(Create)
