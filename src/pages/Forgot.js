@@ -35,7 +35,7 @@ const Forgot = ({ history }) => {
           <Button submit disabled={formValid} loginSVG text="Submit"/>
         </div>
       </div>
-      <div className="bottom">
+      <div className="bottom" style={{ margin: 0 }}>
         <Link to="/auth"><h5>LOG IN</h5></Link>
         <Link to="/create"><h5>CREATE AN ACCOUNT</h5></Link>
       </div>
