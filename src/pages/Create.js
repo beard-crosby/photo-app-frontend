@@ -96,8 +96,8 @@ const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
 }
 
 Create.propTypes = {
-  history: PropTypes.func, // react-router-dom function obtained with withRouter.
-  style: PropTypes.func, // pass up style.
+  history: PropTypes.object, // react-router-dom function obtained with withRouter.
+  style: PropTypes.object, // pass up style.
   stackButtons: PropTypes.bool, // True = Stack buttons in the buttons div vertically.
   hideTopRight: PropTypes.bool, // True = Hide the back button.
   hideBottom: PropTypes.bool, // True = Hide the "bottom" div.
