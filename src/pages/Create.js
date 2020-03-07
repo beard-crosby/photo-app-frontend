@@ -41,50 +41,52 @@ const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
         <h5>CREATE AN ACCOUNT</h5>
         {!hideTopRight && <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>}
       </div>
-      <label htmlFor="name"><h5>{formErrors.nameError ? formErrors.nameError : "Name"}</h5></label>
-      <input 
-        type="text" 
-        name="name" 
-        id="name" 
-        onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
-      </input>
-      <label htmlFor="username"><h5>{formErrors.usernameError ? formErrors.usernameError : "Username"}</h5></label>
-      <input 
-        type="text" 
-        name="username" 
-        id="username" 
-        onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
-      </input>
-      <label htmlFor="email"><h5>{formErrors.emailError ? formErrors.emailError : "Email"}</h5></label>
-      <input 
-        type="email" 
-        name="email" 
-        id="email" 
-        onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
-      </input>
-      <label htmlFor="password"><h5>{formErrors.passwordError ? formErrors.passwordError : "Password"}</h5></label>
-      <input 
-        type="password" 
-        name="password" 
-        id="password" 
-        onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
-      </input>
-      <label htmlFor="passConfirm"><h5>{formErrors.passConfirmError ? formErrors.passConfirmError : "Password Check"}</h5></label>
-      <input 
-        type="password" 
-        name="passConfirm" 
-        id="passConfirm" 
-        onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
-      </input>
-      <div className={`buttons ${stackButtons && `stackButtons`}`}>
-        <Button submit disabled={!formValid} loginSVG text="Sign Up"/>
-        <GoogleLogin
-          text="Login With Google"
-          onSuccess={res => console.log(res)}
-          onFail={res => console.log(res)}/>
-        <FacebookLogin 
-          text="Login With Facebook"
-          res={res => console.log(res)}/>
+      <div className="middle">
+        <label htmlFor="name"><p>{formErrors.nameError ? formErrors.nameError : "Name"}</p></label>
+        <input 
+          type="text" 
+          name="name" 
+          id="name" 
+          onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
+        </input>
+        <label htmlFor="username"><p>{formErrors.usernameError ? formErrors.usernameError : "Username"}</p></label>
+        <input 
+          type="text" 
+          name="username" 
+          id="username" 
+          onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
+        </input>
+        <label htmlFor="email"><p>{formErrors.emailError ? formErrors.emailError : "Email"}</p></label>
+        <input 
+          type="email" 
+          name="email" 
+          id="email" 
+          onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
+        </input>
+        <label htmlFor="password"><p>{formErrors.passwordError ? formErrors.passwordError : "Password"}</p></label>
+        <input 
+          type="password" 
+          name="password" 
+          id="password" 
+          onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
+        </input>
+        <label htmlFor="passConfirm"><p>{formErrors.passConfirmError ? formErrors.passConfirmError : "Password Check"}</p></label>
+        <input 
+          type="password" 
+          name="passConfirm" 
+          id="passConfirm" 
+          onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
+        </input>
+        <div className={`buttons ${stackButtons && `stackButtons`}`}>
+          <Button submit disabled={!formValid} loginSVG text="Sign Up"/>
+          <GoogleLogin
+            text="Login With Google"
+            onSuccess={res => console.log(res)}
+            onFail={res => console.log(res)}/>
+          <FacebookLogin 
+            text="Login With Facebook"
+            res={res => console.log(res)}/>
+        </div>
       </div>
       {!hideBottom && <div className="bottom">
         <Link to="/auth"><h5>BACK TO LOGIN</h5></Link>
