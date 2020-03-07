@@ -1,19 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from '../components/UI/Form'
 import { Link } from 'react-router-dom'
 import Button from '../components/UI/Button'
 
-const Auth = ({ history }) => {
-  const [form, setForm] = useState({
-    email: null,
+const Forgot = ({ history }) => {
+  const [ formValid, setFormValid ] = useState(false)
+  const [ form, setForm ] = useState({
+    email: "",
   })
 
-  const updateField = e => {
-    setForm({
-        ...form,
-        [e.target.name]: e.target.value,
-    })
-  }
+  useEffect(() => form.email.trim() === "" ? setFormValid(true) : setFormValid(false), [form])
+  const updateField = event => setForm({...form, [event.target.name]: event.target.value})
 
   const onSubmit = event => {
     event.preventDefault()
@@ -40,18 +37,11 @@ const Auth = ({ history }) => {
         id="email" 
         onChange={updateField}>
       </input>
-      <label htmlFor="password"><h5>Password</h5></label>
-      <input 
-        type="password" 
-        name="password" 
-        id="password" 
-        onChange={updateField}>
-      </input>
       <div className="auth-buttons">
-        <Button submit loginSVG text="Submit"/>
+        <Button submit disabled={formValid} loginSVG text="Submit"/>
       </div>
     </Form>
   )
 }
 
-export default Auth
+export default Forgot

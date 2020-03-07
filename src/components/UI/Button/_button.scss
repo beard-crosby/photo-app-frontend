@@ -31,7 +31,23 @@ $color-2: #525252;
   &:hover {
     box-shadow: rgba(70, 70, 70, 1) 0px 2px 2px 0px, rgba(70, 70, 70, 1) 0px 0px 1px 0px;
   }
-  &:focus {outline:0;}
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:disabled {
+    color: $color-1;
+    cursor: default;
+
+    h4, p { 
+      cursor: default;
+    }
+
+    &:hover {
+      box-shadow: rgba(120, 120, 120, 1) 0px 2px 2px 0px, rgba(120, 120, 120, 1) 0px 0px 1px 0px;
+    }
+  }
 }
 
 .hide-border {

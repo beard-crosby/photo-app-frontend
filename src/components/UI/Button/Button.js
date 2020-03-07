@@ -3,8 +3,9 @@ import './_button.scss'
 import { Upload, Check, LogIn } from 'react-feather'
 import PropTypes from 'prop-types'
 
-const Button = ({ text, style, submit, onClick, uploadSVG, checkSVG, loginSVG, appleIMG, googleIMG, hideMobile, hideBorder, navBtn }) => 
+const Button = ({ text, style, submit, disabled, onClick, uploadSVG, checkSVG, loginSVG, appleIMG, googleIMG, hideMobile, hideBorder, navBtn }) => 
   <button 
+    disabled={disabled}
     type={submit && "submit"} 
     className={`button ${hideMobile && `hide-mobile`} ${hideBorder && `hide-border`} ${navBtn && `nav-btn`}`} 
     style={style} 
