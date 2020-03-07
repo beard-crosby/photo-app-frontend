@@ -32,29 +32,31 @@ const Auth = ({ history }) => {
         <h5>LOGIN</h5>
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
       </div>
-      <label htmlFor="username_or_email"><h5>Username or Email</h5></label>
-      <input 
-        type="text" 
-        name="username_or_email" 
-        id="username_or_email" 
-        onChange={event => updateForm(event, form, setForm)}>
-      </input>
-      <label htmlFor="password"><h5>Password</h5></label>
-      <input 
-        type="password" 
-        name="password" 
-        id="password" 
-        onChange={event => updateForm(event, form, setForm)}>
-      </input>
-      <div className="buttons">
-        <Button submit disabled={!formValid} loginSVG text="Login"/>
-        <GoogleLogin
-          text="Login With Google"
-          onSuccess={res => console.log(res)}
-          onFail={res => console.log(res)}/>
-        <FacebookLogin 
-          text="Login With Facebook"
-          res={res => console.log(res)}/>
+      <div className="middle">
+        <label htmlFor="username_or_email"><p>Username or Email</p></label>
+        <input 
+          type="text" 
+          name="username_or_email" 
+          id="username_or_email" 
+          onChange={event => updateForm(event, form, setForm)}>
+        </input>
+        <label htmlFor="password"><p>Password</p></label>
+        <input 
+          type="password" 
+          name="password" 
+          id="password" 
+          onChange={event => updateForm(event, form, setForm)}>
+        </input>
+        <div className="buttons">
+          <Button submit disabled={!formValid} loginSVG text="Login"/>
+          <GoogleLogin
+            text="Login With Google"
+            onSuccess={res => console.log(res)}
+            onFail={res => console.log(res)}/>
+          <FacebookLogin 
+            text="Login With Facebook"
+            res={res => console.log(res)}/>
+        </div>
       </div>
       <div className="bottom">
         <Link to="/create"><h5>CREATE AN ACCOUNT</h5></Link>

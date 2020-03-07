@@ -23,14 +23,16 @@ const ProfileImg = ({ history }) => {
   return (
     <form className="model" onClick={event => onUploadClicked(event)} style={{ width: 500 }}>
       <div className="top">
-        <h4>Change Profile Image</h4>
+        <h5>CHANGE PROFILE IMAGE</h5>
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
       </div>
+      <div className="middle">
       <div className="upload-box" onMouseUp={() => updateField()}>
         <Upload/>
         <h1>Drag and Drop</h1>
       </div>
-      <Button text="Change Profile Image"/>
+      <Button text="Change Profile Image" style={{ marginBottom: 25 }}/>
+      </div>
     </form>
   )
 }

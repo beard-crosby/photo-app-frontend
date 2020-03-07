@@ -22,18 +22,20 @@ const Forgot = ({ history }) => {
         <h5>FORGOT PASSWORD</h5>
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
       </div>
-      <label htmlFor="email"><h5>Email</h5></label>
-      <input
-        style={{ margin: 0 }}
-        type="email" 
-        name="email" 
-        id="email" 
-        onChange={updateField}>
-      </input>
-      <div className="buttons stackButtons">
-        <Button submit disabled={formValid} loginSVG text="Submit"/>
+      <div className="middle">
+        <label htmlFor="email"><h5>Email</h5></label>
+        <input
+          style={{ margin: 0 }}
+          type="email" 
+          name="email" 
+          id="email" 
+          onChange={updateField}>
+        </input>
+        <div className="buttons stackButtons">
+          <Button submit disabled={formValid} loginSVG text="Submit"/>
+        </div>
       </div>
-      <div className="bottom">
+      <div className="bottom" style={{ margin: 0 }}>
         <Link to="/auth"><h5>LOG IN</h5></Link>
         <Link to="/create"><h5>CREATE AN ACCOUNT</h5></Link>
       </div>

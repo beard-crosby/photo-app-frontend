@@ -28,31 +28,33 @@ const Upload = ({ history }) => {
     <form className="model" onClick={event => onUploadClicked(event)} style={{ width: 500 }}>
       <div className="top">
         <div className="top-left">
-          <h4>Post</h4>
+          <h5>POST</h5>
           <UploadSVG/>
         </div>
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
       </div>
-      <label htmlFor="title"><h5>Title</h5></label>
-      <input 
-        type="text" 
-        name="title" 
-        id="title"
-        onChange={updateField}>
-      </input>
-      <div className="upload-box">
-        <UploadSVG/>
-        <h1>Drag and Drop</h1>
+      <div className="middle">
+        <label htmlFor="title"><h5>Title</h5></label>
+        <input 
+          type="text" 
+          name="title" 
+          id="title"
+          onChange={updateField}>
+        </input>
+        <div className="upload-box">
+          <UploadSVG/>
+          <h1>Drag and Drop</h1>
+        </div>
+        <label htmlFor="description"><h5>Description</h5></label>
+        <textarea 
+          type="text" 
+          name="description" 
+          id="description"
+          onMouseDown={() => descriptionHeight()}
+          onChange={updateField}>
+        </textarea>
+        <Button submit text="Post" style={{ marginBottom: 25 }}/>
       </div>
-      <label htmlFor="description"><h5>Description</h5></label>
-      <textarea 
-        type="text" 
-        name="description" 
-        id="description"
-        onMouseDown={() => descriptionHeight()}
-        onChange={updateField}>
-      </textarea>
-      <Button submit text="Post"/>
     </form>
   )
 }
