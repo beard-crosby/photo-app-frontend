@@ -15,10 +15,10 @@ const Splash = () =>
       </div>
       <div className="signup">
         <Create 
-          style={{ width: '100%' }}
-          btnStyle={{ flexFlow: 'column nowrap', minHeight: '150px' }}
-          topRight={<></>}
-          hideBottom/>
+        style={{ width: '100%' }}
+        stackButtons
+        hideTopRight
+        hideBottom/>
       </div>
     </div>
     <div className="splash-content">

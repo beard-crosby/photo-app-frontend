@@ -13,7 +13,7 @@ const GoogleBtn = ({ text, onSuccess, onFail, style }) =>
         className="button"
         style={style}>
         <img alt="Google Logo" src={require('../../../../static/logo/google.png')}/>
-        <h4>{text}</h4>
+        <p>{text}</p>
       </button>
     )}
     onSuccess={onSuccess}

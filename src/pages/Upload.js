@@ -5,9 +5,9 @@ import Button from '../components/UI/Button'
 
 const Upload = ({ history }) => {
   const [ form, setForm ] = useState({
-    img: null,
-    title: null,
-    description: null,
+    img: "",
+    title: "",
+    description: "",
   })
 
   const updateField = e => {
@@ -52,7 +52,7 @@ const Upload = ({ history }) => {
         onMouseDown={() => descriptionHeight()}
         onChange={updateField}>
       </textarea>
-      <Button text="Post" style={{ marginTop: 20 }}/>
+      <Button submit text="Post"/>
     </form>
   )
 }

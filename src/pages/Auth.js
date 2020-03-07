@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../App'
-import Form from '../components/UI/Form'
 import { Link } from 'react-router-dom'
 import GoogleLogin from '../components/UI/Button/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/FacebookLogin'
@@ -26,20 +25,13 @@ const Auth = ({ history }) => {
     event.preventDefault()
     login(form, history, setUser, setLoading) // request
   }
-  console.log(form)
+
   return (
-    <Form submit={event => onLoginClicked(event)}
-      top={
-        <>
-          <h5>LOGIN</h5>
-          <h5 className="back" onClick={() => history.goBack()}>BACK</h5>
-        </>}
-      bottom={
-        <>
-          <Link to="/create"><h5>CREATE AN ACCOUNT</h5></Link>
-          <Link to="/forgot"><h5>FORGOT PASSWORD</h5></Link>
-        </>
-      }>
+    <form className="model" onSubmit={event => onLoginClicked(event)} style={{ width: 500 }}>
+      <div className="top">
+        <h5>LOGIN</h5>
+        <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
+      </div>
       <label htmlFor="username_or_email"><h5>Username or Email</h5></label>
       <input 
         type="text" 
@@ -54,7 +46,7 @@ const Auth = ({ history }) => {
         id="password" 
         onChange={event => updateForm(event, form, setForm)}>
       </input>
-      <div className="auth-buttons">
+      <div className="buttons">
         <Button submit disabled={!formValid} loginSVG text="Login"/>
         <GoogleLogin
           text="Login With Google"
@@ -64,7 +56,11 @@ const Auth = ({ history }) => {
           text="Login With Facebook"
           res={res => console.log(res)}/>
       </div>
-    </Form>
+      <div className="bottom">
+        <Link to="/create"><h5>CREATE AN ACCOUNT</h5></Link>
+        <Link to="/forgot"><h5>FORGOT PASSWORD</h5></Link>
+      </div>
+    </form>
   )
 }
 

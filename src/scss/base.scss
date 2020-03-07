@@ -185,31 +185,6 @@ body {
         }
       }
     }
-
-    .back {
-      cursor: pointer;
-    }
-
-    .auth-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin: 15px 0;
-
-      @media (max-width: 600px) {
-        flex-flow: column nowrap;
-        min-height: 150px;
-      }
-    }
-
-    .upload-status-wrapper {
-      width: 100%;
-      min-height: 200px;
-      max-height: 400px;
-      margin-bottom: 20px;
-      border-radius: 5px;
-      border: 1px solid $color-1;
-      background-color: $white;
-    }
     
     footer {
       width: 1000px;

@@ -30,7 +30,7 @@ const ProfileImg = ({ history }) => {
         <Upload/>
         <h1>Drag and Drop</h1>
       </div>
-      <Button text="Change Profile Image" style={{ marginTop: 20 }}/>
+      <Button text="Change Profile Image"/>
     </form>
   )
 }

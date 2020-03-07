@@ -17,14 +17,15 @@ $color-2: #525252;
   cursor: pointer;
 
   img, svg {
-    margin-right: 10px;
+    margin-right: 10px !important;
     width: 20px !important;
-    height: 20px;
+    height: 20px !important;
+    flex-shrink: 0 !important;
   }
 
-  h4, p {
-    font-weight: 400;
-    font-size: 1.1em;
+  p {
+    font-weight: 400 !important;
+    font-size: 1.1em !important;
     cursor: pointer;
   }
 

@@ -15,7 +15,7 @@ const FacebookBtn = ({ res, text, style}) =>
         style={style}
         type="button">
         <img alt="Google Logo" src={require('../../../../static/logo/facebook.png')}/>
-        <h4>{text}</h4>
+        <p>{text}</p>
       </button>
     )} />
 
