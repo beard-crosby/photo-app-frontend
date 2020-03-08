@@ -1,68 +1,53 @@
-export const updateForm = (event, form, setForm, formErrors, setFormErrors) => {
+export const updateForm = (event, forms, setForms, history) => {
   if (event.target.name === 'username_or_email') {
     if (/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(event.target.value)) { //eslint-disable-line
-      setForm({...form, email: event.target.value, username: ""})
+      setForms({...forms, auth: { ...forms.auth, email: event.target.value, username: "" }})
     } else {
-      setForm({...form, username: event.target.value, email: ""})
+      setForms({...forms, auth: { ...forms.auth, username: event.target.value, email: "" }})
     }
-  }
-  if (event.target.name === 'name') {
+  } else if (event.target.name === 'name') {
     if (/^[a-zA-Z\s-']{6,30}$/.test(event.target.value) || event.target.value.trim() === "") {
-      setForm({...form, name: event.target.value})
-      setFormErrors({...formErrors, nameError: false})
+      setForms({...forms, create: { ...forms.create, name: event.target.value }, createErrors: { ...forms.createErrors, nameError: false }})
     } else {
-      setForm({...form, name: event.target.value})
-      setFormErrors({...formErrors, nameError: "Your Name must only have letters, spaces, -' characters and be 6-15 characters in length."})
+      setForms({...forms, create: { ...forms.create, name: event.target.value }, createErrors: { ...forms.createErrors, nameError: "Your Name must only have letters, spaces, -' characters and be 6-15 characters in length." }})
     }
-  }
-  if (event.target.name === 'username') {
+  } else if (event.target.name === 'username') {
     if (/^(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$/.test(event.target.value) || event.target.value.trim() === "") {
-      setForm({...form, username: event.target.value})
-      setFormErrors({...formErrors, usernameError: false})
+      setForms({...forms, create: { ...forms.create, username: event.target.value }, createErrors: { ...forms.createErrors, usernameError: false }})
     } else {
-      setForm({...form, username: event.target.value})
-      setFormErrors({...formErrors, usernameError: "Your Username must have at least one letter, one number and be 6-15 characters in length."})
+      setForms({...forms, create: { ...forms.create, username: event.target.value }, createErrors: { ...forms.createErrors, usernameError: "Your Username must have at least one letter, one number and be 6-15 characters in length." }})
     }
-  }
-  if (event.target.name === 'email') {
+  } else if (event.target.name === 'email') {
     if (/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(event.target.value) || event.target.value.trim() === "") { //eslint-disable-line
-      setForm({...form, email: event.target.value})
-      setFormErrors({...formErrors, emailError: false})
+      setForms({...forms, create: { ...forms.create, email: event.target.value }, createErrors: { ...forms.createErrors, emailError: false }})
     } else {
-      setForm({...form, email: event.target.value})
-      setFormErrors({...formErrors, emailError: "Please enter a valid email address."})
+      setForms({...forms, create: { ...forms.create, email: event.target.value }, createErrors: { ...forms.createErrors, emailError: "Please enter a valid email address." }})
     }
-  }
-  if (event.target.name === 'password') {
+  } else if (event.target.name === 'password') {
     if (/^([a-zA-Z0-9!?_<>"'$£%^&(){};:+=*#]{8,20})$/.test(event.target.value) || event.target.value.trim() === "") {
-      setForm({...form, password: event.target.value})
-      form.passConfirm && setFormErrors({...formErrors, passwordError: false})
+      setForms({...forms, create: { ...forms.create, password: event.target.value }, createErrors: { ...forms.createErrors, passwordError: false }})
     } else {
-      setForm({...form, password: event.target.value})
-      form.passConfirm && setFormErrors({...formErrors, passwordError: "Your Password must have at least one letter, one number and be 8-20 characters in length. Special characters are optional."})
+      setForms({...forms, create: { ...forms.create, password: event.target.value }, createErrors: { ...forms.createErrors, passwordError: "Your Password must have at least one letter, one number and be 8-20 characters in length. Special characters are optional." }})
     }
-  }
-  if (event.target.name === 'passConfirm') {
-    if (event.target.value === form.password || event.target.value.trim() === "") {
-      setForm({...form, passConfirm: event.target.value})
-      setFormErrors({...formErrors, passConfirmError: false})
+  } else if (event.target.name === 'passConfirm') {
+    if (event.target.value === forms.create.password || event.target.value.trim() === "") {
+      setForms({...forms, create: { ...forms.create, passConfirm: event.target.value }, createErrors: { ...forms.createErrors, passConfirmError: false }})
     } else {
-      setForm({...form, passConfirm: event.target.value})
-      setFormErrors({...formErrors, passConfirmError: "Passwords must be the same."})
+      setForms({...forms, create: { ...forms.create, passConfirm: event.target.value }, createErrors: { ...forms.createErrors, passConfirmError: "Passwords must be the same." }})
     }
   }
 }
 
-export const checkFormValid = (form, setFormValid, formErrors) => {
-  if (form.authForm) {
-    if (form.email && form.password || form.username && form.password) { //eslint-disable-line
+export const checkFormValid = (forms, setFormValid) => {
+  if (forms.authForm) {
+    if (forms.email && forms.password || forms.username && forms.password) { //eslint-disable-line
       setFormValid(true)
     } else {
       setFormValid(false)
     }
   } else {
-    const checkBlanks = Object.values(form).find(input => input.trim() === "")
-    const checkErrors = Object.values(formErrors).find(error => error)
+    const checkBlanks = Object.values(forms.create).find(input => input.trim() === "")
+    const checkErrors = Object.values(forms.createErrors).find(error => error)
     if (typeof checkBlanks === 'undefined' && typeof checkErrors === 'undefined') {
       setFormValid(true)
     } else {

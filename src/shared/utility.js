@@ -33,7 +33,7 @@ export const headers = token => {
 export const checkGeolocation = (userData, setUser) => {
   if ("geolocation" in navigator) {
     return navigator.geolocation.getCurrentPosition(position => {
-      const currentGeo = { lat: Number(position.coords.latitude.toFixed(2)), lon: Number(position.coords.longitude.toFixed(2))}
+      const currentGeo = { lat: Number(position.coords.latitude), lon: Number(position.coords.longitude)}
       localStorage.setItem('geolocation', JSON.stringify(currentGeo))
       if (userData.geolocation === null || userData.geolocation.lat !== currentGeo.lat || userData.geolocation.lon !== currentGeo.lon) {
         setUser({...userData, geolocation: currentGeo})

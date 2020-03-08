@@ -1,18 +1,19 @@
 import axios from 'axios'
 import { logout, logInSuccess } from './localStorage'
 import { headers, timeout, checkGeolocation } from './utility'
+import { inputValues, formObj } from './forms'
 
-export const createUser = (formData, history, setUser, setLoading) => {
+export const createUser = (forms, setForms, history, setUser, setLoading) => {
   setLoading(true)
   axios.post('', {
     variables: {
-      name: formData.name,
-      username: formData.username,
-      email: formData.email,
-      password: formData.password,
-      passConfirm: formData.passConfirm,
-      bio: formData.bio,
-      profileImg: formData.profileImg,
+      name: forms.create.name,
+      username: forms.create.username,
+      email: forms.create.email,
+      password: forms.create.password,
+      passConfirm: forms.create.passConfirm,
+      bio: forms.create.bio,
+      profileImg: forms.create.profileImg,
     },
     query: `
       mutation CreateUser($name: String!, $username: String!, $email: String!, $password: String!, $passConfirm: String!, $bio: String, $profileImg: String) {
@@ -40,6 +41,8 @@ export const createUser = (formData, history, setUser, setLoading) => {
   }).then(res => {
     if (res.data.errors) {
       process.env.NODE_ENV === 'development' && console.log(`Error: ${res.data.errors[0].message}`)
+      setLoading(false)
+      inputValues(forms)
     } else {
       const userData = {...res.data.data.createUser, geolocation: JSON.parse(res.data.data.createUser.geolocation)}
       setUser(logInSuccess(userData))
@@ -47,25 +50,27 @@ export const createUser = (formData, history, setUser, setLoading) => {
       history && history.push("/")
       checkGeolocation(userData, setUser)
       process.env.NODE_ENV === 'development' && console.log(res)
+      setLoading(false)
+      setForms(formObj)
     }
-    setLoading(false)
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(err)
     setLoading(false)
+    inputValues(forms)
   })
 }
 
-export const login = (formData, history, setUser, setLoading) => {
+export const login = (forms, setForms, history, setUser, setLoading) => {
   setLoading(true)
   axios.post('', {
     variables: {
-      email: formData.email,
-      username: formData.username,
-      password: formData.password,
+      email: forms.auth.email,
+      username: forms.auth.username,
+      password: forms.auth.password,
     },
     query: `
-      query Login(${formData.email ? `$email: String!` : `$username: String!`}, $password: String!) {
-        login(${formData.email ? `email: $email` : `username: $username`}, password: $password) {
+      query Login(${forms.auth.email ? `$email: String!` : `$username: String!`}, $password: String!) {
+        login(${forms.auth.email ? `email: $email` : `username: $username`}, password: $password) {
           _id
           token
           token_expiry
@@ -117,6 +122,8 @@ export const login = (formData, history, setUser, setLoading) => {
   }).then(res => {
     if (res.data.errors) {
       process.env.NODE_ENV === 'development' && console.log(`Error: ${res.data.errors[0].message}`)
+      setLoading(false)
+      inputValues(forms)
     } else {
       const userData = {...res.data.data.login, geolocation: JSON.parse(res.data.data.login.geolocation)}
       setUser(logInSuccess(userData))
@@ -124,11 +131,14 @@ export const login = (formData, history, setUser, setLoading) => {
       history.push("/")
       checkGeolocation(userData, setUser)
       process.env.NODE_ENV === 'development' && console.log(res)
+      setLoading(false)
+      setForms(formObj)
     }
-    setLoading(false)
+
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(err)
     setLoading(false)
+    inputValues(forms)
   })
 }
 

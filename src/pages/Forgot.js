@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { UserContext } from '../App'
 import { Link } from 'react-router-dom'
 import Button from '../components/UI/Button'
 
 const Forgot = ({ history }) => {
+  const { forms, setForms } = useContext(UserContext)
   const [ formValid, setFormValid ] = useState(false)
-  const [ form, setForm ] = useState({
-    email: "",
-  })
 
-  useEffect(() => form.email.trim() === "" ? setFormValid(true) : setFormValid(false), [form])
-  const updateField = event => setForm({...form, [event.target.name]: event.target.value})
+  useEffect(() => forms.forgot.trim() === "" ? setFormValid(true) : setFormValid(false), [forms])
+  const updateField = event => setForms({...forms, forgot: event.target.value})
 
   const onSubmit = event => {
     event.preventDefault()
@@ -23,11 +22,11 @@ const Forgot = ({ history }) => {
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
       </div>
       <div className="middle">
-        <label htmlFor="email"><h5>Email</h5></label>
+        <label htmlFor="forgot"><h5>Email</h5></label>
         <input
           type="email" 
-          name="email" 
-          id="email" 
+          name="forgot" 
+          id="forgot" 
           onChange={updateField}>
         </input>
         <div className="buttons stackButtons">

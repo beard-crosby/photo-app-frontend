@@ -8,22 +8,14 @@ import { login } from '../shared/authRequests'
 import { updateForm, checkFormValid } from '../shared/formValidation'
 
 const Auth = ({ history }) => {
-  const { setUser, setLoading } = useContext(UserContext)
+  const { setUser, setLoading, forms, setForms } = useContext(UserContext)
   const [ formValid, setFormValid ] = useState(false)
-  const [ form, setForm ] = useState({
-    authForm: true,
-    email: "",
-    username: "",
-    password: "",
-  })
 
-  useEffect(() => {
-    checkFormValid(form, setFormValid)
-  }, [form])
+  useEffect(() => checkFormValid(forms.auth, setFormValid), [forms])
 
   const onLoginClicked = event => {
     event.preventDefault()
-    login(form, history, setUser, setLoading) // request
+    login(forms, setForms, history, setUser, setLoading) // request
   }
 
   return (
@@ -38,14 +30,14 @@ const Auth = ({ history }) => {
           type="text" 
           name="username_or_email" 
           id="username_or_email" 
-          onChange={event => updateForm(event, form, setForm)}>
+          onChange={event => updateForm(event, forms, setForms)}>
         </input>
         <label htmlFor="password"><p>Password</p></label>
         <input 
           type="password" 
           name="password" 
           id="password" 
-          onChange={event => updateForm(event, form, setForm)}>
+          onChange={event => setForms({...forms, auth: { ...forms.auth, password: event.target.value }})}>
         </input>
         <div className="buttons">
           <Button submit disabled={!formValid} loginSVG text="Login"/>

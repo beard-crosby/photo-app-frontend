@@ -9,30 +9,14 @@ import { updateForm, checkFormValid } from '../shared/formValidation'
 import PropTypes from 'prop-types'
 
 const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
-  const { setUser, setLoading } = useContext(UserContext)
+  const { setUser, setLoading, forms, setForms } = useContext(UserContext)
   const [ formValid, setFormValid ] = useState(false)
-  const [ form, setForm ] = useState({
-    name: "",
-    username: "",
-    email: "",
-    password: "",
-    passConfirm: "",
-  })
-  const [ formErrors, setFormErrors ] = useState({
-    nameError: false,
-    usernameError: false,
-    emailError: false,
-    passwordError: false,
-    passConfirmError: false,
-  })
 
-  useEffect(() => {
-    checkFormValid(form, setFormValid, formErrors)
-  }, [form, formErrors])
+  useEffect(() => checkFormValid(forms, setFormValid), [forms])
 
   const onSignUp = event => {
     event.preventDefault()
-    createUser(form, history, setUser, setLoading) // request
+    createUser(forms, setForms, history, setUser, setLoading) // request
   }
 
   return (
@@ -42,40 +26,40 @@ const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
         {!hideTopRight && <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>}
       </div>
       <div className="middle">
-        <label htmlFor="name"><p>{formErrors.nameError ? formErrors.nameError : "Name"}</p></label>
+        <label htmlFor="name"><p>{forms.createErrors.nameError ? forms.createErrors.nameError : "Name"}</p></label>
         <input 
           type="text" 
           name="name" 
           id="name" 
-          onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
+          onChange={event => updateForm(event, forms, setForms)}>
         </input>
-        <label htmlFor="username"><p>{formErrors.usernameError ? formErrors.usernameError : "Username"}</p></label>
+        <label htmlFor="username"><p>{forms.createErrors.usernameError ? forms.createErrors.usernameError : "Username"}</p></label>
         <input 
           type="text" 
           name="username" 
           id="username" 
-          onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
+          onChange={event => updateForm(event, forms, setForms)}>
         </input>
-        <label htmlFor="email"><p>{formErrors.emailError ? formErrors.emailError : "Email"}</p></label>
+        <label htmlFor="email"><p>{forms.createErrors.emailError ? forms.createErrors.emailError : "Email"}</p></label>
         <input 
           type="email" 
           name="email" 
           id="email" 
-          onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
+          onChange={event => updateForm(event, forms, setForms)}>
         </input>
-        <label htmlFor="password"><p>{formErrors.passwordError ? formErrors.passwordError : "Password"}</p></label>
+        <label htmlFor="password"><p>{forms.createErrors.passwordError ? forms.createErrors.passwordError : "Password"}</p></label>
         <input 
           type="password" 
           name="password" 
           id="password" 
-          onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
+          onChange={event => updateForm(event, forms, setForms)}>
         </input>
-        <label htmlFor="passConfirm"><p>{formErrors.passConfirmError ? formErrors.passConfirmError : "Password Check"}</p></label>
+        <label htmlFor="passConfirm"><p>{forms.createErrors.passConfirmError ? forms.createErrors.passConfirmError : "Password Check"}</p></label>
         <input 
           type="password" 
           name="passConfirm" 
           id="passConfirm" 
-          onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
+          onChange={event => updateForm(event, forms, setForms)}>
         </input>
         <div className={`buttons ${stackButtons && `stackButtons`}`}>
           <Button submit disabled={!formValid} loginSVG text="Sign Up"/>
