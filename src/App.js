@@ -23,7 +23,8 @@ const App = () => {
     <UserContext.Provider value={{ loading, setLoading, user, setUser }}>
       <Nav/>
       <main>
-        {loading ? <Spinner/> : <Router/>}
+        {loading && <Spinner/>}
+        <Router/>
       </main>
       <Footer/>
     </UserContext.Provider>
