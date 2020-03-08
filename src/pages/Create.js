@@ -12,27 +12,27 @@ const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
   const { setUser, setLoading } = useContext(UserContext)
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
-    name: "",
-    username: "",
-    email: "",
-    password: "",
-    passConfirm: "",
-  })
-  const [ formErrors, setFormErrors ] = useState({
-    nameError: false,
-    usernameError: false,
-    emailError: false,
-    passwordError: false,
-    passConfirmError: false,
+    values: {
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+      passConfirm: "",
+    },
+    errors: {
+      nameError: false,
+      usernameError: false,
+      emailError: false,
+      passwordError: false,
+      passConfirmError: false,
+    }
   })
 
-  useEffect(() => {
-    checkFormValid(form, setFormValid, formErrors)
-  }, [form, formErrors])
+  useEffect(() => checkFormValid(form, setFormValid), [form])
 
   const onSignUp = event => {
     event.preventDefault()
-    createUser(form, history, setUser, setLoading) // request
+    createUser(form.values, history, setUser, setLoading) // request
   }
 
   return (
@@ -42,40 +42,40 @@ const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
         {!hideTopRight && <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>}
       </div>
       <div className="middle">
-        <label htmlFor="name"><p>{formErrors.nameError ? formErrors.nameError : "Name"}</p></label>
+        <label htmlFor="name"><p>{form.errors.nameError ? form.errors.nameError : "Name"}</p></label>
         <input 
           type="text" 
           name="name" 
           id="name" 
-          onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
+          onChange={event => updateForm(event, form, setForm)}>
         </input>
-        <label htmlFor="username"><p>{formErrors.usernameError ? formErrors.usernameError : "Username"}</p></label>
+        <label htmlFor="username"><p>{form.errors.usernameError ? form.errors.usernameError : "Username"}</p></label>
         <input 
           type="text" 
           name="username" 
           id="username" 
-          onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
+          onChange={event => updateForm(event, form, setForm)}>
         </input>
-        <label htmlFor="email"><p>{formErrors.emailError ? formErrors.emailError : "Email"}</p></label>
+        <label htmlFor="email"><p>{form.errors.emailError ? form.errors.emailError : "Email"}</p></label>
         <input 
           type="email" 
           name="email" 
           id="email" 
-          onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
+          onChange={event => updateForm(event, form, setForm)}>
         </input>
-        <label htmlFor="password"><p>{formErrors.passwordError ? formErrors.passwordError : "Password"}</p></label>
+        <label htmlFor="password"><p>{form.errors.passwordError ? form.errors.passwordError : "Password"}</p></label>
         <input 
           type="password" 
           name="password" 
           id="password" 
-          onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
+          onChange={event => updateForm(event, form, setForm)}>
         </input>
-        <label htmlFor="passConfirm"><p>{formErrors.passConfirmError ? formErrors.passConfirmError : "Password Check"}</p></label>
+        <label htmlFor="passConfirm"><p>{form.errors.passConfirmError ? form.errors.passConfirmError : "Password Check"}</p></label>
         <input 
           type="password" 
           name="passConfirm" 
           id="passConfirm" 
-          onChange={event => updateForm(event, form, setForm, formErrors, setFormErrors)}>
+          onChange={event => updateForm(event, form, setForm)}>
         </input>
         <div className={`buttons ${stackButtons && `stackButtons`}`}>
           <Button submit disabled={!formValid} loginSVG text="Sign Up"/>

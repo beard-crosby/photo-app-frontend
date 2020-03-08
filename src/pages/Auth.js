@@ -11,15 +11,15 @@ const Auth = ({ history }) => {
   const { setUser, setLoading } = useContext(UserContext)
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
-    authForm: true,
-    email: "",
-    username: "",
-    password: "",
+    values: {
+      authForm: true,
+      email: "",
+      username: "",
+      password: "",
+    }
   })
 
-  useEffect(() => {
-    checkFormValid(form, setFormValid)
-  }, [form])
+  useEffect(() => {checkFormValid(form, setFormValid)}, [form])
 
   const onLoginClicked = event => {
     event.preventDefault()
