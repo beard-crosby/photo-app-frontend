@@ -23,7 +23,7 @@ const Auth = ({ history }) => {
 
   const onLoginClicked = event => {
     event.preventDefault()
-    login(form, history, setUser, setLoading) // request
+    login(form.values, history, setUser, setLoading) // request
   }
 
   return (
