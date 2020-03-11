@@ -13,11 +13,14 @@ const DeleteUser = ({ history }) => {
         <h4>Are you sure?</h4>
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
       </div>
-      <p>You are about to permanently delete your account!</p>
-      <Button 
-        text="DELETE ACCOUNT" 
-        style={{ marginTop: 20 }}
-        onClick={() => deleteAccount(user._id, history, setUser, setLoading, user.token)}/>
+      <div className="middle">
+        <p>You are about to permanently delete your account!</p>
+      </div>
+      <div className="bottom" style={{ justifyContent: 'center' }}>
+        <Button 
+          text="DELETE ACCOUNT" 
+          onClick={() => deleteAccount(user._id, history, setUser, setLoading, user.token)}/>
+      </div>
     </div>
   )
 }

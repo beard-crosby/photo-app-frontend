@@ -20,7 +20,7 @@ const Nav = ({ history }) => {
         <Link to="/"><h1>PHOTO APP</h1></Link>
         <div className="nav-top-right">
           {user.dark_mode ? <Sun onClick={() => darkModeClickedHandler()}/> : <Moon onClick={() => darkModeClickedHandler()}/>}
-          {user.token && <Button navBtn hideBorder uploadSVG text="UPLOAD" onClick={() => history.push("/upload")}/>}
+          {user.token && <Button navBtn hideBorder uploadSVG text="POST" onClick={() => history.push("/upload")}/>}
           {user.token ? <Link to="/profile"><div className="profile-picture"/></Link> : <Link to="/auth"><h5 className="login" style={!user.token && { margin: 0 }}>LOGIN</h5></Link>}
         </div>
       </div>
