@@ -44,3 +44,33 @@ export const checkGeolocation = (userData, setUser) => {
     process.env.NODE_ENV === 'development' && console.log("Geolocation Not Available!")
   }
 }
+
+export const backendError = (user, passed) => {
+  if (passed === "Username") {
+    if (user.formErrors.username) {
+      return user.formErrors.username
+    } else {
+      return passed
+    }
+  } else if (passed === "Email") {
+    if (user.formErrors.email) {
+      return user.formErrors.email
+    } else {
+      return passed
+    }
+  } else if (passed === "Password") {
+    if (user.formErrors.password) {
+      return user.formErrors.password
+    } else {
+      return passed
+    }
+  } else if (passed === "Username or Email") {
+    if (user.formErrors.email) {
+      return user.formErrors.email
+    } else if (user.formErrors.username) {
+      return user.formErrors.username
+    } else {
+      return passed
+    }
+  }
+}

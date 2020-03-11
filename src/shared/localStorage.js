@@ -33,7 +33,8 @@ export const checkLocalStorage = () => {
         following: JSON.parse(following),
         dark_mode: JSON.parse(dark_mode.toLowerCase()),
         logged_in_at: logged_in_at,
-        geolocation: JSON.parse(geolocation)
+        geolocation: JSON.parse(geolocation),
+        formErrors: {},
       }
 
       return userData
@@ -70,6 +71,7 @@ export const logout = history => {
     dark_mode: false,
     logged_in_at: null,
     geolocation: null,
+    formErrors: {},
   }
 
   history && history.push("/")
@@ -92,5 +94,5 @@ export const logInSuccess = userData => {
     localStorage.setItem('logged_in_at', userData.logged_in_at)
   }
 
-  return userData
+  return {...userData, formErrors: {}}
 }

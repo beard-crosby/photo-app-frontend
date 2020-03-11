@@ -6,10 +6,11 @@ import FacebookLogin from '../components/UI/Button/FacebookLogin'
 import Button from '../components/UI/Button'
 import { createUser } from '../shared/authRequests'
 import { updateForm, checkFormValid } from '../shared/formValidation'
+import { backendError } from '../shared/utility'
 import PropTypes from 'prop-types'
 
 const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
-  const { setUser, setLoading } = useContext(UserContext)
+  const { user, setUser, setLoading } = useContext(UserContext)
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
     values: {
@@ -32,9 +33,9 @@ const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
 
   const onSignUp = event => {
     event.preventDefault()
-    createUser(form.values, history, setUser, setLoading) // request
+    createUser(form.values, history, user, setUser, setLoading) // request
   }
-
+  
   return (
     <form className="model" onSubmit={event => onSignUp(event)} style={style ? style : { width: 500 }}>
       <div className="top">
@@ -49,21 +50,21 @@ const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
           id="name" 
           onChange={event => updateForm(event, form, setForm)}>
         </input>
-        <label htmlFor="username"><p>{form.errors.usernameError ? form.errors.usernameError : "Username"}</p></label>
+        <label htmlFor="username"><p>{form.errors.usernameError ? form.errors.usernameError : backendError(user, "Username")}</p></label>
         <input 
           type="text" 
           name="username" 
           id="username" 
           onChange={event => updateForm(event, form, setForm)}>
         </input>
-        <label htmlFor="email"><p>{form.errors.emailError ? form.errors.emailError : "Email"}</p></label>
+        <label htmlFor="email"><p>{form.errors.emailError ? form.errors.emailError : backendError(user, "Email")}</p></label>
         <input 
           type="email" 
           name="email" 
           id="email" 
           onChange={event => updateForm(event, form, setForm)}>
         </input>
-        <label htmlFor="password"><p>{form.errors.passwordError ? form.errors.passwordError : "Password"}</p></label>
+        <label htmlFor="password"><p>{form.errors.passwordError ? form.errors.passwordError : backendError(user, "Password")}</p></label>
         <input 
           type="password" 
           name="password" 

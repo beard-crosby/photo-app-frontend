@@ -6,9 +6,10 @@ import FacebookLogin from '../components/UI/Button/FacebookLogin'
 import Button from '../components/UI/Button'
 import { login } from '../shared/authRequests'
 import { updateForm, checkFormValid } from '../shared/formValidation'
+import { backendError } from '../shared/utility'
 
 const Auth = ({ history }) => {
-  const { setUser, setLoading } = useContext(UserContext)
+  const { user, setUser, setLoading } = useContext(UserContext)
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
     values: {
@@ -23,7 +24,7 @@ const Auth = ({ history }) => {
 
   const onLoginClicked = event => {
     event.preventDefault()
-    login(form.values, history, setUser, setLoading) // request
+    login(form.values, history, user, setUser, setLoading) // request
   }
 
   return (
@@ -33,14 +34,14 @@ const Auth = ({ history }) => {
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
       </div>
       <div className="middle">
-        <label htmlFor="username_or_email"><p>Username or Email</p></label>
+        <label htmlFor="username_or_email"><p>{backendError(user, "Username or Email")}</p></label>
         <input 
           type="text" 
           name="username_or_email" 
           id="username_or_email" 
           onChange={event => updateForm(event, form, setForm)}>
         </input>
-        <label htmlFor="password"><p>Password</p></label>
+        <label htmlFor="password"><p>{backendError(user, "Password")}</p></label>
         <input 
           type="password" 
           name="password" 
