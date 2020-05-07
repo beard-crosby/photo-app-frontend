@@ -3,11 +3,11 @@ import './_button.scss'
 import { Upload, Check, LogIn } from 'react-feather'
 import PropTypes from 'prop-types'
 
-const Button = ({ text, style, submit, disabled, onClick, uploadSVG, checkSVG, loginSVG, appleIMG, googleIMG, hideMobile, hideBorder, navBtn }) => 
+const Button = ({ text, style, submit, disabled, onClick, uploadSVG, checkSVG, loginSVG, appleIMG, googleIMG, hideMobile, hideBorder }) => 
   <button 
     disabled={disabled}
     type={submit && "submit"} 
-    className={`button ${hideMobile && `hide-mobile`} ${hideBorder && `hide-border`} ${navBtn && `nav-btn`}`} 
+    className={`button ${hideMobile && `hide-mobile`} ${hideBorder && `hide-border`}`} 
     style={style} 
     onClick={onClick}>
       {appleIMG && <img alt="Apple" src={require("../../../static/logo/apple.png")}/>}
@@ -30,7 +30,6 @@ Button.propTypes = {
   googleIMG: PropTypes.bool, // True = display googleIMG.
   hideMobile: PropTypes.bool, // True = hide for mobile devices.
   hideBorder: PropTypes.bool, // True = hide border.
-  navBtn: PropTypes.bool, // True = resize btn and contained IMG/SVG for nav.
 }
 
 export default Button

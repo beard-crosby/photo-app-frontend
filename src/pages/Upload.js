@@ -27,10 +27,7 @@ const Upload = ({ history }) => {
   return (
     <form className="model" onClick={event => onUploadClicked(event)} style={{ width: 500 }}>
       <div className="top">
-        <div className="top-left">
-          <h5>POST</h5>
-          <UploadSVG/>
-        </div>
+        <h5>POST</h5>
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
       </div>
       <div className="middle">
