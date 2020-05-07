@@ -41,10 +41,6 @@ const Upload = ({ history }) => {
           id="title"
           onChange={updateField}>
         </input>
-        <div className="upload-box">
-          <UploadSVG/>
-          <h1>Drag and Drop</h1>
-        </div>
         <label htmlFor="description"><h5>Description</h5></label>
         <textarea 
           type="text" 
@@ -53,7 +49,11 @@ const Upload = ({ history }) => {
           onMouseDown={() => descriptionHeight()}
           onChange={updateField}>
         </textarea>
-        <Button submit text="Post" style={{ marginBottom: 20 }}/>
+        <div className="upload-box">
+          <UploadSVG/>
+          <h1>Drag and Drop</h1>
+        </div>
+        <Button submit text="Post"/>
       </div>
     </form>
   )
