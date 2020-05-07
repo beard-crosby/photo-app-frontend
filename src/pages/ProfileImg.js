@@ -27,7 +27,7 @@ const ProfileImg = ({ history }) => {
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
       </div>
       <div className="middle">
-      <div className="upload-box" onMouseUp={() => updateField()}>
+      <div className="upload-box">
         <Upload/>
         <h1>Drag and Drop</h1>
       </div>

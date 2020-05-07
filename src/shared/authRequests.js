@@ -52,7 +52,7 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
     setLoading(false)
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(err.response)
-    setUser({ ...user, formErrors: JSON.parse(err.response.data.errors[0].message)})
+    setUser({...user, formErrors: JSON.parse(err.response.data.errors[0].message)})
     setLoading(false)
   })
 }
@@ -119,7 +119,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
   }).then(res => {
     if (res.data.errors) {
       process.env.NODE_ENV === 'development' && console.log(res.data.errors[0].message)
-      setUser({ ...user, formErrors: JSON.parse(res.data.errors[0].message)})
+      setUser({...user, formErrors: JSON.parse(res.data.errors[0].message)})
     } else {
       const userData = {...res.data.data.login, geolocation: JSON.parse(res.data.data.login.geolocation)}
       setUser(logInSuccess(userData))
@@ -131,7 +131,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
     setLoading(false)
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(err.response)
-    setUser({ ...user, formErrors: JSON.parse(err.response.data.errors[0].message)})
+    setUser({...user, formErrors: JSON.parse(err.response.data.errors[0].message)})
     setLoading(false)
   })
 }

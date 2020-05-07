@@ -1,15 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { UserContext } from '../App' 
 import '../scss/_profile.scss'
 import { Menu } from 'react-feather'
 
 const Profile = ({ history }) => {
   const { user } = useContext(UserContext)
+  const [ bioClicked, setBioClicked ] = useState(false)
 
   return (
     <div className="profile-wrapper">
       <div className="profile">
-        <div className="profile-info" style={!user.bio && { width: '100%' }}>
+        <div className="profile-info" style={!user.bio && { width: '100%', padding: 0 }}>
           <div className="profile-picture" onClick={() => history.push("/profileimg")}>
             <h2>Change</h2>
           </div>
@@ -20,6 +21,9 @@ const Profile = ({ history }) => {
               <p>{user.email}</p>
             </div>
           </div>
+          {!user.bio && <div className="write-bio">
+            <p onClick={() => setBioClicked(true)}>Write a Biography</p>
+          </div>}
         </div>
         {user.bio && <div className="bio">
           <p className="bio-title">Biography:</p>
@@ -28,33 +32,13 @@ const Profile = ({ history }) => {
           </div>
         </div>}
       </div>
-      <div className="posts">
-        <div className="posts-bar">
-          <Menu className="menu-btn"/>
-          <div className="posts-bar-section" style={{ borderRight: '1px solid #EEEEEE' }}>
-            <p>Search</p>
-          </div>
-          <div className="posts-bar-section" style={{ borderRight: '1px solid #EEEEEE' }}>
-            <p>Sort Alphabetically</p>
-          </div>
-          <div className="posts-bar-section" style={{ borderRight: '1px solid #EEEEEE' }}>
-            <p>Sort By Date</p>
-          </div>
-          <div className="posts-bar-section">
-            <p>Random</p>
-          </div>
-        </div>
-        {user.posts.length === 0 ? 
-        <div className="posts-content" style={{ alignContent: 'center', justifyContent: 'center', alignItems: 'center', height: '100px' }}>
-          <h2>You have no Posts!</h2>
-        </div> : 
-        <div className="posts-content">
-          {user.posts.map((Post, i) =>
+      <div className="posts" style={user.posts.length === 0 && { justifyContent: "center", alignItems: "center" }}>
+        {user.posts.length === 0 ? <h2>You have no Posts!</h2> :
+          user.posts.map((Post, i) =>
             <div key={i} className="img-wrapper">
               <img alt="Test Img" src={require(`../static/testPictures/${Post.img}.jpg`)}/>
             </div>
           )}
-        </div>}
       </div>
     </div>
   )
