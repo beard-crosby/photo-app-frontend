@@ -29,7 +29,7 @@ export const headers = token => {
   }
 }
 
-// Check Geolocation. If no geolocation data or user has moved, setUser, update localStorage & update database. 
+// Check Geolocation. If no geolocation data or user has moved update User, update localStorage & update database. 
 export const checkGeolocation = (userData, setUser) => {
   if ("geolocation" in navigator) {
     return navigator.geolocation.getCurrentPosition(position => {
@@ -45,6 +45,7 @@ export const checkGeolocation = (userData, setUser) => {
   }
 }
 
+// If there is a backend error, return it. If not, return passed string.
 export const backendError = (user, passed) => {
   if (passed === "Username") {
     if (user.formErrors.username) {

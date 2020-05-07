@@ -156,7 +156,8 @@ export const deleteAccount = (_id, history, setUser, setLoading, token) => {
     `
   }, { headers: headers(token) }).then(res => {
     if (res.data.errors) {
-      process.env.NODE_ENV === 'development' && console.log(`Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(JSON.parse(res.data.errors[0].message))
+      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && logout()
     } else {
       setUser(logout())
       history.push("/")
