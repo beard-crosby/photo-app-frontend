@@ -5,12 +5,12 @@ import { Moon, Sun } from 'react-feather'
 import { withRouter } from 'react-router-dom'
 import { changeDarkMode } from '../../shared/miscRequests'
 
-const Nav = () => {
+const Nav = ({ history }) => {
   const { user, setUser } = useContext(UserContext)
 
   const darkModeClickedHandler = () => {
     setUser({...user, dark_mode: !user.dark_mode}) // set State
-    user.token && changeDarkMode(user._id, user.token) // request
+    user.token && changeDarkMode(user._id, user.token, history) // request
   }
 
   return (

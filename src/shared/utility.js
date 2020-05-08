@@ -30,14 +30,14 @@ export const headers = token => {
 }
 
 // Check Geolocation. If no geolocation data or user has moved update User, update localStorage & update database. 
-export const checkGeolocation = (userData, setUser) => {
+export const checkGeolocation = (userData, setUser, history) => {
   if ("geolocation" in navigator) {
     return navigator.geolocation.getCurrentPosition(position => {
       const currentGeo = { lat: Number(position.coords.latitude), lon: Number(position.coords.longitude)}
       localStorage.setItem('geolocation', JSON.stringify(currentGeo))
       if (userData.geolocation === null || userData.geolocation.lat !== currentGeo.lat || userData.geolocation.lon !== currentGeo.lon) {
         setUser({...userData, geolocation: currentGeo})
-        updateGeolocation(userData._id, JSON.stringify(currentGeo), userData.token)
+        updateGeolocation(userData._id, JSON.stringify(currentGeo), userData.token, history)
       }
     })
   } else {

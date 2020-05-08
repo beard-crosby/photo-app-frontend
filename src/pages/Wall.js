@@ -28,7 +28,7 @@ const Following = () => {
       })
     )
 
-    temp.img && photoCardsArr.push(temp) // If temp obj has an img, push to photoCardsArr. I.E. don't try and render the temp boolean data.
+    temp.img && photoCardsArr.push(temp) // If temp obj has an img, push to photoCardsArr. I.E. don't try and render the temp init data.
   }
 
   return (
