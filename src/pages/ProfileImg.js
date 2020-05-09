@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../scss/_model.scss'
-import { Upload } from 'react-feather'
 import Button from '../components/UI/Button'
+import UploadBox from '../components/UI/UploadBox'
 
 const ProfileImg = ({ history }) => {
   const [ form, setForm ] = useState({
@@ -27,11 +27,11 @@ const ProfileImg = ({ history }) => {
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
       </div>
       <div className="middle">
-      <div className="upload-box">
-        <Upload/>
-        <h1>Drag and Drop</h1>
+        <UploadBox/>
       </div>
-      <Button text="Change Profile Image"/>
+      <div className="bottom">
+        <p>Terms & Conditions</p>
+        <Button submit text="Change Profile Image"/>
       </div>
     </form>
   )

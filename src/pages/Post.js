@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { UserContext } from '../App'
 import '../scss/_model.scss'
-import { Upload as UploadSVG } from 'react-feather'
 import Button from '../components/UI/Button'
+import UploadBox from '../components/UI/UploadBox'
 
-const Upload = ({ history }) => {
+const Post = ({ history }) => {
+  const { user } = useContext(UserContext)
   const [ form, setForm ] = useState({
-    img: "",
     title: "",
     description: "",
   })
@@ -13,11 +14,11 @@ const Upload = ({ history }) => {
   const updateField = e => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value, 
     })
   }
 
-  const onUploadClicked = event => {
+  const onPostClicked = event => {
     event.preventDefault()
     // request
   }
@@ -25,9 +26,9 @@ const Upload = ({ history }) => {
   const descriptionHeight = () => document.getElementById("description").style.height = '100px'
 
   return (
-    <form className="model" onClick={event => onUploadClicked(event)} style={{ width: 500 }}>
+    <form className="model" onClick={event => onPostClicked(event)} style={{ width: 500 }}>
       <div className="top">
-        <h5>POST</h5>
+        <h5>CREATE A POST</h5>
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
       </div>
       <div className="middle">
@@ -46,14 +47,14 @@ const Upload = ({ history }) => {
           onMouseDown={() => descriptionHeight()}
           onChange={updateField}>
         </textarea>
-        <div className="upload-box">
-          <UploadSVG/>
-          <h1>Drag and Drop</h1>
-        </div>
+        <UploadBox/>
+      </div>
+      <div className="bottom">
+        <p>Terms & Conditions</p>
         <Button submit text="Post"/>
       </div>
     </form>
   )
 }
 
-export default Upload
+export default Post

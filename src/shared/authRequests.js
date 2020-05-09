@@ -46,7 +46,7 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
       setUser(logInSuccess(userData))
       timeout(userData.token_expiry)
       history && history.push("/")
-      checkGeolocation(userData, setUser, history)
+      checkGeolocation(userData, setUser)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)
@@ -125,7 +125,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
       setUser(logInSuccess(userData))
       timeout(userData.token_expiry)
       history.push("/")
-      checkGeolocation(userData, setUser, history)
+      checkGeolocation(userData, setUser)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)

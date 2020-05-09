@@ -78,7 +78,7 @@ const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
           id="passConfirm" 
           onChange={event => updateForm(event, form, setForm)}>
         </input>
-        <div className={`buttons ${stackButtons && `stackButtons`}`}>
+        <div className={`buttons ${stackButtons && `stack-buttons`}`}>
           <Button submit disabled={!formValid} loginSVG text="Sign Up"/>
           <GoogleLogin
             text="Login With Google"
