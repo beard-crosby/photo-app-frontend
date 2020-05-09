@@ -1,3 +1,4 @@
+$black: #000000;
 $white: #ffffff;
 $color-1: #EEEEEE;
 $color-2: #525252;
@@ -14,7 +15,12 @@ $color-2: #525252;
   background: $white;
   box-shadow: rgba(120, 120, 120, 1) 0px 2px 2px 0px, rgba(120, 120, 120, 1) 0px 0px 1px 0px;
   border: 1px solid $color-1;
+  transition: 0.3s;
   cursor: pointer;
+
+  p, svg {
+    transition: 0.3s;
+  }
 
   img, svg {
     margin-right: 10px !important;
@@ -31,6 +37,12 @@ $color-2: #525252;
 
   &:hover {
     box-shadow: rgba(70, 70, 70, 1) 0px 2px 2px 0px, rgba(70, 70, 70, 1) 0px 0px 1px 0px;
+    transition: 0.3s;
+    
+    p, svg {
+      color: $black;
+      transition: 0.3s;
+    }
   }
 
   &:focus {
@@ -40,8 +52,9 @@ $color-2: #525252;
   &:disabled {
     cursor: default;
 
-    h4, p { 
+    h4, p, svg, { 
       cursor: default;
+      color: #dddddd;
     }
 
     &:hover {
