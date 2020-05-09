@@ -52,7 +52,7 @@ $color-2: #525252;
   &:disabled {
     cursor: default;
 
-    h4, p, svg, { 
+    h4, p, svg { 
       cursor: default;
       color: #dddddd;
     }
