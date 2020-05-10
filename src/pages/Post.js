@@ -20,13 +20,13 @@ const Post = ({ history }) => {
 
   const onPostClicked = event => {
     event.preventDefault()
-    // request
+    console.log({ file: user.file, title: form.title, description: form.description})
   }
 
   const descriptionHeight = () => document.getElementById("description").style.height = '100px'
 
   return (
-    <form className="model" onClick={event => onPostClicked(event)} style={{ width: 500 }}>
+    <form className="model" onSubmit={event => onPostClicked(event)} style={{ width: 500 }}>
       <div className="top">
         <h5>CREATE A POST</h5>
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>

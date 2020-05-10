@@ -21,7 +21,7 @@ const ProfileImg = ({ history }) => {
   }
 
   return (
-    <form className="model" onClick={event => onUploadClicked(event)} style={{ width: 500 }}>
+    <form className="model" onSubmit={event => onUploadClicked(event)} style={{ width: 500 }}>
       <div className="top">
         <h5>CHANGE PROFILE IMAGE</h5>
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
