@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../../../App'
 import './_UploadBox.scss'
 import { Upload } from 'react-feather'
@@ -6,6 +6,7 @@ import {useDropzone} from 'react-dropzone';
 
 const UploadBox = () => {
   const { user, setUser } = useContext(UserContext)
+  const [ thumb, setThumb ] = useState("")
 
   const canDragDrop = () => {
     const testDiv = document.createElement('div');
@@ -15,12 +16,15 @@ const UploadBox = () => {
   const {acceptedFiles, fileRejections, getRootProps, getInputProps, isDragActive } = useDropzone({ 
     accept: 'image/jpeg, image/png',
     multiple: false,
-    maxSize: 1048576,
+    maxSize: 10000000,
   })
 
   useEffect(() => {
     if (acceptedFiles.length > 0 && fileRejections.length === 0) {
       setUser({ ...user, file: acceptedFiles[0] })
+      setThumb(URL.createObjectURL(acceptedFiles[0]))
+    } else {
+      setThumb("")
     }
   }, [acceptedFiles])
 
@@ -45,10 +49,17 @@ const UploadBox = () => {
   }
 
   return (
-    <div {...getRootProps({className: `upload-box ${canDragDrop && `can-drag-drop`} ${isDragActive && `drag-active`}`})}>
+    <div {...getRootProps({className: `upload-box 
+      ${canDragDrop && `can-drag-drop`} 
+      ${isDragActive && `drag-active`} 
+      ${thumb !== "" && `thumb`}`})}>
       <input {...getInputProps()}/>
-      <Upload/>
-      {text}
+      {thumb ? 
+        <img src={thumb}/> :
+        <>
+          <Upload/>
+          {text}
+        </>}
     </div>
   )
 }

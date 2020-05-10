@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 const Button = ({ text, style, submit, disabled, onClick, uploadSVG, checkSVG, loginSVG, appleIMG, googleIMG, hideMobile, hideBorder }) => 
   <button 
     disabled={disabled}
-    type={submit && "submit"} 
+    type={submit ? "submit" : "button"} 
     className={`button ${hideMobile && `hide-mobile`} ${hideBorder && `hide-border`}`} 
     style={style} 
     onClick={onClick}>
@@ -22,7 +22,7 @@ Button.propTypes = {
   text: PropTypes.string, // Text on the button.
   style: PropTypes.object, // Can change style on Component call.
   onClick: PropTypes.func, // Pass up onClick event.
-  submit: PropTypes.bool, // True = Make the btn trigure form submit event.
+  submit: PropTypes.bool, // True = Trigure form submit event.
   uploadSVG: PropTypes.bool, // True = display uploadSVG.
   checkSVG: PropTypes.bool, // True = display checkSVG.
   loginSVG: PropTypes.bool, // True = display loginSVG.

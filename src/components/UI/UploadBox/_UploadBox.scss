@@ -1,3 +1,4 @@
+$black: #000000;
 $color-2: #525252;
 $color-1: #EEEEEE;
 
@@ -12,6 +13,7 @@ $color-1: #EEEEEE;
   justify-content: center;
   align-items: center;
   transition: 0.3s;
+  overflow: hidden;
   cursor: pointer;
 
   h1, svg {
@@ -49,4 +51,18 @@ $color-1: #EEEEEE;
   box-shadow: rgba(70, 70, 70, 1) 0px 2px 2px 0px, rgba(70, 70, 70, 1) 0px 0px 1px 0px;
   outline: 2px dashed rgba(200, 200, 200, 1);
   transition: 0.3s;
+}
+
+.thumb {
+  outline: none;
+
+  img {
+    width: 110%;
+    height: 280px;
+    object-fit: cover;
+  }
+
+  &:hover {
+    outline: none;
+  }
 }
