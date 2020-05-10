@@ -24,6 +24,7 @@ const UploadBox = () => {
       setUser({ ...user, file: acceptedFiles[0] })
       setThumb(URL.createObjectURL(acceptedFiles[0]))
     } else {
+      setUser({ ...user, file: null })
       setThumb("")
     }
   }, [acceptedFiles])
