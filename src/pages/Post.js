@@ -6,7 +6,7 @@ import UploadBox from '../components/UI/UploadBox'
 import { createPost } from '../shared/postRequests'
 
 const Post = ({ history }) => {
-  const { user, setUser } = useContext(UserContext)
+  const { user } = useContext(UserContext)
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
     title: "",

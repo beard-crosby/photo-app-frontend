@@ -8,13 +8,6 @@ const ProfileImg = ({ history }) => {
     profileImg: null,
   })
 
-  const updateField = e => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    })
-  }
-
   const onUploadClicked = event => {
     event.preventDefault()
     // request

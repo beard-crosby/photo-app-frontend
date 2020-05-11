@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from '../App' 
 import '../scss/_profile.scss'
-import { Menu } from 'react-feather'
 
 const Profile = ({ history }) => {
   const { user } = useContext(UserContext)
@@ -32,14 +31,14 @@ const Profile = ({ history }) => {
           </div>
         </div>}
       </div>
-      {/* <div className="posts" style={user.posts.length === 0 && { justifyContent: "center", alignItems: "center" }}>
+      <div className={`posts ${user.posts.length === 0 && `no-posts`}`}>
         {user.posts.length === 0 ? <h2>You have no Posts!</h2> :
-          user.posts.map((Post, i) =>
-            <div key={i} className="img-wrapper">
-              <img alt="Test Img" src={require(`../static/testPictures/${Post.img}.jpg`)}/>
+          user.posts.map(post => 
+            <div key={post.img} className="img-wrapper">
+              <img alt="post" src={post.img}/>
             </div>
           )}
-      </div> */}
+      </div>
     </div>
   )
 }

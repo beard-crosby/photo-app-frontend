@@ -33,7 +33,7 @@ const UploadBox = () => {
       setUser({ ...user, file: { uploaded: false } })
       setThumb("")
     }
-  }, [acceptedFiles])
+  }, [acceptedFiles]) // eslint-disable-line react-hooks/exhaustive-deps
 
   let text = <h1>Choose an image<br/>{canDragDrop && `or drag it here`}</h1>
 
@@ -63,7 +63,7 @@ const UploadBox = () => {
       ${thumb !== "" && `thumb`}`})}>
       <input {...getInputProps()}/>
       {thumb ? 
-        <img src={thumb}/> :
+        <img alt="Thumbnail" src={thumb}/> :
         <>
           <Upload/>
           {text}
