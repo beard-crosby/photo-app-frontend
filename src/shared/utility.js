@@ -47,9 +47,9 @@ export const checkGeolocation = (userData, setUser) => {
 }
 
 // Format name of all files to be uploaded to s3.
-export const formatFilename = filename => {
-  const cleanFileName = filename.toLowerCase().replace(/[^a-z0-9]/g, "-")
-  const newFilename = `images/${moment().format()}-${cleanFileName}`
+export const formatFilename = (username, filename) => {
+  const cleanFilename = `${moment().format()}-${filename}`
+  const newFilename = `${username.toLowerCase().replace(/[^a-z0-9]/g, "-")}/${cleanFilename.toLowerCase().replace(/[^a-z0-9]/g, "-")}`
   return newFilename
 }
 

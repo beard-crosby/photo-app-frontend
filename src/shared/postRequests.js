@@ -5,7 +5,7 @@ import { logout } from './localStorage'
 export const createPost = (form, user) => {
   axios.post('', {
     variables: {
-      img: user.file,
+      img: user.file.url,
       title: form.title,
       description: form.description,
       author: user._id,

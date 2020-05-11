@@ -30,7 +30,7 @@ const UploadBox = () => {
       setThumb(URL.createObjectURL(acceptedFiles[0]))
       signS3(acceptedFiles[0], user, setUser)
     } else {
-      setUser({ ...user, file: null })
+      setUser({ ...user, file: { uploaded: false } })
       setThumb("")
     }
   }, [acceptedFiles])

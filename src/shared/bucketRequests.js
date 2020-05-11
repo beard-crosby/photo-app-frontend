@@ -6,7 +6,7 @@ import { formatFilename } from './utility'
 export const signS3 = (file, user, setUser) => {
   axios.post('', {
     variables: {
-      filename: formatFilename(file.name),
+      filename: formatFilename(user.name, file.name),
       filetype: file.type,
     },
     query: `
@@ -23,17 +23,17 @@ export const signS3 = (file, user, setUser) => {
       res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && logout()
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
-      uploadToS3(res.data.data.signS3.signedRequest, file, user, setUser)
+      uploadToS3(res.data.data.signS3, file, user, setUser)
     }
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(err)
   })
 }
 
-const uploadToS3 = (signedRequest, file, user, setUser) => {
-  axios.put(signedRequest, file, {headers: {"Content-Type": file.type}}).then(res => {
+const uploadToS3 = (signS3, file, user, setUser) => {
+  axios.put(signS3.signedRequest, file, {headers: {"Content-Type": file.type}}).then(res => {
     process.env.NODE_ENV === 'development' && console.log(res)
-    setUser({ ...user, file: res.config.url })
+    setUser({ ...user, file: { url: signS3.url, uploaded: true }})
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(err)
   })

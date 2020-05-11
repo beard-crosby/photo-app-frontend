@@ -21,7 +21,7 @@ const Post = ({ history }) => {
   }
 
   useEffect(() => { 
-    form.title.length > 0 && typeof user.file === 'string' && setFormValid(true)
+    form.title.length > 0 && user.file.uploaded && setFormValid(true)
   }, [user, form])
 
   const onPostClicked = event => {
