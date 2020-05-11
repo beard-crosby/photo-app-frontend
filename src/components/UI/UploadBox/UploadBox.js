@@ -3,6 +3,7 @@ import { UserContext } from '../../../App'
 import './_UploadBox.scss'
 import { Upload } from 'react-feather'
 import {useDropzone} from 'react-dropzone';
+import { signS3 } from '../../../shared/bucketRequests'
 
 const UploadBox = () => {
   const { user, setUser } = useContext(UserContext)
@@ -27,6 +28,7 @@ const UploadBox = () => {
     if (acceptedFiles.length > 0 && fileRejections.length === 0) {
       setUser({ ...user, file: acceptedFiles[0] })
       setThumb(URL.createObjectURL(acceptedFiles[0]))
+      signS3(acceptedFiles[0], user, setUser)
     } else {
       setUser({ ...user, file: null })
       setThumb("")

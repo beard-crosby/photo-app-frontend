@@ -32,14 +32,14 @@ const Profile = ({ history }) => {
           </div>
         </div>}
       </div>
-      <div className="posts" style={user.posts.length === 0 && { justifyContent: "center", alignItems: "center" }}>
+      {/* <div className="posts" style={user.posts.length === 0 && { justifyContent: "center", alignItems: "center" }}>
         {user.posts.length === 0 ? <h2>You have no Posts!</h2> :
           user.posts.map((Post, i) =>
             <div key={i} className="img-wrapper">
               <img alt="Test Img" src={require(`../static/testPictures/${Post.img}.jpg`)}/>
             </div>
           )}
-      </div>
+      </div> */}
     </div>
   )
 }

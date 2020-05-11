@@ -1,11 +1,13 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../App'
 import '../scss/_model.scss'
 import Button from '../components/UI/Button'
 import UploadBox from '../components/UI/UploadBox'
+import { createPost } from '../shared/postRequests'
 
 const Post = ({ history }) => {
-  const { user } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
+  const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
     title: "",
     description: "",
@@ -18,9 +20,13 @@ const Post = ({ history }) => {
     })
   }
 
+  useEffect(() => { 
+    form.title.length > 0 && typeof user.file === 'string' && setFormValid(true)
+  }, [user, form])
+
   const onPostClicked = event => {
     event.preventDefault()
-    console.log({ file: user.file, title: form.title, description: form.description})
+    createPost(form, user)
   }
 
   const descriptionHeight = () => document.getElementById("description").style.height = '100px'
@@ -51,7 +57,7 @@ const Post = ({ history }) => {
       </div>
       <div className="bottom">
         <p>Terms & Conditions</p>
-        <Button submit text="Post"/>
+        <Button submit disabled={!formValid} text="Post"/>
       </div>
     </form>
   )

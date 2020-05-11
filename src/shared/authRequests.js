@@ -84,6 +84,8 @@ export const login = (formData, history, user, setUser, setLoading) => {
             img
             title
             description
+            created_at
+            updated_at
             comments {
               _id
               comment
@@ -104,9 +106,13 @@ export const login = (formData, history, user, setUser, setLoading) => {
               img
               title
               description
+              created_at
+              updated_at
               comments {
                 _id
                 comment
+                created_at
+                updated_at
                 author {
                   _id
                 }

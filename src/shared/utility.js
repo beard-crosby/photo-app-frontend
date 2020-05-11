@@ -1,5 +1,6 @@
 import { logout } from './localStorage'
 import { updateGeolocation } from './miscRequests'
+import moment from "moment"
 
 // If user.dark_mode = true, add 'dark-mode' class to body and update localStorage. 
 // Else remove it. 'dark-mode' scss class is in base.scss. 
@@ -43,6 +44,13 @@ export const checkGeolocation = (userData, setUser) => {
   } else {
     process.env.NODE_ENV === 'development' && console.log("Geolocation Not Available!")
   }
+}
+
+// Format name of all files to be uploaded to s3.
+export const formatFilename = filename => {
+  const cleanFileName = filename.toLowerCase().replace(/[^a-z0-9]/g, "-")
+  const newFilename = `images/${moment().format()}-${cleanFileName}`
+  return newFilename
 }
 
 // If there is a backend error, return it. If not, return passed string.
