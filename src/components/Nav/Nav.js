@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../../App'
 import { NavLink, Link } from 'react-router-dom'
-import { Moon, Sun } from 'react-feather'
+import { Moon, Sun, Upload } from 'react-feather'
 import { withRouter } from 'react-router-dom'
 import { changeDarkMode } from '../../shared/miscRequests'
 
@@ -19,7 +19,7 @@ const Nav = () => {
         <Link to="/"><h1>PHOTO APP</h1></Link>
         <div className="nav-top-right">
           {user.dark_mode ? <Sun onClick={() => darkModeClickedHandler()}/> : <Moon onClick={() => darkModeClickedHandler()}/>}
-          {user.token ? <Link to="/post"><p>POST</p></Link> : <Link to="/auth"><p>LOGIN</p></Link>}
+          {user.token ? <Link to="/post"><Upload/></Link> : <Link to="/auth"><p>LOGIN</p></Link>}
           {user.token && <Link to="/profile"><div className="profile-picture"/></Link>}
         </div>
       </div>
