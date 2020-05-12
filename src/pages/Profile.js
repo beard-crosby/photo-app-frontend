@@ -1,16 +1,15 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { UserContext } from '../App' 
 import '../scss/_profile.scss'
 import { postsWidth } from '../shared/utility'
 
 const Profile = ({ history }) => {
   const { user } = useContext(UserContext)
-  const [ bioClicked, setBioClicked ] = useState(false)
 
   return (
     <div className="profile-wrapper">
       <div className="profile">
-        <div className="profile-info" style={!user.bio && { width: '100%', padding: 0 }}>
+        <div className="profile-col">
           <div className="profile-picture" onClick={() => history.push("/profileimg")}>
             <h2>Change</h2>
           </div>
@@ -21,16 +20,8 @@ const Profile = ({ history }) => {
               <p>{user.email}</p>
             </div>
           </div>
-          {!user.bio && <div className="write-bio">
-            <p onClick={() => setBioClicked(true)}>Write a Biography</p>
-          </div>}
         </div>
-        {user.bio && <div className="bio">
-          <p className="bio-title">Biography:</p>
-          <div className="bio-body">
-            <p>{user.bio}</p>
-          </div>
-        </div>}
+        <textarea placeholder="Write a biography" maxLength="180"/>
       </div>
       <div className={`posts ${user.posts.length === 0 && `no-posts`}`} style={{ width: postsWidth(user.posts) }}>
         {user.posts.length === 0 ? <h2>You have no Posts!</h2> :

@@ -3,10 +3,6 @@ $color-2: #525252;
 $black: #000000;
 $white: #ffffff;
 
-h2 {
-  font-weight: 300;
-}
-
 .profile-wrapper {
   width: 100%;
   display: flex;
@@ -16,7 +12,7 @@ h2 {
 
   .profile {
     width: 100%;
-    height: 142px;
+    height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,27 +20,24 @@ h2 {
     border-radius: 6px;
     border: 1px solid $color-1;
     background-color: $white;
-    padding: 20px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
     margin-bottom: 40px;
-  
+    overflow: hidden;
+
     p {
-      letter-spacing: 2px;
-      font-weight: 300;
-      color: $black !important;
+      color: $color-2;
     }
-  
-    .profile-info {
-      height: 100%;
+
+    .profile-col {
       width: 50%;
+      height: 100%;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-sizing: border-box;
-      padding-right: 20px;
-  
+      border-right: 1px solid $color-1;
+
       .profile-picture {
-        width: 100px;
-        height: 100px;
+        width: 98px;
+        height: 98px;
         border-radius: 100px;
         background-image: url('../static/defaults/placeholder.png');
         background-size: cover;
@@ -56,17 +49,17 @@ h2 {
         justify-content: center;
         align-items: center;
         cursor: pointer;
-
+  
         h2 {
           opacity: 0;
           cursor: pointer;
           transition: 0.3s;
         }
-
+  
         &:hover {
           opacity: 0.5;
           transition: 0.3s;
-
+  
           h2 {
             opacity: 1;
             transition: 0.3s;
@@ -76,43 +69,21 @@ h2 {
   
       .info {
         height: 100%;
+        padding: 5px 0 10px;
+        box-sizing: border-box;
         flex-grow: 1;
         display: flex;
         flex-flow: column nowrap;
         justify-content: space-between;
       }
-
-      .write-bio {
-        height: 100%;
-        display: flex;
-        flex-flow: column nowrap;
-        justify-content: start;
-        
-        p {
-          cursor: pointer;
-        }
-      }
     }
-  
-    .bio {
-      height: 100%;
+
+    textarea {
       width: 50%;
-      border-left: 1px solid $color-1;
-      display: flex;
-      flex-flow: column nowrap;
+      height: 100%;
+      border: none;
+      padding: 10px;
       box-sizing: border-box;
-      justify-content: space-between;
-      padding: 0 20px;
-  
-      .bio-title {
-        margin-bottom: 5px;
-      }
-      
-      .bio-body {
-        width: 100%;
-        flex-grow: 1;
-        overflow: hidden;
-      }
     }
   }
   

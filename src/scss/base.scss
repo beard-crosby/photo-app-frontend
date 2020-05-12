@@ -13,13 +13,23 @@ h1, h2, h3, h4, h5, h6, p {
   margin: 0;
 }
 
-p {
-  font-size: 0.9em;
+h1, h2 {
+  font-weight: 300;
+}
+
+h1 {
+  letter-spacing: 2px;
+  font-size: 1.7em;
+  color: $black;
 }
 
 a {
   cursor: pointer;
   text-decoration: none;
+}
+
+input, textarea, p {
+  font-size: 0.9em;
 }
 
 textarea:focus, input:focus{
@@ -75,19 +85,6 @@ body {
       h1, h5, p, a, svg {
         cursor: pointer;
       }
-    
-      h1 {
-        font-weight: 300;
-        letter-spacing: 2px;
-        font-size: 1.7em;
-        color: $black;
-      }
-    
-      h5 {
-        font-weight: 400;
-        letter-spacing: 2px;
-        color: $black;
-      }
 
       a {
         color: $color-2;
@@ -96,10 +93,6 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-
-        p {
-          margin: 0;
-        }
   
         &:hover, &:active {
           color: $black;
@@ -121,11 +114,20 @@ body {
 
           a {
             margin: 0 0 0 15px;
+
+            p {
+              letter-spacing: 2px;
+            }
           }
 
           svg {
             width: 15px;
             height: 15px;
+            color: $color-2;
+
+            &:hover {
+              color: $black;
+            }
           }
         }
     
@@ -200,7 +202,7 @@ body {
       border-bottom: 1px solid $dm-color-1;
 
       p, h1, h5, svg {
-        color: $white;
+        color: $white !important;
       }
     }
 

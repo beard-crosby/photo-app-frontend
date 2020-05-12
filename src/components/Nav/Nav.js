@@ -19,8 +19,8 @@ const Nav = () => {
         <Link to="/"><h1>PHOTO APP</h1></Link>
         <div className="nav-top-right">
           {user.dark_mode ? <Sun onClick={() => darkModeClickedHandler()}/> : <Moon onClick={() => darkModeClickedHandler()}/>}
-          {user.token && <Link to="/post"><p>POST</p></Link>}
-          {user.token ? <Link to="/profile"><div className="profile-picture"/></Link> : <Link to="/auth"><h5 className="login" style={!user.token && { margin: 0 }}>LOGIN</h5></Link>}
+          {user.token ? <Link to="/post"><p>POST</p></Link> : <Link to="/auth"><p>LOGIN</p></Link>}
+          {user.token && <Link to="/profile"><div className="profile-picture"/></Link>}
         </div>
       </div>
       {user.token &&
