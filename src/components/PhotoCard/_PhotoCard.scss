@@ -4,7 +4,7 @@ $black: #000000;
 $white: #ffffff;
 
 .photo-card-wrapper {
-  width: 80%;
+  width: 700px;
   min-height: 150px;
   display: flex;
   border-radius: 5px;
@@ -33,7 +33,7 @@ $white: #ffffff;
       width: 100%
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       width: 100%;
     }
   }
@@ -98,7 +98,7 @@ $white: #ffffff;
                   margin-top: 1px;
                 }
 
-                @media (min-width: 800px) {
+                @media (min-width: 900px) {
                   display: none;
                 }
               }
@@ -139,7 +139,7 @@ $white: #ffffff;
         }
       }
 
-      @media (max-width: 800px) {
+      @media (max-width: 900px) {
         position: relative;
         width: 100%;
         max-height: 250px;
@@ -152,25 +152,20 @@ $white: #ffffff;
       font-size: 0.9em;
       padding: 5px 10px;
       box-sizing: border-box;
+      border-top: 1px solid $color-1;
       border-bottom-right-radius: 5px;
       flex-shrink: 0;
     }
 
     @media (max-width: 900px) {
-      width: 200px;
-    }
-
-    @media (max-width: 800px) {
       max-height: 250px;
       width: 100%;
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
+    width: 100%;
     flex-flow: column nowrap;
-  }
-
-  @media (max-width: 600px) {
     border: none;
     border-top: 1px solid $color-1;
     border-bottom: 1px solid $color-1;

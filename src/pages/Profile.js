@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from '../App' 
 import '../scss/_profile.scss'
+import { postsWidth } from '../shared/utility'
 
 const Profile = ({ history }) => {
   const { user } = useContext(UserContext)
@@ -31,7 +32,7 @@ const Profile = ({ history }) => {
           </div>
         </div>}
       </div>
-      <div className={`posts ${user.posts.length === 0 && `no-posts`}`}>
+      <div className={`posts ${user.posts.length === 0 && `no-posts`}`} style={{ width: postsWidth(user.posts) }}>
         {user.posts.length === 0 ? <h2>You have no Posts!</h2> :
           user.posts.map(post => 
             <div key={post.img} className="img-wrapper">

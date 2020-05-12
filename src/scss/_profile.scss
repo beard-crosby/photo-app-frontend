@@ -12,6 +12,7 @@ h2 {
   display: flex;
   flex-flow: column nowrap;
   flex-grow: 1;
+  align-items: center;
 
   .profile {
     width: 100%;
@@ -71,12 +72,6 @@ h2 {
             transition: 0.3s;
           }
         }
-
-        @media (max-width: 600px) {
-          width: 75px;
-          height: 75px;
-          border-radius: 75px;
-        }
       }
   
       .info {
@@ -85,10 +80,6 @@ h2 {
         display: flex;
         flex-flow: column nowrap;
         justify-content: space-between;
-
-        @media (max-width: 600px) {
-          height: 75px;
-        }
       }
 
       .write-bio {
@@ -100,13 +91,6 @@ h2 {
         p {
           cursor: pointer;
         }
-      }
-
-      @media (max-width: 600px) {
-        width: 100%;
-        height: auto;
-        padding: 0 0 20px;
-        border-bottom: 1px solid $color-1;
       }
     }
   
@@ -122,10 +106,6 @@ h2 {
   
       .bio-title {
         margin-bottom: 5px;
-
-        @media (max-width: 600px) {
-          margin-bottom: 10px;
-        }
       }
       
       .bio-body {
@@ -133,22 +113,6 @@ h2 {
         flex-grow: 1;
         overflow: hidden;
       }
-
-      @media (max-width: 600px) {
-        width: 100%;
-        height: auto;
-        padding: 20px 0 0;
-        border: none;
-      }
-    }
-  
-    @media (max-width: 600px) {
-      border-radius: 0px;
-      flex-flow: column nowrap;
-      height: auto;
-      border: none;
-      border-top: 1px solid $color-1;
-      border-bottom: 1px solid $color-1;
     }
   }
   
@@ -177,13 +141,6 @@ h2 {
       img {
         height: 100%;
       }
-    }
-
-    @media (max-width: 600px) {
-      border-radius: 0px;
-      border: none;
-      border-top: 1px solid $color-1;
-      border-bottom: 1px solid $color-1;
     }
   }
 

@@ -44,31 +44,23 @@ body {
     min-height: 100vh;
 
     main {
-      width: 1000px;
+      width: 900px;
       flex-grow: 1;
       display: flex;
       flex-flow: column nowrap;
       justify-content: center;
       align-items: center;
       box-sizing: border-box;
-      padding: 40px;
+      padding: 40px 0;
 
-      @media (max-width: 1000px) {
+      @media (max-width: 900px) {
         width: 100%;
-      }
-
-      @media (max-width: 800px) {
-        padding: 20px;
-      }
-
-      @media (max-width: 600px) {
         padding: 20px 0;
       }
     }
 
     nav {
       width: 100%;
-      padding: 0 15px;
       display: flex;
       flex-flow: column nowrap;
       justify-content: space-between;
@@ -115,13 +107,12 @@ body {
       }
     
       .nav-top {
-        width: 1000px;
+        width: 900px;
         height: 50px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         box-sizing: border-box;
-        padding: 0 40px;
     
         .nav-top-right {
           display: flex;
@@ -145,48 +136,36 @@ body {
           background-image: url('../static/defaults/placeholder.png');
           background-size: contain;
         }
-    
-        @media (max-width: 1000px) {
+
+        @media (max-width: 900px) {
           width: 100%;
-        }
-    
-        @media (max-width: 600px) {
-          padding: 0;
+          padding: 0 15px;
         }
       }
     
       .nav-bottom {
-        width: 1000px;
+        width: 900px;
         height: 40px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         box-sizing: border-box;
-        padding: 0 40px;
     
         .nav-bottom-left {
           display: flex;
           justify-content: flex-start;
         }
-    
-        @media (max-width: 1000px) {
-          width: 100%;
-        }
-    
-        @media (max-width: 600px) {
-          padding: 0;
 
-          svg {
-            display: block;
-          }
+        @media (max-width: 900px) {
+          width: 100%;
+          padding: 0 15px;
         }
       }
     }
     
     footer {
-      width: 1000px;
+      width: 900px;
       box-sizing: border-box;
-      padding: 0 40px;
       height: 60px;
       display: flex;
       justify-content: center;
@@ -194,9 +173,10 @@ body {
       font-weight: 400;
       position: relative;
       z-index: 10000;
-    
-      @media (max-width: 1000px) {
+
+      @media (max-width: 900px) {
         width: 100%;
+        padding: 0 15px;
       }
     }
   }
