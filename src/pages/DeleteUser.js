@@ -10,7 +10,7 @@ const DeleteUser = ({ history }) => {
   return (
     <div className="model">
       <div className="top">
-        <h4>Are you sure?</h4>
+        <h5>Are you sure?</h5>
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
       </div>
       <div className="middle">

@@ -163,9 +163,9 @@ export const deleteAccount = (user, setUser, setLoading) => {
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
       process.env.NODE_ENV === 'development' && console.log(JSON.parse(res.data.errors[0].message))
-      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && setUser({ ...logout(), redirect: "/auth" })
+      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && setUser({ ...logout(), redirect: "/loggedout" })
     } else {
-      setUser({ ...logout(), redirect: "/auth" })
+      setUser({ ...logout(), redirect: "/loggedout" })
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)

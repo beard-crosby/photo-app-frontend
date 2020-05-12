@@ -14,6 +14,7 @@ import Splash from './pages/Splash'
 import Post from './pages/Post'
 import DeleteUser from './pages/DeleteUser'
 import ProfileImg from './pages/ProfileImg'
+import LoggedOut from './pages/LoggedOut'
 
 const Router = () => {
   const { user } = useContext(UserContext)
@@ -35,6 +36,7 @@ const Router = () => {
           <Route path="/auth" component={Auth}/>
           <Route path="/create" component={Create}/>
           <Route path="/forgot" component={Forgot}/>
+          <Route path="/loggedout" component={LoggedOut}/>
         </>
       }
       <Route component={Notfound}/>

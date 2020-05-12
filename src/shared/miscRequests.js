@@ -17,7 +17,7 @@ export const changeDarkMode = (user, setUser) => {
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
       process.env.NODE_ENV === 'development' && console.log(JSON.parse(res.data.errors[0].message))
-      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && setUser({ ...logout(), redirect: "/auth" })
+      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && setUser({ ...logout(), redirect: "/loggedout" })
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
     }
@@ -42,7 +42,7 @@ export const updateGeolocation = (user, setUser, geolocation) => {
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
       process.env.NODE_ENV === 'development' && console.log(JSON.parse(res.data.errors[0].message))
-      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && setUser({ ...logout(), redirect: "/auth" })
+      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && setUser({ ...logout(), redirect: "/loggedout" })
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
     }
