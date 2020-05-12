@@ -44,8 +44,8 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
     } else {
       const userData = {...res.data.data.createUser, geolocation: JSON.parse(res.data.data.createUser.geolocation)}
       setUser(logInSuccess(userData))
-      timeout(userData.token_expiry, history)
-      history && history.push("/")
+      timeout(userData.token_expiry, setUser)
+      history.push("/")
       checkGeolocation(userData, setUser)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
@@ -129,9 +129,9 @@ export const login = (formData, history, user, setUser, setLoading) => {
     } else {
       const userData = {...res.data.data.login, geolocation: JSON.parse(res.data.data.login.geolocation)}
       setUser(logInSuccess(userData))
-      timeout(userData.token_expiry, history)
+      timeout(userData.token_expiry, setUser)
       history.push("/")
-      checkGeolocation(userData, setUser, history)
+      checkGeolocation(userData, setUser)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)
@@ -142,11 +142,11 @@ export const login = (formData, history, user, setUser, setLoading) => {
   })
 }
 
-export const deleteAccount = (_id, history, setUser, setLoading, token) => {
+export const deleteAccount = (user, setUser, setLoading) => {
   setLoading(true)
   axios.post('', {
     variables: {
-      _id: _id
+      _id: user._id
     },
     query: `
       mutation DeleteUser($_id: ID!) {
@@ -160,12 +160,12 @@ export const deleteAccount = (_id, history, setUser, setLoading, token) => {
         }
       }
     `
-  }, { headers: headers(token) }).then(res => {
+  }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
       process.env.NODE_ENV === 'development' && console.log(JSON.parse(res.data.errors[0].message))
-      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && logout(history)
+      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && setUser({ ...logout(), redirect: "/auth" })
     } else {
-      setUser(logout(history))
+      setUser({ ...logout(), redirect: "/auth" })
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)

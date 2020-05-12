@@ -19,7 +19,7 @@ const DeleteUser = ({ history }) => {
       <div className="bottom" style={{ justifyContent: 'center' }}>
         <Button 
           text="DELETE ACCOUNT" 
-          onClick={() => deleteAccount(user._id, history, setUser, setLoading, user.token)}/>
+          onClick={() => deleteAccount(user, setUser, setLoading)}/>
       </div>
     </div>
   )

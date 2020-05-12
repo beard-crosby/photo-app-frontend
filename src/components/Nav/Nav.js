@@ -1,16 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../../App'
 import { NavLink, Link } from 'react-router-dom'
 import { Moon, Sun, Upload } from 'react-feather'
 import { withRouter } from 'react-router-dom'
 import { changeDarkMode } from '../../shared/miscRequests'
 
-const Nav = history => {
+const Nav = ({ history }) => {
   const { user, setUser } = useContext(UserContext)
+
+  useEffect(() => { // Redirect if user.redirect === truthy.
+    user.redirect && history.push(user.redirect)
+    setUser({ ...user, redirect: false })
+  }, [user.redirect]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const darkModeClickedHandler = () => {
     setUser({...user, dark_mode: !user.dark_mode}) // set State
-    user.token && changeDarkMode(user._id, user.token, history) // request
+    changeDarkMode(user, setUser) // request
   }
 
   return (

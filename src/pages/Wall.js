@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { UserContext } from '../App'
 import PhotoCard from '../components/PhotoCard'
 import moment from 'moment'
 
-const Following = () => {
+const Wall = () => {
   const { user } = useContext(UserContext)
   const photoCardsArr = [] // Array of photoCards to be rendered.
 
@@ -43,4 +43,4 @@ const Following = () => {
   )
 }
 
-export default Following
+export default Wall

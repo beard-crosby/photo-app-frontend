@@ -15,11 +15,11 @@ export const switchDarkMode = user => {
 }
 
 // If logged in for 1h (3600000ms), then logout().
-export const timeout = (expirationTime, history) => {
+export const timeout = (expirationTime, setUser) => {
   setTimeout(() => {
-    logout(history)
+    setUser({ ...logout(), redirect: "/auth" })
     process.env.NODE_ENV === 'development' && console.log("Token Expired!")
-  }, expirationTime * 3600000)
+  }, expirationTime * 5000)
 }
 
 // Add headers to a request
@@ -31,14 +31,14 @@ export const headers = token => {
 }
 
 // Check Geolocation. If no geolocation data or user has moved update User, update localStorage & update database. 
-export const checkGeolocation = (userData, setUser, history) => {
+export const checkGeolocation = (userData, setUser) => {
   if ("geolocation" in navigator) {
     return navigator.geolocation.getCurrentPosition(position => {
       const currentGeo = { lat: Number(position.coords.latitude), lon: Number(position.coords.longitude)}
       localStorage.setItem('geolocation', JSON.stringify(currentGeo))
       if (userData.geolocation === null || userData.geolocation.lat !== currentGeo.lat || userData.geolocation.lon !== currentGeo.lon) {
         setUser({...userData, geolocation: currentGeo})
-        updateGeolocation(userData, JSON.stringify(currentGeo), history)
+        updateGeolocation(userData, setUser, JSON.stringify(currentGeo))
       }
     })
   } else {

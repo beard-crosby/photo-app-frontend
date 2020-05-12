@@ -1,11 +1,11 @@
 export const checkLocalStorage = () => {
   const token = localStorage.getItem('token')
   if (!token) {
-    return logout()
+    return { ...logout(), redirect: false }
   } else {
     const token_expiry = new Date(localStorage.getItem('token_expiry'))
     if (token_expiry < new Date()) {
-      return logout()
+      return { ...logout(), redirect: false }
     } else {
       const _id = localStorage.getItem('_id')
       const name = localStorage.getItem('name')
@@ -35,6 +35,7 @@ export const checkLocalStorage = () => {
         logged_in_at: logged_in_at,
         geolocation: JSON.parse(geolocation),
         formErrors: {},
+        redirect: false,
       }
 
       return userData
@@ -42,7 +43,7 @@ export const checkLocalStorage = () => {
   }
 }
 
-export const logout = history => {
+export const logout = () => {
   localStorage.removeItem('token')
   localStorage.removeItem('token_expiry')
   localStorage.removeItem('_id')
@@ -72,9 +73,9 @@ export const logout = history => {
     logged_in_at: null,
     geolocation: null,
     formErrors: {},
+    redirect: false,
   }
 
-  history && history.push("/")
   return userData
 }
 
@@ -94,5 +95,5 @@ export const logInSuccess = userData => {
     localStorage.setItem('logged_in_at', userData.logged_in_at)
   }
 
-  return {...userData, formErrors: {}}
+  return {...userData, formErrors: {}, redirect: false}
 }
