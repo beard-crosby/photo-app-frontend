@@ -19,7 +19,7 @@ export const timeout = (expirationTime, setUser) => {
   setTimeout(() => {
     setUser({ ...logout(), redirect: "/loggedout" })
     process.env.NODE_ENV === 'development' && console.log("Token Expired!")
-  }, expirationTime * 5000)
+  }, expirationTime * 3600000)
 }
 
 // Add headers to a request
