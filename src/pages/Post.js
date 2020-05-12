@@ -51,8 +51,7 @@ const Post = ({ history }) => {
           name="description" 
           id="description"
           onMouseDown={() => descriptionHeight()}
-          onChange={updateField}>
-        </textarea>
+          onChange={updateField}/>
         <UploadBox/>
       </div>
       <div className="bottom">

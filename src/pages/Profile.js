@@ -4,7 +4,14 @@ import '../scss/_profile.scss'
 import { postsWidth } from '../shared/utility'
 
 const Profile = ({ history }) => {
-  const { user } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
+
+  const updateField = e => {
+    setUser({ 
+      ...user, 
+      [e.target.name]: e.target.value,
+    })
+  }
 
   return (
     <div className="profile-wrapper">
@@ -21,7 +28,13 @@ const Profile = ({ history }) => {
             </div>
           </div>
         </div>
-        <textarea placeholder="Write a biography" maxLength="180"/>
+        <textarea 
+          type="text"
+          name="bio"
+          placeholder="Write a biography" 
+          maxLength="180"
+          onChange={updateField}
+          value={user.bio}/>
       </div>
       <div className={`posts ${user.posts.length === 0 && `no-posts`}`} style={{ width: postsWidth(user.posts) }}>
         {user.posts.length === 0 ? <h2>You have no Posts!</h2> :

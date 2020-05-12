@@ -39,7 +39,7 @@ $white: #ffffff;
         width: 98px;
         height: 98px;
         border-radius: 100px;
-        background-image: url('../static/defaults/placeholder.png');
+        background-image: url("https://photoapp118.s3.eu-west-2.amazonaws.com/placeholder");
         background-size: cover;
         background-repeat: no-repeat;
         flex-shrink: 0;
@@ -84,6 +84,7 @@ $white: #ffffff;
       border: none;
       padding: 10px;
       box-sizing: border-box;
+      resize: none;
     }
   }
   
