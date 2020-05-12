@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from './App'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 import Notfound from './pages/NotFound'
 import Profile from './pages/Profile'
@@ -20,18 +20,23 @@ const Router = () => {
 
   return (
     <Switch>
-      {user.token ? 
-        <Route exact path="/" component={Wall}/> : 
-        <Route exact path="/" component={Splash}/>}
-      <Route path="/profile" component={Profile}/>
-      <Route path="/discover" component={Discover}/>
-      <Route path="/settings" component={Settings}/>
-      <Route path="/post" component={Post}/>
-      <Route path="/deleteuser" component={DeleteUser}/>
-      <Route path="/auth" component={Auth}/>
-      <Route path="/create" component={Create}/>
-      <Route path="/forgot" component={Forgot}/>
-      <Route path="/profileimg" component={ProfileImg}/>
+      {user.token ?
+        <>
+          <Route exact path="/" component={Wall}/>
+          <Route path="/profile" component={Profile}/>
+          <Route path="/discover" component={Discover}/>
+          <Route path="/settings" component={Settings}/>
+          <Route path="/post" component={Post}/>
+          <Route path="/deleteuser" component={DeleteUser}/>
+          <Route path="/profileimg" component={ProfileImg}/> 
+        </> :
+        <>
+          <Route exact path="/" component={Splash}/>
+          <Route path="/auth" component={Auth}/>
+          <Route path="/create" component={Create}/>
+          <Route path="/forgot" component={Forgot}/>
+        </>
+      }
       <Route component={Notfound}/>
     </Switch>
   )
