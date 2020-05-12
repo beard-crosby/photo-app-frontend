@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from './App'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import Notfound from './pages/NotFound'
 import Profile from './pages/Profile'

@@ -4,8 +4,9 @@ import './_UploadBox.scss'
 import { Upload } from 'react-feather'
 import {useDropzone} from 'react-dropzone';
 import { signS3 } from '../../../shared/bucketRequests'
+import { withRouter } from 'react-router-dom'
 
-const UploadBox = () => {
+const UploadBox = history => {
   const { user, setUser } = useContext(UserContext)
   const [ thumb, setThumb ] = useState("")
 
@@ -28,7 +29,7 @@ const UploadBox = () => {
     if (acceptedFiles.length > 0 && fileRejections.length === 0) {
       setUser({ ...user, file: acceptedFiles[0] })
       setThumb(URL.createObjectURL(acceptedFiles[0]))
-      signS3(acceptedFiles[0], user, setUser)
+      signS3(acceptedFiles[0], user, setUser, history)
     } else {
       setUser({ ...user, file: { uploaded: false } })
       setThumb("")
@@ -72,4 +73,4 @@ const UploadBox = () => {
   )
 }
 
-export default UploadBox
+export default withRouter(UploadBox)

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { headers } from './utility'
 import { logout } from './localStorage'
 
-export const changeDarkMode = (_id, token) => {
+export const changeDarkMode = (_id, token, history) => {
   axios.post('', {
     variables: {
       _id: _id
@@ -17,7 +17,7 @@ export const changeDarkMode = (_id, token) => {
   }, { headers: headers(token) }).then(res => {
     if (res.data.errors) {
       process.env.NODE_ENV === 'development' && console.log(JSON.parse(res.data.errors[0].message))
-      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && logout()
+      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && logout(history)
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
     }
@@ -26,11 +26,11 @@ export const changeDarkMode = (_id, token) => {
   })
 }
 
-export const updateGeolocation = (_id, geolocation, token) => {
+export const updateGeolocation = (user, geolocation, history) => {
   axios.post('', {
     variables: {
-      _id: _id,
-      geo: geolocation
+      _id: user._id,
+      geo: geolocation,
     },
     query: `
       mutation UpdateGeolocation($_id: ID!, $geo: String!) {
@@ -39,10 +39,10 @@ export const updateGeolocation = (_id, geolocation, token) => {
         }
       }
     `
-  }, { headers: headers(token) }).then(res => {
+  }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
       process.env.NODE_ENV === 'development' && console.log(JSON.parse(res.data.errors[0].message))
-      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && logout()
+      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && logout(history)
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
     }

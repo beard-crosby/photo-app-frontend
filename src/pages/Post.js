@@ -26,7 +26,7 @@ const Post = ({ history }) => {
 
   const onPostClicked = event => {
     event.preventDefault()
-    createPost(form, user)
+    createPost(form, user, history)
   }
 
   const descriptionHeight = () => document.getElementById("description").style.height = '100px'

@@ -2,7 +2,7 @@ import axios from "axios"
 import { headers } from './utility'
 import { logout } from './localStorage'
 
-export const createPost = (form, user) => {
+export const createPost = (form, user, history) => {
   axios.post('', {
     variables: {
       img: user.file.url,
@@ -36,7 +36,7 @@ export const createPost = (form, user) => {
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
       process.env.NODE_ENV === 'development' && console.log(JSON.parse(res.data.errors[0].message))
-      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && logout()
+      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && logout(history)
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
     }

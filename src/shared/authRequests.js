@@ -44,7 +44,7 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
     } else {
       const userData = {...res.data.data.createUser, geolocation: JSON.parse(res.data.data.createUser.geolocation)}
       setUser(logInSuccess(userData))
-      timeout(userData.token_expiry)
+      timeout(userData.token_expiry, history)
       history && history.push("/")
       checkGeolocation(userData, setUser)
       process.env.NODE_ENV === 'development' && console.log(res)
@@ -129,9 +129,9 @@ export const login = (formData, history, user, setUser, setLoading) => {
     } else {
       const userData = {...res.data.data.login, geolocation: JSON.parse(res.data.data.login.geolocation)}
       setUser(logInSuccess(userData))
-      timeout(userData.token_expiry)
+      timeout(userData.token_expiry, history)
       history.push("/")
-      checkGeolocation(userData, setUser)
+      checkGeolocation(userData, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)
@@ -165,8 +165,7 @@ export const deleteAccount = (_id, history, setUser, setLoading, token) => {
       process.env.NODE_ENV === 'development' && console.log(JSON.parse(res.data.errors[0].message))
       res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && logout(history)
     } else {
-      setUser(logout())
-      history.push("/")
+      setUser(logout(history))
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)
