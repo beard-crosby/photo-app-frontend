@@ -15,18 +15,16 @@ const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
   const [ form, setForm ] = useState({
     values: {
       name: "",
-      username: "",
       email: "",
       password: "",
       passConfirm: "",
     },
     errors: {
       nameError: false,
-      usernameError: false,
       emailError: false,
       passwordError: false,
       passConfirmError: false,
-    }
+    },
   })
 
   useEffect(() => checkFormValid(form, setFormValid), [form])
@@ -48,13 +46,6 @@ const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
           type="text" 
           name="name" 
           id="name" 
-          onChange={event => updateForm(event, form, setForm)}>
-        </input>
-        <label htmlFor="username"><p>{form.errors.usernameError ? form.errors.usernameError : backendError(user, "Username")}</p></label>
-        <input 
-          type="text" 
-          name="username" 
-          id="username" 
           onChange={event => updateForm(event, form, setForm)}>
         </input>
         <label htmlFor="email"><p>{form.errors.emailError ? form.errors.emailError : backendError(user, "Email")}</p></label>

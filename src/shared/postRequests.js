@@ -22,8 +22,8 @@ export const createPost = (form, user, setUser) => {
           author {
             _id
             name
-            username
             email
+            website
             bio
             profile_img
           }

@@ -56,13 +56,7 @@ export const formatFilename = (username, filename) => {
 
 // If there is a backend error, return it. If not, return passed string.
 export const backendError = (user, passed) => {
-  if (passed === "Username") {
-    if (user.formErrors.username) {
-      return user.formErrors.username
-    } else {
-      return passed
-    }
-  } else if (passed === "Email") {
+  if (passed === "Email") {
     if (user.formErrors.email) {
       return user.formErrors.email
     } else {

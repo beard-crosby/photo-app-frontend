@@ -3,7 +3,7 @@ import './_PhotoCard.scss'
 import { MessageSquare } from "react-feather"
 import PropTypes from 'prop-types'
 
-const PhotoCard = ({ img, name, username, profileImg, comments }) => {
+const PhotoCard = ({ img, name, profileImg, comments }) => {
   const [imgClicked, setImgClicked] = useState(null)
   const [showComments, setShowComments] = useState(false)
 
@@ -30,12 +30,9 @@ const PhotoCard = ({ img, name, username, profileImg, comments }) => {
             {profileImg}
             <div className="creator-info">
               <h5>{name}</h5>
-              <div className="username-btns">
-                <p>{username}</p>
-                <div className="comments-btn" onClick={() => setShowComments(!showComments)}>
-                  <p>Comments</p>
-                  <MessageSquare/>
-                </div>
+              <div className="comments-btn" onClick={() => setShowComments(!showComments)}>
+                <p>Comments</p>
+                <MessageSquare/>
               </div>
             </div>
           </div>

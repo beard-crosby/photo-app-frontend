@@ -25,8 +25,8 @@ const Profile = ({ history }) => {
           <div className="info">
             <h2>{user.name}</h2>
             <div className="username-email">
-              <p>{user.username}</p>
               <p>{user.email}</p>
+              {user.website && <p>{user.website}</p>}
             </div>
           </div>
         </div>

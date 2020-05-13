@@ -8,7 +8,7 @@ const Wall = () => {
   const photoCardsArr = [] // Array of photoCards to be rendered.
 
   // Render posts of followed users in order of date time.
-  for (let i = 0; i <= 10; i++) { // Loop and render 10 photoCards.
+  for (let i = 0; i <= 9; i++) { // Loop and render 10 photoCards.
     let earliestDate = { created_at: moment().format() }
     if (photoCardsArr.length > 0) {
       earliestDate = photoCardsArr.slice(-1)[0] // Get the created_at of the last element in photoCardsArr.

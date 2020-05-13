@@ -81,26 +81,20 @@ $white: #ffffff;
             flex-flow: column nowrap;
             justify-content: space-evenly;
 
-            .username-btns {
-              width: 100%;
+            .comments-btn {
               display: flex;
-              justify-content: space-between;
+              align-items: center;
+  
+              svg {
+                width: 10px;
+                height: 10px;
+                color: $color-2;
+                padding-left: 3px;
+                margin-top: 1px;
+              }
 
-              .comments-btn {
-                display: flex;
-                align-items: center;
-    
-                svg {
-                  width: 10px;
-                  height: 10px;
-                  color: $color-2;
-                  padding-left: 3px;
-                  margin-top: 1px;
-                }
-
-                @media (min-width: 900px) {
-                  display: none;
-                }
+              @media (min-width: 900px) {
+                display: none;
               }
             }
           }

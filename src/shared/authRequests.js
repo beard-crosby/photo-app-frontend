@@ -7,24 +7,21 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
   axios.post('', {
     variables: {
       name: formData.name,
-      username: formData.username,
       email: formData.email,
       password: formData.password,
       passConfirm: formData.passConfirm,
-      bio: formData.bio,
-      profileImg: formData.profileImg,
     },
     query: `
-      mutation CreateUser($name: String!, $username: String!, $email: String!, $password: String!, $passConfirm: String!, $bio: String, $profileImg: String) {
-        createUser(userInput: { name: $name, username: $username, email: $email, password: $password, pass_confirm: $passConfirm, bio: $bio, profile_img: $profileImg }) {
+      mutation CreateUser($name: String!, $email: String!, $password: String!, $passConfirm: String! ) {
+        createUser(userInput: { name: $name, email: $email, password: $password, pass_confirm: $passConfirm }) {
           _id
           token
           token_expiry
           logged_in_at
           geolocation
           name
-          username
           email
+          website
           bio  
           profile_img
           dark_mode
@@ -42,6 +39,7 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
       process.env.NODE_ENV === 'development' && console.log(JSON.parse(res.data.errors[0].message))
       setUser({...user, formErrors: JSON.parse(res.data.errors[0].message)})
     } else {
+      console.log(res.data.data.createUser)
       const userData = {...res.data.data.createUser, geolocation: JSON.parse(res.data.data.createUser.geolocation)}
       setUser(logInSuccess(userData))
       timeout(userData.token_expiry, setUser)
@@ -62,20 +60,19 @@ export const login = (formData, history, user, setUser, setLoading) => {
   axios.post('', {
     variables: {
       email: formData.email,
-      username: formData.username,
       password: formData.password,
     },
     query: `
-      query Login(${formData.email ? `$email: String!` : `$username: String!`}, $password: String!) {
-        login(${formData.email ? `email: $email` : `username: $username`}, password: $password) {
+      query Login( $email: String!, $password: String!) {
+        login( email: $email, password: $password) {
           _id
           token
           token_expiry
           logged_in_at
           geolocation
           name
-          username
           email
+          website
           bio
           profile_img
           dark_mode
@@ -97,8 +94,8 @@ export const login = (formData, history, user, setUser, setLoading) => {
           following {
             _id
             name
-            username
             email
+            website
             bio
             profile_img
             posts {

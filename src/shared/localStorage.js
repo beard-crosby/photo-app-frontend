@@ -9,8 +9,8 @@ export const checkLocalStorage = () => {
     } else {
       const _id = localStorage.getItem('_id')
       const name = localStorage.getItem('name')
-      const username = localStorage.getItem('username')
       const email = localStorage.getItem('email')
+      const website = localStorage.getItem('website')
       const bio = localStorage.getItem('bio')
       const profile_img = localStorage.getItem('profile_img')
       const posts = localStorage.getItem('posts')
@@ -25,8 +25,8 @@ export const checkLocalStorage = () => {
         token: token,
         token_expiry: token_expiry,
         name: name,
-        username: username,
         email: email,
+        website: website,
         bio: bio,
         profile_img: profile_img,
         posts: JSON.parse(posts),
@@ -48,8 +48,8 @@ export const logout = () => {
   localStorage.removeItem('token_expiry')
   localStorage.removeItem('_id')
   localStorage.removeItem('name')
-  localStorage.removeItem('username')
   localStorage.removeItem('email')
+  localStorage.removeItem('website')
   localStorage.removeItem('bio')
   localStorage.removeItem('profile_img')
   localStorage.removeItem('posts')
@@ -63,8 +63,8 @@ export const logout = () => {
     token: null,
     token_expiry: null,
     name: null,
-    username: null,
     email: null,
+    website: null,
     bio: "",
     profile_img: null,
     posts: null,
@@ -85,8 +85,8 @@ export const logInSuccess = userData => {
     localStorage.setItem('token', userData.token)
     localStorage.setItem('token_expiry', new Date(new Date().getTime() + userData.token_expiry * 3600000))
     localStorage.setItem('name', userData.name)
-    localStorage.setItem('username', userData.username)
     localStorage.setItem('email', userData.email)
+    localStorage.setItem('website', userData.website)
     localStorage.setItem('bio', userData.bio)
     localStorage.setItem('profile_img', userData.profile_img)
     localStorage.setItem('posts', JSON.stringify(userData.posts))

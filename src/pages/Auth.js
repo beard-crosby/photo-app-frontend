@@ -13,14 +13,16 @@ const Auth = ({ history }) => {
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
     values: {
-      authForm: true,
       email: "",
-      username: "",
       password: "",
-    }
+    },
+    errors: {
+      emailError: false,
+      passwordError: false,
+    },
   })
 
-  useEffect(() => {checkFormValid(form, setFormValid)}, [form])
+  useEffect(() => checkFormValid(form, setFormValid), [form])
 
   const onLoginClicked = event => {
     event.preventDefault()
@@ -34,11 +36,11 @@ const Auth = ({ history }) => {
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
       </div>
       <div className="middle">
-        <label htmlFor="username_or_email"><p>{backendError(user, "Username or Email")}</p></label>
+      <label htmlFor="email"><p>{backendError(user, "Email")}</p></label>
         <input 
-          type="text" 
-          name="username_or_email" 
-          id="username_or_email" 
+          type="email" 
+          name="email" 
+          id="email" 
           onChange={event => updateForm(event, form, setForm)}>
         </input>
         <label htmlFor="password"><p>{backendError(user, "Password")}</p></label>

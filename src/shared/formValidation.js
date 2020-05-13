@@ -1,21 +1,9 @@
 export const updateForm = (event, form, setForm) => {
-  if (event.target.name === 'username_or_email') {
-    if (/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(event.target.value)) { //eslint-disable-line
-      setForm({...form, values: { ...form.values, email: event.target.value, username: "" }, errors: { ...form.errors, emailError: false }})
-    } else {
-      setForm({...form, values: { ...form.values, username: event.target.value, email: "" }, errors: { ...form.errors, usernameError: false }})
-    }
-  } else if (event.target.name === 'name') {
+  if (event.target.name === 'name') {
     if (/^[a-zA-Z\s-']{6,30}$/.test(event.target.value) || event.target.value.trim() === "") {
       setForm({...form, values: { ...form.values, name: event.target.value }, errors: { ...form.errors, nameError: false }})
     } else {
       setForm({...form, values: { ...form.values, name: event.target.value }, errors: { ...form.errors, nameError: "Your Name must only have letters, spaces, -' characters and be 6-15 characters in length." }})
-    }
-  } else if (event.target.name === 'username') {
-    if (/^(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$/.test(event.target.value) || event.target.value.trim() === "") {
-      setForm({...form, values: { ...form.values, username: event.target.value }, errors: { ...form.errors, usernameError: false }})
-    } else {
-      setForm({...form, values: { ...form.values, username: event.target.value }, errors: { ...form.errors, usernameError: "Your Username must have at least one letter, one number and be 6-15 characters in length." }})
     }
   } else if (event.target.name === 'email') {
     if (/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(event.target.value) || event.target.value.trim() === "") { //eslint-disable-line
@@ -39,19 +27,11 @@ export const updateForm = (event, form, setForm) => {
 }
 
 export const checkFormValid = (form, setFormValid) => {
-  if (form.values.authForm) {
-    if (form.values.email && form.values.password || form.values.username && form.values.password) { //eslint-disable-line
-      setFormValid(true)
-    } else {
-      setFormValid(false)
-    }
+  const checkBlanks = Object.values(form.values).find(input => input.trim() === "")
+  const checkErrors = Object.values(form.errors).find(error => error)
+  if (typeof checkBlanks === 'undefined' && typeof checkErrors === 'undefined') {
+    setFormValid(true)
   } else {
-    const checkBlanks = Object.values(form.values).find(input => input.trim() === "")
-    const checkErrors = Object.values(form.errors).find(error => error)
-    if (typeof checkBlanks === 'undefined' && typeof checkErrors === 'undefined') {
-      setFormValid(true)
-    } else {
-      setFormValid(false)
-    }
+    setFormValid(false)
   }
 }
