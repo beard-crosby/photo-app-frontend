@@ -1,3 +1,4 @@
+import { updateBio } from './authRequests'
 import { logout } from './localStorage'
 import { updateGeolocation } from './miscRequests'
 import moment from "moment"
@@ -101,14 +102,15 @@ export const postsWidth = posts => {
   return postsWidth
 }
 
-export const sendBioReqHandler = user => {
+// Send a request when the user has stopped typing.
+export const sendInputReqHandler = (user, setUser, element) => {
   let typingTimer // timer identifier
-  let bioTextarea = document.getElementById('bio-textarea')
+  let input = document.getElementById(element)
 
-  bioTextarea.addEventListener('keyup', () => {
+  input.addEventListener('keyup', () => {
     clearTimeout(typingTimer)
-    if (bioTextarea.value) {
-      typingTimer = setTimeout(() => console.log(bioTextarea.value), 5000)
+    if (input.value) {
+      typingTimer = setTimeout(() => updateBio(user, setUser, input.value), 5000)
     }
   })
 }

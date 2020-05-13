@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../App' 
 import '../scss/_profile.scss'
-import { postsWidth, sendBioReqHandler } from '../shared/utility'
+import { postsWidth, sendInputReqHandler } from '../shared/utility'
 
 const Profile = ({ history }) => {
   const { user, setUser } = useContext(UserContext)
@@ -13,7 +13,7 @@ const Profile = ({ history }) => {
     })
   }
 
-  useEffect(() => sendBioReqHandler(user),[])
+  useEffect(() => sendInputReqHandler(user, setUser, 'bio-textarea'),[])
 
   return (
     <div className="profile-wrapper">
