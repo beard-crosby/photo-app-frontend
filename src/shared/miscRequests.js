@@ -3,7 +3,6 @@ import { headers } from './utility'
 import { logout } from './localStorage'
 
 export const changeDarkMode = (user, setUser) => {
-  console.log(user)
   axios.post('', {
     variables: {
       _id: user._id
