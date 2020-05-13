@@ -105,6 +105,8 @@ export const sendInputReqHandler = (user, setUser, element) => {
     clearTimeout(typingTimer)
     if (input.value) {
       typingTimer = setTimeout(() => updateBio(user, setUser, input.value), 5000)
+    } else {
+      updateBio(user, setUser, input.value)
     }
   })
 }
