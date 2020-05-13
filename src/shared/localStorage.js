@@ -65,7 +65,7 @@ export const logout = () => {
     name: null,
     username: null,
     email: null,
-    bio: null,
+    bio: "",
     profile_img: null,
     posts: null,
     following: null,
@@ -87,8 +87,8 @@ export const logInSuccess = userData => {
     localStorage.setItem('name', userData.name)
     localStorage.setItem('username', userData.username)
     localStorage.setItem('email', userData.email)
-    userData.bio && localStorage.setItem('bio', userData.bio)
-    userData.profile_img && localStorage.setItem('profile_img', userData.profile_img)
+    localStorage.setItem('bio', userData.bio)
+    localStorage.setItem('profile_img', userData.profile_img)
     localStorage.setItem('posts', JSON.stringify(userData.posts))
     localStorage.setItem('following', JSON.stringify(userData.following))
     localStorage.setItem('dark_mode', userData.dark_mode)

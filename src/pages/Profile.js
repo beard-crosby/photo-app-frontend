@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../App' 
 import '../scss/_profile.scss'
-import { postsWidth } from '../shared/utility'
+import { postsWidth, sendBioReqHandler } from '../shared/utility'
 
 const Profile = ({ history }) => {
   const { user, setUser } = useContext(UserContext)
@@ -12,6 +12,8 @@ const Profile = ({ history }) => {
       [e.target.name]: e.target.value,
     })
   }
+
+  useEffect(() => sendBioReqHandler(user),[])
 
   return (
     <div className="profile-wrapper">
@@ -31,6 +33,7 @@ const Profile = ({ history }) => {
         <textarea 
           type="text"
           name="bio"
+          id="bio-textarea"
           placeholder="Write a biography" 
           maxLength="180"
           onChange={updateField}

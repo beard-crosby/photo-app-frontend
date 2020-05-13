@@ -100,3 +100,15 @@ export const postsWidth = posts => {
   }
   return postsWidth
 }
+
+export const sendBioReqHandler = user => {
+  let typingTimer // timer identifier
+  let bioTextarea = document.getElementById('bio-textarea')
+
+  bioTextarea.addEventListener('keyup', () => {
+    clearTimeout(typingTimer)
+    if (bioTextarea.value) {
+      typingTimer = setTimeout(() => console.log(bioTextarea.value), 5000)
+    }
+  })
+}
