@@ -6,7 +6,7 @@ import UploadBox from '../components/UI/UploadBox'
 import { createPost } from '../shared/postRequests'
 
 const Post = ({ history }) => {
-  const { user, setUser } = useContext(UserContext)
+  const { user, setUser, setLoading } = useContext(UserContext)
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
     title: "",
@@ -26,7 +26,7 @@ const Post = ({ history }) => {
 
   const onPostClicked = event => {
     event.preventDefault()
-    createPost(form, user, setUser)
+    createPost(form, user, setUser, setLoading, history)
   }
 
   const descriptionHeight = () => document.getElementById("description").style.height = '100px'
