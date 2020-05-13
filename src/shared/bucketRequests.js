@@ -19,7 +19,7 @@ export const signS3 = (file, user, setUser) => {
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
-      process.env.NODE_ENV === 'development' && console.log(JSON.parse(res.data.errors[0].message))
+      process.env.NODE_ENV === 'development' && console.log(res.data.errors[0].message)
       res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && setUser({ ...logout(), redirect: "/loggedout" })
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
