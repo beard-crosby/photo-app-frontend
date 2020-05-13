@@ -132,7 +132,8 @@ body {
           height: 25px;
           border-radius: 25px;
           background-image: url('https://photoapp118.s3.eu-west-2.amazonaws.com/placeholder');
-          background-size: contain;
+          background-size: cover;
+          background-repeat: no-repeat;
         }
 
         @media (max-width: 900px) {

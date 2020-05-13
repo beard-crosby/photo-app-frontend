@@ -20,8 +20,6 @@ $white: #ffffff;
     border-radius: 6px;
     border: 1px solid $color-1;
     background-color: $white;
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
     margin-bottom: 40px;
     overflow: hidden;
 
@@ -33,21 +31,19 @@ $white: #ffffff;
       width: 50%;
       height: 100%;
       display: flex;
+      align-items: center;
       border-right: 1px solid $color-1;
 
       .profile-picture {
-        width: 98px;
-        height: 98px;
+        width: 80px;
+        height: 80px;
         border-radius: 100px;
         background-image: url("https://photoapp118.s3.eu-west-2.amazonaws.com/placeholder");
         background-size: cover;
         background-repeat: no-repeat;
         flex-shrink: 0;
-        margin-right: 20px;
+        margin: 0 20px 0 10px;
         transition: 0.3s;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         cursor: pointer;
   
         h2 {
