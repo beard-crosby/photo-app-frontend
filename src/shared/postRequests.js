@@ -2,7 +2,7 @@ import axios from "axios"
 import { headers } from './utility'
 import { logout } from './localStorage'
 
-export const createPost = (form, user, setUser, setLoading, history) => {
+export const createPost = (form, user, setUser, setLoading) => {
   setLoading(true)
   axios.post('', {
     variables: {
@@ -31,8 +31,8 @@ export const createPost = (form, user, setUser, setLoading, history) => {
       process.env.NODE_ENV === 'development' && console.log(JSON.parse(res.data.errors[0].message))
       res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && setUser({ ...logout(), redirect: "/loggedout" })
     } else {
-      setUser({ ...user, posts: [ ...user.posts, res.data.data.createPost ]})
-      history.push("/")
+      setUser({ ...user, posts: [ ...user.posts, res.data.data.createPost ], redirect: "/" })
+      localStorage.setItem('posts', JSON.stringify([ ...user.posts, res.data.data.createPost ]))
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)
