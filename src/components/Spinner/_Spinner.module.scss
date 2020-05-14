@@ -1,7 +1,7 @@
 $background-white: #f5f5f5;
 $dm-background-white: #0A0A0A;
 
-.spinner-bg {
+.spinnerBG {
   position: absolute;
   z-index: 9000;
   width: 100%;
@@ -11,7 +11,7 @@ $dm-background-white: #0A0A0A;
   align-items: center;
   background: $background-white;
 
-  .sk-folding-cube {
+  .skFoldingCube {
     margin: 20px auto;
     width: 40px;
     height: 40px;
@@ -20,7 +20,7 @@ $dm-background-white: #0A0A0A;
             transform: rotateZ(45deg);
   }
   
-  .sk-folding-cube .sk-cube {
+  .skFoldingCube .skCube {
     float: left;
     width: 50%;
     height: 50%;
@@ -30,11 +30,11 @@ $dm-background-white: #0A0A0A;
             transform: scale(1.1); 
   }
   
-  .dark-mode:before {
+  .darkMode:before {
     background-color: #EEEEEE !important;
   }
   
-  .sk-folding-cube .sk-cube:before {
+  .skFoldingCube .skCube:before {
     content: '';
     position: absolute;
     top: 0;
@@ -48,27 +48,27 @@ $dm-background-white: #0A0A0A;
         -ms-transform-origin: 100% 100%;
             transform-origin: 100% 100%;
   }
-  .sk-folding-cube .sk-cube2 {
+  .skFoldingCube .skCube2 {
     -webkit-transform: scale(1.1) rotateZ(90deg);
             transform: scale(1.1) rotateZ(90deg);
   }
-  .sk-folding-cube .sk-cube3 {
+  .skFoldingCube .skCube3 {
     -webkit-transform: scale(1.1) rotateZ(180deg);
             transform: scale(1.1) rotateZ(180deg);
   }
-  .sk-folding-cube .sk-cube4 {
+  .skFoldingCube .skCube4 {
     -webkit-transform: scale(1.1) rotateZ(270deg);
             transform: scale(1.1) rotateZ(270deg);
   }
-  .sk-folding-cube .sk-cube2:before {
+  .skFoldingCube .skCube2:before {
     -webkit-animation-delay: 0.3s;
             animation-delay: 0.3s;
   }
-  .sk-folding-cube .sk-cube3:before {
+  .skFoldingCube .skCube3:before {
     -webkit-animation-delay: 0.6s;
             animation-delay: 0.6s; 
   }
-  .sk-folding-cube .sk-cube4:before {
+  .skFoldingCube .skCube4:before {
     -webkit-animation-delay: 0.9s;
             animation-delay: 0.9s;
   }
@@ -106,6 +106,6 @@ $dm-background-white: #0A0A0A;
   }
 }
 
-.dark-mode-bg {
+.darkModeBG {
   background: $dm-background-white;
 }

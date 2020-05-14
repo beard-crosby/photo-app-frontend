@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { UserContext } from '../App'
 import Button from '../components/UI/Button'
 import { logout } from '../shared/localStorage'
+import ProfilePicture from '../components/UI/ProfilePicture'
 
 const Settings = ({ history }) => {
   const { user, setUser } = useContext(UserContext)
@@ -13,10 +14,8 @@ const Settings = ({ history }) => {
           <h5>SETTINGS</h5>
         </div>
         <div className="middle">
-          
-            
-          <div className="buttons">
-            
+          <div className="middle-row">
+            <ProfilePicture user={user} heightWidth={100}/>
           </div>
         </div>
         <div className="bottom">

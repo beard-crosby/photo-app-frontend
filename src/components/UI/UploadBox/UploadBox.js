@@ -1,13 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react'
-import { UserContext } from '../../../App'
-import './_UploadBox.scss'
+import React, { useState, useEffect } from 'react'
+import styles from './_UploadBox.module.scss'
 import { Upload } from 'react-feather'
-import {useDropzone} from 'react-dropzone';
+import { useDropzone } from 'react-dropzone'
 import { signS3 } from '../../../shared/bucketRequests'
 import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-const UploadBox = history => {
-  const { user, setUser } = useContext(UserContext)
+const UploadBox = ({ user, setUser, history }) => {
   const [ thumb, setThumb ] = useState("")
 
   // Determine if the window has drag and drop capabilities.
@@ -58,10 +57,11 @@ const UploadBox = history => {
   }
 
   return (
-    <div {...getRootProps({className: `upload-box 
-      ${canDragDrop && `can-drag-drop`} 
-      ${isDragActive && `drag-active`} 
-      ${thumb !== "" && `thumb`}`})}>
+    <div {...getRootProps({className: `
+      ${styles.uploadBox} 
+      ${canDragDrop && styles.canDragDrop} 
+      ${isDragActive && styles.dragActive} 
+      ${thumb !== "" && styles.thumb}`})}>
       <input {...getInputProps()}/>
       {thumb ? 
         <img alt="Thumbnail" src={thumb}/> :
@@ -71,6 +71,11 @@ const UploadBox = history => {
         </>}
     </div>
   )
+}
+
+UploadBox.propTypes = {
+  user: PropTypes.object, // User Object in context.
+  setUser: PropTypes.func, // setUser function in context.
 }
 
 export default withRouter(UploadBox)

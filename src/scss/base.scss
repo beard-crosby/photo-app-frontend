@@ -54,7 +54,7 @@ body {
     min-height: 100vh;
 
     main {
-      width: 900px;
+      width: 700px;
       flex-grow: 1;
       display: flex;
       flex-flow: column nowrap;
@@ -131,7 +131,7 @@ body {
           width: 25px;
           height: 25px;
           border-radius: 25px;
-          background-image: url('https://photoapp118.s3.eu-west-2.amazonaws.com/placeholder');
+          background-image: url('../static/defaults/placeholder.png');
           background-size: cover;
           background-repeat: no-repeat;
           background-position: center;

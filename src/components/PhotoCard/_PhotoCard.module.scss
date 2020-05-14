@@ -3,7 +3,7 @@ $color-2: #525252;
 $black: #000000;
 $white: #ffffff;
 
-.photo-card-wrapper {
+.photoCardWrapper {
   width: 700px;
   min-height: 150px;
   display: flex;
@@ -25,7 +25,7 @@ $white: #ffffff;
     color: $color-2;
   }
 
-  .img-wrapper {
+  .imgWrapper {
     display: flex;
     width: 75%;
     
@@ -46,7 +46,7 @@ $white: #ffffff;
     justify-content: space-between;
     position: relative;
 
-    .sidebar-wrapper {
+    .sidebarWrapper {
       position: absolute;
       top: 0;
       left: 0;
@@ -63,25 +63,31 @@ $white: #ffffff;
           align-items: center;
           border-bottom: 1px solid $color-1;
           box-sizing: border-box;
-    
-          img {
+          
+          .profilePictureWrapper {
             width: 40px;
             height: 40px;
             border-radius: 40px;
-            background-image: url('../../static/defaults/placeholder.png');
-            background-size: contain;
-            margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
             flex-shrink: 0;
+            margin-right: 10px;
+
+            img {
+              height: 40px;
+            }
           }
     
-          .creator-info {
+          .creatorInfo {
             height: 100%;
             width: 100%;
             display: flex;
             flex-flow: column nowrap;
             justify-content: space-evenly;
 
-            .comments-btn {
+            .commentsBtn {
               display: flex;
               align-items: center;
   
@@ -166,8 +172,8 @@ $white: #ffffff;
   }
 }
 
-.img-clicked {
-  .img-wrapper {
+.imgClicked {
+  .imgWrapper {
     width: 100vw;
     height: 100vh;
     background: $black;

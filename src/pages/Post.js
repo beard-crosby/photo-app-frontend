@@ -52,7 +52,7 @@ const Post = ({ history }) => {
           id="description"
           onMouseDown={() => descriptionHeight()}
           onChange={updateField}/>
-        <UploadBox/>
+        <UploadBox user={user} setUser={setUser}/>
       </div>
       <div className="bottom">
         <p>Terms & Conditions</p>

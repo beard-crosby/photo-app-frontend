@@ -2,8 +2,9 @@ import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../App' 
 import '../scss/_profile.scss'
 import { postsWidth, sendInputReqHandler } from '../shared/utility'
+import ProfilePicture from '../components/UI/ProfilePicture'
 
-const Profile = ({ history }) => {
+const Profile = () => {
   const { user, setUser } = useContext(UserContext)
 
   const updateField = e => {
@@ -13,15 +14,13 @@ const Profile = ({ history }) => {
     })
   }
 
-  useEffect(() => sendInputReqHandler(user, setUser, 'bio-textarea'),[])
+  useEffect(() => sendInputReqHandler(user, setUser, 'bio-textarea'),[]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="profile-wrapper">
       <div className="profile">
         <div className="profile-col">
-          <div className="profile-picture" onClick={() => history.push("/profileimg")}>
-            <h2>Change</h2>
-          </div>
+          <ProfilePicture user={user} style={{ margin: "0 20px 0 10px" }}/>
           <div className="info">
             <h2>{user.name}</h2>
             <div className="username-email">

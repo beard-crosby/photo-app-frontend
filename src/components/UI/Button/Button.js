@@ -1,5 +1,5 @@
 import React from 'react'
-import './_button.scss'
+import styles from './_button.module.scss'
 import { Upload, Check, LogIn } from 'react-feather'
 import PropTypes from 'prop-types'
 
@@ -7,7 +7,7 @@ const Button = ({ text, style, submit, disabled, onClick, uploadSVG, checkSVG, l
   <button 
     disabled={disabled}
     type={submit ? "submit" : "button"} 
-    className={`button ${hideMobile && `hide-mobile`} ${hideBorder && `hide-border`}`} 
+    className={`${styles.button} ${hideMobile && styles.hideMobile} ${hideBorder && styles.hideBorder}`} 
     style={style} 
     onClick={onClick}>
       {appleIMG && <img alt="Apple" src={require("../../../static/logo/apple.png")}/>}

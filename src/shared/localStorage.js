@@ -12,7 +12,7 @@ export const checkLocalStorage = () => {
       const email = localStorage.getItem('email')
       const website = localStorage.getItem('website')
       const bio = localStorage.getItem('bio')
-      const profile_img = localStorage.getItem('profile_img')
+      const profile_picture = localStorage.getItem('profile_picture')
       const posts = localStorage.getItem('posts')
       const following = localStorage.getItem('following')
       const logged_in_at = localStorage.getItem('logged_in_at')
@@ -28,7 +28,7 @@ export const checkLocalStorage = () => {
         email: email,
         website: website,
         bio: bio,
-        profile_img: profile_img,
+        profile_picture: profile_picture,
         posts: JSON.parse(posts),
         following: JSON.parse(following),
         logged_in_at: logged_in_at,
@@ -51,7 +51,7 @@ export const logout = () => {
   localStorage.removeItem('email')
   localStorage.removeItem('website')
   localStorage.removeItem('bio')
-  localStorage.removeItem('profile_img')
+  localStorage.removeItem('profile_picture')
   localStorage.removeItem('posts')
   localStorage.removeItem('following')
   localStorage.removeItem('logged_in_at')
@@ -64,9 +64,9 @@ export const logout = () => {
     token_expiry: null,
     name: null,
     email: null,
-    website: null,
+    website: "",
     bio: "",
-    profile_img: null,
+    profile_picture: "",
     posts: null,
     following: null,
     settings: { dark_mode: false },
@@ -88,7 +88,7 @@ export const logInSuccess = userData => {
     localStorage.setItem('email', userData.email)
     localStorage.setItem('website', userData.website)
     localStorage.setItem('bio', userData.bio)
-    localStorage.setItem('profile_img', userData.profile_img)
+    localStorage.setItem('profile_picture', userData.profile_picture)
     localStorage.setItem('posts', JSON.stringify(userData.posts))
     localStorage.setItem('following', JSON.stringify(userData.following))
     localStorage.setItem('logged_in_at', userData.logged_in_at)

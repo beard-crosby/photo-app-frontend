@@ -3,7 +3,7 @@ import './scss/base.scss'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Router from './Router'
-import Spinner from './components/UI/Spinner'
+import Spinner from './components/Spinner'
 import { checkLocalStorage } from './shared/localStorage'
 
 const UserContext = React.createContext()
@@ -19,7 +19,7 @@ const App = () => {
     <UserContext.Provider value={{ loading, setLoading, user, setUser }}>
       <Nav/>
       <main>
-        {loading && <Spinner/>}
+        {loading && <Spinner user={user}/>}
         <Router/>
       </main>
       <Footer/>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import './_PhotoCard.scss'
+import styles from './_PhotoCard.module.scss'
 import { MessageSquare } from "react-feather"
 import PropTypes from 'prop-types'
 
-const PhotoCard = ({ img, name, profileImg, comments }) => {
+const PhotoCard = ({ img, user, comments }) => {
   const [imgClicked, setImgClicked] = useState(null)
   const [showComments, setShowComments] = useState(false)
 
@@ -11,35 +11,37 @@ const PhotoCard = ({ img, name, profileImg, comments }) => {
 
   const imgClickedHandler = () => {
     if (imgClicked === null) {
-      setImgClicked("img-clicked")
+      setImgClicked(styles.imgClicked)
       document.body.style.overflow = "hidden"
     } else {
       setImgClicked(null)
       document.body.style = "none"
     }
   }
-
+  
   return (
-    <div className={`photo-card-wrapper ${imgClicked}`}>
-      <div className="img-wrapper" onClick={() => imgClickedHandler()}>
+    <div className={`${styles.photoCardWrapper} ${imgClicked}`}>
+      <div className={styles.imgWrapper} onClick={() => imgClickedHandler()}>
         {img}
       </div>
-      <div className="sidebar">
-        <div className="sidebar-wrapper">
-          <div className="creator">
-            {profileImg}
-            <div className="creator-info">
-              <h5>{name}</h5>
-              <div className="comments-btn" onClick={() => setShowComments(!showComments)}>
+      <div className={styles.sidebar}>
+        <div className={styles.sidebarWrapper}>
+          <div className={styles.creator}>
+            <div className={styles.profilePictureWrapper}>
+              <img alt="Profile" src={user.profile_picture ? user.profile_picture : require('../../static/defaults/placeholder.png')}/>
+            </div>
+            <div className={styles.creatorInfo}>
+              <h5>{user.name}</h5>
+              <div className={styles.commentsBtn} onClick={() => setShowComments(!showComments)}>
                 <p>Comments</p>
                 <MessageSquare/>
               </div>
             </div>
           </div>
-          {comments.length > 0 && showComments && <div className="comments">
+          {comments.length > 0 && showComments && <div className={styles.comments}>
             {comments.map((comment, i) => (
-              <div className="comment" key={i}>
-                <img alt="Profile" src={require(`../../static/defaults/${comment.profileImg}`)}/>
+              <div className={styles.comment} key={i}>
+                <img alt="Profile" src={require(`../../static/defaults/${comment.profile_picture}`)}/>
                 <p>{comment.comment}</p>
               </div>
             ))}
@@ -53,10 +55,8 @@ const PhotoCard = ({ img, name, profileImg, comments }) => {
 
 PhotoCard.propTypes = {
   img: PropTypes.element, // The image. Height of the image decides the height of the component thus preserving aspect ratio.
-  name: PropTypes.string, // Name of the user that uploaded the photo.
-  username: PropTypes.string, // Username of the user that uploaded the photo.
-  profileImg: PropTypes.element, // Image of the user that uploaded the photo.
-  comments: PropTypes.array // An array of comments
+  user: PropTypes.object, // Author of the post.
+  comments: PropTypes.array // An array of the comments on this post.
 }
 
 export default PhotoCard
