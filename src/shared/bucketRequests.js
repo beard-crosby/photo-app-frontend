@@ -19,14 +19,14 @@ export const signS3 = (file, user, setUser) => {
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
-      process.env.NODE_ENV === 'development' && console.log(res.data.errors[0].message)
-      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && setUser({ ...logout(), redirect: "/loggedout" })
+      process.env.NODE_ENV === 'development' && console.log(`SignS3 Error: ${res.data.errors[0].message}`)
+      res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
       uploadToS3(res.data.data.signS3, file, user, setUser)
     }
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(err)
+    process.env.NODE_ENV === 'development' && console.log(`SignS3 Error: ${err}`)
   })
 }
 
@@ -35,6 +35,6 @@ const uploadToS3 = (signS3, file, user, setUser) => {
     process.env.NODE_ENV === 'development' && console.log(res)
     setUser({ ...user, file: { url: signS3.url, uploaded: true }})
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(err)
+    process.env.NODE_ENV === 'development' && console.log(`UploadToS3 Error: ${err}`)
   })
 }

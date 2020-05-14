@@ -36,8 +36,8 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
     `
   }).then(res => {
     if (res.data.errors) {
-      process.env.NODE_ENV === 'development' && console.log(JSON.parse(res.data.errors[0].message))
-      setUser({...user, formErrors: JSON.parse(res.data.errors[0].message)})
+      setUser({...user, formErrors: res.data.errors[0].message})
+      process.env.NODE_ENV === 'development' && console.log(`CreateUser Error: ${res.data.errors[0].message}`)
     } else {
       const userData = {...res.data.data.createUser, geolocation: JSON.parse(res.data.data.createUser.geolocation), settings: JSON.parse(res.data.data.createUser.settings)}
       setUser(logInSuccess(userData))
@@ -48,8 +48,8 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
     }
     setLoading(false)
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(err.response)
     setUser({...user, formErrors: err.response.data.errors[0].message})
+    process.env.NODE_ENV === 'development' && console.log(`CreateUser Error: ${err}`)
     setLoading(false)
   })
 }
@@ -120,8 +120,8 @@ export const login = (formData, history, user, setUser, setLoading) => {
     `
   }).then(res => {
     if (res.data.errors) {
-      process.env.NODE_ENV === 'development' && console.log(res.data.errors[0].message)
-      setUser({...user, formErrors: JSON.parse(res.data.errors[0].message)})
+      setUser({...user, formErrors: res.data.errors[0].message})
+      process.env.NODE_ENV === 'development' && console.log(`Login Error: ${res.data.errors[0].message}`)
     } else {
       const userData = {...res.data.data.login, geolocation: JSON.parse(res.data.data.login.geolocation), settings: JSON.parse(res.data.data.login.settings)}
       setUser(logInSuccess(userData))
@@ -132,8 +132,8 @@ export const login = (formData, history, user, setUser, setLoading) => {
     }
     setLoading(false)
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(err.response)
     setUser({...user, formErrors: err.response.data.errors[0].message})
+    process.env.NODE_ENV === 'development' && console.log(`Login Error: ${err}`)
     setLoading(false)
   })
 }
@@ -158,15 +158,15 @@ export const deleteAccount = (user, setUser, setLoading) => {
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
-      process.env.NODE_ENV === 'development' && console.log(res.data.errors[0].message)
-      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && setUser({ ...logout(), redirect: "/loggedout" })
+      process.env.NODE_ENV === 'development' && console.log(`DeleteAccount Error: ${res.data.errors[0].message}`)
+      res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
     } else {
       setUser({ ...logout(), redirect: "/loggedout" })
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(err)
+    process.env.NODE_ENV === 'development' && console.log(`DeleteAccount Error: ${err}`)
     setLoading(false)
   })
 }
@@ -187,12 +187,12 @@ export const updateBio = (user, setUser, bioTextarea) => {
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
-      process.env.NODE_ENV === 'development' && console.log(res.data.errors[0].message)
-      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && setUser({ ...logout(), redirect: "/loggedout" })
+      process.env.NODE_ENV === 'development' && console.log(`UpdateBio Error: ${res.data.errors[0].message}`)
+      res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(err)
+    process.env.NODE_ENV === 'development' && console.log(`UpdateBio Error: ${err}`)
   })
 }

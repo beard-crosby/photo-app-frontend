@@ -62,24 +62,16 @@ export const formatFilename = (username, filename) => {
 // If there is a backend error, return it. If not, return passed string.
 export const backendError = (user, passed) => {
   if (passed === "Email") {
-    if (user.formErrors.email) {
-      return user.formErrors.email
-    } else {
-      return passed
+    switch (user.formErrors) {
+      case "An Account by that Email already exists!": return user.formErrors
+      case "An Account by that Email was not found!": return user.formErrors
+      default: return passed
     }
   } else if (passed === "Password") {
-    if (user.formErrors.password) {
-      return user.formErrors.password
-    } else {
-      return passed
-    }
-  } else if (passed === "Username or Email") {
-    if (user.formErrors.email) {
-      return user.formErrors.email
-    } else if (user.formErrors.username) {
-      return user.formErrors.username
-    } else {
-      return passed
+    switch (user.formErrors) {
+      case "Incorrect Password": return user.formErrors
+      case "Passwords do not match.": return user.formErrors
+      default: return passed
     }
   }
 }

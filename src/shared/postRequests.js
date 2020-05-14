@@ -28,8 +28,8 @@ export const createPost = (form, user, setUser, setLoading, history) => {
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
-      process.env.NODE_ENV === 'development' && console.log(res.data.errors[0].message)
-      res.data.errors[0].message === '{"auth":"Not Authenticated!"}' && setUser({ ...logout(), redirect: "/loggedout" })
+      process.env.NODE_ENV === 'development' && console.log(`CreatePost Error: ${res.data.errors[0].message}`)
+      res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
     } else {
       setUser({ ...user, posts: [ ...user.posts, res.data.data.createPost ] })
       localStorage.setItem('posts', JSON.stringify([ ...user.posts, res.data.data.createPost ]))
@@ -38,7 +38,7 @@ export const createPost = (form, user, setUser, setLoading, history) => {
     }
     setLoading(false)
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(err)
+    process.env.NODE_ENV === 'development' && console.log(`CreatePost Error: ${err}`)
     setLoading(false)
   })
 }
