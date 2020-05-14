@@ -33,8 +33,8 @@ const Profile = () => {
           type="text"
           name="bio"
           id="bio-textarea"
-          placeholder="Write a biography" 
-          maxLength="180"
+          placeholder="Write a short biography" 
+          maxLength="150"
           onChange={updateField}
           value={user.bio}/>
       </div>

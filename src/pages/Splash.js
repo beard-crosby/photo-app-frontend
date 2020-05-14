@@ -8,10 +8,6 @@ const Splash = () =>
     <div className="app-and-signup">
       <div className="app">
         <img alt="iPhone 11" src={require("../static/misc/iphone-template.png")}/>
-        <div className="app-btn-wrapper">
-          <a href="https://www.apple.com/uk/ios/app-store/"><Button appleIMG text="App Store"/></a>
-          <a href="https://play.google.com/store/apps?hl=en"><Button googleIMG text="Google Play"/></a>
-        </div>
       </div>
       <div className="signup">
         <Create 
