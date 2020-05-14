@@ -3,7 +3,7 @@ import { UserContext } from '../../App'
 import { NavLink, Link } from 'react-router-dom'
 import { Moon, Sun, Upload } from 'react-feather'
 import { withRouter } from 'react-router-dom'
-import { changeDarkMode } from '../../shared/miscRequests'
+import { switchDarkMode } from '../../shared/utility'
 
 const Nav = ({ history }) => {
   const { user, setUser } = useContext(UserContext)
@@ -13,17 +13,15 @@ const Nav = ({ history }) => {
     setUser({ ...user, redirect: false })
   }, [user.redirect]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const darkModeClickedHandler = () => {
-    setUser({...user, dark_mode: !user.dark_mode}) // set State
-    changeDarkMode(user, setUser) // request
-  }
+  // On load, check user.settings.dark_mode.
+  switchDarkMode(user, setUser, true)
 
   return (
     <nav>
       <div className="nav-top">
         <Link to="/"><h1>PHOTO APP</h1></Link>
         <div className="nav-top-right">
-          {user.dark_mode ? <Sun onClick={() => darkModeClickedHandler()}/> : <Moon onClick={() => darkModeClickedHandler()}/>}
+          {user.settings.dark_mode ? <Sun onClick={() => switchDarkMode(user, setUser)}/> : <Moon onClick={() => switchDarkMode(user, setUser)}/>}
           {user.token ? <Link to="/post"><Upload/></Link> : <Link to="/auth"><p>LOGIN</p></Link>}
           {user.token && <Link to="/profile"><div className="profile-picture"/></Link>}
         </div>

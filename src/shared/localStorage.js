@@ -15,9 +15,9 @@ export const checkLocalStorage = () => {
       const profile_img = localStorage.getItem('profile_img')
       const posts = localStorage.getItem('posts')
       const following = localStorage.getItem('following')
-      const dark_mode = localStorage.getItem('dark_mode')
       const logged_in_at = localStorage.getItem('logged_in_at')
       const geolocation = localStorage.getItem('geolocation')
+      const settings = localStorage.getItem('settings')
 
       const userData = {
         localStorage: true,
@@ -31,9 +31,9 @@ export const checkLocalStorage = () => {
         profile_img: profile_img,
         posts: JSON.parse(posts),
         following: JSON.parse(following),
-        dark_mode: JSON.parse(dark_mode.toLowerCase()),
         logged_in_at: logged_in_at,
         geolocation: JSON.parse(geolocation),
+        settings: JSON.parse(settings),
         formErrors: {},
         redirect: false,
       }
@@ -54,9 +54,9 @@ export const logout = () => {
   localStorage.removeItem('profile_img')
   localStorage.removeItem('posts')
   localStorage.removeItem('following')
-  localStorage.removeItem('dark_mode')
   localStorage.removeItem('logged_in_at')
   localStorage.removeItem('geolocation')
+  localStorage.removeItem('settings')
 
   const userData = {
     _id: null,
@@ -69,7 +69,7 @@ export const logout = () => {
     profile_img: null,
     posts: null,
     following: null,
-    dark_mode: false,
+    settings: { dark_mode: false },
     logged_in_at: null,
     geolocation: null,
     formErrors: {},
@@ -91,8 +91,8 @@ export const logInSuccess = userData => {
     localStorage.setItem('profile_img', userData.profile_img)
     localStorage.setItem('posts', JSON.stringify(userData.posts))
     localStorage.setItem('following', JSON.stringify(userData.following))
-    localStorage.setItem('dark_mode', userData.dark_mode)
     localStorage.setItem('logged_in_at', userData.logged_in_at)
+    localStorage.setItem('settings', JSON.stringify(userData.settings))
   }
 
   return {...userData, formErrors: {}, redirect: false}

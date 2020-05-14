@@ -24,7 +24,7 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
           website
           bio  
           profile_img
-          dark_mode
+          settings
           posts {
             _id
           }
@@ -39,8 +39,7 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
       process.env.NODE_ENV === 'development' && console.log(JSON.parse(res.data.errors[0].message))
       setUser({...user, formErrors: JSON.parse(res.data.errors[0].message)})
     } else {
-      console.log(res.data.data.createUser)
-      const userData = {...res.data.data.createUser, geolocation: JSON.parse(res.data.data.createUser.geolocation)}
+      const userData = {...res.data.data.createUser, geolocation: JSON.parse(res.data.data.createUser.geolocation), settings: JSON.parse(res.data.data.createUser.settings)}
       setUser(logInSuccess(userData))
       timeout(userData.token_expiry, setUser)
       history.push("/")
@@ -50,7 +49,7 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
     setLoading(false)
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(err.response)
-    setUser({...user, formErrors: JSON.parse(err.response.data.errors[0].message)})
+    setUser({...user, formErrors: err.response.data.errors[0].message})
     setLoading(false)
   })
 }
@@ -75,7 +74,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
           website
           bio
           profile_img
-          dark_mode
+          settings
           posts {
             _id
             img
@@ -124,7 +123,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
       process.env.NODE_ENV === 'development' && console.log(res.data.errors[0].message)
       setUser({...user, formErrors: JSON.parse(res.data.errors[0].message)})
     } else {
-      const userData = {...res.data.data.login, geolocation: JSON.parse(res.data.data.login.geolocation)}
+      const userData = {...res.data.data.login, geolocation: JSON.parse(res.data.data.login.geolocation), settings: JSON.parse(res.data.data.login.settings)}
       setUser(logInSuccess(userData))
       timeout(userData.token_expiry, setUser)
       history.push("/")
@@ -134,7 +133,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
     setLoading(false)
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(err.response)
-    setUser({...user, formErrors: JSON.parse(err.response.data.errors[0].message)})
+    setUser({...user, formErrors: err.response.data.errors[0].message})
     setLoading(false)
   })
 }

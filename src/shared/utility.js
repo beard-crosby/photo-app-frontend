@@ -1,17 +1,22 @@
 import { updateBio } from './authRequests'
 import { logout } from './localStorage'
-import { updateGeolocation } from './miscRequests'
+import { updateDarkMode, updateGeolocation } from './miscRequests'
 import moment from "moment"
 
-// If user.dark_mode = true, add 'dark-mode' class to body and update localStorage. 
+// If user.settings.dark_mode = true, add 'dark-mode' class to body and update localStorage. 
 // Else remove it. 'dark-mode' scss class is in base.scss. 
-export const switchDarkMode = user => {
-  if (user.dark_mode) {
-    document.body.classList.add('dark-mode')
-    localStorage.setItem("dark_mode", true)
+export const switchDarkMode = (user, setUser, Onload) => {
+  if (Onload) {
+    if (user.settings.dark_mode) {
+      document.body.classList.add('dark-mode')
+      localStorage.setItem("settings", JSON.stringify({ ...user.settings, dark_mode: true }))
+    } else {
+      document.body.classList.remove('dark-mode')
+      localStorage.setItem("settings", JSON.stringify({ ...user.settings, dark_mode: false }))
+    }
   } else {
-    document.body.classList.remove('dark-mode')
-    localStorage.setItem("dark_mode", false)
+    setUser({ ...user, settings: { ...user.settings, dark_mode: !user.settings.dark_mode} })
+    updateDarkMode(user, setUser) // request
   }
 }
 

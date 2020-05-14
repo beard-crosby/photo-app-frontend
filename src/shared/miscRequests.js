@@ -2,7 +2,7 @@ import axios from 'axios'
 import { headers } from './utility'
 import { logout } from './localStorage'
 
-export const changeDarkMode = (user, setUser) => {
+export const updateDarkMode = (user, setUser) => {
   axios.post('', {
     variables: {
       _id: user._id
@@ -10,7 +10,7 @@ export const changeDarkMode = (user, setUser) => {
     query: `
       mutation SetDarkMode($_id: ID!) {
         setDarkMode(_id: $_id) {
-          dark_mode
+          settings
         }
       }
     `
