@@ -8,8 +8,22 @@ const Settings = ({ history }) => {
 
   return (
     <>
-      <Button text="Logout" onClick={() => setUser({ ...logout(), redirect: "/auth" })} darkMode={user.dark_mode}/>
-      <Button text="Delete Account" onClick={() => history.push('/deleteuser')} darkMode={user.dark_mode} style={{ marginTop: 10 }}/>
+      <div className="model" style={{ width: 500 }}>
+        <div className="top">
+          <h5>SETTINGS</h5>
+        </div>
+        <div className="middle">
+          
+            
+          <div className="buttons">
+            
+          </div>
+        </div>
+        <div className="bottom">
+          <Button text="Logout" onClick={() => setUser({ ...logout(), redirect: "/auth" })}/>
+          <Button text="Delete Account" onClick={() => history.push('/deleteuser')}/>
+        </div>
+      </div>
     </>
   )
 }

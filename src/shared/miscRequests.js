@@ -2,27 +2,28 @@ import axios from 'axios'
 import { headers } from './utility'
 import { logout } from './localStorage'
 
-export const updateDarkMode = (user, setUser) => {
+export const updateSettings = (user, setUser) => {
   axios.post('', {
     variables: {
-      _id: user._id
+      _id: user._id,
+      settings: JSON.stringify(user.settings),
     },
     query: `
-      mutation SetDarkMode($_id: ID!) {
-        setDarkMode(_id: $_id) {
+      mutation UpdateSettings($_id: ID!, $settings: String!) {
+        updateSettings(_id: $_id, settings: $settings) {
           settings
         }
       }
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
-      process.env.NODE_ENV === 'development' && console.log(`UpdateDarkMode Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(`UpdateSettings Error: ${res.data.errors[0].message}`)
       res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(`UpdateDarkMode Error: ${err}`)
+    process.env.NODE_ENV === 'development' && console.log(`UpdateSettings Error: ${err}`)
   })
 }
 
