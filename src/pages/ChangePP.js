@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { UserContext } from '../App'
 import '../scss/_model.scss'
 import Button from '../components/UI/Button'
@@ -7,11 +7,16 @@ import { updatePP } from '../shared/authRequests'
 
 const ChangePP = ({ history }) => {
   const { user, setUser, setLoading } = useContext(UserContext)
+  const [ formValid, setFormValid ] = useState(false)
 
   const onChangePPClicked = event => {
     event.preventDefault()
     updatePP(user, setUser, history, setLoading)
   }
+
+  useEffect(() => { 
+    user.file.uploaded && setFormValid(true)
+  }, [user])
 
   return (
     <form className="model" onSubmit={event => onChangePPClicked(event)} style={{ width: 500 }}>
@@ -24,7 +29,7 @@ const ChangePP = ({ history }) => {
       </div>
       <div className="bottom">
         <p>Terms & Conditions</p>
-        <Button submit text="Change Profile Picture"/>
+        <Button submit disabled={!formValid} text="Change Profile Picture"/>
       </div>
     </form>
   )

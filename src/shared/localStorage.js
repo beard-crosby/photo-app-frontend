@@ -35,6 +35,7 @@ export const checkLocalStorage = () => {
         geolocation: JSON.parse(geolocation),
         settings: JSON.parse(settings),
         formErrors: {},
+        file: { uploaded: false },
         redirect: false,
       }
 
@@ -73,6 +74,7 @@ export const logout = () => {
     logged_in_at: null,
     geolocation: null,
     formErrors: {},
+    file: { uploaded: false },
     redirect: false,
   }
 
