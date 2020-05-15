@@ -73,19 +73,3 @@ export const backendError = (user, passed) => {
     }
   }
 }
-
-// Change width of posts div in profile page based on how many posts a user has.
-export const postsWidth = posts => {
-  let postsWidth = "700px"
-  switch (posts.length) {
-    case 1: postsWidth = "100px"; break
-    case 2: postsWidth = "200px"; break
-    case 3: postsWidth = "300px"; break
-    case 4: postsWidth = "400px"; break
-    case 5: postsWidth = "500px"; break
-    case 6: postsWidth = "600px"; break
-    case 7: postsWidth = "700px"; break
-    default: postsWidth = "700px";
-  }
-  return postsWidth
-}

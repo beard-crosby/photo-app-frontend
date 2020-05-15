@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../App' 
 import '../scss/_profile.scss'
-import { postsWidth } from '../shared/utility'
 import ProfileInfo from '../components/ProfileInfo'
 import ProfilePicture from '../components/UI/ProfilePicture'
 
@@ -25,7 +24,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div className={`posts ${user.posts.length === 0 && `no-posts`}`} style={{ width: postsWidth(user.posts) }}>
+      <div className={`posts ${user.posts.length === 0 && `no-posts`}`}>
         {user.posts.length === 0 ? <h2>You have no Posts!</h2> :
           user.posts.map(post => 
             <div key={post.img} className="img-wrapper">

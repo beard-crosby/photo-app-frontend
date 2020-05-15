@@ -23,10 +23,7 @@ $white: #ffffff;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  border-radius: 6px;
   overflow: hidden;
-  border: 1px solid $color-1;
-  background-color: $white;
   box-sizing: border-box;
 
   .img-wrapper {
@@ -37,6 +34,8 @@ $white: #ffffff;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    margin: 0 10px 10px 0;
+    border-radius: 6px;
 
     img {
       height: 100%;
