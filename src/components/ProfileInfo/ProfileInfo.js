@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 const ProfileInfo = ({ user, style }) => 
   <div className={styles.profile} style={style}>
-    <ProfilePicture user={user} style={{ margin: "0 20px 0 10px" }}/>
+    <ProfilePicture user={user} style={{ margin: "0 20px 0 0" }}/>
     <div className={styles.ProfileInfo}>
       <h2>{user.name}</h2>
       <p>{user.email}</p>
