@@ -1,4 +1,3 @@
-import { updateBio } from './authRequests'
 import { logout } from './localStorage'
 import { updateSettings, updateGeolocation } from './miscRequests'
 import moment from "moment"
@@ -89,19 +88,4 @@ export const postsWidth = posts => {
     default: postsWidth = "700px";
   }
   return postsWidth
-}
-
-// Send a request when the user has stopped typing.
-export const sendInputReqHandler = (user, setUser, element) => {
-  let typingTimer // timer identifier
-  let input = document.getElementById(element)
-
-  input.addEventListener('keyup', () => {
-    clearTimeout(typingTimer)
-    if (input.value) {
-      typingTimer = setTimeout(() => updateBio(user, setUser, input.value), 5000)
-    } else {
-      updateBio(user, setUser, input.value)
-    }
-  })
 }

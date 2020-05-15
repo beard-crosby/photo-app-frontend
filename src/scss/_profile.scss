@@ -3,72 +3,48 @@ $color-2: #525252;
 $black: #000000;
 $white: #ffffff;
 
-.profile-wrapper {
-  width: 100%;
+.following {
+  width: 50%;
+  height: 300px;
   display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  flex-grow: 1;
+  flex-wrap: wrap;
+}
 
-  .profile-section {
-    width: 100%;
+.bio {
+  width: 50%;
+  height: 300px;
+  background-color: darkred;
+}
+
+.posts {
+  width: 100%;
+  min-height: 100px;
+  max-height: 600px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid $color-1;
+  background-color: $white;
+  box-sizing: border-box;
+
+  .img-wrapper {
+    width: 100px;
     height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    border-radius: 6px;
-    border: 1px solid $color-1;
-    background-color: $white;
-    margin-bottom: 40px;
     overflow: hidden;
-
-    p {
-      color: $color-2;
-    }
-
-    textarea {
-      width: 50%;
-      height: 100%;
-      border: none;
-      padding: 10px;
-      box-sizing: border-box;
-      resize: none;
-      color: $color-2;
-      border-left: 1px solid $color-1;
-    }
-  }
-  
-  .posts {
-    width: 100%;
-    min-height: 100px;
-    max-height: 600px;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    border-radius: 6px;
-    overflow: hidden;
-    border: 1px solid $color-1;
-    background-color: $white;
-    box-sizing: border-box;
-  
-    .img-wrapper {
-      width: 100px;
-      height: 100px;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-
-      img {
-        height: 100%;
-      }
-    }
-  }
-
-  .no-posts {
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+
+    img {
+      height: 100%;
+    }
   }
+}
+
+.no-posts {
+  justify-content: center;
+  align-items: center;
 }

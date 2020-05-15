@@ -8,8 +8,8 @@ const ProfileInfo = ({ user, style }) =>
     <ProfilePicture user={user} style={{ margin: "0 20px 0 0" }}/>
     <div className={styles.ProfileInfo}>
       <h2>{user.name}</h2>
-      <p>{user.email}</p>
-      {user.website && <p>{user.website}</p>}
+      {user.settings.display_email && <p>{user.email}</p>}
+      {user.website && user.settings.display_website && <p>{user.website}</p>}
     </div>
   </div>
 
