@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { UserContext } from '../App'
 import Button from '../components/UI/Button'
 import { logout } from '../shared/localStorage'
-import ProfilePicture from '../components/UI/ProfilePicture'
+import ProfileInfo from '../components/ProfileInfo'
 
 const Settings = ({ history }) => {
   const { user, setUser } = useContext(UserContext)
@@ -14,9 +14,7 @@ const Settings = ({ history }) => {
           <h5>SETTINGS</h5>
         </div>
         <div className="middle">
-          <div className="middle-row">
-            <ProfilePicture user={user} heightWidth={100}/>
-          </div>
+          <ProfileInfo user={user}/>
         </div>
         <div className="bottom">
           <Button text="Logout" onClick={() => setUser({ ...logout(), redirect: "/auth" })}/>

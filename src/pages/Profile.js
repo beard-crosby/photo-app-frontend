@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../App' 
 import '../scss/_profile.scss'
 import { postsWidth, sendInputReqHandler } from '../shared/utility'
-import ProfilePicture from '../components/UI/ProfilePicture'
+import ProfileInfo from '../components/ProfileInfo'
 
 const Profile = () => {
   const { user, setUser } = useContext(UserContext)
@@ -18,17 +18,8 @@ const Profile = () => {
 
   return (
     <div className="profile-wrapper">
-      <div className="profile">
-        <div className="profile-col">
-          <ProfilePicture user={user} style={{ margin: "0 20px 0 10px" }}/>
-          <div className="info">
-            <h2>{user.name}</h2>
-            <div className="username-email">
-              <p>{user.email}</p>
-              {user.website && <p>{user.website}</p>}
-            </div>
-          </div>
-        </div>
+      <div className="profile-section">
+        <ProfileInfo user={user} style={{ width: "50%" }}/>
         <textarea 
           type="text"
           name="bio"
