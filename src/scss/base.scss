@@ -126,16 +126,6 @@ body {
             }
           }
         }
-    
-        .profile-picture {
-          width: 25px;
-          height: 25px;
-          border-radius: 25px;
-          background-image: url('../static/defaults/placeholder.png');
-          background-size: cover;
-          background-repeat: no-repeat;
-          background-position: center;
-        }
 
         @media (max-width: 900px) {
           width: 100%;
