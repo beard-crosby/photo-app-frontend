@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { UserContext } from '../App'
 import Button from '../components/UI/Button'
 import { logout } from '../shared/localStorage'
-import ProfileInfo from '../components/ProfileInfo'
+import ProfileCard from '../components/ProfileCard'
 
 const Settings = ({ history }) => {
   const { user, setUser } = useContext(UserContext)
@@ -10,7 +10,7 @@ const Settings = ({ history }) => {
   return (
     <div className="flex-col">
       <div className="flex-row">
-        <ProfileInfo user={user}/>
+        <ProfileCard user={user}/>
       </div>
       <div className="model settings">
         <div className="top">

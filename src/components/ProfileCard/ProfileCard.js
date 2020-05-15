@@ -1,9 +1,9 @@
 import React from 'react'
-import styles from './_ProfileInfo.module.scss'
+import styles from './_ProfileCard.module.scss'
 import ProfilePicture from '../UI/ProfilePicture'
 import PropTypes from 'prop-types'
 
-const ProfileInfo = ({ user, style }) => 
+const ProfileCard = ({ user, style }) => 
   <div className={styles.profile} style={style}>
     <ProfilePicture user={user} style={{ margin: "0 20px 0 0" }}/>
     <div className={styles.ProfileInfo}>
@@ -13,9 +13,9 @@ const ProfileInfo = ({ user, style }) =>
     </div>
   </div>
 
-ProfileInfo.propTypes = {
+ProfileCard.propTypes = {
   user: PropTypes.object, // User Object in context.
   style: PropTypes.object, // Can change style on Component call.
 }
 
-export default ProfileInfo
+export default ProfileCard

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../App' 
 import '../scss/_profile.scss'
-import ProfileInfo from '../components/ProfileInfo'
+import ProfileCard from '../components/ProfileCard'
 import ProfilePicture from '../components/UI/ProfilePicture'
 
 const Profile = () => {
@@ -10,7 +10,7 @@ const Profile = () => {
   return (
     <div className="flex-col">
       <div className="flex-row">
-        <ProfileInfo user={user}/>
+        <ProfileCard user={user}/>
       </div>
       <div className="model settings">
         <div className="top">
