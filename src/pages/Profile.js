@@ -21,7 +21,7 @@ const Profile = () => {
         <div className="middle">
           <div className="middle-row" style={{ justifyContent: "flex-start" }}>
             {user.following.map((followed, i) => 
-            <ProfilePicture key={i} user={followed} heightWidth={60} style={{ marginRight: 10 }}/>)}
+            <ProfilePicture key={i} user={followed} heightWidth={60} style={{ marginRight: 10 }} following/>)}
           </div>
         </div>
       </div>
