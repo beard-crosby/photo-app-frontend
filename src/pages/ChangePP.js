@@ -3,19 +3,20 @@ import { UserContext } from '../App'
 import '../scss/_model.scss'
 import Button from '../components/UI/Button'
 import UploadBox from '../components/UI/UploadBox'
+import { updatePP } from '../shared/authRequests'
 
-const ProfileImg = ({ history }) => {
-  const { user, setUser } = useContext(UserContext)
+const ChangePP = ({ history }) => {
+  const { user, setUser, setLoading } = useContext(UserContext)
 
-  const onUploadClicked = event => {
+  const onChangePPClicked = event => {
     event.preventDefault()
-    // request
+    updatePP(user, setUser, history, setLoading)
   }
 
   return (
-    <div className="model" onSubmit={event => onUploadClicked(event)} style={{ width: 500 }}>
+    <form className="model" onSubmit={event => onChangePPClicked(event)} style={{ width: 500 }}>
       <div className="top">
-        <h5>CHANGE PROFILE IMAGE</h5>
+        <h5>CHANGE PROFILE PICTURE</h5>
         <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
       </div>
       <div className="middle">
@@ -23,10 +24,10 @@ const ProfileImg = ({ history }) => {
       </div>
       <div className="bottom">
         <p>Terms & Conditions</p>
-        <Button submit text="Change Profile Image"/>
+        <Button submit text="Change Profile Picture"/>
       </div>
-    </div>
+    </form>
   )
 }
 
-export default ProfileImg
+export default ChangePP

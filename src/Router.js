@@ -13,7 +13,7 @@ import Forgot from './pages/Forgot'
 import Splash from './pages/Splash'
 import Post from './pages/Post'
 import DeleteUser from './pages/DeleteUser'
-import ProfileImg from './pages/ProfileImg'
+import ChangePP from './pages/ChangePP'
 import LoggedOut from './pages/LoggedOut'
 
 const Router = () => {
@@ -29,7 +29,7 @@ const Router = () => {
           <Route path="/settings" component={Settings}/>
           <Route path="/post" component={Post}/>
           <Route path="/deleteuser" component={DeleteUser}/>
-          <Route path="/profileimg" component={ProfileImg}/> 
+          <Route path="/changepp" component={ChangePP}/> 
         </> :
         <>
           <Route exact path="/" component={Splash}/>

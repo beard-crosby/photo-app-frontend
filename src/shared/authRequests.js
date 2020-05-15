@@ -158,8 +158,8 @@ export const deleteAccount = (user, setUser, setLoading) => {
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
-      process.env.NODE_ENV === 'development' && console.log(`DeleteAccount Error: ${res.data.errors[0].message}`)
       res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
+      process.env.NODE_ENV === 'development' && console.log(`DeleteAccount Error: ${res.data.errors[0].message}`)
     } else {
       setUser({ ...logout(), redirect: "/loggedout" })
       process.env.NODE_ENV === 'development' && console.log(res)
@@ -187,12 +187,44 @@ export const updateBio = (user, setUser, bioTextarea) => {
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
-      process.env.NODE_ENV === 'development' && console.log(`UpdateBio Error: ${res.data.errors[0].message}`)
       res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
+      process.env.NODE_ENV === 'development' && console.log(`UpdateBio Error: ${res.data.errors[0].message}`)
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(`UpdateBio Error: ${err}`)
+  })
+}
+
+export const updatePP = (user, setUser, history, setLoading) => {
+  setLoading(true)
+  axios.post('', {
+    variables: {
+      _id: user._id,
+      profile_picture: user.file.url,
+    },
+    query: `
+      mutation UpdatePP($_id: ID!, $profile_picture: String!) {
+        updatePP(_id: $_id, profile_picture: $profile_picture) {
+          _id
+          profile_picture
+        }
+      }
+    `
+  }, { headers: headers(user.token) }).then(res => {
+    if (res.data.errors) {
+      res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
+      process.env.NODE_ENV === 'development' && console.log(`UpdatePP Error: ${res.data.errors[0].message}`)
+    } else {
+      setUser({ ...user, profile_picture: res.data.data.updatePP.profile_picture, file: { uploaded: false }})
+      localStorage.setItem('profile_picture', res.data.data.updatePP.profile_picture)
+      history.push("/")
+      process.env.NODE_ENV === 'development' && console.log(res)
+    }
+    setLoading(false)
+  }).catch(err => {
+    setLoading(false)
+    process.env.NODE_ENV === 'development' && console.log(`UpdatePP Error: ${err}`)
   })
 }

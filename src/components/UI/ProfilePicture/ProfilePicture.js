@@ -7,7 +7,7 @@ const ProfilePicture = ({ user, style, heightWidth, disable, history }) =>
   <div 
     className={`${styles.profilePicture} ${disable && styles.disable}`} 
     style={{ ...style, height: heightWidth, width: heightWidth }} 
-    onClick={() => !disable && history.push("/profileimg")}>
+    onClick={() => !disable && history.push("/changepp")}>
     <img 
       alt="Profile" 
       style={{ ...style, height: heightWidth }} 
