@@ -16,20 +16,18 @@ const Wall = () => {
 
     let temp = { created_at: '1800-01-01T00:00:00+01:00' }
 
-    user.following.map(followed => // Loop through all of the users that the user is following.
-      followed.posts.map(post => { // Loop through all of the posts each followed user has.
+    user.following.map(followed => // Loop through all of the users that the user is following and then loop through all the posts that user has.
+      followed.posts.map(post => { // eslint-disable-line array-callback-return 
         if (moment(post.created_at).isAfter(temp.created_at) && moment(post.created_at).isBefore(earliestPost.created_at)) { // If post.created_at is later than temp.created_at AND earlier than earliestDate.created_at.
-          temp = { ...post, user: { name: followed.name, profile_picture: followed.profile_picture }} // Mutate temp to the passed post and add user information to the object.
-        }
-        return null // get rid of err msg
+          temp = { ...post, author: { name: followed.name, profile_picture: followed.profile_picture }} // Mutate temp to the passed post and add user information to the object.
+        } 
       })
     )
 
-    user.posts.map(post => { // Loop though all of the posts the user has.
+    user.posts.map(post => { // eslint-disable-line array-callback-return 
       if (moment(post.created_at).isAfter(temp.created_at) && moment(post.created_at).isBefore(earliestPost.created_at)) {
-        temp = { ...post, user: { name: user.name, profile_picture: user.profile_picture }}
+        temp = { ...post, author: { name: user.name, profile_picture: user.profile_picture }}
       }
-      return null // get rid of err msg
     })
 
     temp.img && photoCardsArr.push(temp) // If temp obj has an img key, push to photoCardsArr. I.E. don't try and render the temp init data.
@@ -40,9 +38,8 @@ const Wall = () => {
       {photoCardsArr.map((photoCard, i) => 
         <PhotoCard
           key={i}
-          img={<img alt="Test Img" src={photoCard.img}/>}
-          user={photoCard.user}
-          comments={photoCard.comments}
+          post={photoCard}
+          author={photoCard.author}
         />
       )}
     </>

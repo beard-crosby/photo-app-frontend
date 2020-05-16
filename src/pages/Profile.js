@@ -3,6 +3,7 @@ import { UserContext } from '../App'
 import '../scss/_profile.scss'
 import ProfileCard from '../components/ProfileCard'
 import ProfilePicture from '../components/UI/ProfilePicture'
+import PhotoCard from '../components/PhotoCard'
 
 const Profile = () => {
   const { user } = useContext(UserContext)
@@ -26,10 +27,8 @@ const Profile = () => {
       </div>
       <div className={`posts ${user.posts.length === 0 && `no-posts`}`}>
         {user.posts.length === 0 ? <h2>You have no Posts!</h2> :
-          user.posts.map(post => 
-            <div key={post.img} className="img-wrapper">
-              <img alt="post" src={post.img}/>
-            </div>
+          user.posts.map((post, i) =>
+            <PhotoCard key={i} post={post} author={user} small/>
           )}
       </div>
     </div>

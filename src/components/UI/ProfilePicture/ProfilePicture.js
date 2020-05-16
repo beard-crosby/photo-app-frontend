@@ -10,7 +10,7 @@ const ProfilePicture = ({ user, style, heightWidth, disable, following, history 
     onClick={() => {following ? history.push("/profile") : !disable && history.push("/changepp")}}>
     <img 
       alt="Profile" 
-      style={{ ...style, height: heightWidth }} 
+      style={{ height: heightWidth }} 
       src={user.profile_picture ? user.profile_picture : require('../../../static/defaults/placeholder.png')}/>
     {following ? <p>Profile</p> : !disable && <p>Change</p>}
   </div>
