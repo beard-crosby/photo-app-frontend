@@ -18,7 +18,7 @@ const PhotoCard = ({ post, author, small }) => {
 
   return (
     <div className={`${small ? styles.small : styles.photoCardWrapper} ${imgClicked}`} id="photo-card">
-      <div className={small ? styles.smallImgWrapper : styles.imgWrapper} onClick={() => imgClickedHandler()}>
+      <div className={small ? styles.smallImgWrapper : styles.imgWrapper} onClick={() => !small && imgClickedHandler()}>
         <img alt="Post" src={post.img}/>
       </div>
       {!small && <div className={styles.sidebar}>
