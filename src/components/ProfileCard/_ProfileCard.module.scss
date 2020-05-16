@@ -1,3 +1,5 @@
+$color-1: #EEEEEE;
+
 .profile { // also used for settings page.
   width: 100%;
   display: flex;
@@ -11,5 +13,25 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-evenly;
+  }
+}
+
+.sidebar {
+  border-bottom: 1px solid $color-1;
+  cursor: pointer;
+
+  .viewProfile {
+    opacity: 0;
+    position: absolute;
+  }
+
+  &:hover {
+    h5 {
+      opacity: 0;
+    }
+
+    .viewProfile {
+      opacity: 1;
+    }
   }
 }
