@@ -1,0 +1,17 @@
+.photoCollage {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  .col {
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 3px;
+    box-sizing: border-box;
+    
+    @media (max-width: 700px) {
+      flex: 100%;
+      max-width: 100%;
+    }
+  }
+}

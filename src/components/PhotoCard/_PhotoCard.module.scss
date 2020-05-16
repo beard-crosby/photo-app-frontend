@@ -84,20 +84,18 @@ $white: #ffffff;
 }
 
 .small {
-  height: 100px;
-  width: 100px;
-  margin: 0 10px 0 0;
+  vertical-align: middle;
+  width: 100%;
   border: none;
 
   .smallImgWrapper {
-    height: 100%;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100%;
 
     img {
+      width: 100%;
       height: 100%;
+      border-radius: 6px;
     }
   }
 }
