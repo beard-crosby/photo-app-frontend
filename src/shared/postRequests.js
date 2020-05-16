@@ -43,3 +43,32 @@ export const createPost = (form, user, setUser, setLoading, history) => {
     setLoading(false)
   })
 }
+
+export const allPosts = (user, setUser) => {
+  axios.post('', {
+    query: `
+      query {
+        allPosts {
+          _id
+          img
+          title
+          description
+          author {
+            _id
+            name
+            profile_picture
+          }
+        }
+      }
+    `
+  }).then(res => {
+    if (res.data.errors) {
+      process.env.NODE_ENV === 'development' && console.log(`allPosts Error: ${res.data.errors[0].message}`)
+    } else {
+      setUser({ ...user, posts: res.data.data.allPosts })
+      process.env.NODE_ENV === 'development' && console.log(res)
+    }
+  }).catch(err => {
+    process.env.NODE_ENV === 'development' && console.log(`allPosts Error: ${err}`)
+  })
+}
