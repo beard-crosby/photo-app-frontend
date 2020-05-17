@@ -9,7 +9,7 @@ const Splash = () => {
   const { user, setUser } = useContext(UserContext)
   const [ masComp, setMasComp ] = useState(null)
 
-  useEffect(() => allPosts(user, setUser), [])
+  useEffect(() => allPosts(user, setUser), []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="flex-col">
