@@ -65,11 +65,10 @@ body {
       justify-content: center;
       align-items: center;
       box-sizing: border-box;
-      padding: 40px 0;
+      padding: 20px 0;
 
       @media (max-width: 700px) {
         width: 100%;
-        padding: 20px 0;
       }
     }
 

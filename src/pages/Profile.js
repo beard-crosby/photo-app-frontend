@@ -29,7 +29,12 @@ const Profile = () => {
       <Masonry 
         className={`masonry ${masComp}`}
         onLayoutComplete={() => setMasComp("masonry-complete")}>
-        {user.posts.map(post => <img key={post._id} alt="A Random User Post" src={post.img}/>)}
+        {user.posts.map(post => 
+          <img 
+            key={post._id} 
+            alt="A Random User Post" 
+            src={post.img}
+          />)}
       </Masonry>
     </div>
   )
