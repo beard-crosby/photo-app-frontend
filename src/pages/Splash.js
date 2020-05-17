@@ -12,7 +12,7 @@ const Splash = () => {
   useEffect(() => allPosts(user, setUser), [])
 
   return (
-    <>
+    <div className="flex-col">
       <div className="app-and-signup">
         <div className="app">
           <img alt="iPhone 11" src={require("../static/misc/iphone-template.png")}/>
@@ -30,7 +30,7 @@ const Splash = () => {
         onLayoutComplete={() => setMasComp("masonry-complete")}>
         {user.posts.map(post => <img alt="A Random User Post" src={post.img}/>)}
       </Masonry>}
-    </>
+    </div>
   )
 }
 
