@@ -17,10 +17,6 @@ $dm-background: #0A0A0A;
     cursor: pointer;
   }
 
-  h5 {
-    font-weight: 400;
-  }
-
   p {
     font-size: 0.7em;
     color: $color-2;
@@ -69,7 +65,9 @@ $dm-background: #0A0A0A;
       border: none;
       padding: 5px 10px;
       box-sizing: border-box;
-      border-top: 1px solid $color-1;
+      box-shadow: none;
+      border: none !important;
+      border-top: 1px solid $color-1 !important;
       border-bottom-right-radius: 5px;
       flex-shrink: 0;
     }
@@ -129,9 +127,8 @@ $dm-background: #0A0A0A;
     }
 
     input {
-      background: $black;
-      color: $white;
-      border-top: 1px solid $dm-background;
+      border-top: 1px solid $dm-background !important;
+      box-shadow: none !important;
     }
   }
 }

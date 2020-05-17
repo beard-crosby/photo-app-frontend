@@ -13,8 +13,12 @@ h1, h2, h3, h4, h5, h6, p {
   margin: 0;
 }
 
-h1, h2, h4, h5, label {
+h1, h2, h4, label {
   font-weight: 300;
+}
+
+h5 {
+  font-weight: 400;
 }
 
 h1 {
@@ -177,12 +181,49 @@ body {
 
   #root {
 
-    h1 {
-      color: $white;
+    h1, a {
+      color: $color-1;
     }
 
     .not-found-dark-mode {
       color: $white;
+    }
+
+    .model, .flex-row, input, textarea, button {
+      background: $black;
+      color: $color-1;
+      border: 1px solid $dm-color-1;
+    }
+
+    .top {
+      border-bottom: 1px solid $dm-color-1;
+    }
+
+    .bottom {
+      border-top: 1px solid $dm-color-1;
+    }
+
+    input, textarea, button {
+      background: $black;
+      box-shadow: rgb(190, 190, 190) 0px 2px 2px 0px, rgb(190, 190, 190) 0px 0px 1px 0px;
+
+      &:hover {
+        box-shadow: rgb(240, 240, 240) 0px 2px 2px 0px, rgb(240, 240, 240) 0px 0px 1px 0px;
+
+        p, svg {
+          color: $white;
+        }
+      }
+
+      &:disabled {
+        h4, p, svg { 
+          color: $color-2;
+        }
+    
+        &:hover {
+          box-shadow: rgb(190, 190, 190) 0px 2px 2px 0px, rgb(190, 190, 190) 0px 0px 1px 0px;
+        }
+      }
     }
 
     nav {
