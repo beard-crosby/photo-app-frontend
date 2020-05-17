@@ -58,7 +58,7 @@ $white: #ffffff;
     }
 
     input {
-      height: 35px;
+      height: 30px;
       border: none;
       padding: 5px 10px;
       box-sizing: border-box;
@@ -80,23 +80,6 @@ $white: #ffffff;
     border-top: 1px solid $color-1;
     border-bottom: 1px solid $color-1;
     border-radius: 0px;
-  }
-}
-
-.small {
-  vertical-align: middle;
-  width: 100%;
-  border: none;
-
-  .smallImgWrapper {
-    width: 100%;
-    height: 100%;
-
-    img {
-      width: 100%;
-      height: 100%;
-      border-radius: 6px;
-    }
   }
 }
 

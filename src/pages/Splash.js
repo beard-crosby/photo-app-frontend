@@ -1,12 +1,13 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../App'
 import '../scss/_splash.scss'
 import Create from './Create'
-import PhotoCollage from '../components/PhotoCollage'
+import Masonry from 'react-masonry-component'
 import { allPosts } from '../shared/postRequests'
 
 const Splash = () => {
   const { user, setUser } = useContext(UserContext)
+  const [ masComp, setMasComp ] = useState(null)
 
   useEffect(() => allPosts(user, setUser), [])
 
@@ -24,7 +25,11 @@ const Splash = () => {
           hideBottom/>
         </div>
       </div>
-      {user.posts && <PhotoCollage author={user}/>}
+      {user.posts && <Masonry 
+        className={`masonry ${masComp}`}
+        onLayoutComplete={() => setMasComp("masonry-complete")}>
+        {user.posts.map(post => <img alt="A Random User Post" src={post.img}/>)}
+      </Masonry>}
     </>
   )
 }

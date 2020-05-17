@@ -205,3 +205,21 @@ body {
     }
   }
 }
+
+.masonry {
+  width: 100%;
+  opacity: 0;
+
+  img {
+    width: 25%;
+    border-radius: 6px;
+    padding: 3px !important;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+}
+
+.masonry-complete {
+  opacity: 1;
+  transition: 0.3s; 
+}

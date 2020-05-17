@@ -1,12 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { UserContext } from '../App' 
 import '../scss/_profile.scss'
 import ProfileCard from '../components/ProfileCard'
 import ProfilePicture from '../components/UI/ProfilePicture'
-import PhotoCollage from '../components/PhotoCollage'
+import Masonry from 'react-masonry-component'
 
 const Profile = () => {
   const { user } = useContext(UserContext)
+  const [ masComp, setMasComp ] = useState(null)
 
   return (
     <div className="flex-col">
@@ -25,7 +26,11 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <PhotoCollage author={user}/>
+      <Masonry 
+        className={`masonry ${masComp}`}
+        onLayoutComplete={() => setMasComp("masonry-complete")}>
+        {user.posts.map(post => <img alt="A Random User Post" src={post.img}/>)}
+      </Masonry>
     </div>
   )
 }
