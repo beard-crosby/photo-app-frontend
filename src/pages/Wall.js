@@ -40,6 +40,7 @@ const Wall = () => {
           key={i}
           post={photoCard}
           author={photoCard.author}
+          darkMode={user.settings.dark_mode}
         />
       )}
     </>

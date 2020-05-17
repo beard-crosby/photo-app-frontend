@@ -2,6 +2,7 @@ $color-1: #EEEEEE;
 $color-2: #525252;
 $black: #000000;
 $white: #ffffff;
+$dm-background: #0A0A0A;
 
 .photoCardWrapper {
   width: 100%;
@@ -56,6 +57,12 @@ $white: #ffffff;
       flex-direction: column;
       justify-content: space-between;
     }
+    .comments {
+      width: 100%;
+      flex-grow: 1;
+      box-sizing: border-box;
+      border-top: 1px solid $color-1;
+    }
 
     input {
       height: 30px;
@@ -107,5 +114,24 @@ $white: #ffffff;
 
   .sidebar {
     display: none;
+  }
+}
+
+.darkMode {
+  border: 1px solid $dm-background;
+
+  .sidebar {
+    background: $black;
+    color: $white;
+
+    .comments {
+      border-top: 1px solid $dm-background;
+    }
+
+    input {
+      background: $black;
+      color: $white;
+      border-top: 1px solid $dm-background;
+    }
   }
 }
