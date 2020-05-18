@@ -189,10 +189,16 @@ body {
       color: $white;
     }
 
-    .model, .flex-row, input, textarea, button {
+    .model, .flex-row {
       background: $black;
       color: $color-1;
       border: 1px solid $dm-color-1;
+
+      input, textarea, button {
+        background: $black;
+        color: $color-1;
+        border: 1px solid $dm-color-1;
+      }
     }
 
     .top {

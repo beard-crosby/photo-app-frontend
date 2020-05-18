@@ -5,13 +5,14 @@ $black: #000000;
 $white: #ffffff;
 $dm-background: #0A0A0A;
 
-.photoCardWrapper {
-  width: 100%;
+.photoCard {
+  width: 700px;
   min-height: 100px;
   display: flex;
   border-radius: 5px;
   overflow: hidden;
   margin-bottom: 15px;
+  background: $white;
   border: 1px solid $color-1;
 
   img, h5, p, svg {
@@ -28,17 +29,24 @@ $dm-background: #0A0A0A;
     width: 75%;
     
     img {
-      width: 100%
+      width: 100%;
+      transition: 0.3s;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 700px) {
       width: 100%;
+    }
+  }
+
+  .showEdit {
+    img {
+      opacity: 0.2;
+      transition: 0.3s;
     }
   }
 
   .sidebar {
     width: 25%;
-    background: $white;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
@@ -53,24 +61,54 @@ $dm-background: #0A0A0A;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-    }
-    .comments {
-      width: 100%;
-      flex-grow: 1;
-      box-sizing: border-box;
-      border-top: 1px solid $color-1;
-    }
 
-    input {
-      height: 30px;
-      border: none;
-      padding: 5px 10px;
-      box-sizing: border-box;
-      box-shadow: none;
-      border: none !important;
-      border-top: 1px solid $color-1 !important;
-      border-bottom-right-radius: 5px;
-      flex-shrink: 0;
+      .comments {
+        width: 100%;
+        flex-grow: 1;
+        box-sizing: border-box;
+        border-top: 1px solid $color-1;
+      }
+
+      .postSettings {
+        width: 100%;
+        display: flex;
+      
+        .editBtn, .deleteBtn {
+          width: 50%;
+          height: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          box-sizing: border-box;
+          border-top: 1px solid $color-1;
+          cursor: pointer;
+      
+          h5 {
+            color: $color-3;
+          }
+      
+          &:hover {
+            h5 {
+              color: $black;
+            }
+          }
+        }
+      
+        .deleteBtn {
+          border-left: 1px solid $color-1;
+        }
+      }
+  
+      input {
+        height: 30px;
+        border: none;
+        padding: 5px 10px;
+        box-sizing: border-box;
+        box-shadow: none;
+        border-top: 1px solid $color-1;
+        border-bottom-right-radius: 5px;
+        flex-shrink: 0;
+      }
     }
 
     @media (max-width: 900px) {
@@ -116,59 +154,30 @@ $dm-background: #0A0A0A;
   }
 }
 
-.postSettings {
-  width: 100%;
-  display: flex;
-  box-sizing: border-box;
-  border-top: 1px solid $color-1;
-
-  .edit, .delete {
-    width: 50%;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-
-    h5 {
-      color: $color-3;
-    }
-
-    &:hover {
-      h5 {
-        color: $black !important;
-      }
-    }
-  }
-
-  .delete {
-    border-left: 1px solid $color-1;
-  }
-}
-
 .darkMode {
   border: 1px solid $dm-background;
+  background: $black;
 
   .sidebar {
     background: $black;
     color: $white;
 
     .comments {
-      border-top: 1px solid $dm-background;
+      border-top: 1px solid $dm-background !important;
     }
 
-    .postSettings {
-      border-top: 1px solid $dm-background;
+    .editBtn, .deleteBtn {
+      border-top: 1px solid $dm-background !important;
 
-      .edit:hover, .delete:hover {
+      &:hover {
         h5 {
           color: $color-1 !important;
         }
       }
+    }
 
-      .delete {
-        border-left: 1px solid $dm-background;
-      }
+    .deleteBtn {
+      border-left: 1px solid $dm-background !important;
     }
 
     input {
