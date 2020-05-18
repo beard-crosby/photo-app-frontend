@@ -128,9 +128,16 @@ $dm-background: #0A0A0A;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
     h5 {
       color: $color-3;
+    }
+
+    &:hover {
+      h5 {
+        color: $black !important;
+      }
     }
   }
 
@@ -148,6 +155,20 @@ $dm-background: #0A0A0A;
 
     .comments {
       border-top: 1px solid $dm-background;
+    }
+
+    .postSettings {
+      border-top: 1px solid $dm-background;
+
+      .edit:hover, .delete:hover {
+        h5 {
+          color: $color-1 !important;
+        }
+      }
+
+      .delete {
+        border-left: 1px solid $dm-background;
+      }
     }
 
     input {
