@@ -3,6 +3,7 @@ import { UserContext } from '../App'
 import '../scss/_model.scss'
 import Button from '../components/UI/Button'
 import { deleteAccount } from '../shared/authRequests'
+import { XSquare } from 'react-feather'
 
 const DeleteUser = ({ history }) => {
   const { user, setUser, setLoading } = useContext(UserContext)
@@ -15,11 +16,7 @@ const DeleteUser = ({ history }) => {
       </div>
       <div className="middle">
         <p>You are about to permanently delete your account!</p>
-      </div>
-      <div className="bottom" style={{ justifyContent: 'center' }}>
-        <Button 
-          text="DELETE ACCOUNT" 
-          onClick={() => deleteAccount(user, setUser, setLoading)}/>
+        <Button text="DELETE ACCOUNT" icon={<XSquare/>} onClick={() => deleteAccount(user, setUser, setLoading)}/>
       </div>
     </div>
   )

@@ -53,6 +53,10 @@
   box-sizing: border-box;
   flex-shrink: 0;
 
+  p {
+    margin-bottom: 20px;
+  }
+
   input, textarea {
     margin-bottom: 20px;
   }

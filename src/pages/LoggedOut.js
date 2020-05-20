@@ -9,7 +9,7 @@ const loggedOut = ({ history }) =>
     </div>
     <div className="middle">
       <p>You were logged out.</p>
-      <Button text="Continue" onClick={() => history.push("/auth")}/>
+      <Button text="Continue" redirect={"/auth"}/>
     </div>
   </div>
 

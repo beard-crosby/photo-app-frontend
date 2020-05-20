@@ -33,7 +33,7 @@ const Forgot = ({ history }) => {
       </div>
       <div className="middle">
         <FormSection text={"Email"} err={form.errors.emailError} user={user} form={form} setForm={setForm}/>
-        <Button submit disabled={!formValid} icon={<Mail/>} text="Submit"/>
+        <Button text="Submit" submit disabled={!formValid} icon={<Mail/>}/>
       </div>
     </form>
   )

@@ -3,8 +3,9 @@ import { UserContext } from '../App'
 import Button from '../components/UI/Button'
 import { logout } from '../shared/localStorage'
 import ProfileCard from '../components/ProfileCard'
+import { LogOut, XSquare } from 'react-feather'
 
-const Settings = ({ history }) => {
+const Settings = () => {
   const { user, setUser } = useContext(UserContext)
 
   return (
@@ -17,7 +18,7 @@ const Settings = ({ history }) => {
           <h5 className="title-left">GENERAL</h5>
         </div>
         <div className="middle-row">
-          <Button text="Change Profile Picture" onClick={() => history.push("/changepp")}/>
+          <Button text="Change Profile Picture" redirect={"/changepp"}/>
           <Button text="Change Name"/>
           <Button text="Change Email"/>
           <Button text="Change Website"/>
@@ -34,8 +35,8 @@ const Settings = ({ history }) => {
         </div>
       </div>
       <div className="button-row">
-        <Button text="Logout" onClick={() => setUser({ ...logout(), redirect: "/auth" })}/>
-        <Button text="Delete Account" onClick={() => history.push('/deleteuser')}/>
+        <Button text="Logout" icon={<LogOut/>} onClick={() => setUser({ ...logout(), redirect: "/auth" })}/>
+        <Button text="Delete Account" icon={<XSquare/>} redirect={"/deleteuser"}/>
       </div>
     </div>
   )
