@@ -31,7 +31,15 @@ export const createPost = (form, user, setUser, setLoading, history) => {
       res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
       process.env.NODE_ENV === 'development' && console.log(`CreatePost Error: ${res.data.errors[0].message}`)
     } else {
-      setUser({ ...user, posts: [ ...user.posts, res.data.data.createPost ], file: { uploaded: false }})
+      setUser({ 
+        ...user, 
+        posts: [ ...user.posts, res.data.data.createPost ], 
+        file: { 
+          ...res.data.data.createPost, 
+          author: { _id: user._id, name: user.name, profile_picture: user.profile_picture }, 
+          uploaded: false
+        },
+      })
       localStorage.setItem('posts', JSON.stringify([ ...user.posts, res.data.data.createPost ]))
       history.push("/")
       process.env.NODE_ENV === 'development' && console.log(res)

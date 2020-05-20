@@ -97,5 +97,10 @@ export const logInSuccess = userData => {
     localStorage.setItem('settings', JSON.stringify(userData.settings))
   }
 
-  return {...userData, formErrors: {}, redirect: false}
+  return {
+    ...userData, 
+    formErrors: {},
+    file: { uploaded: false },
+    redirect: false,
+  }
 }

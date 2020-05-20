@@ -39,7 +39,11 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
       setUser({...user, formErrors: res.data.errors[0].message})
       process.env.NODE_ENV === 'development' && console.log(`CreateUser Error: ${res.data.errors[0].message}`)
     } else {
-      const userData = {...res.data.data.createUser, geolocation: JSON.parse(res.data.data.createUser.geolocation), settings: JSON.parse(res.data.data.createUser.settings)}
+      const userData = {
+        ...res.data.data.createUser, 
+        geolocation: JSON.parse(res.data.data.createUser.geolocation), 
+        settings: JSON.parse(res.data.data.createUser.settings),
+      }
       setUser(logInSuccess(userData))
       timeout(userData.token_expiry, setUser)
       history.push("/")
@@ -123,7 +127,11 @@ export const login = (formData, history, user, setUser, setLoading) => {
       setUser({...user, formErrors: res.data.errors[0].message})
       process.env.NODE_ENV === 'development' && console.log(`Login Error: ${res.data.errors[0].message}`)
     } else {
-      const userData = {...res.data.data.login, geolocation: JSON.parse(res.data.data.login.geolocation), settings: JSON.parse(res.data.data.login.settings)}
+      const userData = {
+        ...res.data.data.login, 
+        geolocation: JSON.parse(res.data.data.login.geolocation), 
+        settings: JSON.parse(res.data.data.login.settings),
+      }
       setUser(logInSuccess(userData))
       timeout(userData.token_expiry, setUser)
       history.push("/")

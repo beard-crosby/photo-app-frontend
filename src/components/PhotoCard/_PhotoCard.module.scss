@@ -46,6 +46,7 @@
     flex-flow: column nowrap;
     justify-content: space-between;
     position: relative;
+    border-left: 1px solid $color-1;
 
     .sidebarWrapper {
       position: absolute;
