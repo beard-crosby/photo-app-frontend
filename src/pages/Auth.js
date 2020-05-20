@@ -5,8 +5,9 @@ import GoogleLogin from '../components/UI/Button/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/FacebookLogin'
 import Button from '../components/UI/Button'
 import { login } from '../shared/authRequests'
-import { updateForm, checkFormValid } from '../shared/formValidation'
-import { backendError } from '../shared/utility'
+import { checkFormValid } from '../shared/formValidation'
+import FormSection from '../components/UI/FormSection'
+import { LogIn } from 'react-feather'
 
 const Auth = ({ history }) => {
   const { user, setUser, setLoading } = useContext(UserContext)
@@ -17,8 +18,8 @@ const Auth = ({ history }) => {
       password: "",
     },
     errors: {
-      emailError: false,
-      passwordError: false,
+      emailError: "",
+      passwordError: "",
     },
   })
 
@@ -30,28 +31,16 @@ const Auth = ({ history }) => {
   }
 
   return (
-    <form className="model" onSubmit={event => onLoginClicked(event)} style={{ width: 500 }}>
-      <div className="top">
-        <h5>LOGIN</h5>
-        <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
-      </div>
-      <div className="middle">
-      <label htmlFor="email"><p>{backendError(user, "Email")}</p></label>
-        <input 
-          type="email" 
-          name="email" 
-          id="email" 
-          onChange={event => updateForm(event, form, setForm)}>
-        </input>
-        <label htmlFor="password"><p>{backendError(user, "Password")}</p></label>
-        <input 
-          type="password" 
-          name="password" 
-          id="password" 
-          onChange={event => updateForm(event, form, setForm)}>
-        </input>
-        <div className="buttons">
-          <Button submit disabled={!formValid} loginSVG text="Login"/>
+    <>
+      <form className="model" onSubmit={event => onLoginClicked(event)}>
+        <div className="top">
+          <h5>LOGIN</h5>
+          <h5 onClick={() => history.goBack()}>BACK</h5>
+        </div>
+        <div className="middle">
+          <FormSection text={"Email"} err={form.errors.emailError} user={user} form={form} setForm={setForm}/>
+          <FormSection text={"Password"} user={user} form={form} setForm={setForm}/>
+          <Button text="Login" submit disabled={!formValid} icon={<LogIn/>} shadow/>
           <GoogleLogin
             text="Login With Google"
             onSuccess={res => console.log(res)}
@@ -60,12 +49,9 @@ const Auth = ({ history }) => {
             text="Login With Facebook"
             res={res => console.log(res)}/>
         </div>
-      </div>
-      <div className="bottom">
-        <Link to="/create"><h5>CREATE AN ACCOUNT</h5></Link>
-        <Link to="/forgot"><h5>FORGOT PASSWORD</h5></Link>
-      </div>
-    </form>
+      </form>
+      <Link className="below" to="/forgot"><h6>Forgot Password</h6></Link>
+    </>
   )
 }
 

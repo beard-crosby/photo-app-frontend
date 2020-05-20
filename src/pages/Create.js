@@ -5,11 +5,11 @@ import GoogleLogin from '../components/UI/Button/GoogleLogin'
 import FacebookLogin from '../components/UI/Button/FacebookLogin'
 import Button from '../components/UI/Button'
 import { createUser } from '../shared/authRequests'
-import { updateForm, checkFormValid } from '../shared/formValidation'
-import { backendError } from '../shared/utility'
-import PropTypes from 'prop-types'
+import { checkFormValid } from '../shared/formValidation'
+import FormSection from '../components/UI/FormSection'
+import { LogIn } from 'react-feather'
 
-const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
+const Create = ({ history }) => {
   const { user, setUser, setLoading } = useContext(UserContext)
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
@@ -20,10 +20,10 @@ const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
       passConfirm: "",
     },
     errors: {
-      nameError: false,
-      emailError: false,
-      passwordError: false,
-      passConfirmError: false,
+      nameError: "",
+      emailError: "",
+      passwordError: "",
+      passConfirmError: "",
     },
   })
 
@@ -35,64 +35,27 @@ const Create = ({ history, style, stackButtons, hideTopRight, hideBottom }) => {
   }
   
   return (
-    <form className="model" onSubmit={event => onSignUp(event)} style={style ? style : { width: 500 }}>
+    <form className="model" onSubmit={event => onSignUp(event)}>
       <div className="top">
         <h5>CREATE AN ACCOUNT</h5>
-        {!hideTopRight && <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>}
       </div>
       <div className="middle">
-        <label htmlFor="name"><p>{form.errors.nameError ? form.errors.nameError : "Name"}</p></label>
-        <input 
-          type="text" 
-          name="name" 
-          id="name" 
-          onChange={event => updateForm(event, form, setForm)}>
-        </input>
-        <label htmlFor="email"><p>{form.errors.emailError ? form.errors.emailError : backendError(user, "Email")}</p></label>
-        <input 
-          type="email" 
-          name="email" 
-          id="email" 
-          onChange={event => updateForm(event, form, setForm)}>
-        </input>
-        <label htmlFor="password"><p>{form.errors.passwordError ? form.errors.passwordError : backendError(user, "Password")}</p></label>
-        <input 
-          type="password" 
-          name="password" 
-          id="password" 
-          onChange={event => updateForm(event, form, setForm)}>
-        </input>
-        <label htmlFor="passConfirm"><p>{form.errors.passConfirmError ? form.errors.passConfirmError : "Password Check"}</p></label>
-        <input 
-          type="password" 
-          name="passConfirm" 
-          id="passConfirm" 
-          onChange={event => updateForm(event, form, setForm)}>
-        </input>
-        <div className={`buttons ${stackButtons && `stack-buttons`}`}>
-          <Button submit disabled={!formValid} loginSVG text="Sign Up"/>
-          <GoogleLogin
-            text="Login With Google"
-            onSuccess={res => console.log(res)}
-            onFail={res => console.log(res)}/>
-          <FacebookLogin 
-            text="Login With Facebook"
-            res={res => console.log(res)}/>
-        </div>
+        <FormSection text={"Name"} err={form.errors.nameError} user={user} form={form} setForm={setForm}/>
+        <FormSection text={"Email"} err={form.errors.emailError} user={user} form={form} setForm={setForm}/>
+        <FormSection text={"Password"} err={form.errors.passwordError} user={user} form={form} setForm={setForm}/>
+        <FormSection text={"Password Check"} err={form.errors.passConfirmError} user={user} form={form} setForm={setForm}/>
+        <Link to="/termsandconditions"><h6 className="terms-and-conditions">I agree to the <u><strong>Terms and Conditions</strong></u></h6></Link>
+        <Button text="Sign Up" submit disabled={!formValid} icon={<LogIn/>}/>
+        <GoogleLogin
+          text="Sign Up With Google"
+          onSuccess={res => console.log(res)}
+          onFail={res => console.log(res)}/>
+        <FacebookLogin 
+          text="Sign Up With Facebook"
+          res={res => console.log(res)}/>
       </div>
-      {!hideBottom && <div className="bottom">
-        <Link to="/auth"><h5>BACK TO LOGIN</h5></Link>
-      </div>}
     </form>
   )
-}
-
-Create.propTypes = {
-  history: PropTypes.object, // react-router-dom function obtained with withRouter.
-  style: PropTypes.object, // pass up style.
-  stackButtons: PropTypes.bool, // True = Stack buttons in the buttons div vertically.
-  hideTopRight: PropTypes.bool, // True = Hide the back button.
-  hideBottom: PropTypes.bool, // True = Hide the "bottom" div.
 }
 
 export default withRouter(Create)

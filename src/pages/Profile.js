@@ -14,27 +14,20 @@ const Profile = () => {
       <div className="flex-row">
         <ProfileCard user={user}/>
       </div>
-      <div className="model settings">
+      <div className="model section">
         <div className="top">
-          <h5>FOLLOWING</h5>
+          <h5 className={user.following.length < 8 && "title-left"}>FOLLOWING</h5>
           {user.following.length > 8 && <h5>SEE FULL LIST</h5>}
         </div>
-        <div className="middle">
-          <div className="middle-row" style={{ justifyContent: "flex-start" }}>
-            {user.following.map((followed, i) => 
-            <ProfilePicture key={i} user={followed} heightWidth={60} style={{ marginRight: 10 }} following/>)}
-          </div>
+        <div className="middle-row-left">
+          {user.following.map((followed, i) => 
+          <ProfilePicture key={i} user={followed} heightWidth={60} style={{ marginRight: 10 }} following/>)}
         </div>
       </div>
       <Masonry 
         className={`masonry ${masComp}`}
         onLayoutComplete={() => setMasComp("masonry-complete")}>
-        {user.posts.map(post => 
-          <img 
-            key={post._id} 
-            alt="A Random User Post" 
-            src={post.img}
-          />)}
+        {user.posts.map(post => <img key={post._id} alt="One of your posts" src={post.img}/>)}
       </Masonry>
     </div>
   )

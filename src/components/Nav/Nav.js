@@ -23,7 +23,7 @@ const Nav = ({ history }) => {
         <Link to="/"><h1>PHOTO APP</h1></Link>
         <div className="nav-top-right">
           {user.settings.dark_mode ? <Sun onClick={() => switchDarkMode(user, setUser)}/> : <Moon onClick={() => switchDarkMode(user, setUser)}/>}
-          {user.token ? <Link to="/post"><Upload/></Link> : <Link to="/auth"><p>LOGIN</p></Link>}
+          {user.token ? <Link to="/post"><Upload/></Link> : <Link to="/auth"><h5>LOGIN</h5></Link>}
           {user.token && <Link to="/profile"><ProfilePicture user={user} heightWidth={25} disable/></Link>}
         </div>
       </div>

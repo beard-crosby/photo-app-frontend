@@ -1,78 +1,47 @@
-$black: #000000;
-$white: #ffffff;
-$color-1: #EEEEEE;
-$color-2: #525252;
+@import "../../../scss/variables";
 
 .button {
-  height: 35px;
-  display: inline-flex;
+  width: fit-content;
+  background: none;
+  display: flex;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0 10px;
-  border-radius: 5px;
-  background: $white;
-  box-shadow: rgba(120, 120, 120, 1) 0px 2px 2px 0px, rgba(120, 120, 120, 1) 0px 0px 1px 0px;
-  border: 1px solid $color-1;
-  transition: 0.3s;
+  border: none;
+  padding: 0;
+  font-size:inherit;
+  letter-spacing:inherit;
   cursor: pointer;
 
-  p, svg {
-    transition: 0.3s;
-  }
-
-  img, svg {
-    margin-right: 10px !important;
-    width: 20px !important;
-    height: 20px !important;
-    flex-shrink: 0 !important;
-  }
-
-  p {
-    font-weight: 400 !important;
-    font-size: 1.1em !important;
+  img, svg, h5 {
+    color: $color-3;
     cursor: pointer;
   }
 
-  &:hover {
-    box-shadow: rgba(70, 70, 70, 1) 0px 2px 2px 0px, rgba(70, 70, 70, 1) 0px 0px 1px 0px;
-    transition: 0.3s;
-    
-    p, svg {
-      color: $black;
-      transition: 0.3s;
-    }
-  }
-
-  &:focus {
-    outline: 0;
+  img, svg {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
   }
 
   &:disabled {
     cursor: default;
 
-    h4, p, svg { 
+    img, svg, h5 {
+      color: $disabled;
       cursor: default;
-      color: #dddddd;
     }
 
     &:hover {
-      box-shadow: rgba(120, 120, 120, 1) 0px 2px 2px 0px, rgba(120, 120, 120, 1) 0px 0px 1px 0px;
+      h5, svg {
+        color: $disabled;
+      }
     }
   }
-}
-
-.hideBorder {
-  background: none;
-  box-shadow: none;
-  border: none;
 
   &:hover {
-    box-shadow: none;
+    h5, svg {
+      color: $black;
+    }
   }
-}
-
-.hideMobile {
-  display: none;
 }

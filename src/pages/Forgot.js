@@ -1,15 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useContext, useEffect } from 'react'
+import { UserContext } from '../App'
 import Button from '../components/UI/Button'
+import '../components/UI/FormSection'
+import { checkFormValid } from '../shared/formValidation'
+import FormSection from '../components/UI/FormSection'
+import { Mail } from 'react-feather'
 
 const Forgot = ({ history }) => {
+  const { user } =  useContext(UserContext)
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
-    email: "",
+    values: {
+      email: "",
+    },
+    errors: {
+      emailError: "",
+    },
   })
 
-  useEffect(() => form.email.trim() === "" ? setFormValid(true) : setFormValid(false), [form])
-  const updateField = event => setForm({...form, [event.target.name]: event.target.value})
+  useEffect(() => checkFormValid(form, setFormValid), [form])
 
   const onSubmit = event => {
     event.preventDefault()
@@ -17,26 +26,14 @@ const Forgot = ({ history }) => {
   }
 
   return (
-    <form className="model" onSubmit={event => onSubmit(event)} style={{ width: 500 }}>
+    <form className="model" onSubmit={event => onSubmit(event)}>
       <div className="top">
-        <h5>FORGOT PASSWORD</h5>
-        <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
+        <h5 className="title">FORGOT PASSWORD</h5>
+        <h5 onClick={() => history.goBack()}>BACK</h5>
       </div>
       <div className="middle">
-        <label htmlFor="email"><h5>Email</h5></label>
-        <input
-          type="email" 
-          name="email" 
-          id="email" 
-          onChange={updateField}>
-        </input>
-        <div className="buttons stackButtons">
-          <Button submit disabled={formValid} loginSVG text="Submit"/>
-        </div>
-      </div>
-      <div className="bottom">
-        <Link to="/auth"><h5>LOG IN</h5></Link>
-        <Link to="/create"><h5>CREATE AN ACCOUNT</h5></Link>
+        <FormSection text={"Email"} err={form.errors.emailError} user={user} form={form} setForm={setForm}/>
+        <Button submit disabled={!formValid} icon={<Mail/>} text="Submit"/>
       </div>
     </form>
   )

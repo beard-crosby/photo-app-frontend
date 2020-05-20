@@ -1,13 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap');
-
-$black: #000000;
-$white: #ffffff;
-$color-1: #EEEEEE;
-$color-2: #525252;
-$color-3: #757575;
-$background: #f5f5f5;
-$dm-background: #0A0A0A;
-$dm-color-1: #111111;
+@import "./variables";
 
 h1, h2, h3, h4, h5, h6, p {
   cursor: default;
@@ -18,14 +10,19 @@ h1, h2, h4, label {
   font-weight: 300;
 }
 
-h5 {
-  font-weight: 400;
-}
-
 h1 {
   letter-spacing: 2px;
   font-size: 1.7em;
   color: $black;
+}
+
+h5, h6 {
+  font-weight: 400;
+  color: $color-3;
+}
+
+h5 {
+  letter-spacing: 1.5px;
 }
 
 a {
@@ -37,8 +34,41 @@ input, textarea, p {
   font-size: 0.9em;
 }
 
-textarea:focus, input:focus{
+label {
+  width: 100%;
+  padding: 0 0 5px 0;
+}
+
+input, textarea {
+  width: 100%;
+  height: 30px;
+  min-height: 30px;
+  max-height: 200px;
+  border: none;
+  padding: 5px 10px;
+  border: 1px solid $color-1;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 2px 0px, rgba(0, 0, 0, 0.25) 0px 0px 1px 0px;
+  box-sizing: border-box;
+  color: $color-3;
+  resize: vertical;
+  transition: 0.3s;
+
+  &:hover, &:focus {
+    box-shadow: rgba(0, 0, 0, 0.60) 0px 2px 2px 0px, rgba(0, 0, 0, 0.60) 0px 0px 1px 0px;
+  }
+}
+
+textarea:focus, input:focus, button:focus {
   outline: none;
+}
+
+strong {
+  cursor: pointer;
+  
+  &:hover {
+    color: $black;
+  }
 }
 
 body {
@@ -118,6 +148,10 @@ body {
 
           a {
             margin: 0 0 0 15px;
+
+            h5:hover {
+              color: $black;
+            }
           }
 
           svg {
@@ -180,55 +214,71 @@ body {
   background: $dm-background;
 
   #root {
-
-    h1, a {
-      color: $color-1;
+    h5, h6 {
+      color: $color-4;
     }
 
-    .not-found-dark-mode {
-      color: $white;
-    }
-
-    .model, .flex-row {
+    input, textarea {
       background: $black;
-      color: $color-1;
-      border: 1px solid $dm-color-1;
+      color: $color-4;
+      border: 1px solid $color-5;
+      box-shadow: 0 2px 3px rgba(224,224,224,0.8), 0 1px 1px rgba(224,224,224,0.8);
+    }
 
-      input, textarea, button {
-        background: $black;
-        color: $color-1;
-        border: 1px solid $dm-color-1;
+    button:hover, strong:hover {
+      color: $white;
+
+      h5 {
+        color: $white;
       }
     }
 
-    .top {
-      border-bottom: 1px solid $dm-color-1;
-    }
-
-    .bottom {
-      border-top: 1px solid $dm-color-1;
-    }
-
-    input, textarea, button {
-      background: $black;
-      box-shadow: rgb(190, 190, 190) 0px 2px 2px 0px, rgb(190, 190, 190) 0px 0px 1px 0px;
-
-      &:hover {
-        box-shadow: rgb(240, 240, 240) 0px 2px 2px 0px, rgb(240, 240, 240) 0px 0px 1px 0px;
-
-        p, svg {
-          color: $white;
-        }
+    button {
+      h5, svg {
+        color: $color-4;
       }
 
       &:disabled {
-        h4, p, svg { 
+        img, svg, h5 {
           color: $color-2;
+          cursor: default;
         }
     
         &:hover {
-          box-shadow: rgb(190, 190, 190) 0px 2px 2px 0px, rgb(190, 190, 190) 0px 0px 1px 0px;
+          h5, svg {
+            color: $color-2;
+          }
         }
+      }
+
+      &:hover {
+        h5, svg {
+          color: $white;
+        }
+      }
+    }
+
+    .model {
+      background: $black;
+
+      .top {
+        border-bottom: 1px solid $color-5;
+
+        a:nth-child(n+2) {
+          border-left: 1px solid $color-5;
+
+          &:hover {
+            h5 {
+              color: $white;
+            }
+          }
+        }
+      }
+    }
+
+    a {
+      h6:hover {
+        color: $white;
       }
     }
 

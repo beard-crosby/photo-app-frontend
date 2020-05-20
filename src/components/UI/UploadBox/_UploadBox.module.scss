@@ -1,12 +1,10 @@
-$black: #000000;
-$color-2: #525252;
-$color-1: #EEEEEE;
+@import "../../../scss/variables";
 
 .uploadBox {
   width: 100%;
   height: 280px;
   border-radius: 5px;
-  box-shadow: rgba(120, 120, 120, 1) 0px 2px 2px 0px, rgba(120, 120, 120, 1) 0px 0px 1px 0px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 2px 0px, rgba(0, 0, 0, 0.25) 0px 0px 1px 0px;
   border: 1px solid $color-1;
   display: flex;
   flex-flow: column nowrap;
@@ -14,6 +12,7 @@ $color-1: #EEEEEE;
   align-items: center;
   transition: 0.3s;
   overflow: hidden;
+  margin-bottom: 20px;
   cursor: pointer;
 
   h1, svg {
@@ -30,9 +29,8 @@ $color-1: #EEEEEE;
     width: 20%;
   }
 
-  &:hover {
-    box-shadow: rgba(70, 70, 70, 1) 0px 2px 2px 0px, rgba(70, 70, 70, 1) 0px 0px 1px 0px;
-    transition: 0.3s;
+  &:hover, &:focus {
+    box-shadow: rgba(0, 0, 0, 0.60) 0px 2px 2px 0px, rgba(0, 0, 0, 0.60) 0px 0px 1px 0px;
   }
 }
 
@@ -48,7 +46,7 @@ $color-1: #EEEEEE;
 }
 
 .dragActive {
-  box-shadow: rgba(70, 70, 70, 1) 0px 2px 2px 0px, rgba(70, 70, 70, 1) 0px 0px 1px 0px;
+  box-shadow: rgba(0, 0, 0, 0.60) 0px 2px 2px 0px, rgba(0, 0, 0, 0.60) 0px 0px 1px 0px;
   outline: 2px dashed rgba(200, 200, 200, 1);
   transition: 0.3s;
 }

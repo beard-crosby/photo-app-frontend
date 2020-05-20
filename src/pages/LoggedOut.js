@@ -5,15 +5,11 @@ const loggedOut = ({ history }) =>
   <div className="model">
     <div className="top">
       <h5>LOGGED OUT</h5>
-      <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
+      <h5 onClick={() => history.goBack()}>BACK</h5>
     </div>
-    <div className="middle" style={{ alignItems: 'center' }}>
+    <div className="middle">
       <p>You were logged out.</p>
-    </div>
-    <div className="bottom" style={{ justifyContent: 'center' }}>
-      <Button 
-        text="Continue" 
-        onClick={() => history.push("/auth")}/>
+      <Button text="Continue" onClick={() => history.push("/auth")}/>
     </div>
   </div>
 

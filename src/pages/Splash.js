@@ -13,17 +13,11 @@ const Splash = () => {
 
   return (
     <div className="flex-col">
-      <div className="app-and-signup">
+      <div className="app-and-create">
         <div className="app">
           <img alt="iPhone 11" src={require("../static/misc/iphone-template.png")}/>
         </div>
-        <div className="signup">
-          <Create 
-          style={{ width: '100%' }}
-          stackButtons
-          hideTopRight
-          hideBottom/>
-        </div>
+        <Create/>
       </div>
       {user.posts && <Masonry 
         className={`masonry ${masComp}`}

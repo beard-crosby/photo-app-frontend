@@ -6,7 +6,7 @@ import { signS3 } from '../../../shared/bucketRequests'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-const UploadBox = ({ user, setUser, history }) => {
+const UploadBox = ({ user, setUser, style, history }) => {
   const [ thumb, setThumb ] = useState("")
 
   // Determine if the window has drag and drop capabilities.
@@ -61,7 +61,8 @@ const UploadBox = ({ user, setUser, history }) => {
       ${styles.uploadBox} 
       ${canDragDrop && styles.canDragDrop} 
       ${isDragActive && styles.dragActive} 
-      ${thumb !== "" && styles.thumb}`})}>
+      ${thumb !== "" && styles.thumb}`})}
+      style={style}>
       <input {...getInputProps()}/>
       {thumb ? 
         <img alt="Thumbnail" src={thumb}/> :
@@ -74,8 +75,9 @@ const UploadBox = ({ user, setUser, history }) => {
 }
 
 UploadBox.propTypes = {
-  user: PropTypes.object, // User Object in context.
-  setUser: PropTypes.func, // setUser function in context.
+  user: PropTypes.object,  // User Object in context.
+  setUser: PropTypes.func, // SetUser function in context.
+  style: PropTypes.object, // Pass up style. 
 }
 
 export default withRouter(UploadBox)

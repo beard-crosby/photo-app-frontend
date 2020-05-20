@@ -8,7 +8,6 @@ import Discover from './pages/Discover'
 import Wall from './pages/Wall'
 import Settings from './pages/Settings'
 import Auth from './pages/Auth'
-import Create from './pages/Create'
 import Forgot from './pages/Forgot'
 import Splash from './pages/Splash'
 import Post from './pages/Post'
@@ -34,7 +33,6 @@ const Router = () => {
         <>
           <Route exact path="/" component={Splash}/>
           <Route path="/auth" component={Auth}/>
-          <Route path="/create" component={Create}/>
           <Route path="/forgot" component={Forgot}/>
           <Route path="/loggedout" component={LoggedOut}/>
         </>

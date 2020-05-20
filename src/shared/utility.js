@@ -56,20 +56,3 @@ export const formatFilename = (username, filename) => {
   const newFilename = `${username.toLowerCase().replace(/[^a-z0-9]/g, "-")}/${cleanFilename.toLowerCase().replace(/[^a-z0-9]/g, "-")}`
   return newFilename
 }
-
-// If there is a backend error, return it. If not, return passed string.
-export const backendError = (user, passed) => {
-  if (passed === "Email") {
-    switch (user.formErrors) {
-      case "An Account by that Email already exists!": return user.formErrors
-      case "An Account by that Email was not found!": return user.formErrors
-      default: return passed
-    }
-  } else if (passed === "Password") {
-    switch (user.formErrors) {
-      case "Incorrect Password": return user.formErrors
-      case "Passwords do not match.": return user.formErrors
-      default: return passed
-    }
-  }
-}

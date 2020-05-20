@@ -1,5 +1,4 @@
-$background-white: #f5f5f5;
-$dm-background-white: #0A0A0A;
+@import "../../scss/variables";
 
 .spinnerBG {
   position: absolute;
@@ -9,7 +8,7 @@ $dm-background-white: #0A0A0A;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: $background-white;
+  background: $background;
 
   .skFoldingCube {
     margin: 20px auto;
@@ -107,5 +106,5 @@ $dm-background-white: #0A0A0A;
 }
 
 .darkModeBG {
-  background: $dm-background-white;
+  background: $dm-background;
 }
