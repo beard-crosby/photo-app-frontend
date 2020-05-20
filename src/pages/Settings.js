@@ -3,7 +3,8 @@ import { UserContext } from '../App'
 import Button from '../components/UI/Button'
 import { logout } from '../shared/localStorage'
 import ProfileCard from '../components/ProfileCard'
-import { LogOut, XSquare } from 'react-feather'
+import { LogOut, XSquare, GitHub } from 'react-feather'
+import { Link } from 'react-router-dom'
 
 const Settings = () => {
   const { user, setUser } = useContext(UserContext)
@@ -38,6 +39,7 @@ const Settings = () => {
         <Button text="Logout" icon={<LogOut/>} onClick={() => setUser({ ...logout(), redirect: "/auth" })}/>
         <Button text="Delete Account" icon={<XSquare/>} redirect={"/deleteuser"}/>
       </div>
+      <a href="https://github.com/beard-crosby/photo-app-frontend"><Button text="Photo App is an open source project!" icon={<GitHub/>}/></a>
     </div>
   )
 }
