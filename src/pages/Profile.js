@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { UserContext } from '../App'
 import ProfileCard from '../components/Cards/ProfileCard'
 import Following from '../components/Following'
-import Biography from '../components/Biography'
+import UserInfo from '../components/UserInfo'
 import Masonry from 'react-masonry-component'
 
 const Profile = () => {
@@ -16,7 +16,7 @@ const Profile = () => {
       </div>
       <div className="flex-row-nobg">
         <Following user={user}/>
-        <Biography/>
+        <UserInfo/>
       </div>
       <Masonry 
         className={`masonry ${masComp}`}
