@@ -3,11 +3,11 @@ import styles from './_Following.module.scss'
 import FollowingCard from '../../Cards/FollowingCard'
 
 const Following = ({ user }) => 
-  <div className={`model ${styles.followingWrapper}`}>
-    <div className="top">
-      <h5 className="title-left">FOLLOWING</h5>
+  <div className={styles.followingWrapper}>
+    <div className={styles.top}>
+      <h5>FOLLOWING</h5>
     </div>
-    <div className={`middle ${styles.following}`} id="following">
+    <div className={styles.following}>
       {user.following.map((followed, i) => <FollowingCard key={i} followed={followed}/>)}
     </div>
   </div>

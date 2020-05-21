@@ -1,16 +1,50 @@
+@import '../../../scss/variables';
+
 .followingWrapper {
-  width: 175px !important;
-  height: 360px !important;
+  width: 175px;
+  height: 360px;
+  display: flex;
+  flex-flow: column nowrap;
   margin: 0 20px 20px 0;
+  background: $white;
+  border: 1px solid $color-1;
+  border-radius: 6px;
+  box-sizing: border-box;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  .top {
+    width: 175px;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    border-bottom: 1px solid $color-1;
+    padding: 0 20px;
+
+    h5 {
+      width: 175px;
+      height: 40px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      &:hover {
+        color: $black;
+      }
+    }
+  }
 
   .following {
-    height: 320px !important;
+    height: 320px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 10px 0 !important;
+    padding: 10px 0;
     overflow-y: scroll;
     flex-shrink: 0;
+    box-sizing: border-box;
   }
 }
