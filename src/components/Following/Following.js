@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './_Following.module.scss'
-import FollowingCard from '../../Cards/FollowingCard'
+import FollowingCard from '../Cards/FollowingCard'
 
 const Following = ({ user }) => 
   <div className={styles.followingWrapper}>

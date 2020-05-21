@@ -1,11 +1,11 @@
-@import '../../../scss/variables';
+@import '../../scss/variables';
 
 .followingWrapper {
   width: 175px;
   height: 360px;
   display: flex;
   flex-flow: column nowrap;
-  margin: 0 20px 20px 0;
+  margin-right: 20px;
   background: $white;
   border: 1px solid $color-1;
   border-radius: 6px;

@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react'
 import { UserContext } from '../App'
 import ProfileCard from '../components/Cards/ProfileCard'
-import Following from '../components/UI/Following'
+import Following from '../components/Following'
+import Biography from '../components/Biography'
 import Masonry from 'react-masonry-component'
 
 const Profile = () => {
@@ -15,14 +16,7 @@ const Profile = () => {
       </div>
       <div className="flex-row-nobg">
         <Following user={user}/>
-        <div className="model section">
-          <div className="top">
-            <h5 className="title-left">BIOGRAPHY</h5>
-          </div>
-          <div className="middle">
-
-          </div>
-        </div>
+        <Biography/>
       </div>
       <Masonry 
         className={`masonry ${masComp}`}

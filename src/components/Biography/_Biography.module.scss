@@ -1,0 +1,41 @@
+@import '../../scss/variables';
+
+.biographyWrapper {
+  height: 360px;
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  background: $white;
+  border: 1px solid $color-1;
+  border-radius: 6px;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  .top {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    border-bottom: 1px solid $color-1;
+    padding: 0 20px;
+
+    h5 {
+      height: 40px;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+
+  .biography {
+    width: 100%;
+    height: 100%;
+  }
+}
