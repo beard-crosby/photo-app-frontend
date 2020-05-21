@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './_ProfileCard.module.scss'
-import ProfilePicture from '../UI/ProfilePicture'
+import ProfilePicture from '../../UI/ProfilePicture'
 import PropTypes from 'prop-types'
 
 const ProfileCard = ({ user, style, sidebar }) => 

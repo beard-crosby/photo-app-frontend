@@ -1,0 +1,16 @@
+.followingWrapper {
+  width: 175px !important;
+  height: 360px !important;
+  margin: 0 20px 20px 0;
+
+  .following {
+    height: 320px !important;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 10px 0 !important;
+    overflow-y: scroll;
+    flex-shrink: 0;
+  }
+}

@@ -43,6 +43,7 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
         ...res.data.data.createUser, 
         geolocation: JSON.parse(res.data.data.createUser.geolocation), 
         settings: JSON.parse(res.data.data.createUser.settings),
+        file: { uploaded: false },
       }
       setUser(logInSuccess(userData))
       timeout(userData.token_expiry, setUser)
@@ -131,6 +132,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
         ...res.data.data.login, 
         geolocation: JSON.parse(res.data.data.login.geolocation), 
         settings: JSON.parse(res.data.data.login.settings),
+        file: { uploaded: false },
       }
       setUser(logInSuccess(userData))
       timeout(userData.token_expiry, setUser)

@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { UserContext } from '../App'
 import Button from '../components/UI/Button'
 import { logout } from '../shared/localStorage'
-import ProfileCard from '../components/ProfileCard'
+import ProfileCard from '../components/Cards/ProfileCard'
 import { LogOut, XSquare, GitHub } from 'react-feather'
 
 const Settings = () => {

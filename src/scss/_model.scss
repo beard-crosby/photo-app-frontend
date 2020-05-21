@@ -7,7 +7,7 @@
   align-items: center;
   flex-grow: 1;
 
-  .flex-row, .button-row {
+  .flex-row, .button-row, .flex-row-nobg {
     width: 100%;
     min-height: 20px;
     display: flex;
@@ -38,6 +38,13 @@
         border-left: 1px solid $color-1;
       }
     }
+  }
+
+  .flex-row-nobg {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
   }
 }
 
@@ -93,7 +100,7 @@
     }
   }
 
-  .middle, .middle-row, .middle-row-left {
+  .middle, .middle-row {
     width: 100%;
     padding: 20px;
     display: flex;
@@ -111,13 +118,9 @@
     }
   }
 
-  .middle-row, .middle-row-left {
+  .middle-row {
     flex-flow: row nowrap;
     justify-content: space-between;
-  }
-
-  .middle-row-left {
-    justify-content: flex-start;
   }
 }
 
@@ -126,8 +129,8 @@
   margin-bottom: 20px;
 
   button {
-    height: 40px;
     width: 100%;
+    height: 40px;
 
     &:nth-child(n+2) {
       border-left: 1px solid $color-1;

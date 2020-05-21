@@ -1,4 +1,4 @@
-@import "../../scss/variables";
+@import "../../../scss/variables";
 
 .profile { // also used for settings page.
   width: 100%;
@@ -18,6 +18,10 @@
 
 .sidebar {
   cursor: pointer;
+
+  h5 {
+    letter-spacing: 1px;
+  }
 
   .viewProfile {
     opacity: 0;

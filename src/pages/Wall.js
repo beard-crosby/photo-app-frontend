@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../App'
-import PhotoCard from '../components/PhotoCard'
+import PhotoCard from '../components/Cards/PhotoCard'
 import moment from 'moment'
 
 const Wall = () => {
