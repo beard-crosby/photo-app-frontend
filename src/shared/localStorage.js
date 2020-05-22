@@ -18,6 +18,7 @@ export const checkLocalStorage = () => {
       const logged_in_at = localStorage.getItem('logged_in_at')
       const geolocation = localStorage.getItem('geolocation')
       const settings = localStorage.getItem('settings')
+      const favourites = localStorage.getItem('favourites')
 
       const userData = {
         localStorage: true,
@@ -34,6 +35,7 @@ export const checkLocalStorage = () => {
         logged_in_at: logged_in_at,
         geolocation: JSON.parse(geolocation),
         settings: JSON.parse(settings),
+        favourites: JSON.parse(favourites),
         formErrors: {},
         file: { uploaded: false },
         redirect: false,
@@ -58,6 +60,7 @@ export const logout = () => {
   localStorage.removeItem('logged_in_at')
   localStorage.removeItem('geolocation')
   localStorage.removeItem('settings')
+  localStorage.removeItem('favourites')
 
   const userData = {
     _id: null,
@@ -71,6 +74,7 @@ export const logout = () => {
     posts: null,
     following: null,
     settings: { dark_mode: false },
+    favourites: null,
     logged_in_at: null,
     geolocation: null,
     formErrors: {},
@@ -95,6 +99,7 @@ export const logInSuccess = userData => {
     localStorage.setItem('following', JSON.stringify(userData.following))
     localStorage.setItem('logged_in_at', userData.logged_in_at)
     localStorage.setItem('settings', JSON.stringify(userData.settings))
+    localStorage.setItem('favourites', JSON.stringify(userData.favourites))
   }
 
   return {

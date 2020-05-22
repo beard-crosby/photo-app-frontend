@@ -31,6 +31,9 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
           following {
             _id
           }
+          favourites {
+            _id
+          }
         }
       }
     `
@@ -118,6 +121,22 @@ export const login = (formData, history, user, setUser, setLoading) => {
                   _id
                 }
               }
+            }
+          }
+          favourites {
+            _id
+            img
+            title
+            description
+            created_at
+            updated_at
+            author {
+              _id
+              name
+              email
+              website
+              bio
+              profile_picture
             }
           }
         }
