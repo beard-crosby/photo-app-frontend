@@ -4,6 +4,7 @@ import ProfileCard from '../components/Cards/ProfileCard'
 import Following from '../components/Following'
 import UserInfo from '../components/UserInfo'
 import Masonry from 'react-masonry-component'
+import ContactCard from '../components/Cards/ContactCard'
 
 const Profile = () => {
   const { user } = useContext(UserContext)
@@ -11,12 +12,15 @@ const Profile = () => {
 
   return (
     <div className="flex-col">
-      <div className="flex-row">
+      <div className="flex-row section">
         <ProfileCard user={user}/>
       </div>
-      <div className="flex-row-nobg">
+      <div className="flex-row">
         <Following user={user}/>
-        <UserInfo/>
+        <div className="flex-col">
+          <UserInfo/>
+          <ContactCard/>
+        </div>
       </div>
       <Masonry 
         className={`masonry ${masComp}`}

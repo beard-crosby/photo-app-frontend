@@ -21,6 +21,17 @@ h5, h6, p {
   color: $color-3;
 }
 
+svg {
+  width: 18px;
+  height: 18px;
+  color: $color-3;
+  cursor: pointer;
+
+  &:hover {
+    color: $black;
+  }
+}
+
 h5 {
   letter-spacing: 1.5px;
 }
@@ -157,11 +168,7 @@ body {
           svg {
             width: 15px;
             height: 15px;
-            color: $color-2;
-
-            &:hover {
-              color: $black;
-            }
+            color: $color-3;
           }
         }
 
@@ -306,6 +313,7 @@ body {
 .masonry {
   width: 100%;
   opacity: 0;
+  margin-top: 20px;
 
   img {
     width: 25%;

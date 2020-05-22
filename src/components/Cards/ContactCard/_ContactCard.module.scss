@@ -1,6 +1,6 @@
-@import '../../scss/variables';
+@import '../../../scss/variables';
 
-.userInfoWrapper {
+.contactWrapper {
   height: 170px;
   width: 100%;
   display: flex;
@@ -10,7 +10,6 @@
   border-radius: 6px;
   box-sizing: border-box;
   overflow: hidden;
-  margin-bottom: 20px;
 
   .top {
     height: 40px;
@@ -35,7 +34,7 @@
     }
   }
 
-  .userInfo {
+  .contact {
     width: 100%;
     height: 100%;
   }

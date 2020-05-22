@@ -1,54 +1,21 @@
 @import "./variables";
 
-.flex-col {
+.flex-col { // Structural
   width: 100%;
+  flex-grow: 1;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  flex-grow: 1;
 
-  .flex-row, .button-row, .flex-row-nobg {
+  .flex-row {
     width: 100%;
-    min-height: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 6px;
-    border: 1px solid $color-1;
-    background: $white;
-    margin-bottom: 20px;
-    overflow: hidden;
-    padding: 15px 20px;
-    box-sizing: border-box;
-  }
-
-  .button-row {
-    height: 40px;
-    padding: 0;
-
-    button {
-      height: 40px;
-      padding: 0 20px;
-
-      &:nth-child(1) {
-        border-right: 1px solid $color-1;
-      }
-
-      &:nth-child(n+2) {
-        border-left: 1px solid $color-1;
-      }
-    }
-  }
-
-  .flex-row-nobg {
-    background: none;
-    border: none;
-    padding: 0;
-    margin-bottom: 20px;
   }
 }
 
-.model {
+.model { // Asthetic
   width: 400px;
   min-height: 100px;
   height: fit-content;
@@ -126,6 +93,11 @@
 
 .section {
   width: 100%;
+  border-radius: 6px;
+  border: 1px solid $color-1;
+  background: $white;
+  overflow: hidden;
+  box-sizing: border-box;
   margin-bottom: 20px;
 
   button {
@@ -138,7 +110,7 @@
   }
 }
 
-.below {
+.below { // Outside of white backgrounds
   margin-top: 10px;
   
   h6 {

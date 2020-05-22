@@ -17,7 +17,7 @@
     width: 175px;
     height: 40px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
     border-bottom: 1px solid $color-1;
@@ -33,6 +33,10 @@
       &:hover {
         color: $black;
       }
+    }
+
+    svg {
+      flex-shrink: 0;
     }
   }
 

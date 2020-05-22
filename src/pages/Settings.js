@@ -10,7 +10,7 @@ const Settings = () => {
 
   return (
     <div className="flex-col">
-      <div className="flex-row">
+      <div className="flex-row section">
         <ProfileCard user={user}/>
       </div>
       <div className="model section">
@@ -34,7 +34,7 @@ const Settings = () => {
           <Button text="Toggle Display Biography"/>
         </div>
       </div>
-      <div className="button-row">
+      <div className="flex-row section">
         <Button text="Logout" icon={<LogOut/>} onClick={() => setUser({ ...logout(), redirect: "/auth" })}/>
         <Button text="Delete Account" icon={<XSquare/>} redirect={"/deleteuser"}/>
       </div>
