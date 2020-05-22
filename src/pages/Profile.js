@@ -12,7 +12,7 @@ const Profile = () => {
 
   return (
     <div className="flex-col">
-      <div className="flex-row section">
+      <div className="flex-row">
         <ProfileCard user={user}/>
       </div>
       <div className="flex-row">
