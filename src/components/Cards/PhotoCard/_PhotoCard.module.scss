@@ -10,7 +10,7 @@
   background: $white;
   border: 1px solid $color-1;
 
-  h5, p, svg {
+  img, h5, p, svg {
     cursor: pointer;
   }
 
@@ -29,31 +29,24 @@
       transition: 0.3s;
     }
 
-    .svgBar {
+    svg {
       position: absolute;
       top: 0;
       right: 0;
       margin: 15px 20px;
       opacity: 0;
+      color: $white;
+      fill: $white;
       transition: 0.3s;
+    }
 
-      svg {
-        color: $white;
-        fill: $white;
-
-        &:nth-child(n+2) {
-          margin-left: 10px;
-        }
-      }
-
-      .heartClicked {
-        color: $favourite;
-        fill: $favourite;
-      }
+    .heartClicked {
+      color: $favourite;
+      fill: $favourite;
     }
 
     &:hover {
-      .svgBar {
+      svg {
         opacity: 1;
         transition: 0.3s;
       }

@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ProfileCard from '../ProfileCard'
 import styles from './_PhotoCard.module.scss'
 import PropTypes from 'prop-types'
-import { Maximize2, Heart } from 'react-feather'
+import { Heart } from 'react-feather'
 
 const PhotoCard = ({ user, post, author }) => {
   const [ imgClicked, setImgClicked ] = useState("undefined")
@@ -10,32 +10,29 @@ const PhotoCard = ({ user, post, author }) => {
   const [ edit, setEdit ] = useState(false)
   const isAuthor = user._id === author._id
 
-  const maximiseClickedHandler = () => {
-    if (imgClicked === "undefined") {
-      setImgClicked(styles.imgClicked)
-      document.body.style.overflow = "hidden"
+  const clickedHandler = e => {
+    if (e.target.nodeName.toLowerCase() === "img") {
+      if (imgClicked === "undefined") {
+        setImgClicked(styles.imgClicked)
+        document.body.style.overflow = "hidden"
+      } else {
+        setImgClicked("undefined")
+        document.body.style = "none"
+      }
     } else {
-      setImgClicked("undefined")
-      document.body.style = "none"
-    }
-  }
-
-  const favouriteClickedHandler = () => {
-    if (heartClicked === "undefined") {
-      setHeartClicked(styles.heartClicked)
-    } else {
-      setHeartClicked("undefined")
+      if (heartClicked === "undefined") {
+        setHeartClicked(styles.heartClicked)
+      } else {
+        setHeartClicked("undefined")
+      }
     }
   }
 
   return (
     <div className={`${styles.photoCard} ${imgClicked} ${!isAuthor && styles.postSettings} ${user.settings.dark_mode && styles.darkMode}`}>
-      <div className={`${styles.imgWrapper} ${edit && styles.showEdit}`}>
+      <div className={`${styles.imgWrapper} ${edit && styles.showEdit}`} onClick={(e) => !edit && clickedHandler(e)}>
         <img alt="Post" src={post.img}/>
-          {!edit && !isAuthor && <div className={styles.svgBar}>
-            <Heart className={heartClicked} onClick={() => favouriteClickedHandler()}/>
-            <Maximize2 onClick={() => maximiseClickedHandler()}/>
-          </div>}
+        {!isAuthor && <Heart className={heartClicked}/>}
       </div>
       <div className={styles.sidebar}>
         <div className={styles.sidebarWrapper}>
