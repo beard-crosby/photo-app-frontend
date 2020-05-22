@@ -19,11 +19,11 @@ export const switchDarkMode = (user, setUser, Onload) => {
 }
 
 // If logged in for 1h (3600000ms), then logout().
-export const timeout = (expirationTime, setUser) => {
+export const timeout = (user, setUser) => {
   setTimeout(() => {
     setUser({ ...logout(), redirect: "/loggedout" })
     process.env.NODE_ENV === 'development' && console.log("Token Expired!")
-  }, expirationTime * 3600000)
+  }, user.token_expiry * 3600000)
 }
 
 // Add headers to a request

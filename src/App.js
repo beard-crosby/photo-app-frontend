@@ -17,12 +17,12 @@ const App = () => {
 
   return (
     <UserContext.Provider value={{ loading, setLoading, user, setUser }}>
-      <Nav/>
+      <Nav user={user} setUser={setUser}/>
       <main>
         {loading && <Spinner user={user}/>}
         <Router/>
       </main>
-      <Footer/>
+      <Footer user={user} setUser={setUser}/>
     </UserContext.Provider>
   )
 }

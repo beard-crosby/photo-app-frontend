@@ -1,14 +1,11 @@
-import React, { useContext, useEffect } from 'react'
-import { UserContext } from '../../App'
+import React, { useEffect } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { Moon, Sun, Upload } from 'react-feather'
 import { withRouter } from 'react-router-dom'
 import { switchDarkMode } from '../../shared/utility'
 import ProfilePicture from '../UI/ProfilePicture'
 
-const Nav = ({ history }) => {
-  const { user, setUser } = useContext(UserContext)
-
+const Nav = ({ user, setUser, history }) => {
   useEffect(() => { // Redirect if user.redirect === truthy.
     user.redirect && history.push(user.redirect)
     setUser({ ...user, redirect: false })

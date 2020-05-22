@@ -51,3 +51,30 @@ export const updateGeolocation = (user, setUser, geolocation) => {
     process.env.NODE_ENV === 'development' && console.log(`UpdateGeolocation Error: ${err}`)
   })
 }
+
+export const notActive = (user, setUser) => {
+  const _id = localStorage.getItem('_id')
+  axios.post('', {
+    variables: {
+      _id: _id,
+    },
+    query: `
+      mutation NotActive($_id: ID!) {
+        notActive(_id: $_id) {
+          _id
+          active
+        }
+      }
+    `
+  }).then(res => {
+    if (res.data.errors) {
+      process.env.NODE_ENV === 'development' && console.log(`NotActive Error: ${res.data.errors[0].message}`)
+    } else {
+      setUser({ ...user, active: false })
+      process.env.NODE_ENV === 'development' && console.log(res)
+    }
+  }).catch(err => {
+    process.env.NODE_ENV === 'development' && console.log(`NotActive Error: ${err}`)
+  })
+  localStorage.removeItem('_id') // get rid of localStorage._id no matter the eventuality of the request.
+}

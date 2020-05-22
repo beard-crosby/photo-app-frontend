@@ -15,6 +15,7 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
       mutation CreateUser($name: String!, $email: String!, $password: String!, $passConfirm: String! ) {
         createUser(userInput: { name: $name, email: $email, password: $password, pass_confirm: $passConfirm }) {
           _id
+          active
           token
           token_expiry
           logged_in_at
@@ -49,7 +50,7 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
         file: { uploaded: false },
       }
       setUser(logInSuccess(userData))
-      timeout(userData.token_expiry, setUser)
+      timeout(userData, setUser)
       history.push("/")
       checkGeolocation(userData, setUser)
       process.env.NODE_ENV === 'development' && console.log(res)
@@ -73,6 +74,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
       query Login( $email: String!, $password: String!) {
         login( email: $email, password: $password) {
           _id
+          active
           token
           token_expiry
           logged_in_at
@@ -100,6 +102,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
           }
           following {
             _id
+            active
             name
             email
             website
@@ -154,7 +157,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
         file: { uploaded: false },
       }
       setUser(logInSuccess(userData))
-      timeout(userData.token_expiry, setUser)
+      timeout(userData, setUser)
       history.push("/")
       checkGeolocation(userData, setUser)
       process.env.NODE_ENV === 'development' && console.log(res)
