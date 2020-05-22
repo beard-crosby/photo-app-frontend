@@ -22,31 +22,42 @@
   .imgWrapper {
     display: flex;
     position: relative;
-    width: 75%;
+    width: 525px;
     
     img {
       width: 100%;
       transition: 0.3s;
     }
 
-    svg {
+    .hoverOverlay {
       position: absolute;
       top: 0;
-      right: 0;
-      margin: 15px 20px;
+      left: 0;
+      width: 525px;
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 20px;
+      box-sizing: border-box;
       opacity: 0;
-      color: $white;
-      fill: $white;
       transition: 0.3s;
-    }
 
-    .heartClicked {
-      color: $favourite;
-      fill: $favourite;
+      h5, svg {
+        color: $white;
+        fill: $white;
+      }
+
+      h5 {
+        font-weight: 600;
+      }
+
+      .heartClicked {
+        color: $favourite;
+        fill: $favourite;
+      }
     }
 
     &:hover {
-      svg {
+      .hoverOverlay {
         opacity: 1;
         transition: 0.3s;
       }
@@ -65,7 +76,7 @@
   }
 
   .sidebar {
-    width: 25%;
+    width: 175px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;

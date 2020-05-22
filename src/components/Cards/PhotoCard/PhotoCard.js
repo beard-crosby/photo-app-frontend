@@ -4,11 +4,11 @@ import styles from './_PhotoCard.module.scss'
 import PropTypes from 'prop-types'
 import { Heart } from 'react-feather'
 
-const PhotoCard = ({ user, post, author }) => {
+const PhotoCard = ({ user, post }) => {
   const [ imgClicked, setImgClicked ] = useState("undefined")
   const [ heartClicked, setHeartClicked ] = useState("undefined")
   const [ edit, setEdit ] = useState(false)
-  const isAuthor = user._id === author._id
+  const isAuthor = user._id === post.author._id
 
   const clickedHandler = e => {
     if (e.target.nodeName.toLowerCase() === "img") {
@@ -32,11 +32,14 @@ const PhotoCard = ({ user, post, author }) => {
     <div className={`${styles.photoCard} ${imgClicked} ${!isAuthor && styles.postSettings} ${user.settings.dark_mode && styles.darkMode}`}>
       <div className={`${styles.imgWrapper} ${edit && styles.showEdit}`} onClick={(e) => !edit && clickedHandler(e)}>
         <img alt="Post" src={post.img}/>
-        {!isAuthor && <Heart className={heartClicked}/>}
+        <div className={styles.hoverOverlay}>
+          <h5>{post.title}</h5>
+          {!isAuthor && <Heart className={heartClicked}/>}
+        </div>
       </div>
       <div className={styles.sidebar}>
         <div className={styles.sidebarWrapper}>
-          <ProfileCard user={author} style={{ padding: 10 }} sidebar/>
+          <ProfileCard user={post.author} style={{ padding: 10 }} sidebar/>
           <div className={styles.comments}>
 
           </div>
