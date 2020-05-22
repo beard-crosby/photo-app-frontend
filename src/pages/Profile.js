@@ -4,7 +4,7 @@ import ProfileCard from '../components/Cards/ProfileCard'
 import Following from '../components/Following'
 import UserInfo from '../components/UserInfo'
 import Masonry from 'react-masonry-component'
-import ContactCard from '../components/Cards/ContactCard'
+import FavouritesCard from '../components/Cards/FavouritesCard'
 
 const Profile = () => {
   const { user } = useContext(UserContext)
@@ -19,7 +19,7 @@ const Profile = () => {
         <Following user={user}/>
         <div className="flex-col">
           <UserInfo/>
-          <ContactCard/>
+          <FavouritesCard/>
         </div>
       </div>
       <Masonry 
