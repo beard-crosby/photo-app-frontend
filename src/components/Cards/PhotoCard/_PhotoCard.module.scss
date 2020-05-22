@@ -33,13 +33,14 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 525px;
+      width: 100%;
       display: flex;
       justify-content: space-between;
       padding: 15px 20px;
       box-sizing: border-box;
       opacity: 0;
       transition: 0.3s;
+      cursor: pointer;
 
       h5, svg {
         color: $white;

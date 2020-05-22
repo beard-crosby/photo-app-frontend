@@ -11,19 +11,19 @@ const PhotoCard = ({ user, post }) => {
   const isAuthor = user._id === post.author._id
 
   const clickedHandler = e => {
-    if (e.target.nodeName.toLowerCase() === "img") {
+    if (e.target.nodeName.toLowerCase() === "path" || e.target.nodeName.toLowerCase() === "svg") {
+      if (heartClicked === "undefined") {
+        setHeartClicked(styles.heartClicked)
+      } else {
+        setHeartClicked("undefined")
+      }
+    } else {
       if (imgClicked === "undefined") {
         setImgClicked(styles.imgClicked)
         document.body.style.overflow = "hidden"
       } else {
         setImgClicked("undefined")
         document.body.style = "none"
-      }
-    } else {
-      if (heartClicked === "undefined") {
-        setHeartClicked(styles.heartClicked)
-      } else {
-        setHeartClicked("undefined")
       }
     }
   }
