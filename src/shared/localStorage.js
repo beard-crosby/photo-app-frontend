@@ -22,8 +22,8 @@ export const checkLocalStorage = () => {
 
       const userData = {
         localStorage: true,
+        status: "online",
         _id: _id,
-        active: true,
         token: token,
         token_expiry: token_expiry,
         name: name,
@@ -88,8 +88,8 @@ export const logInSuccess = userData => {
 
   return {
     ...userData, 
+    status: "online",
     formErrors: {},
-    active: true,
     file: { uploaded: false },
   }
 }

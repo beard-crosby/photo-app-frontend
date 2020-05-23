@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { headers, checkAuth } from './utility'
-import { logout } from './localStorage'
 
 export const updateSettings = (user, setUser, history) => {
   axios.post('', {
@@ -52,26 +51,27 @@ export const updateGeolocation = (user, setUser, geolocation, history) => {
   })
 }
 
-export const notActive = user => {
+export const updateStatus = (user, status) => {
   axios.post('', {
     variables: {
       _id: user._id,
+      status: status,
     },
     query: `
-      mutation NotActive($_id: ID!) {
-        notActive(_id: $_id) {
+      mutation UpdateStatus($_id: ID!, $status: String!) {
+        updateStatus(_id: $_id, status: $status) {
           _id
-          active
+          status
         }
       }
     `
   }).then(res => {
     if (res.data.errors) {
-      process.env.NODE_ENV === 'development' && console.log(`NotActive Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(`UpdateStatus Error: ${res.data.errors[0].message}`)
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(`NotActive Error: ${err}`)
+    process.env.NODE_ENV === 'development' && console.log(`UpdateStatus Error: ${err}`)
   })
 }

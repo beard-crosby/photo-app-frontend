@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../App'
-import { notActive } from '../shared/miscRequests'
+import { updateStatus } from '../shared/miscRequests'
 import Button from '../components/UI/Button'
 import { logout } from '../shared/localStorage'
 import ProfileCard from '../components/Cards/ProfileCard'
@@ -10,7 +10,7 @@ const Settings = ({ history }) => {
   const { user, setUser } = useContext(UserContext)
 
   const logoutHandler = () => {
-    notActive(user)
+    updateStatus(user, "offline")
     setUser(logout())
     history.push("/auth")
   }

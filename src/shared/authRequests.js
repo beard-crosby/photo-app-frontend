@@ -15,7 +15,7 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
       mutation CreateUser($name: String!, $email: String!, $password: String!, $passConfirm: String! ) {
         createUser(userInput: { name: $name, email: $email, password: $password, pass_confirm: $passConfirm }) {
           _id
-          active
+          status
           token
           token_expiry
           logged_in_at
@@ -74,7 +74,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
       query Login( $email: String!, $password: String!) {
         login( email: $email, password: $password) {
           _id
-          active
+          status
           token
           token_expiry
           logged_in_at
@@ -102,7 +102,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
           }
           following {
             _id
-            active
+            status
             name
             email
             website
@@ -181,10 +181,7 @@ export const deleteAccount = (user, setUser, setLoading, history) => {
         deleteUser(_id: $_id) {
           _id
           name
-          username
           email
-          bio
-          profile_img
         }
       }
     `
