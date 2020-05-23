@@ -25,9 +25,8 @@ const Post = ({ history }) => {
     createPost(form, user, setUser, setLoading, history)
   }
 
-  const descriptionHeight = () => {
-    let textarea = document.getElementById("description")
-    if (textarea.clientHeight < 100) textarea.style.height = "100px"
+  const descriptionHeight = e => {
+    if (e.target.clientHeight < 100) e.target.style.height = "100px"
   }
   
   return (
@@ -39,7 +38,7 @@ const Post = ({ history }) => {
         </div>
         <div className="middle">
           <FormSection text={"Title"} user={user} form={form} setForm={setForm}/>
-          <FormSection text={"Description"} user={user} form={form} setForm={setForm} onMouseDown={() => descriptionHeight()} textarea/>
+          <FormSection text={"Description"} user={user} form={form} setForm={setForm} onFocus={(e) => descriptionHeight(e)} textarea/>
           <UploadBox user={user} setUser={setUser} style={{ margin: "20px 0"}}/>
           <Button submit disabled={!formValid} icon={<Upload/>} text="Post"/>
         </div>

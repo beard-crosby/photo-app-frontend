@@ -7,7 +7,7 @@ import Masonry from 'react-masonry-component'
 import FavouritesCard from '../components/Cards/FavouritesCard'
 
 const Profile = () => {
-  const { user } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
   const [ masComp, setMasComp ] = useState(null)
 
   return (
@@ -17,9 +17,9 @@ const Profile = () => {
       </div>
       <div className="flex-row">
         <Following user={user}/>
-        <div className="flex-col">
-          <UserInfo/>
-          <FavouritesCard/>
+        <div className="flex-col" style={{ height: 360, justifyContent: "space-between" }}>
+          <UserInfo user={user} setUser={setUser}/>
+          {!user.aboutFocused && <FavouritesCard/>}
         </div>
       </div>
       <Masonry 

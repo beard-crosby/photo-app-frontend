@@ -65,3 +65,9 @@ export const checkAuth = (res, setUser, history) => {
     history.push("/loggedout")
   }
 }
+
+// Remove a key: value pair from context.
+export const removeKey = (obj, prop) => {
+  let {[prop]: omit, ...res} = obj
+  return res
+}
