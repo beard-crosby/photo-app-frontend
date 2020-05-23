@@ -23,7 +23,7 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
           name
           email
           website
-          bio  
+          info  
           profile_picture
           settings
           posts {
@@ -45,6 +45,7 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
     } else {
       const userData = {
         ...res.data.data.createUser, 
+        info: JSON.parse(res.data.data.createUser.info),
         geolocation: JSON.parse(res.data.data.createUser.geolocation), 
         settings: JSON.parse(res.data.data.createUser.settings),
         file: { uploaded: false },
@@ -57,8 +58,8 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
     }
     setLoading(false)
   }).catch(err => {
-    setUser({...user, formErrors: err.response.data.errors[0].message})
     process.env.NODE_ENV === 'development' && console.log(`CreateUser Error: ${err}`)
+    setUser({...user, formErrors: err.response.data.errors[0].message})
     setLoading(false)
   })
 }
@@ -82,7 +83,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
           name
           email
           website
-          bio
+          info
           profile_picture
           settings
           posts {
@@ -106,7 +107,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
             name
             email
             website
-            bio
+            info
             profile_picture
             posts {
               _id
@@ -138,7 +139,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
               name
               email
               website
-              bio
+              info
               profile_picture
             }
           }
@@ -151,7 +152,8 @@ export const login = (formData, history, user, setUser, setLoading) => {
       process.env.NODE_ENV === 'development' && console.log(`Login Error: ${res.data.errors[0].message}`)
     } else {
       const userData = {
-        ...res.data.data.login, 
+        ...res.data.data.login,
+        info: JSON.parse(res.data.data.login.info),
         geolocation: JSON.parse(res.data.data.login.geolocation), 
         settings: JSON.parse(res.data.data.login.settings),
         file: { uploaded: false },
@@ -164,8 +166,8 @@ export const login = (formData, history, user, setUser, setLoading) => {
     }
     setLoading(false)
   }).catch(err => {
-    setUser({...user, formErrors: err.response.data.errors[0].message})
     process.env.NODE_ENV === 'development' && console.log(`Login Error: ${err}`)
+    setUser({...user, formErrors: err.response.data.errors[0].message})
     setLoading(false)
   })
 }
@@ -201,29 +203,29 @@ export const deleteAccount = (user, setUser, setLoading, history) => {
   })
 }
 
-export const updateBio = (user, setUser, history) => {
+export const updateInfo = (user, setUser, history) => {
   axios.post('', {
     variables: {
       _id: user._id,
-      bio: user.bio,
+      info: JSON.stringify(user.info),
     },
     query: `
-      mutation UpdateBio($_id: ID!, $bio: String!) {
-        updateBio(_id: $_id, bio: $bio) {
+      mutation UpdateInfo($_id: ID!, $info: String!) {
+        updateInfo(_id: $_id, info: $info) {
           _id
-          bio
+          info
         }
       }
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
-      process.env.NODE_ENV === 'development' && console.log(`UpdateBio Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(`UpdateInfo Error: ${res.data.errors[0].message}`)
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(`UpdateBio Error: ${err}`)
+    process.env.NODE_ENV === 'development' && console.log(`UpdateInfo Error: ${err}`)
   })
 }
 
