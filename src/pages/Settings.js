@@ -10,7 +10,7 @@ const Settings = () => {
   const { user, setUser } = useContext(UserContext)
 
   const logoutHandler = () => {
-    notActive(user, setUser)
+    notActive(user)
     setUser({ ...logout(), redirect: "/auth" })
   }
 

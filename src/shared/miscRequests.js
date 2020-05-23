@@ -52,7 +52,7 @@ export const updateGeolocation = (user, setUser, geolocation) => {
   })
 }
 
-export const notActive = (user, setUser) => {
+export const notActive = user => {
   axios.post('', {
     variables: {
       _id: user._id,
@@ -74,6 +74,4 @@ export const notActive = (user, setUser) => {
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(`NotActive Error: ${err}`)
   })
-  console.log({ ...user, active: false })
-  setUser({ ...user, active: false })
 }
