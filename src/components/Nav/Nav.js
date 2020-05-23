@@ -7,8 +7,10 @@ import ProfilePicture from '../UI/ProfilePicture'
 
 const Nav = ({ user, setUser, history }) => {
   useEffect(() => { // Redirect if user.redirect === truthy.
-    user.redirect && history.push(user.redirect)
-    setUser({ ...user, redirect: false })
+    if (user.redirect) {
+      history.push(user.redirect)
+      setUser({ ...user, redirect: false })
+    }
   }, [user.redirect]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // On load, check user.settings.dark_mode.

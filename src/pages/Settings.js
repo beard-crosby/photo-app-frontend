@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../App'
+import { notActive } from '../shared/miscRequests'
 import Button from '../components/UI/Button'
 import { logout } from '../shared/localStorage'
 import ProfileCard from '../components/Cards/ProfileCard'
@@ -7,6 +8,11 @@ import { LogOut, XSquare, GitHub } from 'react-feather'
 
 const Settings = () => {
   const { user, setUser } = useContext(UserContext)
+
+  const logoutHandler = () => {
+    notActive(user, setUser)
+    setUser({ ...logout(), redirect: "/auth" })
+  }
 
   return (
     <div className="flex-col">
@@ -35,7 +41,7 @@ const Settings = () => {
         </div>
       </div>
       <div className="flex-row" style={{ width: 250 }}>
-        <Button text="Logout" icon={<LogOut/>} onClick={() => setUser({ ...logout(), redirect: "/auth" })}/>
+        <Button text="Logout" icon={<LogOut/>} onClick={() => logoutHandler()}/>
         <Button text="Delete Account" icon={<XSquare/>} redirect={"/deleteuser"}/>
       </div>
       <a href="https://github.com/beard-crosby/photo-app-frontend"><Button text="Photo App is an open source project!" icon={<GitHub/>}/></a>

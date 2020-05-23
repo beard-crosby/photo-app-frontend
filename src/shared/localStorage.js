@@ -47,7 +47,8 @@ export const checkLocalStorage = () => {
   }
 }
 
-export const logout = () => { // user._id in localStorage and active: bool are changed in notActive in miscRequests.js.
+export const logout = () => {
+  localStorage.removeItem('_id')
   localStorage.removeItem('token')
   localStorage.removeItem('token_expiry')
   localStorage.removeItem('name')
@@ -63,24 +64,7 @@ export const logout = () => { // user._id in localStorage and active: bool are c
   localStorage.removeItem('favourites')
 
   const userData = {
-    _id: null,
-    active: true,
-    token: null,
-    token_expiry: null,
-    name: null,
-    email: null,
-    website: "",
-    bio: "",
-    profile_picture: "",
-    posts: null,
-    following: null,
     settings: { dark_mode: false },
-    favourites: null,
-    logged_in_at: null,
-    geolocation: null,
-    formErrors: {},
-    file: { uploaded: false },
-    redirect: false,
   }
 
   return userData

@@ -22,7 +22,7 @@ const App = () => {
         {loading && <Spinner user={user}/>}
         <Router/>
       </main>
-      <Footer user={user} setUser={setUser}/>
+      <Footer/>
     </UserContext.Provider>
   )
 }

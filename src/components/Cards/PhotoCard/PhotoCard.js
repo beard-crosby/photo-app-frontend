@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import ProfileCard from '../ProfileCard'
 import styles from './_PhotoCard.module.scss'
 import PropTypes from 'prop-types'
