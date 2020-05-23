@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { logout, logInSuccess } from './localStorage'
-import { headers, timeout, checkGeolocation } from './utility'
+import { headers, timeout, checkGeolocation, checkAuth } from './utility'
 
 export const createUser = (formData, history, user, setUser, setLoading) => {
   setLoading(true)
@@ -50,9 +50,9 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
         file: { uploaded: false },
       }
       setUser(logInSuccess(userData))
-      timeout(userData, setUser)
+      timeout(userData, setUser, history)
       history.push("/")
-      checkGeolocation(userData, setUser)
+      checkGeolocation(userData, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)
@@ -157,9 +157,9 @@ export const login = (formData, history, user, setUser, setLoading) => {
         file: { uploaded: false },
       }
       setUser(logInSuccess(userData))
-      timeout(userData, setUser)
+      timeout(userData, setUser, history)
       history.push("/")
-      checkGeolocation(userData, setUser)
+      checkGeolocation(userData, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)
@@ -170,7 +170,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
   })
 }
 
-export const deleteAccount = (user, setUser, setLoading) => {
+export const deleteAccount = (user, setUser, setLoading, history) => {
   setLoading(true)
   axios.post('', {
     variables: {
@@ -190,10 +190,11 @@ export const deleteAccount = (user, setUser, setLoading) => {
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
-      res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
+      checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`DeleteAccount Error: ${res.data.errors[0].message}`)
     } else {
-      setUser({ ...logout(), redirect: "/loggedout" })
+      setUser(logout())
+      history.push("/")
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setLoading(false)
@@ -203,11 +204,11 @@ export const deleteAccount = (user, setUser, setLoading) => {
   })
 }
 
-export const updateBio = (user, setUser, bioTextarea) => {
+export const updateBio = (user, setUser, history) => {
   axios.post('', {
     variables: {
       _id: user._id,
-      bio: bioTextarea,
+      bio: user.bio,
     },
     query: `
       mutation UpdateBio($_id: ID!, $bio: String!) {
@@ -219,7 +220,7 @@ export const updateBio = (user, setUser, bioTextarea) => {
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
-      res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
+      checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`UpdateBio Error: ${res.data.errors[0].message}`)
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
@@ -246,7 +247,7 @@ export const updatePP = (user, setUser, history, setLoading) => {
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
-      res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
+      checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`UpdatePP Error: ${res.data.errors[0].message}`)
     } else {
       setUser({ ...user, profile_picture: res.data.data.updatePP.profile_picture, file: { uploaded: false }})

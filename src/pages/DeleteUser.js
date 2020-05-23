@@ -16,7 +16,7 @@ const DeleteUser = ({ history }) => {
       </div>
       <div className="middle">
         <p>You are about to permanently delete your account!</p>
-        <Button text="DELETE ACCOUNT" icon={<XSquare/>} onClick={() => deleteAccount(user, setUser, setLoading)}/>
+        <Button text="DELETE ACCOUNT" icon={<XSquare/>} onClick={() => deleteAccount(user, setUser, setLoading, history)}/>
       </div>
     </div>
   )

@@ -1,11 +1,11 @@
 export const checkLocalStorage = () => {
   const token = localStorage.getItem('token')
   if (!token) {
-    return { ...logout(), redirect: false }
+    return logout()
   } else {
     const token_expiry = new Date(localStorage.getItem('token_expiry'))
     if (token_expiry < new Date()) {
-      return { ...logout(), redirect: false }
+      return logout()
     } else {
       const _id = localStorage.getItem('_id')
       const name = localStorage.getItem('name')
@@ -39,7 +39,6 @@ export const checkLocalStorage = () => {
         favourites: JSON.parse(favourites),
         formErrors: {},
         file: { uploaded: false },
-        redirect: false,
       }
 
       return userData
@@ -92,6 +91,5 @@ export const logInSuccess = userData => {
     formErrors: {},
     active: true,
     file: { uploaded: false },
-    redirect: false,
   }
 }

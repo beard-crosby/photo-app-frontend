@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { headers } from './utility'
+import { headers, checkAuth } from './utility'
 import { logout } from './localStorage'
 
-export const updateSettings = (user, setUser) => {
+export const updateSettings = (user, setUser, history) => {
   axios.post('', {
     variables: {
       _id: user._id,
@@ -17,8 +17,8 @@ export const updateSettings = (user, setUser) => {
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
+      checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`UpdateSettings Error: ${res.data.errors[0].message}`)
-      res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
     }
@@ -27,7 +27,7 @@ export const updateSettings = (user, setUser) => {
   })
 }
 
-export const updateGeolocation = (user, setUser, geolocation) => {
+export const updateGeolocation = (user, setUser, geolocation, history) => {
   axios.post('', {
     variables: {
       _id: user._id,
@@ -42,8 +42,8 @@ export const updateGeolocation = (user, setUser, geolocation) => {
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
+      checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`UpdateGeolocation Error: ${res.data.errors[0].message}`)
-      res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
     }

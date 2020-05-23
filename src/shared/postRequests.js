@@ -1,6 +1,5 @@
 import axios from "axios"
-import { headers } from './utility'
-import { logout } from './localStorage'
+import { headers, checkAuth } from './utility'
 
 export const createPost = (form, user, setUser, setLoading, history) => {
   setLoading(true)
@@ -28,7 +27,7 @@ export const createPost = (form, user, setUser, setLoading, history) => {
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
-      res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
+      checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`CreatePost Error: ${res.data.errors[0].message}`)
     } else {
       setUser({ 

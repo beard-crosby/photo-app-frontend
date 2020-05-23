@@ -1,9 +1,8 @@
 import axios from "axios"
-import { headers } from './utility'
-import { logout } from './localStorage'
+import { headers, checkAuth } from './utility'
 import { formatFilename } from './utility'
 
-export const signS3 = (file, user, setUser) => {
+export const signS3 = (file, user, setUser, history) => {
   axios.post('', {
     variables: {
       filename: formatFilename(user.name, file.name),
@@ -19,8 +18,8 @@ export const signS3 = (file, user, setUser) => {
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
+      checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`SignS3 Error: ${res.data.errors[0].message}`)
-      res.data.errors[0].message === "Not Authenticated!" && setUser({ ...logout(), redirect: "/loggedout" })
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
       uploadToS3(res.data.data.signS3, file, user, setUser)

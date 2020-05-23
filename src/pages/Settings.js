@@ -6,12 +6,13 @@ import { logout } from '../shared/localStorage'
 import ProfileCard from '../components/Cards/ProfileCard'
 import { LogOut, XSquare, GitHub } from 'react-feather'
 
-const Settings = () => {
+const Settings = ({ history }) => {
   const { user, setUser } = useContext(UserContext)
 
   const logoutHandler = () => {
     notActive(user)
-    setUser({ ...logout(), redirect: "/auth" })
+    setUser(logout())
+    history.push("/auth")
   }
 
   return (
