@@ -14,7 +14,7 @@ export const switchDarkMode = (user, setUser, Onload) => {
     }
   } else {
     setUser({ ...user, settings: { ...user.settings, dark_mode: !user.settings.dark_mode} })
-    updateSettings({ ...user, settings: { ...user.settings, dark_mode: !user.settings.dark_mode} }, setUser) // request
+    user.token && updateSettings({ ...user, settings: { ...user.settings, dark_mode: !user.settings.dark_mode} }, setUser) // request
   }
 }
 
