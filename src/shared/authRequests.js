@@ -107,7 +107,6 @@ export const login = (formData, history, user, setUser, setLoading) => {
             name
             email
             website
-            info
             profile_picture
             posts {
               _id
@@ -139,7 +138,6 @@ export const login = (formData, history, user, setUser, setLoading) => {
               name
               email
               website
-              info
               profile_picture
             }
           }
