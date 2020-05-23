@@ -33,7 +33,7 @@ const Wall = () => {
     temp.img && photoCardsArr.push(temp) // If temp obj has an img key, push to photoCardsArr. I.E. don't try and render the temp init data.
   }
 
-  if (user.file._id) { // When user posts an image and redirects here, make sure the post is a the top of the wall.
+  if (user.file._id && photoCardsArr.length > 0) { // When user posts an image and redirects here, make sure the post is a the top of the wall.
     user.file._id !== photoCardsArr[0]._id && photoCardsArr.unshift(user.file)
   }
   
