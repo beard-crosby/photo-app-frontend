@@ -68,6 +68,7 @@ export const checkAuth = (res, setUser, history) => {
 
 // Remove a key: value pair from context.
 export const removeKey = (obj, prop) => {
+  // myObj.hasOwnProperty(prop)
   let {[prop]: omit, ...res} = obj
   return res
 }

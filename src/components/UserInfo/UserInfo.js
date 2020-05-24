@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './_UserInfo.module.scss'
 import { withRouter } from 'react-router-dom'
 import { updateInfo } from '../../shared/authRequests'
@@ -21,15 +21,28 @@ const UserInfo = ({ user, setUser, history }) => {
     const aboutValue = document.getElementById("about-textarea").value
 
     if (user.info.about !== aboutValue) {
-      setUser({ ...user, info: { ...user.info, about: aboutValue } })
+      setUser({ ...removeKey(user, "aboutFocused"), info: { ...user.info, about: aboutValue } })
       updateInfo({ ...user, info: { ...user.info, about: aboutValue }}, setUser, history)
     }
   }
 
+  useEffect(() => {
+    window.addEventListener("click", function(e) {
+      const infoWrapper = document.getElementById("user-info-wrapper")
+      if (infoWrapper) {
+        if (e.target.tagName !== "svg" && e.target.tagName !== "path" && !infoWrapper.contains(e.target) && infoWrapper.style.height === "100%") {
+          shrinkHandler()
+        }
+      } else {
+        setUser(removeKey(user, "aboutFocused"))
+      }
+    })
+  }, [])
+
   return (
     <div className={styles.userInfoWrapper} id="user-info-wrapper">
       <div className={styles.top}>
-        <h5>ABOUT</h5>
+        {user.aboutFocused ? <h5>WRITE ABOUT YOU</h5> : <h5>ABOUT</h5>}
         {!user.aboutFocused ? <MoreHorizontal/> : <h5 onClick={() => shrinkHandler()}>DONE</h5>}
       </div>
       <div className={styles.userInfo}>
