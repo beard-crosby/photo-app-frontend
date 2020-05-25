@@ -1,14 +1,13 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { UserContext } from '../App'
 import ProfileCard from '../components/Cards/ProfileCard'
 import Following from '../components/Following'
 import UserInfo from '../components/UserInfo'
-import Masonry from 'react-masonry-component'
 import FavouritesCard from '../components/Cards/FavouritesCard'
+import Masonry from '../components/Masonry'
 
 const Profile = () => {
   const { user, setUser } = useContext(UserContext)
-  const [ masComp, setMasComp ] = useState(null)
 
   return (
     <div className="flex-col">
@@ -17,16 +16,12 @@ const Profile = () => {
       </div>
       <div className="flex-row">
         <Following user={user}/>
-        <div className="flex-col" style={{ height: 360, justifyContent: "space-between" }}>
+        <div className="profile-col">
           <UserInfo user={user} setUser={setUser}/>
-          {!user.aboutFocused && <FavouritesCard/>}
+          {!user.aboutFocused && <FavouritesCard user={user}/>}
         </div>
       </div>
-      <Masonry 
-        className={`masonry ${masComp}`}
-        onLayoutComplete={() => setMasComp("masonry-complete")}>
-        {user.posts.map(post => <img key={post._id} alt="One of your posts" src={post.img}/>)}
-      </Masonry>
+      <Masonry array={user.posts}/>
     </div>
   )
 }

@@ -1,13 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../App'
 import '../scss/_splash.scss'
 import Create from './Create'
-import Masonry from 'react-masonry-component'
 import { allPosts } from '../shared/postRequests'
+import Masonry from '../components/Masonry'
 
 const Splash = () => {
   const { user, setUser } = useContext(UserContext)
-  const [ masComp, setMasComp ] = useState(null)
 
   useEffect(() => allPosts(user, setUser), []) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -19,11 +18,7 @@ const Splash = () => {
         </div>
         <Create/>
       </div>
-      {user.posts && <Masonry 
-        className={`masonry ${masComp}`}
-        onLayoutComplete={() => setMasComp("masonry-complete")}>
-        {user.posts.map(post => <img key={post._id} alt="A Random User Post" src={post.img}/>)}
-      </Masonry>}
+      {user.allPosts && <Masonry array={user.allPosts}/>}
     </div>
   )
 }

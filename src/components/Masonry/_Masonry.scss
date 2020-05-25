@@ -1,0 +1,48 @@
+.masonry {
+  width: 100%;
+  opacity: 0;
+
+  .grid-sizer, .grid-item {
+    width: 24.25%;
+  }
+  
+  .gutter-sizer {
+    width: 1%;
+  }
+  
+  .grid-item {
+    float: left;
+    margin-bottom: 7px;
+    border-radius: 6px;
+    display: table;
+    overflow: hidden;
+    cursor: pointer;
+
+    img {
+      display: table-row;
+      width: 100%;
+    }
+  }
+}
+
+.masonry-contained {
+  width: 100%;
+  opacity: 0;
+
+  .grid-item {
+    width: 20%;
+    float: left;
+    display: table;
+    cursor: pointer;
+
+    img {
+      display: table-row;
+      width: 100%;
+    }
+  }
+}
+
+.masonry-complete {
+  opacity: 1;
+  transition: 0.3s; 
+}

@@ -1,6 +1,6 @@
 @import "./variables";
 
-.flex-col { // Structural
+.flex-col, .profile-col { // Structural
   width: 100%;
   flex-grow: 1;
   display: flex;
@@ -14,6 +14,11 @@
     align-items: center;
     margin-bottom: 20px;
   }
+}
+
+.profile-col {
+  height: 360px;
+  justify-content: space-between;
 }
 
 .model { // Asthetic
