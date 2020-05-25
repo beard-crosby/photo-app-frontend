@@ -6,7 +6,6 @@ import { removeKey } from '../../shared/utility'
 import { MoreHorizontal, Edit2 } from 'react-feather'
 
 const UserInfo = ({ user, setUser, history }) => {
-
   const growHandler = () => {
     setUser({ ...user, aboutFocused: true })
     document.getElementById("user-info-wrapper").style.height = "100%"
@@ -25,19 +24,17 @@ const UserInfo = ({ user, setUser, history }) => {
     }
   }
 
-  useEffect(() => {
-    window.addEventListener("click", function(e) {
-      const infoWrapper = document.getElementById("user-info-wrapper")
-      if (infoWrapper) {
-        if (e.target.tagName !== "svg" && e.target.tagName !== "path" && !infoWrapper.contains(e.target) && infoWrapper.style.height === "100%") {
-          shrinkHandler()
-        }
+  const infoWrapperClicked = () => {
+    const infoWrapper = document.getElementById("user-info-wrapper")
+    document.addEventListener("click", e => {
+      if (e.target.tagName !== "svg" && e.target.tagName !== "path" && !infoWrapper.contains(e.target) && infoWrapper.style.height === "100%") {
+        shrinkHandler()
       }
     })
-  }, [])
+  }
 
   return (
-    <div className={styles.userInfoWrapper} id="user-info-wrapper">
+    <div className={styles.userInfoWrapper} id="user-info-wrapper" onClick={() => infoWrapperClicked()}>
       <div className={styles.top}>
         {user.aboutFocused ? <h5>WRITE ABOUT YOU</h5> : <h5>ABOUT</h5>}
         {!user.aboutFocused ? <MoreHorizontal/> : <h5 onClick={() => shrinkHandler()}>DONE</h5>}
