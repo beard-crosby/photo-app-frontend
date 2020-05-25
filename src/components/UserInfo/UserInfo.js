@@ -19,7 +19,6 @@ const UserInfo = ({ user, setUser, history }) => {
     setUser(removeKey(user, "aboutFocused"))
     document.getElementById("user-info-wrapper").style.height = "170px"
     const aboutValue = document.getElementById("about-textarea").value
-
     if (user.info.about !== aboutValue) {
       setUser({ ...removeKey(user, "aboutFocused"), info: { ...user.info, about: aboutValue } })
       updateInfo({ ...user, info: { ...user.info, about: aboutValue }}, setUser, history)
@@ -33,8 +32,6 @@ const UserInfo = ({ user, setUser, history }) => {
         if (e.target.tagName !== "svg" && e.target.tagName !== "path" && !infoWrapper.contains(e.target) && infoWrapper.style.height === "100%") {
           shrinkHandler()
         }
-      } else {
-        setUser(removeKey(user, "aboutFocused"))
       }
     })
   }, [])

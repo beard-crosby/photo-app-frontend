@@ -1,21 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ProfileCard from '../ProfileCard'
+import { withRouter } from 'react-router-dom'
 import styles from './_PhotoCard.module.scss'
 import PropTypes from 'prop-types'
 import { Heart } from 'react-feather'
+import { updateFavourites } from '../../../shared/authRequests'
+import { removeKey } from '../../../shared/utility'
 
-const PhotoCard = ({ user, post }) => {
+const PhotoCard = ({ user, setUser, post, history }) => {
   const [ imgClicked, setImgClicked ] = useState("undefined")
   const [ heartClicked, setHeartClicked ] = useState("undefined")
   const [ edit, setEdit ] = useState(false)
   const isAuthor = user._id === post.author._id
 
+  useEffect(() => {
+    user.favourites.forEach(fav => {
+      post._id === fav._id && setHeartClicked(styles.heartClicked)
+    })
+    if (user.updateFavouritesError === post._id) {
+      setHeartClicked("undefined")
+      setUser(removeKey(user, "updateFavouritesError"))
+    }
+  }, [])
+
   const clickedHandler = e => {
     if (e.target.nodeName.toLowerCase() === "path" || e.target.nodeName.toLowerCase() === "svg") {
       if (heartClicked === "undefined") {
         setHeartClicked(styles.heartClicked)
+        updateFavourites(user, setUser, post, "add", history)
       } else {
         setHeartClicked("undefined")
+        updateFavourites(user, setUser, post, "remove", history)
       }
     } else {
       if (imgClicked === "undefined") {
@@ -61,7 +76,6 @@ const PhotoCard = ({ user, post }) => {
 PhotoCard.propTypes = {
   user: PropTypes.object, // User Object from context.
   post: PropTypes.object, // Post Object.
-  author: PropTypes.object, // Author Object.
 }
 
-export default PhotoCard
+export default withRouter(PhotoCard)

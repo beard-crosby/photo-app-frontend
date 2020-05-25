@@ -220,6 +220,7 @@ export const updateInfo = (user, setUser, history) => {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`UpdateInfo Error: ${res.data.errors[0].message}`)
     } else {
+      localStorage.setItem('info', res.data.data.updateInfo.info)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
@@ -256,5 +257,51 @@ export const updatePP = (user, setUser, history, setLoading) => {
   }).catch(err => {
     setLoading(false)
     process.env.NODE_ENV === 'development' && console.log(`UpdatePP Error: ${err}`)
+  })
+}
+
+export const updateFavourites = (user, setUser, post, action, history) => {
+  const savedUser = user
+  setUser({ ...user, favourites: [ ...user.favourites, post ] })
+  axios.post('', {
+    variables: {
+      _id: user._id,
+      post: post._id,
+      action: action
+    },
+    query: `
+      mutation UpdateFavourites($_id: ID!, $post: ID!, $action: String!) {
+        updateFavourites(_id: $_id, post: $post, action: $action) {
+          _id
+          favourites {
+            _id
+            img
+            title
+            description
+            created_at
+            updated_at
+            author {
+              _id
+              name
+              email
+              website
+              profile_picture
+            }
+          }
+        }
+      }
+    `
+  }, { headers: headers(user.token) }).then(res => {
+    if (res.data.errors) {
+      checkAuth(res, setUser, history)
+      res.data.errors[0].message === "Duplicate Favourite!" && setUser({ ...user, favourites: savedUser.favourites, updateFavouritesError: post._id })
+      process.env.NODE_ENV === 'development' && console.log(`UpdateFavourites Error: ${res.data.errors[0].message}`)
+    } else {
+      localStorage.setItem('favourites', JSON.stringify(res.data.data.updateFavourites.favourites))
+      process.env.NODE_ENV === 'development' && console.log(res)
+    }
+  }).catch(err => {
+    setUser({ ...user, favourites: savedUser.favourites, updateFavouritesError: post._id })
+    process.env.NODE_ENV === 'development' && console.log(`UpdateFavourites Error: ${err}`)
   })
 }

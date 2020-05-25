@@ -4,7 +4,7 @@ import PhotoCard from '../components/Cards/PhotoCard'
 import moment from 'moment'
 
 const Wall = () => {
-  const { user } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
   const photoCardsArr = [] // Array of photoCards to be rendered.
 
   // Render posts of followed users in order of date time.
@@ -38,7 +38,13 @@ const Wall = () => {
   }
   
   return (
-    photoCardsArr.map((post, i) => <PhotoCard key={i} user={user} post={post}/>)
+    photoCardsArr.map((post, i) => 
+      <PhotoCard 
+        key={i} 
+        user={user}
+        setUser={setUser}
+        post={post}/>
+    )
   )
 }
 
