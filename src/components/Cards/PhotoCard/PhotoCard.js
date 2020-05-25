@@ -17,11 +17,14 @@ const PhotoCard = ({ user, setUser, post, history }) => {
     user.favourites.forEach(fav => {
       post._id === fav._id && setHeartClicked(styles.heartClicked)
     })
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
     if (user.updateFavouritesError === post._id) {
       setHeartClicked("undefined")
       setUser(removeKey(user, "updateFavouritesError"))
     }
-  }, [])
+  }, [user, setUser, post])
 
   const clickedHandler = e => {
     if (e.target.nodeName.toLowerCase() === "path" || e.target.nodeName.toLowerCase() === "svg") {
