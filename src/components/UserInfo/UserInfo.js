@@ -6,7 +6,7 @@ import { removeKey } from '../../shared/utility'
 import { MoreHorizontal, Edit2 } from 'react-feather'
 
 const UserInfo = ({ user, setUser, history }) => {
-  const growHandler = () => {
+  const growHandler = () => { // Grow component to 100% of the containers height and focus the textarea.
     setUser({ ...user, aboutFocused: true })
     document.getElementById("user-info-wrapper").style.height = "100%"
     const aboutTextarea = document.getElementById("about-textarea")
@@ -14,11 +14,12 @@ const UserInfo = ({ user, setUser, history }) => {
     aboutTextarea.select()
   }
 
-  const shrinkHandler = () => {
+  const shrinkHandler = () => { // Shrink component back to its original state.
     setUser(removeKey(user, "aboutFocused"))
-    document.getElementById("user-info-wrapper").style.height = "170px"
+    document.getElementById("user-info-wrapper").style.height = null
     const aboutValue = document.getElementById("about-textarea").value
-    if (user.info.about !== aboutValue) {
+
+    if (user.info.about !== aboutValue) { // If context value !== textarea value.
       setUser({ ...removeKey(user, "aboutFocused"), info: { ...user.info, about: aboutValue } })
       updateInfo({ ...user, info: { ...user.info, about: aboutValue }}, setUser, history)
     }
