@@ -13,21 +13,21 @@ const PhotoCard = ({ user, setUser, post, history }) => {
   const [ edit, setEdit ] = useState(false)
   const isAuthor = user._id === post.author._id
 
-  useEffect(() => {
+  useEffect(() => { // Check ONCE if the post is a favourite. If it is, setHeartClicked().
     user.favourites.forEach(fav => {
       post._id === fav._id && setHeartClicked(styles.heartClicked)
     })
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
+  useEffect(() => { // If dependencies change, check if the _id in updateFavouritesError matches this post.
     if (user.updateFavouritesError === post._id) {
-      setHeartClicked("undefined")
-      setUser(removeKey(user, "updateFavouritesError"))
+      setHeartClicked("undefined") // Remove class from setHeartClicked().
+      setUser(removeKey(user, "updateFavouritesError")) // Remove "updateFavouritesError" from user context.
     }
   }, [user, setUser, post])
 
   const clickedHandler = e => {
-    if (e.target.nodeName.toLowerCase() === "path" || e.target.nodeName.toLowerCase() === "svg") {
+    if (e.target.nodeName.toLowerCase() === "path" || e.target.nodeName.toLowerCase() === "svg") { // If user clicks on heart.
       if (heartClicked === "undefined") {
         setHeartClicked(styles.heartClicked)
         updateFavourites(user, setUser, post, "add", history)
@@ -35,7 +35,7 @@ const PhotoCard = ({ user, setUser, post, history }) => {
         setHeartClicked("undefined")
         updateFavourites(user, setUser, post, "remove", history)
       }
-    } else {
+    } else { // Else = If user has clicked on the picture.
       if (imgClicked === "undefined") {
         setImgClicked(styles.imgClicked)
         document.body.style.overflow = "hidden"
@@ -77,8 +77,9 @@ const PhotoCard = ({ user, setUser, post, history }) => {
 }
 
 PhotoCard.propTypes = {
-  user: PropTypes.object, // User Object from context.
-  post: PropTypes.object, // Post Object.
+  user: PropTypes.object,  // User Object from context.
+  setUser: PropTypes.func, // setUser function from contet.
+  post: PropTypes.object,  // Post Object.
 }
 
 export default withRouter(PhotoCard)
