@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from './_UserInfo.module.scss'
 import { withRouter } from 'react-router-dom'
 import { updateInfo } from '../../shared/authRequests'
