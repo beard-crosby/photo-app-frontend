@@ -45,6 +45,7 @@ const UserInfo = ({ user, setUser, history }) => {
           type="text"
           name="about"
           id="about-textarea"
+          placeholder="Write about you!"
           defaultValue={user.info.about}
           onFocus={() => growHandler()}/>
         {!user.aboutFocused && <Edit2 onClick={() => growHandler()}/>}

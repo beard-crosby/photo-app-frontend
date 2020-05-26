@@ -57,6 +57,10 @@
       border-radius: 0;
       box-shadow: none;
       resize: none;
+
+      &::placeholder {
+        color: $disabled;
+      }
     }
     
     svg {
