@@ -3,7 +3,7 @@ import Masonry from 'react-masonry-component'
 import './_Masonry.scss'
 import PropTypes from 'prop-types'
 
-const MasonryComp = ({ array, user, setUser, contained}) => {
+const MasonryComp = ({ array, user, setUser, contained, noInteract }) => {
   const [ layoutComplete, setLayoutComplete ] = useState(null)
   
   let itemWidth = "20%"
@@ -34,7 +34,9 @@ const MasonryComp = ({ array, user, setUser, contained}) => {
         <div className="grid-sizer"/>
         <div className="gutter-sizer"/>
       </>}
-      {array.map(post => 
+      {array.map(post => noInteract ? 
+        <img alt="A Post" src={post.img} className="grid-item no-interact"/> 
+        :
         <div 
           key={post._id} 
           className="grid-item" 
@@ -48,9 +50,11 @@ const MasonryComp = ({ array, user, setUser, contained}) => {
 }
 
 MasonryComp.propTypes = {
-  user: PropTypes.object,  // User object in context.
-  setUser: PropTypes.func, // setUser function context function.
-  contained: PropTypes.bool,          // Style Masonry in such a way that suits being visually contained.
+  array: PropTypes.array,     // Array of posts in which to loop through.
+  user: PropTypes.object,     // User object in context.
+  setUser: PropTypes.func,    // setUser function context function.
+  contained: PropTypes.bool,  // Style Masonry in such a way that suits being visually contained.
+  noInteract: PropTypes.bool, // Render just images. No user interaction intended.
 }
 
 export default MasonryComp

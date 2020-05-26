@@ -18,7 +18,7 @@ const Splash = () => {
         </div>
         <Create/>
       </div>
-      {user.allPosts && <Masonry array={user.allPosts}/>}
+      {user.allPosts && <Masonry array={user.allPosts} noInteract/>}
     </div>
   )
 }

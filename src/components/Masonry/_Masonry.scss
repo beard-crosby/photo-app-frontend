@@ -44,6 +44,10 @@
   }
 }
 
+.no-interact {
+  cursor: default !important;
+}
+
 .masonry-complete {
   opacity: 1;
   transition: 0.3s; 
