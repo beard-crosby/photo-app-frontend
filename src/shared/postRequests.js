@@ -69,12 +69,6 @@ export const allPosts = (user, setUser) => {
           _id
           img
           title
-          description
-          author {
-            _id
-            name
-            profile_picture
-          }
         }
       }
     `
