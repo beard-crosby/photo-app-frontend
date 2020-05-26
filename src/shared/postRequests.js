@@ -43,7 +43,6 @@ export const createPost = (form, user, setUser, setLoading, history) => {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`CreatePost Error: ${res.data.errors[0].message}`)
     } else {
-      console.log(res.data.data.createPost)
       setUser({ 
         ...user, 
         posts: [ ...user.posts, res.data.data.createPost ], 

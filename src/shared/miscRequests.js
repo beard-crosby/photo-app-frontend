@@ -60,7 +60,6 @@ export const updateStatus = (user, status) => {
     query: `
       mutation UpdateStatus($_id: ID!, $status: String!) {
         updateStatus(_id: $_id, status: $status) {
-          _id
           status
         }
       }
