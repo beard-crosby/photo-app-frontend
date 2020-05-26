@@ -48,8 +48,8 @@ const MasonryComp = ({ array, user, setUser, contained}) => {
 }
 
 MasonryComp.propTypes = {
-  user: PropTypes.object.isRequired,  // User object in context.
-  setUser: PropTypes.func.isRequired, // setUser function context function.
+  user: PropTypes.object,  // User object in context.
+  setUser: PropTypes.func, // setUser function context function.
   contained: PropTypes.bool,          // Style Masonry in such a way that suits being visually contained.
 }
 

@@ -233,7 +233,6 @@ export const updateInfo = (user, setUser, history) => {
     query: `
       mutation UpdateInfo($_id: ID!, $info: String!) {
         updateInfo(_id: $_id, info: $info) {
-          _id
           info
         }
       }
@@ -261,7 +260,6 @@ export const updatePP = (user, setUser, history, setLoading) => {
     query: `
       mutation UpdatePP($_id: ID!, $profile_picture: String!) {
         updatePP(_id: $_id, profile_picture: $profile_picture) {
-          _id
           profile_picture
         }
       }
