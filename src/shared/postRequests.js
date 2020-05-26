@@ -19,8 +19,21 @@ export const createPost = (form, user, setUser, setLoading, history) => {
           description
           created_at
           updated_at
+          author {
+            _id
+            name
+            email
+            website
+            profile_picture
+          }
           comments {
             _id
+            comment
+            created_at
+            updated_at
+            author {
+              _id
+            }
           }
         }
       }
@@ -30,14 +43,11 @@ export const createPost = (form, user, setUser, setLoading, history) => {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`CreatePost Error: ${res.data.errors[0].message}`)
     } else {
+      console.log(res.data.data.createPost)
       setUser({ 
         ...user, 
         posts: [ ...user.posts, res.data.data.createPost ], 
-        file: { 
-          ...res.data.data.createPost, 
-          author: { _id: user._id, name: user.name, profile_picture: user.profile_picture }, 
-          uploaded: false
-        },
+        file: { ...res.data.data.createPost, uploaded: false },
       })
       localStorage.setItem('posts', JSON.stringify([ ...user.posts, res.data.data.createPost ]))
       history.push("/")

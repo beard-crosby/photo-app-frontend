@@ -3,7 +3,7 @@ import Masonry from 'react-masonry-component'
 import './_Masonry.scss'
 import PropTypes from 'prop-types'
 
-const MasonryComp = ({ array, contained }) => {
+const MasonryComp = ({ array, user, setUser, contained}) => {
   const [ layoutComplete, setLayoutComplete ] = useState(null)
   
   let itemWidth = "20%"
@@ -35,8 +35,12 @@ const MasonryComp = ({ array, contained }) => {
         <div className="gutter-sizer"/>
       </>}
       {array.map(post => 
-        <div key={post._id} className="grid-item" style={contained && { width: itemWidth }}>
-          <img alt="A Random User Post" src={post.img}/>
+        <div 
+          key={post._id} 
+          className="grid-item" 
+          style={contained && { width: itemWidth }} 
+          onClick={() => setUser({ ...user, postClicked: post})}>
+          <img alt="A Post" src={post.img}/>
         </div>
       )}
     </Masonry>
@@ -44,8 +48,9 @@ const MasonryComp = ({ array, contained }) => {
 }
 
 MasonryComp.propTypes = {
-  array: PropTypes.array.isRequired, // Array of posts.
-  contained: PropTypes.bool,         // Style Masonry in such a way that suits being visually contained.
+  user: PropTypes.object.isRequired,  // User object in context.
+  setUser: PropTypes.func.isRequired, // setUser function context function.
+  contained: PropTypes.bool,          // Style Masonry in such a way that suits being visually contained.
 }
 
 export default MasonryComp

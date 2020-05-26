@@ -93,9 +93,18 @@ export const login = (formData, history, user, setUser, setLoading) => {
             description
             created_at
             updated_at
+            author {
+              _id
+              name
+              email
+              website
+              profile_picture
+            }
             comments {
               _id
               comment
+              created_at
+              updated_at
               author {
                 _id
               }
@@ -115,6 +124,13 @@ export const login = (formData, history, user, setUser, setLoading) => {
               description
               created_at
               updated_at
+              author {
+                _id
+                name
+                email
+                website
+                profile_picture
+              }
               comments {
                 _id
                 comment
@@ -139,6 +155,15 @@ export const login = (formData, history, user, setUser, setLoading) => {
               email
               website
               profile_picture
+            }
+            comments {
+              _id
+              comment
+              created_at
+              updated_at
+              author {
+                _id
+              }
             }
           }
         }
@@ -180,8 +205,6 @@ export const deleteAccount = (user, setUser, setLoading, history) => {
       mutation DeleteUser($_id: ID!) {
         deleteUser(_id: $_id) {
           _id
-          name
-          email
         }
       }
     `

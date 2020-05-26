@@ -10,8 +10,8 @@ const ProfileCard = ({ user, style, sidebar }) =>
     <div className={styles.profileInfo}>
       {sidebar && <h5 className={styles.viewProfile}>View Profile</h5>}
       {sidebar ? <h5>{user.name}</h5> : <h2>{user.name}</h2>}
-      {user.email && user.settings.display_email && <p>{user.email}</p>}
-      {user.website && user.settings.display_website && <p>{user.website}</p>}
+      {user.email && <p>{user.email}</p>}
+      {user.website && <p>{user.website}</p>}
     </div>
     {!sidebar && <Edit2/>}
   </div>
