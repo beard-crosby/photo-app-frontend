@@ -35,7 +35,7 @@ const MasonryComp = ({ array, user, setUser, contained, noInteract }) => {
         <div className="gutter-sizer"/>
       </>}
       {array.map(post => noInteract ? 
-        <img alt="A Post" src={post.img} className="grid-item no-interact"/> 
+        <img key={post._id} alt="A Post" src={post.img} className="grid-item no-interact"/> 
         :
         <div 
           key={post._id} 
