@@ -11,14 +11,14 @@ export const checkLocalStorage = () => {
       const name = localStorage.getItem('name')
       const email = localStorage.getItem('email')
       const website = localStorage.getItem('website')
-      const info = localStorage.getItem('info')
+      const info = JSON.parse(localStorage.getItem('info'))
       const profile_picture = localStorage.getItem('profile_picture')
-      const posts = localStorage.getItem('posts')
-      const following = localStorage.getItem('following')
+      const posts = JSON.parse(localStorage.getItem('posts'))
+      const following = JSON.parse(localStorage.getItem('following'))
       const logged_in_at = localStorage.getItem('logged_in_at')
-      const geolocation = localStorage.getItem('geolocation')
-      const settings = localStorage.getItem('settings')
-      const favourites = localStorage.getItem('favourites')
+      const geolocation = JSON.parse(localStorage.getItem('geolocation'))
+      const settings = JSON.parse(localStorage.getItem('settings'))
+      const favourites = JSON.parse(localStorage.getItem('favourites'))
 
       const userData = {
         localStorage: true,
@@ -29,14 +29,14 @@ export const checkLocalStorage = () => {
         name: name,
         email: email,
         website: website,
-        info: JSON.parse(info),
+        info: info,
         profile_picture: profile_picture,
-        posts: JSON.parse(posts),
-        following: JSON.parse(following),
+        posts: posts,
+        following: following,
         logged_in_at: logged_in_at,
-        geolocation: JSON.parse(geolocation),
-        settings: JSON.parse(settings),
-        favourites: JSON.parse(favourites),
+        geolocation: geolocation,
+        settings: settings,
+        favourites: favourites,
         formErrors: {},
         file: { uploaded: false },
       }
