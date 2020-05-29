@@ -17,7 +17,7 @@ const Profile = ({ history }) => {
       </div>
       <div className="flex-row">
         <Following user={user}/>
-        <div className="profile-col">
+        <div className="profile-col" id="profile-col">
           <UserInfo user={user} setUser={setUser}/>
           <FavouritesCard user={user} setUser={setUser}/>
         </div>

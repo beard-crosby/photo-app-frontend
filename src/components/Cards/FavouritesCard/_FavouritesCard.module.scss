@@ -10,6 +10,8 @@
   border-radius: 6px;
   box-sizing: border-box;
   overflow: hidden;
+  flex-shrink: 0;
+  transition: 0.3s;
 
   .top {
     height: 40px;
