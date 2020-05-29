@@ -5,6 +5,13 @@ import Masonry from '../../Masonry'
 
 const Favourites = ({ user, setUser }) => {
   const [ wrapperHeight, setWrapperHeight ] = useState(null)
+
+  const clickListener = e => {
+    const wrapper = document.getElementById("favourites-wrapper")
+    if (e.target.tagName !== "svg" && e.target.tagName !== "path" && !wrapper.contains(e.target) && wrapper.style.height === "100%") {
+      setWrapperHeight(null)
+    }
+  }
   
   useEffect(() => {
     let profileCol = document.getElementById("profile-col")
@@ -13,6 +20,8 @@ const Favourites = ({ user, setUser }) => {
     } else {
       setTimeout(() => profileCol.style.justifyContent = "flex-start", 300)
     }
+    document.addEventListener("click", clickListener)
+    return () => document.removeEventListener("click", clickListener)
   }, [wrapperHeight])
 
   return (

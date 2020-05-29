@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './_UserInfo.module.scss'
 import { withRouter } from 'react-router-dom'
 import { updateInfo } from '../../shared/authRequests'
-import { removeKey } from '../../shared/utility'
 import { MoreHorizontal, Edit2 } from 'react-feather'
 
 const UserInfo = ({ user, setUser, history }) => {
@@ -19,22 +18,25 @@ const UserInfo = ({ user, setUser, history }) => {
     setWrapperHeight(null)
     const textarea = document.getElementById("about-textarea").value
     if (user.info.about !== textarea) { // If context value !== textarea value.
-      setUser({ ...removeKey(user, "aboutFocused"), info: { ...user.info, about: textarea } })
+      setUser({ ...user, info: { ...user.info, about: textarea } })
       updateInfo({ ...user, info: { ...user.info, about: textarea }}, setUser, history)
     }
   }
-
-  const isClicked = () => {
+  
+  const clickListener = e => {
     const wrapper = document.getElementById("user-info-wrapper")
-    document.addEventListener("click", e => {
-      if (e.target.tagName !== "svg" && e.target.tagName !== "path" && !wrapper.contains(e.target) && wrapper.style.height === "100%") {
-        shrinkHandler()
-      }
-    })
+    if (e.target.tagName !== "svg" && e.target.tagName !== "path" && !wrapper.contains(e.target) && wrapper.style.height === "100%") {
+      setWrapperHeight(null)
+    }
   }
 
+  useEffect(() => {
+    document.addEventListener("click", clickListener)
+    return () => document.removeEventListener("click", clickListener)
+  }, [wrapperHeight])
+
   return (
-    <div className={styles.userInfoWrapper} id="user-info-wrapper" onClick={() => isClicked()} style={{ height: wrapperHeight }}>
+    <div className={styles.userInfoWrapper} id="user-info-wrapper" style={{ height: wrapperHeight }}>
       <div className={styles.top}>
         {wrapperHeight ? <h5>WRITE ABOUT YOU</h5> : <h5>ABOUT</h5>}
         {!wrapperHeight ? <MoreHorizontal/> : <h5 onClick={() => shrinkHandler()}>DONE</h5>}
