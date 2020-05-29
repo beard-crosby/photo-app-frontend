@@ -19,7 +19,7 @@ const Profile = ({ history }) => {
         <Following user={user}/>
         <div className="profile-col">
           <UserInfo user={user} setUser={setUser}/>
-          {!user.aboutFocused && <FavouritesCard user={user} setUser={setUser}/>}
+          <FavouritesCard user={user} setUser={setUser}/>
         </div>
       </div>
       {user.postClicked ? 

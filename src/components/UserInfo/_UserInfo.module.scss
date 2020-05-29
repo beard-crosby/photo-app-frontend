@@ -11,6 +11,8 @@
   box-sizing: border-box;
   overflow: hidden;
   transition: 0.3s;
+  flex-shrink: 0;
+  margin-bottom: 20px;
 
   .top {
     height: 40px;
