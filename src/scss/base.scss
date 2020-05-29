@@ -11,30 +11,19 @@ img {
   user-select: none;
 }
 
-h1, h2, h4, label {
-  font-weight: 300;
-}
-
 h1 {
   letter-spacing: 2px;
   font-size: 1.7em;
   color: $black;
 }
 
+h1, h2, h3, h4, label {
+  font-weight: 300;
+}
+
 h5, h6, p {
   font-weight: 400;
   color: $color-3;
-}
-
-svg {
-  width: 18px;
-  height: 18px;
-  color: $color-3;
-  cursor: pointer;
-
-  &:hover {
-    color: $black;
-  }
 }
 
 h5 {
@@ -48,6 +37,17 @@ a {
 
 input, textarea, p {
   font-size: 0.8em;
+}
+
+svg {
+  width: 18px;
+  height: 18px;
+  color: $color-3;
+  cursor: pointer;
+
+  &:hover {
+    color: $black;
+  }
 }
 
 label {

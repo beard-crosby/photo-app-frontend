@@ -12,10 +12,11 @@
 
   img {
     border-radius: 1000px;
+    opacity: 1;
     transition: 0.3s;
   }
 
-  p {
+  h3 {
     opacity: 0;
     position: absolute;
     cursor: pointer;
@@ -24,11 +25,11 @@
 
   &:hover {
     img {
-      opacity: 0.3;
+      opacity: 0.2;
       transition: 0.3s;
     }
 
-    p {
+    h3 {
       opacity: 1;
       transition: 0.3s;
     }

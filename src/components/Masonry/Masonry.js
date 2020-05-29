@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 const MasonryComp = ({ array, user, setUser, contained, noInteract }) => {
   const [ layoutComplete, setLayoutComplete ] = useState(null)
   
-  let itemWidth = "20%"
+  let itemWidth = "20%" // Change width of images and thus how many colums there are based on how many images are in the array.
   if (contained && array.length < 9) {
     if (array.length < 3) {
       itemWidth = "50%"

@@ -26,8 +26,8 @@ const PhotoCard = ({ user, setUser, post, history }) => {
     }
   }, [user, setUser, post])
 
-  const clickedHandler = e => {
-    if (e.target.nodeName.toLowerCase() === "path" || e.target.nodeName.toLowerCase() === "svg") { // If user clicks on heart.
+  const clickedHandler = e => { // If user clicks on heart.
+    if (e.target.nodeName.toLowerCase() === "path" || e.target.nodeName.toLowerCase() === "svg") {
       if (heartClicked === "undefined") {
         setHeartClicked(styles.heartClicked)
         updateFavourites(user, setUser, post, "add", history)
@@ -35,7 +35,7 @@ const PhotoCard = ({ user, setUser, post, history }) => {
         setHeartClicked("undefined")
         updateFavourites(user, setUser, post, "remove", history)
       }
-    } else { // Else = If user has clicked on the picture.
+    } else { // Else = If user has clicked on the image.
       if (imgClicked === "undefined") {
         setImgClicked(styles.imgClicked)
         document.body.style.overflow = "hidden"
@@ -59,7 +59,7 @@ const PhotoCard = ({ user, setUser, post, history }) => {
         <div className={styles.sidebarWrapper}>
           <ProfileCard user={post.author} style={{ padding: 10 }} sidebar/>
           <div className={styles.comments}>
-
+          {/* comments section code */}
           </div>
           {!isAuthor ? <input type="text" name="comment" placeholder="Write a comment"/> :
           <div className={styles.postSettings}>

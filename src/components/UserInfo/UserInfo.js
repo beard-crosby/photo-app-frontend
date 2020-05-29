@@ -3,6 +3,7 @@ import styles from './_UserInfo.module.scss'
 import { withRouter } from 'react-router-dom'
 import { updateInfo } from '../../shared/authRequests'
 import { MoreHorizontal, Edit2 } from 'react-feather'
+import PropTypes from 'prop-types'
 
 const UserInfo = ({ user, setUser, history }) => {
   const [ wrapperHeight, setWrapperHeight ] = useState(null)
@@ -23,14 +24,14 @@ const UserInfo = ({ user, setUser, history }) => {
     }
   }
   
-  const clickListener = e => {
+  const clickListener = e => { // If clickEvent outside of the wrapper, setWrapperHeight.
     const wrapper = document.getElementById("user-info-wrapper")
     if (e.target.tagName !== "svg" && e.target.tagName !== "path" && !wrapper.contains(e.target) && wrapper.style.height === "100%") {
       setWrapperHeight(null)
     }
   }
 
-  useEffect(() => {
+  useEffect(() => { // add eventListener onLoad and cleanup eventListener on when component unmounts.
     document.addEventListener("click", clickListener)
     return () => document.removeEventListener("click", clickListener)
   }, [wrapperHeight])
@@ -53,6 +54,11 @@ const UserInfo = ({ user, setUser, history }) => {
       </div>
     </div>
   )
+}
+
+UserInfo.propTypes = {
+  user: PropTypes.object.isRequired,  // User object from context.
+  setUser: PropTypes.func.isRequired, // setUser function from context.
 }
 
 export default withRouter(UserInfo)
