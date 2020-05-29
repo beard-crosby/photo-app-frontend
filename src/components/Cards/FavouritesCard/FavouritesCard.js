@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styles from './_FavouritesCard.module.scss'
 import { ChevronUp, ChevronDown } from 'react-feather'
+import { removeKey } from '../../../shared/utility'
 import Masonry from '../../Masonry'
 
 const Favourites = ({ user, setUser }) => {
@@ -21,7 +22,10 @@ const Favourites = ({ user, setUser }) => {
       setTimeout(() => profileCol.style.justifyContent = "flex-start", 300)
     }
     document.addEventListener("click", clickListener)
-    return () => document.removeEventListener("click", clickListener)
+    return () => {
+      document.removeEventListener("click", clickListener)
+      setUser(removeKey(user, "postClicked"))
+    }
   }, [wrapperHeight])
 
   return (
