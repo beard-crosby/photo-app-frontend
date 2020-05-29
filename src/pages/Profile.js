@@ -22,9 +22,8 @@ const Profile = ({ history }) => {
           <FavouritesCard user={user} setUser={setUser}/>
         </div>
       </div>
-      {user.postClicked ? 
-      <PhotoCard user={user} setUser={setUser} post={user.postClicked} history={history}/> : 
-      <Masonry array={user.posts} user={user} setUser={setUser}/>}
+      {user.postClicked && <PhotoCard user={user} setUser={setUser} post={user.postClicked} history={history}/>} 
+      <Masonry array={user.posts} user={user} setUser={setUser}/>
     </div>
   )
 }
