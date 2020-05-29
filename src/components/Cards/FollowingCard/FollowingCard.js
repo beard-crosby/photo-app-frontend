@@ -7,8 +7,8 @@ const FollowingCard = ({ followed, style }) =>
   <div className={styles.followingCard} style={style}>
     <ProfilePicture user={followed} disable heightWidth={40} style={{ marginRight: 10 }}/>
     <div className={styles.info}>
-      <h6 className={styles.name}>{followed.name}</h6>
-      <h6 className={styles.viewProfile}>View Profile</h6>
+      <p className={styles.name}>{followed.name}</p>
+      <p className={styles.viewProfile}>View Profile</p>
     </div>
   </div>
 

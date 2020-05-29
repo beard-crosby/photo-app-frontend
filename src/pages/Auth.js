@@ -40,7 +40,7 @@ const Auth = ({ history }) => {
         <div className="middle">
           <FormSection text={"Email"} err={form.errors.emailError} user={user} form={form} setForm={setForm}/>
           <FormSection text={"Password"} user={user} form={form} setForm={setForm}/>
-          <Button text="Login" submit disabled={!formValid} icon={<LogIn/>} shadow/>
+          <Button text="Login" submit disabled={!formValid} icon={<LogIn/>}/>
           <GoogleLogin
             text="Login With Google"
             onSuccess={res => console.log(res)}

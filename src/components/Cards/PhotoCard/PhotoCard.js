@@ -61,13 +61,13 @@ const PhotoCard = ({ user, setUser, post, history }) => {
           <div className={styles.comments}>
 
           </div>
-          {!isAuthor ? <input type="text" name="comment" placeholder="Write a comment" /> :
+          {!isAuthor ? <input type="text" name="comment" placeholder="Write a comment"/> :
           <div className={styles.postSettings}>
             <div className={styles.editBtn} onClick={() => setEdit(!edit)}>
-              <h5>Edit</h5>
+              <p>Edit</p>
             </div>
             <div className={styles.deleteBtn}>
-              <h5>Delete</h5>
+              <p>Delete</p>
             </div>
           </div>}
         </div>

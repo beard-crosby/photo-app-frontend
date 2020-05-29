@@ -14,11 +14,6 @@
     cursor: pointer;
   }
 
-  p {
-    font-size: 0.7em;
-    color: $color-2;
-  }
-
   .imgWrapper {
     display: flex;
     position: relative;
@@ -115,12 +110,16 @@
           border-top: 1px solid $color-1;
           cursor: pointer;
       
-          h5 {
-            color: $color-3;
+          p {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
       
           &:hover {
-            h5 {
+            p {
               color: $black;
             }
           }
@@ -203,7 +202,7 @@
       border-top: 1px solid $dm-background !important;
 
       &:hover {
-        h5 {
+        p {
           color: $color-1 !important;
         }
       }

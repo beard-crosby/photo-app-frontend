@@ -8,8 +8,8 @@ const ProfileCard = ({ user, style, sidebar }) =>
   <div className={`${sidebar ? styles.sidebar : styles.profile}`} style={style}>
     <ProfilePicture user={user} disable={sidebar} heightWidth={sidebar ? 40 : 80} style={{ marginRight: sidebar ? 10 : 20 }}/>
     <div className={styles.profileInfo}>
-      {sidebar && <h5 className={styles.viewProfile}>View Profile</h5>}
-      {sidebar ? <h5>{user.name}</h5> : <h2>{user.name}</h2>}
+      {sidebar && <p className={styles.viewProfile}>View Profile</p>}
+      {sidebar ? <p>{user.name}</p> : <h2>{user.name}</h2>}
       {user.email && <p>{user.email}</p>}
       {user.website && <p>{user.website}</p>}
     </div>

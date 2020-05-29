@@ -47,7 +47,7 @@ a {
 }
 
 input, textarea, p {
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 label {
@@ -69,11 +69,14 @@ input, textarea {
   color: $color-3;
   resize: vertical;
   transition: 0.3s;
-  font: inherit;
-  font-size: 0.8em;
+  font-family: inherit;
 
   &:hover, &:focus {
     box-shadow: rgba(0, 0, 0, 0.60) 0px 2px 2px 0px, rgba(0, 0, 0, 0.60) 0px 0px 1px 0px;
+
+    &::placeholder {
+      color: $black;
+    }
   }
 }
 
@@ -196,6 +199,10 @@ body {
         .nav-bottom-left {
           display: flex;
           justify-content: flex-start;
+
+          p {
+            font-size: 0.9em;
+          }
         }
 
         @media (max-width: 900px) {
