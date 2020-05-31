@@ -9,6 +9,7 @@
 
 .app {
   width: 300px;
+  position: relative;
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
@@ -16,7 +17,10 @@
   padding-right: 20px;
 
   img {
-    width: 121%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
   }
 
   @media (max-width: 700px) {
