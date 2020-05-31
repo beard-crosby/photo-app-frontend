@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../App'
 import { withRouter, Link } from 'react-router-dom'
 import GoogleOAuth from '../components/UI/Button/GoogleOAuth'
-import FacebookOAuth from '../components/UI/Button/FacebookOAuth'
 import Button from '../components/UI/Button'
 import { createUser, login } from '../shared/authRequests'
 import { checkFormValid } from '../shared/formValidation'
@@ -49,10 +48,7 @@ const Create = ({ history }) => {
         <FormSection text={"Password Check"} err={form.errors.passConfirmError} user={user} form={form} setForm={setForm}/>
         <Link to="/termsandconditions"><h6 className="terms-and-conditions">I agree to the <u><strong>Terms and Conditions</strong></u></h6></Link>
         <Button text="Sign Up" submit disabled={!formValid} icon={<LogIn/>}/>
-        <GoogleOAuth text="Sign up with Google" user={user} setUser={setUser} setLoading={setLoading} create/>
-        {/* <FacebookLogin 
-          text="Sign Up with Facebook"
-          res={res => console.log(res)}/> */}
+        <GoogleOAuth text="Sign up with Google" user={user} setUser={setUser} setLoading={setLoading} history={history} create/>
       </div>
     </form>
   )

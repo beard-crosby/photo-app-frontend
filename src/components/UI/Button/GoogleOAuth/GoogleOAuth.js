@@ -1,11 +1,10 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 import styles from '../_button.module.scss'
 import GoogleLogin from 'react-google-login'
 import { createUser, login } from '../../../../shared/authRequests'
 import PropTypes from 'prop-types'
 
-const GoogleOAuth = ({ text, user, setUser, setLoading, create, style, history }) => {
+const GoogleOAuth = ({ text, user, setUser, setLoading, history, create, style }) => {
   const onSuccess = res => {
     const data = { ...res.profileObj, token: res.tokenId }
     if (create) {
@@ -40,8 +39,13 @@ const GoogleOAuth = ({ text, user, setUser, setLoading, create, style, history }
 }
 
 GoogleOAuth.propTypes = {
-  text: PropTypes.string.isRequired, // Text on the button.
-  style: PropTypes.object,           // Can change style on Component call.
+  text: PropTypes.string.isRequired,     // Text on the button.
+  user: PropTypes.object.isRequired,     // user object from context.
+  setUser: PropTypes.func.isRequired,    // setUser function from context.
+  setLoading: PropTypes.func.isRequired, // setLoading function from context.
+  history: PropTypes.object.isRequired,  // history object from react-router-dom.
+  create: PropTypes.bool,                // create === true and createUser after GoogleLogin res. Else, login.
+  style: PropTypes.object,               // Can change style on Component call.
 }
 
-export default withRouter(GoogleOAuth)
+export default GoogleOAuth

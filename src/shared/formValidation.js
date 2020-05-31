@@ -29,10 +29,10 @@ export const backendError = (user, passed) => {
   if (passed === "Email") {
     switch (user.formErrors) {
       case "An account by that email already exists! Please try and login.": return user.formErrors
-      case "A Google or Facebook account by that email already exists! Please try and login.": return user.formErrors
+      case "A Google account by that email already exists! Please try and login.": return user.formErrors
       case "An Account by that Email was not found!": return user.formErrors
-      case "The account for this email is a Google or Facebook account.": return user.formErrors
-      case "The account for this email wasn't created with Google or Facebook.": return user.formErrors
+      case "The account for this email is a Google account.": return user.formErrors
+      case "The account for this email wasn't created with Google.": return user.formErrors
       case "Sign up with Google failed. Please try another method.": return user.formErrors
       case "Login with Google failed. Please try again.": return user.formErrors
       default: return passed
