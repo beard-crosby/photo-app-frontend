@@ -2,29 +2,31 @@ import axios from 'axios'
 import { logout, logInSuccess } from './localStorage'
 import { headers, timeout, checkGeolocation, checkAuth } from './utility'
 
-export const createUser = (formData, history, user, setUser, setLoading) => {
+export const createUser = (data, user, setUser, setLoading, history) => {
   setLoading(true)
   axios.post('', {
     variables: {
-      name: formData.name,
-      email: formData.email,
-      password: formData.password,
-      passConfirm: formData.passConfirm,
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      passConfirm: data.passConfirm,
+      profile_picture: data.imageUrl,
+      oAuthToken: data.token,
     },
     query: `
-      mutation CreateUser($name: String!, $email: String!, $password: String!, $passConfirm: String! ) {
-        createUser(userInput: { name: $name, email: $email, password: $password, pass_confirm: $passConfirm }) {
+      mutation CreateUser($name: String!, $email: String!, $password: String, $passConfirm: String, $profile_picture: String, $oAuthToken: String) {
+        createUser(userInput: {name: $name, email: $email, password: $password, pass_confirm: $passConfirm, profile_picture: $profile_picture, oAuthToken: $oAuthToken}) {
           _id
           status
           token
           token_expiry
           logged_in_at
-          geolocation
           name
           email
           website
           info  
           profile_picture
+          geolocation
           settings
           posts {
             _id
@@ -38,9 +40,9 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
         }
       }
     `
-  }).then(res => {
+  }).then(async (res) => {
     if (res.data.errors) {
-      setUser({...user, formErrors: res.data.errors[0].message})
+      setUser({...user, formErrors: res.data.errors[0].message, data: res.data.errors[0].message === "oAuth Login" ? data : null})
       process.env.NODE_ENV === 'development' && console.log(`CreateUser Error: ${res.data.errors[0].message}`)
     } else {
       const userData = {
@@ -58,22 +60,23 @@ export const createUser = (formData, history, user, setUser, setLoading) => {
     }
     setLoading(false)
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(`CreateUser Error: ${err}`)
+    process.env.NODE_ENV === 'development' && console.log(`CreateUser Error: ${err.response.data.errors[0].message}`)
     setUser({...user, formErrors: err.response.data.errors[0].message})
     setLoading(false)
   })
 }
 
-export const login = (formData, history, user, setUser, setLoading) => {
+export const login = (data, user, setUser, setLoading, history) => {
   setLoading(true)
   axios.post('', {
     variables: {
-      email: formData.email,
-      password: formData.password,
+      email: data.email,
+      password: data.password,
+      oAuthToken: data.token,
     },
     query: `
-      query Login( $email: String!, $password: String!) {
-        login( email: $email, password: $password) {
+      query Login($email: String!, $password: String, $oAuthToken: String) {
+        login(email: $email, password: $password, oAuthToken: $oAuthToken) {
           _id
           status
           token
@@ -189,7 +192,7 @@ export const login = (formData, history, user, setUser, setLoading) => {
     }
     setLoading(false)
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(`Login Error: ${err}`)
+    process.env.NODE_ENV === 'development' && console.log(`Login Error: ${err.response.data.errors[0].message}`)
     setUser({...user, formErrors: err.response.data.errors[0].message})
     setLoading(false)
   })

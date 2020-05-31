@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../App'
 import { Link } from 'react-router-dom'
-import GoogleLogin from '../components/UI/Button/GoogleLogin'
-import FacebookLogin from '../components/UI/Button/FacebookLogin'
+import GoogleOAuth from '../components/UI/Button/GoogleOAuth'
+import FacebookOAuth from '../components/UI/Button/FacebookOAuth'
 import Button from '../components/UI/Button'
 import { login } from '../shared/authRequests'
 import { checkFormValid } from '../shared/formValidation'
@@ -27,7 +27,7 @@ const Auth = ({ history }) => {
 
   const onLoginClicked = event => {
     event.preventDefault()
-    login(form.values, history, user, setUser, setLoading) // request
+    login(form.values, user, setUser, setLoading, history) // request
   }
 
   return (
@@ -41,13 +41,10 @@ const Auth = ({ history }) => {
           <FormSection text={"Email"} err={form.errors.emailError} user={user} form={form} setForm={setForm}/>
           <FormSection text={"Password"} user={user} form={form} setForm={setForm}/>
           <Button text="Login" submit disabled={!formValid} icon={<LogIn/>}/>
-          <GoogleLogin
-            text="Login With Google"
-            onSuccess={res => console.log(res)}
-            onFail={res => console.log(res)}/>
-          <FacebookLogin 
+          <GoogleOAuth text="Login With Google" user={user} setUser={setUser} setLoading={setLoading}/>
+          {/* <FacebookLogin 
             text="Login With Facebook"
-            res={res => console.log(res)}/>
+            res={res => console.log(res)}/> */}
         </div>
       </form>
       <Link className="below" to="/forgot"><h6>Forgot Password</h6></Link>

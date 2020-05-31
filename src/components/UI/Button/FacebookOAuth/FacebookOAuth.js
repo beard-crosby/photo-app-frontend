@@ -3,7 +3,7 @@ import styles from '../_button.module.scss'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import PropTypes from 'prop-types'
 
-const FacebookBtn = ({ res, text, style}) => 
+const FacebookOAuth = ({ res, text, style}) => 
   <FacebookLogin
     appId={process.env.REACT_APP_FACEBOOK_AUTH_ID}
     fields="name,email,picture"
@@ -19,10 +19,10 @@ const FacebookBtn = ({ res, text, style}) =>
       </button>
     )} />
 
-FacebookBtn.propTypes = {
-  res: PropTypes.func, // oAuth res.
+FacebookOAuth.propTypes = {
+  res: PropTypes.func,     // oAuth res.
   style: PropTypes.object, // Can change style on Component call.
-  text: PropTypes.string // Text on the button.
+  text: PropTypes.string   // Text on the button.
 }
 
-export default FacebookBtn
+export default FacebookOAuth

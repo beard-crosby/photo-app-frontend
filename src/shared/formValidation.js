@@ -28,13 +28,19 @@ export const updateForm = (event, form, setForm) => {
 export const backendError = (user, passed) => {
   if (passed === "Email") {
     switch (user.formErrors) {
-      case "An Account by that Email already exists!": return user.formErrors
+      case "An account by that email already exists! Please try and login.": return user.formErrors
+      case "A Google or Facebook account by that email already exists! Please try and login.": return user.formErrors
       case "An Account by that Email was not found!": return user.formErrors
+      case "The account for this email is a Google or Facebook account.": return user.formErrors
+      case "The account for this email wasn't created with Google or Facebook.": return user.formErrors
+      case "Sign up with Google failed. Please try another method.": return user.formErrors
+      case "Login with Google failed. Please try again.": return user.formErrors
       default: return passed
     }
   } else if (passed === "Password") {
     switch (user.formErrors) {
-      case "Incorrect Password": return user.formErrors
+      case "Incorrect Password.": return user.formErrors
+      case "Please enter your password.": return user.formErrors
       case "Passwords do not match.": return user.formErrors
       default: return passed
     }

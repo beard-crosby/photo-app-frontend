@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../App'
 import { withRouter, Link } from 'react-router-dom'
-import GoogleLogin from '../components/UI/Button/GoogleLogin'
-import FacebookLogin from '../components/UI/Button/FacebookLogin'
+import GoogleOAuth from '../components/UI/Button/GoogleOAuth'
+import FacebookOAuth from '../components/UI/Button/FacebookOAuth'
 import Button from '../components/UI/Button'
-import { createUser } from '../shared/authRequests'
+import { createUser, login } from '../shared/authRequests'
 import { checkFormValid } from '../shared/formValidation'
 import FormSection from '../components/UI/FormSection'
 import { LogIn } from 'react-feather'
@@ -27,11 +27,14 @@ const Create = ({ history }) => {
     },
   })
 
-  useEffect(() => checkFormValid(form, setFormValid), [form])
+  useEffect(() => {
+    checkFormValid(form, setFormValid)
+    user.formErrors === "oAuth Login" && login(user.data, user, setUser, setLoading, history)
+  }, [user, setUser, setLoading, history, form])
 
   const onSignUp = event => {
     event.preventDefault()
-    createUser(form.values, history, user, setUser, setLoading) // request
+    createUser(form.values, user, setUser, setLoading, history) // request
   }
   
   return (
@@ -46,13 +49,10 @@ const Create = ({ history }) => {
         <FormSection text={"Password Check"} err={form.errors.passConfirmError} user={user} form={form} setForm={setForm}/>
         <Link to="/termsandconditions"><h6 className="terms-and-conditions">I agree to the <u><strong>Terms and Conditions</strong></u></h6></Link>
         <Button text="Sign Up" submit disabled={!formValid} icon={<LogIn/>}/>
-        <GoogleLogin
-          text="Sign Up With Google"
-          onSuccess={res => console.log(res)}
-          onFail={res => console.log(res)}/>
-        <FacebookLogin 
-          text="Sign Up With Facebook"
-          res={res => console.log(res)}/>
+        <GoogleOAuth text="Sign up with Google" user={user} setUser={setUser} setLoading={setLoading} create/>
+        {/* <FacebookLogin 
+          text="Sign Up with Facebook"
+          res={res => console.log(res)}/> */}
       </div>
     </form>
   )
