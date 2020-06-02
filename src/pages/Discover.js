@@ -1,5 +1,4 @@
 import React from 'react'
-import '../scss/_discover.scss'
 
 const Discover = () => {
 

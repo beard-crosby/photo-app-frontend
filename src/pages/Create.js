@@ -38,7 +38,7 @@ const Create = ({ history }) => {
   }
   
   return (
-    <form className="model" onSubmit={event => onSignUp(event)}>
+    <form className="model" onSubmit={event => onSignUp(event)} style={{ marginBottom: 20 }}>
       <div className="top">
         <h5>CREATE AN ACCOUNT</h5>
       </div>
