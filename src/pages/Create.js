@@ -34,7 +34,7 @@ const Create = ({ history }) => {
     } else {
       return () => user.formErrors && setUser(removeKey(user, "formErrors"))
     }
-  }, [user, setUser, form])
+  }, [user, setUser, setLoading, history, form])
 
   const onSignUp = event => {
     event.preventDefault()
