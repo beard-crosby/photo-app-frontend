@@ -12,6 +12,7 @@ const GoogleOAuth = ({ text, user, setUser, setLoading, history, create, style }
     } else {
       login(data, user, setUser, setLoading, history)
     }
+    process.env.NODE_ENV === 'development' && console.log(res)
   }
 
   const onFailure = res => {

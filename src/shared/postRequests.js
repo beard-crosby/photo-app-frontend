@@ -75,7 +75,7 @@ export const allPosts = (user, setUser) => {
     if (res.data.errors) {
       process.env.NODE_ENV === 'development' && console.log(`allPosts Error: ${res.data.errors[0].message}`)
     } else {
-      setUser({ ...user, allPosts: res.data.data.allPosts })
+      setUser({ settings: user.settings, allPosts: res.data.data.allPosts })
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {

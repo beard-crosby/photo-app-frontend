@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../App'
+import { removeKey } from '../shared/utility'
 import Button from '../components/UI/Button'
 import '../components/UI/FormSection'
 import { checkFormValid } from '../shared/formValidation'
@@ -7,7 +8,7 @@ import FormSection from '../components/UI/FormSection'
 import { Mail } from 'react-feather'
 
 const Forgot = ({ history }) => {
-  const { user } =  useContext(UserContext)
+  const { user, setUser } =  useContext(UserContext)
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
     values: {
@@ -18,7 +19,10 @@ const Forgot = ({ history }) => {
     },
   })
 
-  useEffect(() => checkFormValid(form, setFormValid), [form])
+  useEffect(() => {
+    checkFormValid(form, setFormValid)
+    return () => user.formErrors && setUser(removeKey(user, "formErrors"))
+  }, [user, setUser, form])
 
   const onSubmit = event => {
     event.preventDefault()

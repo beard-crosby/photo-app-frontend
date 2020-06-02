@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../App'
+import { removeKey } from '../shared/utility'
 import { Link } from 'react-router-dom'
 import GoogleOAuth from '../components/UI/Button/GoogleOAuth'
 import Button from '../components/UI/Button'
@@ -22,7 +23,10 @@ const Auth = ({ history }) => {
     },
   })
 
-  useEffect(() => checkFormValid(form, setFormValid), [form])
+  useEffect(() => {
+    checkFormValid(form, setFormValid)
+    return () => user.formErrors && setUser(removeKey(user, "formErrors"))
+  }, [user, setUser, form])
 
   const onLoginClicked = event => {
     event.preventDefault()

@@ -3,7 +3,8 @@ import { UserContext } from '../App'
 import { withRouter, Link } from 'react-router-dom'
 import GoogleOAuth from '../components/UI/Button/GoogleOAuth'
 import Button from '../components/UI/Button'
-import { createUser, login } from '../shared/authRequests'
+import { removeKey } from '../shared/utility'
+import { createUser } from '../shared/authRequests'
 import { checkFormValid } from '../shared/formValidation'
 import FormSection from '../components/UI/FormSection'
 import { LogIn } from 'react-feather'
@@ -28,8 +29,8 @@ const Create = ({ history }) => {
 
   useEffect(() => {
     checkFormValid(form, setFormValid)
-    user.formErrors === "oAuth Login" && login(user.data, user, setUser, setLoading, history)
-  }, [user, setUser, setLoading, history, form])
+    return () => user.formErrors && setUser(removeKey(user, "formErrors"))
+  }, [user, setUser, form])
 
   const onSignUp = event => {
     event.preventDefault()
