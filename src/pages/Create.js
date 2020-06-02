@@ -4,7 +4,7 @@ import { withRouter, Link } from 'react-router-dom'
 import GoogleOAuth from '../components/UI/Button/GoogleOAuth'
 import Button from '../components/UI/Button'
 import { removeKey } from '../shared/utility'
-import { createUser } from '../shared/authRequests'
+import { createUser, login } from '../shared/authRequests'
 import { checkFormValid } from '../shared/formValidation'
 import FormSection from '../components/UI/FormSection'
 import { LogIn } from 'react-feather'
@@ -29,7 +29,11 @@ const Create = ({ history }) => {
 
   useEffect(() => {
     checkFormValid(form, setFormValid)
-    return () => user.formErrors && setUser(removeKey(user, "formErrors"))
+    if (user.formErrors === "oAuth Login") {
+      login(user.data, user, setUser, setLoading, history)
+    } else {
+      return () => user.formErrors && setUser(removeKey(user, "formErrors"))
+    }
   }, [user, setUser, form])
 
   const onSignUp = event => {
