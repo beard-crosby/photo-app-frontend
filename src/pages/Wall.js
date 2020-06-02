@@ -35,6 +35,8 @@ const Wall = () => {
 
   if (user.file._id && photoCardsArr.length > 0) { // When user posts an image and redirects here, make sure the post is a the top of the wall.
     user.file._id !== photoCardsArr[0]._id && photoCardsArr.unshift(user.file)
+  } else if (user.file._id) {
+    photoCardsArr.unshift(user.file)
   }
   
   return (
