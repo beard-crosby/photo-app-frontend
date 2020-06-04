@@ -101,9 +101,15 @@ export const updateTitle = (post, user, setUser, history) => {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`UpdateTitle Error: ${res.data.errors[0].message}`)
     } else {
-      const i = user.posts.findIndex(x => x._id === post._id)
-      setUser({ ...user, posts: [ ...user.posts, user.posts[i].title = post.title ]})
-      localStorage.setItem('posts', JSON.stringify([ ...user.posts, user.posts[i].title = post.title ]))
+      const newPosts = user.posts.map((p, i) => {
+        if (user.posts.findIndex(x => x._id === post._id) !== i) {
+          return p
+        } else {
+          return { ...p, title: post.title }
+        }
+      })
+      setUser({ ...user, posts: newPosts })
+      localStorage.setItem('posts', JSON.stringify(newPosts))
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
@@ -129,9 +135,15 @@ export const updateDescription = (post, user, setUser, history) => {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`UpdateDescription Error: ${res.data.errors[0].message}`)
     } else {
-      const i = user.posts.findIndex(x => x._id === post._id)
-      setUser({ ...user, posts: [ ...user.posts, user.posts[i].description = post.description ]})
-      localStorage.setItem('posts', JSON.stringify([ ...user.posts, user.posts[i].description = post.description ]))
+      const newPosts = user.posts.map((p, i) => {
+        if (user.posts.findIndex(x => x._id === post._id) !== i) {
+          return p
+        } else {
+          return { ...p, description: post.description }
+        }
+      })
+      setUser({ ...user, posts: newPosts })
+      localStorage.setItem('posts', JSON.stringify(newPosts))
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {

@@ -52,8 +52,9 @@ const PhotoCard = ({ user, setUser, post, history }) => {
       }
     }
   }
-
+  
   const editClickedHandler = () => {
+    // console.log(user.posts[1].title, form.title)
     post.title !== form.title && updateTitle({ ...post, title: form.title }, user, setUser, history)
     post.description !== form.description && updateDescription({ ...post, description: form.description }, user, setUser, history) 
   }
