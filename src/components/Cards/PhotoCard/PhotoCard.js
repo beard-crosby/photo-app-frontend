@@ -53,8 +53,7 @@ const PhotoCard = ({ user, setUser, post, history }) => {
     }
   }
   
-  const editClickedHandler = () => {
-    // console.log(user.posts[1].title, form.title)
+  const editClosedHandler = () => {
     post.title !== form.title && updateTitle({ ...post, title: form.title }, user, setUser, history)
     post.description !== form.description && updateDescription({ ...post, description: form.description }, user, setUser, history) 
   }
@@ -85,7 +84,7 @@ const PhotoCard = ({ user, setUser, post, history }) => {
           {!isAuthor ? <input type="text" name="comment" placeholder="Write a comment"/> :
           <div className={styles.postSettings}>
             <div className={styles.editBtn} onClick={() => setEdit(!edit)}>
-              {edit ? <p onClick={() => editClickedHandler()}>Done</p> : <p>Edit</p>}
+              {edit ? <p onClick={() => editClosedHandler()}>Done</p> : <p>Edit</p>}
             </div>
             <div className={styles.deleteBtn}>
               <p>Delete</p>
