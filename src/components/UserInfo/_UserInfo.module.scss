@@ -59,6 +59,7 @@
       border-radius: 0;
       box-shadow: none;
       resize: none;
+      padding: 10px;
 
       &::placeholder {
         color: $disabled;

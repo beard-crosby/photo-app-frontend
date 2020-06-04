@@ -2,7 +2,7 @@ import React from 'react'
 import { updateForm, backendError } from '../../../shared/formValidation'
 import PropTypes from 'prop-types'
 
-const FormSection = ({ text, err, user, form, setForm, textarea, onFocus }) => {
+const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeholder, defaultValue }) => {
   let type = text
   switch (text) {
     case "Name": type = "text"; break
@@ -21,26 +21,32 @@ const FormSection = ({ text, err, user, form, setForm, textarea, onFocus }) => {
           name={text.toLowerCase()} 
           id={text.toLowerCase()} 
           onChange={event => updateForm(event, form, setForm)}
-          onFocus={onFocus}/> 
+          onFocus={onFocus}
+          placeholder={placeholder}
+          defaultValue={defaultValue}/> 
       :
         <input 
           type={type.toLowerCase()} 
           name={text.toLowerCase()} 
-          id={text.toLowerCase()} 
-          onChange={event => updateForm(event, form, setForm)}/>
+          id={text.toLowerCase()}
+          onChange={event => updateForm(event, form, setForm)}
+          placeholder={placeholder}
+          defaultValue={defaultValue}/>
       }
     </>
   )
 }
 
 FormSection.propTypes = {
-  text: PropTypes.string.isRequired,  // Text for the label.
-  err: PropTypes.string,              // What error the label should check for.
-  user: PropTypes.object.isRequired,  // User object from context. 
-  form: PropTypes.object.isRequired,  // Form object on which this Component is called for.
-  setForm: PropTypes.func.isRequired, // SetForm function for which this Component is called for.
-  textarea: PropTypes.bool,           // True = Render a <textarea> instead of an <input>.
-  onFocus: PropTypes.func,            // Pass up the onFocus event.
+  text: PropTypes.string.isRequired,  // text for the label.
+  err: PropTypes.string,              // what error the label should check for.
+  user: PropTypes.object.isRequired,  // user object from context. 
+  form: PropTypes.object.isRequired,  // form object on which this Component is called for.
+  setForm: PropTypes.func.isRequired, // setForm function for which this Component is called for.
+  textarea: PropTypes.bool,           // true = Render a <textarea> instead of an <input>.
+  onFocus: PropTypes.func,            // pass up the onFocus event.
+  placeholder: PropTypes.string,      // placeholder passed up.
+  defaultValue: PropTypes.string,     // defaultValue passed up.
 }
 
 export default FormSection

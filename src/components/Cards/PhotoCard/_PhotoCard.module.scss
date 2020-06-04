@@ -21,7 +21,6 @@
     
     img {
       width: 100%;
-      transition: 0.3s;
     }
 
     .hoverOverlay {
@@ -52,6 +51,22 @@
       }
     }
 
+    .edit {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-flow: column nowrap;
+      padding: 20px;
+      box-sizing: border-box;
+
+      input {
+        margin-bottom: 20px;
+      }
+    }
+
     &:hover {
       .hoverOverlay {
         opacity: 1;
@@ -66,8 +81,7 @@
 
   .showEdit {
     img {
-      opacity: 0.2;
-      transition: 0.3s;
+      opacity: 0.1;
     }
   }
 

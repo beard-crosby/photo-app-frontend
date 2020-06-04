@@ -38,7 +38,7 @@ export const createPost = (form, user, setUser, setLoading, history) => {
         }
       }
     `
-  }, { headers: headers(user.token) }).then(res => {
+  }, {headers: headers(user.token)}).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`CreatePost Error: ${res.data.errors[0].message}`)
@@ -80,5 +80,61 @@ export const allPosts = (user, setUser) => {
     }
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(`allPosts Error: ${err}`)
+  })
+}
+
+export const updateTitle = (post, user, setUser, history) => {
+  axios.post('', {
+    variables: {
+      _id: post._id,
+      title: post.title,
+    },
+    query: `
+      mutation UpdateTitle($_id: ID!, $title: String!) {
+        updateTitle(_id: $_id, title: $title) {
+          title
+        }
+      }
+    `
+  }, {headers: headers(user.token)}).then(res => {
+    if (res.data.errors) {
+      checkAuth(res, setUser, history)
+      process.env.NODE_ENV === 'development' && console.log(`UpdateTitle Error: ${res.data.errors[0].message}`)
+    } else {
+      const i = user.posts.findIndex(x => x._id === post._id)
+      setUser({ ...user, posts: [ ...user.posts, user.posts[i].title = post.title ]})
+      localStorage.setItem('posts', JSON.stringify([ ...user.posts, user.posts[i].title = post.title ]))
+      process.env.NODE_ENV === 'development' && console.log(res)
+    }
+  }).catch(err => {
+    process.env.NODE_ENV === 'development' && console.log(`UpdateTitle Error: ${err}`)
+  })
+}
+
+export const updateDescription = (post, user, setUser, history) => {
+  axios.post('', {
+    variables: {
+      _id: post._id,
+      description: post.description,
+    },
+    query: `
+      mutation UpdateDescription($_id: ID!, $description: String!) {
+        updateDescription(_id: $_id, description: $description) {
+          description
+        }
+      }
+    `
+  }, {headers: headers(user.token)}).then(res => {
+    if (res.data.errors) {
+      checkAuth(res, setUser, history)
+      process.env.NODE_ENV === 'development' && console.log(`UpdateDescription Error: ${res.data.errors[0].message}`)
+    } else {
+      const i = user.posts.findIndex(x => x._id === post._id)
+      setUser({ ...user, posts: [ ...user.posts, user.posts[i].description = post.description ]})
+      localStorage.setItem('posts', JSON.stringify([ ...user.posts, user.posts[i].description = post.description ]))
+      process.env.NODE_ENV === 'development' && console.log(res)
+    }
+  }).catch(err => {
+    process.env.NODE_ENV === 'development' && console.log(`UpdateDescription Error: ${err}`)
   })
 }
