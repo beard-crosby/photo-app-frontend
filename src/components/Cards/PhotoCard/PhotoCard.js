@@ -74,7 +74,7 @@ const PhotoCard = ({ user, setUser, post, history }) => {
         </div>}
         {del && <div className={styles.del}>
           <h5 style={{ marginBottom: 20 }}>Are you sure?</h5>
-          <Button text="Delete" onClick={() => deletePost(post, user, setUser, history)} border/>
+          <Button text="Delete" onClick={() => deletePost(post, user, setUser, history, setDel)} border/>
         </div>}
         {!edit && !del && <div className={styles.hoverOverlay}>
           <h5>{post.title}</h5>
