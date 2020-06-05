@@ -8,16 +8,18 @@ import { updateFavourites } from '../../../shared/authRequests'
 import { removeKey } from '../../../shared/utility'
 import FormSection from '../../UI/FormSection'
 import { updateTitle, updateDescription } from '../../../shared/postRequests'
+import Button from '../../UI/Button'
 
 const PhotoCard = ({ user, setUser, post, history }) => {
   const [ imgClicked, setImgClicked ] = useState("undefined")
   const [ heartClicked, setHeartClicked ] = useState("undefined")
   const [ edit, setEdit ] = useState(false)
+  const [ del, setDel ] = useState(false)
   const [ form, setForm ] = useState({
     title: post.title,
     description: post.description,
   })
-
+  // Ditermine if the user is the author of this post.
   const isAuthor = user._id === post.author._id
 
   useEffect(() => { // Check ONCE if the post is a favourite. If it is, setHeartClicked().
@@ -53,7 +55,7 @@ const PhotoCard = ({ user, setUser, post, history }) => {
     }
   }
   
-  const editClosedHandler = () => {
+  const editClosedHandler = () => { // If the title or description has changed, send the relevant request.
     post.title !== form.title && updateTitle({ ...post, title: form.title }, user, setUser, history)
     post.description !== form.description && updateDescription({ ...post, description: form.description }, user, setUser, history) 
   }
@@ -64,13 +66,17 @@ const PhotoCard = ({ user, setUser, post, history }) => {
 
   return (
     <div className={`${styles.photoCard} ${imgClicked} ${!isAuthor && styles.postSettings} ${user.settings.dark_mode && styles.darkMode}`}>
-      <div className={`${styles.imgWrapper} ${edit && styles.showEdit}`} onClick={(e) => !edit && clickedHandler(e)}>
+      <div className={`${styles.imgWrapper} ${edit && styles.imgOpacity} ${del && styles.imgOpacity}`} onClick={(e) => !edit && !del && clickedHandler(e)}>
         <img alt="Post" src={post.img}/>
         {edit && <div className={styles.edit}>
           <FormSection text={"Title"} user={user} form={form} setForm={setForm} defaultValue={post.title}/>
           <FormSection text={"Description"} user={user} form={form} setForm={setForm} onFocus={(e) => descriptionHeight(e)} defaultValue={post.description} textarea/>
         </div>}
-        {!edit && <div className={styles.hoverOverlay}>
+        {del && <div className={styles.del}>
+          <h5 style={{ marginBottom: 20 }}>Are you sure?</h5>
+          <Button text="Delete" border/>
+        </div>}
+        {!edit && !del && <div className={styles.hoverOverlay}>
           <h5>{post.title}</h5>
           {!isAuthor && <Heart className={heartClicked}/>}
         </div>}
@@ -83,11 +89,17 @@ const PhotoCard = ({ user, setUser, post, history }) => {
           </div>
           {!isAuthor ? <input type="text" name="comment" placeholder="Write a comment"/> :
           <div className={styles.postSettings}>
-            <div className={styles.editBtn} onClick={() => setEdit(!edit)}>
+            <div className={styles.editBtn} onClick={() => {
+              setEdit(!edit) 
+              setDel(false)
+            }}>
               {edit ? <p onClick={() => editClosedHandler()}>Done</p> : <p>Edit</p>}
             </div>
-            <div className={styles.deleteBtn}>
-              <p>Delete</p>
+            <div className={styles.deleteBtn} onClick={() => {
+              setDel(!del)
+              setEdit(false)
+            }}>
+              {del ? <p>Back</p> : <p>Delete</p>}
             </div>
           </div>}
         </div>

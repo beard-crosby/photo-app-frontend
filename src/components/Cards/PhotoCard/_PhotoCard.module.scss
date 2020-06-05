@@ -10,7 +10,7 @@
   background: $white;
   border: 1px solid $color-1;
 
-  img, h5, p, svg {
+  img, p, svg {
     cursor: pointer;
   }
 
@@ -51,7 +51,7 @@
       }
     }
 
-    .edit {
+    .edit, .del {
       position: absolute;
       top: 0;
       left: 0;
@@ -65,6 +65,17 @@
       input {
         margin-bottom: 20px;
       }
+
+      button:hover {
+        h5 {
+          color: $favourite;
+        }
+      }
+    }
+
+    .del {
+      justify-content: center;
+      align-items: center;
     }
 
     &:hover {
@@ -79,7 +90,7 @@
     }
   }
 
-  .showEdit {
+  .imgOpacity {
     img {
       opacity: 0.1;
     }
@@ -102,6 +113,10 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
+      h5 {
+        cursor: pointer;
+      }
 
       .comments {
         width: 100%;

@@ -4,11 +4,11 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 
 
-const Button = ({ text, style, submit, disabled, onClick, icon, redirect, history }) => 
+const Button = ({ text, style, submit, disabled, onClick, icon, redirect, border, history }) => 
   <button 
     disabled={disabled}
     type={submit ? "submit" : "button"} 
-    className={styles.button} 
+    className={`${styles.button} ${border && styles.border}`} 
     style={style} 
     onClick={redirect ? () => history.push(redirect) : onClick}>
       {icon && icon}
@@ -22,6 +22,7 @@ Button.propTypes = {
   redirect: PropTypes.string, // Redirect to path in passed string.
   submit: PropTypes.bool,     // True = Trigure form submit event.
   icon: PropTypes.element,    // True = display passed icon element.
+  border: PropTypes.bool,     // True = display border and background.
 }
 
 export default withRouter(Button)
