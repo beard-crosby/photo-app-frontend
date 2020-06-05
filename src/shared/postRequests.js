@@ -150,3 +150,30 @@ export const updateDescription = (post, user, setUser, history) => {
     process.env.NODE_ENV === 'development' && console.log(`UpdateDescription Error: ${err}`)
   })
 }
+
+export const deletePost = (post, user, setUser, history) => {
+  axios.post('', {
+    variables: {
+      _id: post._id
+    },
+    query: `
+      mutation DeletePost($_id: ID!) {
+        deletePost(_id: $_id) {
+          _id
+        }
+      }
+    `
+  }, {headers: headers(user.token)}).then(res => {
+    if (res.data.errors) {
+      checkAuth(res, setUser, history)
+      process.env.NODE_ENV === 'development' && console.log(`DeletePost Error: ${res.data.errors[0].message}`)
+    } else {
+      setUser({ ...user, posts: user.posts.filter(x => {
+        return x._id != post._id
+      })})
+      process.env.NODE_ENV === 'development' && console.log(res)
+    }
+  }).catch(err => {
+    process.env.NODE_ENV === 'development' && console.log(`DeletePost Error: ${err}`)
+  })
+}

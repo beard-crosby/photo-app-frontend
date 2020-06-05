@@ -7,7 +7,7 @@ import { Heart } from 'react-feather'
 import { updateFavourites } from '../../../shared/authRequests'
 import { removeKey } from '../../../shared/utility'
 import FormSection from '../../UI/FormSection'
-import { updateTitle, updateDescription } from '../../../shared/postRequests'
+import { updateTitle, updateDescription, deletePost } from '../../../shared/postRequests'
 import Button from '../../UI/Button'
 
 const PhotoCard = ({ user, setUser, post, history }) => {
@@ -74,7 +74,7 @@ const PhotoCard = ({ user, setUser, post, history }) => {
         </div>}
         {del && <div className={styles.del}>
           <h5 style={{ marginBottom: 20 }}>Are you sure?</h5>
-          <Button text="Delete" border/>
+          <Button text="Delete" onClick={() => deletePost(post, user, setUser, history)} border/>
         </div>}
         {!edit && !del && <div className={styles.hoverOverlay}>
           <h5>{post.title}</h5>
