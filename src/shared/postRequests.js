@@ -170,7 +170,7 @@ export const deletePost = (post, user, setUser, history, setDel) => {
     } else {
       setDel(false)
       const newPosts = user.posts.filter(x => {
-        return x._id != post._id
+        return x._id !== post._id
       })
       setUser({ ...user, posts: newPosts })
       localStorage.setItem('posts', JSON.stringify(newPosts))
