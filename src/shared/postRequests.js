@@ -1,5 +1,5 @@
 import axios from "axios"
-import { headers, checkAuth } from './utility'
+import { headers, checkAuth, removeKey } from './utility'
 
 export const createPost = (form, user, setUser, setLoading, history) => {
   setLoading(true)
@@ -170,7 +170,7 @@ export const deletePost = (post, user, setUser, history, setDel) => {
     } else {
       setDel(false)
       const newPosts = user.posts.filter(x => x._id !== post._id)
-      setUser({ ...user, posts: newPosts })
+      setUser({ ...removeKey(user, "postClicked"), posts: newPosts })
       localStorage.setItem('posts', JSON.stringify(newPosts))
       process.env.NODE_ENV === 'development' && console.log(res)
     }
