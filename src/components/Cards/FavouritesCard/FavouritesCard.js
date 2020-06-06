@@ -23,10 +23,7 @@ const Favourites = ({ user, setUser }) => {
       setTimeout(() => profileCol.style.justifyContent = "flex-start", 300) // Wait for transition to finish before style change.
     }
     document.addEventListener("click", clickListener)
-    return () => {
-      document.removeEventListener("click", clickListener)
-      setUser(removeKey(user, "postClicked")) // Remove postClicked from context on component unmount.
-    }
+    return () => document.removeEventListener("click", clickListener)
   }, [wrapperHeight]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
