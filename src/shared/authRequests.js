@@ -285,8 +285,10 @@ export const updatePP = (user, setUser, history, setLoading) => {
 }
 
 export const updateFavourites = (user, setUser, post, action, history) => {
-  const savedUser = user
-  setUser({ ...user, favourites: [ ...user.favourites, post ] })
+  const backupUser = user // Use backupUser if request fails so action can be reverted.
+  action === "add" ? 
+  setUser({ ...user, favourites: [ ...user.favourites, post ] }) :
+  setUser({ ...user, favourites: user.favourites.filter(x => x._id !== post._id) })
   axios.post('', {
     variables: {
       _id: user._id,
@@ -318,14 +320,14 @@ export const updateFavourites = (user, setUser, post, action, history) => {
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
-      res.data.errors[0].message === "Duplicate Favourite!" && setUser({ ...user, favourites: savedUser.favourites, updateFavouritesError: post._id })
+      res.data.errors[0].message === "Duplicate Favourite!" && setUser({ ...user, favourites: backupUser.favourites, updateFavouritesError: post._id })
       process.env.NODE_ENV === 'development' && console.log(`UpdateFavourites Error: ${res.data.errors[0].message}`)
     } else {
       localStorage.setItem('favourites', JSON.stringify(res.data.data.updateFavourites.favourites))
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
-    setUser({ ...user, favourites: savedUser.favourites, updateFavouritesError: post._id })
+    setUser({ ...user, favourites: backupUser.favourites, updateFavouritesError: post._id })
     process.env.NODE_ENV === 'development' && console.log(`UpdateFavourites Error: ${err}`)
   })
 }

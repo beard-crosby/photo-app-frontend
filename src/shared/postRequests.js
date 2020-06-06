@@ -169,9 +169,7 @@ export const deletePost = (post, user, setUser, history, setDel) => {
       process.env.NODE_ENV === 'development' && console.log(`DeletePost Error: ${res.data.errors[0].message}`)
     } else {
       setDel(false)
-      const newPosts = user.posts.filter(x => {
-        return x._id !== post._id
-      })
+      const newPosts = user.posts.filter(x => x._id !== post._id)
       setUser({ ...user, posts: newPosts })
       localStorage.setItem('posts', JSON.stringify(newPosts))
       process.env.NODE_ENV === 'development' && console.log(res)
