@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from './_FavouritesCard.module.scss'
 import { ChevronUp, ChevronDown } from 'react-feather'
-import { removeKey } from '../../../shared/utility'
 import Masonry from '../../Masonry'
 import PropTypes from 'prop-types'
 
