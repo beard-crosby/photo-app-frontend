@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { logout, logInSuccess } from './localStorage'
-import { headers, timeout, checkGeolocation, checkAuth } from './utility'
+import { headers, timeout, checkGeolocation, checkAuth, removeKey } from './utility'
 
 export const createUser = (data, user, setUser, setLoading, history) => {
   setLoading(true)
@@ -286,9 +286,10 @@ export const updatePP = (user, setUser, history, setLoading) => {
 
 export const updateFavourites = (user, setUser, post, action, history) => {
   const backupUser = user // Use backupUser if request fails so action can be reverted.
-  action === "add" ? 
+  action === "add" ?
   setUser({ ...user, favourites: [ ...user.favourites, post ] }) :
-  setUser({ ...user, favourites: user.favourites.filter(x => x._id !== post._id) })
+  setUser({ ...removeKey(user, "postClicked"), favourites: user.favourites.filter(x => x._id !== post._id) })
+  
   axios.post('', {
     variables: {
       _id: user._id,

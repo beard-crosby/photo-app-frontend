@@ -22,13 +22,11 @@ const PhotoCard = ({ user, setUser, post, history }) => {
   // Ditermine if the user is the author of this post.
   const isAuthor = user._id === post.author._id
 
-  useEffect(() => { // Check ONCE if the post is a favourite. If it is, setHeartClicked().
-    user.favourites.forEach(fav => {
-      post._id === fav._id && setHeartClicked(styles.heartClicked)
-    })
+  useEffect(() => { // Check if this post is in user.favourites. If it is, setHeartClicked().
+    user.favourites.forEach(fav => post._id === fav._id && setHeartClicked(styles.heartClicked))
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => { // If dependencies change, check if the _id in updateFavouritesError matches this post.
+  useEffect(() => { // Check if the _id in updateFavouritesError matches this post.
     if (user.updateFavouritesError === post._id) {
       setHeartClicked("undefined") // Remove class from setHeartClicked().
       setUser(removeKey(user, "updateFavouritesError")) // Remove "updateFavouritesError" from user context.
