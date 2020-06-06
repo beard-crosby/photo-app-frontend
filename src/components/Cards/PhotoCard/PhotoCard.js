@@ -73,8 +73,8 @@ const PhotoCard = ({ user, setUser, post, history }) => {
           <FormSection text={"Description"} user={user} form={form} setForm={setForm} onFocus={(e) => descriptionHeight(e)} defaultValue={post.description} textarea/>
         </div>}
         {del && <div className={styles.del}>
-          <h5 style={{ marginBottom: 20 }}>Are you sure?</h5>
-          <Button text="Delete" onClick={() => deletePost(post, user, setUser, history, setDel)} border/>
+          <h5 style={{ marginBottom: 10 }}>Are you sure?</h5>
+          <Button text="Delete" onClick={() => deletePost(post, user, setUser, history, setDel)} border boxShadow/>
         </div>}
         {!edit && !del && <div className={styles.hoverOverlay}>
           <h5>{post.title}</h5>

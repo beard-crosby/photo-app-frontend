@@ -1,0 +1,29 @@
+.outerMain {
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 20px;
+  margin-top: 91px;
+
+  .left, .right {
+    width: fit-content;
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  .left {
+    align-items: flex-start;
+  }
+
+  .right {
+    align-items: flex-end;
+
+    svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+}
