@@ -3,7 +3,7 @@ import ProfileCard from '../ProfileCard'
 import { withRouter } from 'react-router-dom'
 import styles from './_PhotoCard.module.scss'
 import PropTypes from 'prop-types'
-import { Heart } from 'react-feather'
+import { Heart, ChevronUp, ChevronDown } from 'react-feather'
 import { updateFavourites } from '../../../shared/authRequests'
 import { removeKey } from '../../../shared/utility'
 import FormSection from '../../UI/FormSection'
@@ -11,8 +11,9 @@ import { updateTitle, updateDescription, deletePost } from '../../../shared/post
 import Button from '../../UI/Button'
 
 const PhotoCard = ({ user, setUser, post, history }) => {
-  const [ imgClicked, setImgClicked ] = useState("undefined")
   const [ heartClicked, setHeartClicked ] = useState("undefined")
+  const [ descClicked, setDescClicked ] = useState(false)
+  const [ imgClicked, setImgClicked ] = useState("undefined")
   const [ edit, setEdit ] = useState(false)
   const [ del, setDel ] = useState(false)
   const [ form, setForm ] = useState({
@@ -42,7 +43,7 @@ const PhotoCard = ({ user, setUser, post, history }) => {
         setHeartClicked("undefined")
         updateFavourites(user, setUser, post, "remove", history)
       }
-    } else { // Else = If user has clicked on the image.
+    } else if (!document.getElementById(`desc-btn-${post._id}`).contains(e.target)) { // Else = If user has clicked on the image.
       if (imgClicked === "undefined") {
         setImgClicked(styles.imgClicked)
         document.body.style.overflow = "hidden"
@@ -64,19 +65,25 @@ const PhotoCard = ({ user, setUser, post, history }) => {
 
   return (
     <div className={`${styles.photoCard} ${imgClicked} ${!isAuthor && styles.postSettings} ${user.settings.dark_mode && styles.darkMode}`}>
-      <div className={`${styles.imgWrapper} ${edit && styles.imgOpacity} ${del && styles.imgOpacity}`} onClick={(e) => !edit && !del && clickedHandler(e)}>
+      <div className={`${styles.imgWrapper} ${edit && styles.imgOpacity} ${del && styles.imgOpacity}`} onClick={e => !edit && !del && clickedHandler(e)}>
         <img alt="Post" src={post.img}/>
         {edit && <div className={styles.edit}>
-          <FormSection text={"Title"} user={user} form={form} setForm={setForm} defaultValue={post.title}/>
-          <FormSection text={"Description"} user={user} form={form} setForm={setForm} onFocus={(e) => descriptionHeight(e)} defaultValue={post.description} textarea/>
+          <FormSection text={"Title"} user={user} form={form} setForm={setForm} maxLength="60" defaultValue={post.title}/>
+          <FormSection text={"Description"} user={user} form={form} setForm={setForm} onFocus={e => descriptionHeight(e)} defaultValue={post.description} maxLength="300" textarea/>
         </div>}
         {del && <div className={styles.del}>
           <h5 style={{ marginBottom: 10 }}>Are you sure?</h5>
           <Button text="Delete" onClick={() => deletePost(post, user, setUser, history, setDel)} border boxShadow/>
         </div>}
         {!edit && !del && <div className={styles.hoverOverlay}>
-          <h5>{post.title}</h5>
-          {!isAuthor && <Heart className={heartClicked}/>}
+          <div className={styles.top}>
+            <h5>{post.title}</h5>
+            {!isAuthor && <Heart className={heartClicked}/>}
+          </div>
+          {post.description && <div className={styles.bottom}>
+            <Button text="Description" icon={descClicked ? <ChevronDown/> : <ChevronUp/>} id={`desc-btn-${post._id}`} onClick={() => setDescClicked(!descClicked)} iconRight/>
+            {descClicked && <p>{post.description}</p>}
+          </div>}
         </div>}
       </div>
       <div className={styles.sidebar}>

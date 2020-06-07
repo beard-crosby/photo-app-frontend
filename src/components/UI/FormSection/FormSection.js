@@ -2,7 +2,7 @@ import React from 'react'
 import { updateForm, backendError } from '../../../shared/formValidation'
 import PropTypes from 'prop-types'
 
-const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeholder, defaultValue }) => {
+const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeholder, defaultValue, maxLength }) => {
   let type = text
   switch (text) {
     case "Name": type = "text"; break
@@ -23,7 +23,8 @@ const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeh
           onChange={event => updateForm(event, form, setForm)}
           onFocus={onFocus}
           placeholder={placeholder}
-          defaultValue={defaultValue}/> 
+          defaultValue={defaultValue}
+          maxLength={maxLength}/> 
       :
         <input 
           type={type.toLowerCase()} 
@@ -31,7 +32,8 @@ const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeh
           id={text.toLowerCase()}
           onChange={event => updateForm(event, form, setForm)}
           placeholder={placeholder}
-          defaultValue={defaultValue}/>
+          defaultValue={defaultValue}
+          maxLength={maxLength}/>
       }
     </>
   )
@@ -47,6 +49,7 @@ FormSection.propTypes = {
   onFocus: PropTypes.func,            // pass up the onFocus event.
   placeholder: PropTypes.string,      // placeholder passed up.
   defaultValue: PropTypes.string,     // defaultValue passed up.
+  maxLength: PropTypes.string,        // maxLength passed up.
 }
 
 export default FormSection

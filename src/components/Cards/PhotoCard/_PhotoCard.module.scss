@@ -28,7 +28,9 @@
       top: 0;
       left: 0;
       width: 100%;
+      height: 100%;
       display: flex;
+      flex-flow: column nowrap;
       justify-content: space-between;
       padding: 15px 20px;
       box-sizing: border-box;
@@ -36,18 +38,38 @@
       transition: 0.3s;
       cursor: pointer;
 
-      h5, svg {
+      h5, p, svg {
         color: $white;
-        fill: $white;
       }
 
       h5 {
         font-weight: 600;
       }
 
-      .heartClicked {
-        color: $favourite;
-        fill: $favourite;
+      .top {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        svg {
+          color: $white;
+          fill: $white;
+        }
+
+        .heartClicked {
+          color: $favourite;
+          fill: $favourite;
+        }
+      }
+
+      .bottom {
+        width: fit-content;
+        display: flex;
+        flex-flow: column nowrap;
+
+        button {
+          font-family: inherit;
+        }
       }
     }
 
