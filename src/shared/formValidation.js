@@ -46,6 +46,7 @@ export const backendError = (user, passed) => {
     }
   } else if (passed === "Title") {
     switch (user.formErrors) {
+      case "Title cannot be empty!": return user.formErrors
       case "Title must be a maximum of 60 characters.": return user.formErrors
       default: return passed
     }
