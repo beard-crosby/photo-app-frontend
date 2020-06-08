@@ -1,10 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../App'
 import PhotoCard from '../components/Cards/PhotoCard'
 import moment from 'moment'
+import { removeKey } from '../shared/utility'
 
 const Wall = () => {
   const { user, setUser } = useContext(UserContext)
+  useEffect(() => user.formErrors && setUser(removeKey(user, "formErrors")), []) // eslint-disable-line react-hooks/exhaustive-deps
+  
   const photoCardsArr = [] // Array of photoCards to be rendered.
 
   // Render posts of followed users in order of date time.

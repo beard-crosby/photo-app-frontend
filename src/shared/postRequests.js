@@ -90,7 +90,7 @@ export const updateTitle = (post, user, setUser, setSpinner, switchEditDel, hist
     if (user.posts.findIndex(x => x._id === post._id) !== i) {
       return p
     } else {
-      return { ...p, title: post.title }
+      return { ...p, title: post.title.length > 0 ? post.title : p.title }
     }
   })
 
