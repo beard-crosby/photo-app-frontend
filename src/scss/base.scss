@@ -53,6 +53,12 @@ svg {
 label {
   width: 100%;
   padding: 0 0 5px 0;
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    animation: 0.3s ease-out fadeIn;
+  }
 }
 
 input, textarea {
@@ -317,5 +323,14 @@ body {
     footer {
       color: $white;
     }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { updateForm, backendError } from '../../../shared/formValidation'
 import PropTypes from 'prop-types'
 
 const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeholder, defaultValue, maxLength }) => {
+  const [ targetValue, setTargetValue ] = useState(null)
+
   let type = text
   switch (text) {
     case "Name": type = "text"; break
@@ -12,15 +14,23 @@ const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeh
     default: type = text
   }
 
+  const onChangeHandler = e => {
+    setTargetValue(e.target.value.length)
+    updateForm(e, form, setForm)
+  }
+
   return (
     <>
-      <label htmlFor={text.toLowerCase()}><h5>{err ? err : backendError(user, text)}</h5></label>
+      <label htmlFor={text.toLowerCase()}>
+        <h5>{err ? err : backendError(user, text)}</h5>
+        {maxLength && targetValue > maxLength - 20 && backendError(user, text) === text && <p>{`${maxLength - targetValue} characters left`}</p>}
+      </label>
       {textarea ? 
         <textarea 
           type={type.toLowerCase()} 
           name={text.toLowerCase()} 
           id={text.toLowerCase()} 
-          onChange={event => updateForm(event, form, setForm)}
+          onChange={e => onChangeHandler(e)}
           onFocus={onFocus}
           placeholder={placeholder}
           defaultValue={defaultValue}
@@ -30,7 +40,7 @@ const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeh
           type={type.toLowerCase()} 
           name={text.toLowerCase()} 
           id={text.toLowerCase()}
-          onChange={event => updateForm(event, form, setForm)}
+          onChange={e => onChangeHandler(e)}
           placeholder={placeholder}
           defaultValue={defaultValue}
           maxLength={maxLength}/>
