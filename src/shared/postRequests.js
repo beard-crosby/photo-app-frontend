@@ -41,10 +41,11 @@ export const createPost = (form, user, setUser, setLoading, history) => {
   }, {headers: headers(user.token)}).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
+      setUser({...user, formErrors: res.data.errors[0].message})
       process.env.NODE_ENV === 'development' && console.log(`CreatePost Error: ${res.data.errors[0].message}`)
     } else {
       setUser({ 
-        ...user, 
+        ...removeKey(user, "formErrors"), 
         posts: [ ...user.posts, res.data.data.createPost ], 
         file: { ...res.data.data.createPost, uploaded: false },
       })
@@ -54,7 +55,7 @@ export const createPost = (form, user, setUser, setLoading, history) => {
     }
     setLoading(false)
   }).catch(err => {
-    setUser({ ...user, file: { uploaded: false }})
+    setUser({ ...user, formErrors: err.response.data.errors[0].message, file: { uploaded: false }})
     process.env.NODE_ENV === 'development' && console.log(`CreatePost Error: ${err}`)
     setLoading(false)
   })
@@ -83,7 +84,16 @@ export const allPosts = (user, setUser) => {
   })
 }
 
-export const updateTitle = (post, user, setUser, history) => {
+export const updateTitle = (post, user, setUser, setSpinner, switchEditDel, history) => {
+  setSpinner(true) // NOT spinner in context. UseState in PhotoCard.
+  const newPosts = user.posts.map((p, i) => { // Find the post and mutate the title.
+    if (user.posts.findIndex(x => x._id === post._id) !== i) {
+      return p
+    } else {
+      return { ...p, title: post.title }
+    }
+  })
+
   axios.post('', {
     variables: {
       _id: post._id,
@@ -99,25 +109,32 @@ export const updateTitle = (post, user, setUser, history) => {
   }, {headers: headers(user.token)}).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
+      setUser({...user, posts: newPosts, formErrors: res.data.errors[0].message})
       process.env.NODE_ENV === 'development' && console.log(`UpdateTitle Error: ${res.data.errors[0].message}`)
     } else {
-      const newPosts = user.posts.map((p, i) => {
-        if (user.posts.findIndex(x => x._id === post._id) !== i) {
-          return p
-        } else {
-          return { ...p, title: post.title }
-        }
-      })
-      setUser({ ...user, posts: newPosts })
+      setUser({ ...removeKey(user, "formErrors"), posts: newPosts })
       localStorage.setItem('posts', JSON.stringify(newPosts))
+      switchEditDel(false)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
+    setSpinner(false)
   }).catch(err => {
+    setUser({ ...user, posts: newPosts, formErrors: err.response.data.errors[0].message})
     process.env.NODE_ENV === 'development' && console.log(`UpdateTitle Error: ${err}`)
+    setSpinner(false)
   })
 }
 
-export const updateDescription = (post, user, setUser, history) => {
+export const updateDescription = (post, user, setUser, setSpinner, switchEditDel, history) => {
+  setSpinner(true) // NOT spinner in context. UseState in PhotoCard.
+  const newPosts = user.posts.map((p, i) => { // Find the post and mutate the description.
+    if (user.posts.findIndex(x => x._id === post._id) !== i) {
+      return p
+    } else {
+      return { ...p, description: post.description }
+    }
+  })
+  
   axios.post('', {
     variables: {
       _id: post._id,
@@ -133,21 +150,19 @@ export const updateDescription = (post, user, setUser, history) => {
   }, {headers: headers(user.token)}).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
+      setUser({...user, posts: newPosts, formErrors: res.data.errors[0].message})
       process.env.NODE_ENV === 'development' && console.log(`UpdateDescription Error: ${res.data.errors[0].message}`)
     } else {
-      const newPosts = user.posts.map((p, i) => {
-        if (user.posts.findIndex(x => x._id === post._id) !== i) {
-          return p
-        } else {
-          return { ...p, description: post.description }
-        }
-      })
-      setUser({ ...user, posts: newPosts })
+      setUser({ ...removeKey(user, "formErrors"), posts: newPosts })
       localStorage.setItem('posts', JSON.stringify(newPosts))
+      switchEditDel(false)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
+    setSpinner(false)
   }).catch(err => {
+    setUser({ ...user, posts: newPosts, formErrors: err.response.data.errors[0].message})
     process.env.NODE_ENV === 'development' && console.log(`UpdateDescription Error: ${err}`)
+    setSpinner(false)
   })
 }
 

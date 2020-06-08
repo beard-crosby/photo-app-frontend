@@ -44,6 +44,16 @@ export const backendError = (user, passed) => {
       case "Passwords do not match.": return user.formErrors
       default: return passed
     }
+  } else if (passed === "Title") {
+    switch (user.formErrors) {
+      case "Title must be a maximum of 60 characters.": return user.formErrors
+      default: return passed
+    }
+  } else if (passed === "Description") {
+    switch (user.formErrors) {
+      case "Description must be a maximum of 300 characters.": return user.formErrors
+      default: return passed
+    }
   } else {
     return passed
   }
