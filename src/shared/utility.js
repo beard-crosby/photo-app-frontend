@@ -71,3 +71,8 @@ export const removeKey = (obj, prop) => {
   let {[prop]: omit, ...res} = obj
   return res
 }
+
+// on focus increase textarea height to 100px.
+export const textareaGrow = e => {
+  if (e.target.clientHeight < 100) e.target.style.height = "100px"
+}

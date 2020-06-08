@@ -5,7 +5,7 @@ import styles from './_PhotoCard.module.scss'
 import PropTypes from 'prop-types'
 import { Heart, ChevronUp, ChevronDown } from 'react-feather'
 import { updateFavourites } from '../../../shared/authRequests'
-import { removeKey } from '../../../shared/utility'
+import { textareaGrow, removeKey } from '../../../shared/utility'
 import FormSection from '../../UI/FormSection'
 import { updateTitle, updateDescription, deletePost } from '../../../shared/postRequests'
 import Button from '../../UI/Button'
@@ -25,11 +25,8 @@ const PhotoCard = ({ user, setUser, post, history }) => {
   
   const isAuthor = user._id === post.author._id // Ditermine if the user is the author of this post.
 
-  useEffect(() => { // Check if this post is in user.favourites. If it is, setHeartClicked().
-    user.favourites.forEach(fav => post._id === fav._id && setHeartClicked(styles.heartClicked))
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
   useEffect(() => { // Check if the _id in updateFavouritesError matches this post.
+    user.favourites.forEach(fav => post._id === fav._id && setHeartClicked(styles.heartClicked)) // Check if this post is in user.favourites. If it is, setHeartClicked().
     if (user.updateFavouritesError === post._id) {
       setHeartClicked("undefined") // Remove class from setHeartClicked().
       setUser(removeKey(user, "updateFavouritesError")) // Remove "updateFavouritesError" from user context.
@@ -77,10 +74,6 @@ const PhotoCard = ({ user, setUser, post, history }) => {
     setEdit(false)
   }
 
-  const descriptionHeight = e => {
-    if (e.target.clientHeight < 100) e.target.style.height = "100px"
-  }
-
   return (
     <div className={`${styles.photoCard} ${imgClicked} ${!isAuthor && styles.postSettings} ${user.settings.dark_mode && styles.darkMode}`}>
       <div className={`${styles.imgWrapper} ${edit && styles.imgOpacity} ${del && styles.imgOpacity}`} onClick={e => !edit && !del && clickedHandler(e)}>
@@ -89,7 +82,7 @@ const PhotoCard = ({ user, setUser, post, history }) => {
         <>
           {edit && <div className={styles.edit}>
             <FormSection text={"Title"} user={user} form={form} setForm={setForm} maxLength="60" defaultValue={post.title}/>
-            <FormSection text={"Description"} user={user} form={form} setForm={setForm} onFocus={e => descriptionHeight(e)} defaultValue={post.description} maxLength="300" textarea/>
+            <FormSection text={"Description"} user={user} form={form} setForm={setForm} onFocus={e => textareaGrow(e)} defaultValue={post.description} maxLength="300" textarea/>
           </div>}
           {del && <div className={styles.del}>
             <h5 style={{ marginBottom: 10 }}>Are you sure?</h5>

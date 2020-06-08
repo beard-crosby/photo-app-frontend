@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../App'
 import { Link } from 'react-router-dom'
 import '../scss/_model.scss'
-import { removeKey } from '../shared/utility'
+import { textareaGrow, removeKey } from '../shared/utility'
 import Button from '../components/UI/Button'
 import UploadBox from '../components/UI/UploadBox'
 import FormSection from '../components/UI/FormSection'
@@ -26,10 +26,6 @@ const Post = ({ history }) => {
     event.preventDefault()
     createPost(form, user, setUser, setLoading, history)
   }
-
-  const descriptionHeight = e => {
-    if (e.target.clientHeight < 100) e.target.style.height = "100px"
-  }
   
   return (
     <>
@@ -40,7 +36,7 @@ const Post = ({ history }) => {
         </div>
         <div className="middle">
           <FormSection text={"Title"} user={user} form={form} maxLength="60" setForm={setForm}/>
-          <FormSection text={"Description"} user={user} form={form} setForm={setForm} onFocus={(e) => descriptionHeight(e)} maxLength="300" textarea/>
+          <FormSection text={"Description"} user={user} form={form} setForm={setForm} onFocus={e => textareaGrow(e)} maxLength="300" textarea/>
           <UploadBox user={user} setUser={setUser} style={{ margin: "20px 0"}}/>
           <Button submit disabled={!formValid} icon={<Upload/>} text="Post"/>
         </div>
