@@ -35,21 +35,23 @@ const PhotoCard = ({ user, setUser, post, history }) => {
   }, [user, setUser, post])
 
   const clickedHandler = e => { // If user clicks on heart.
-    if (e.target.nodeName.toLowerCase() === "path" || e.target.nodeName.toLowerCase() === "svg") {
-      if (heartClicked === "undefined") {
-        setHeartClicked(styles.heartClicked)
-        updateFavourites(user, setUser, post, "add", history)
-      } else {
-        setHeartClicked("undefined")
-        updateFavourites(user, setUser, post, "remove", history)
-      }
-    } else if (!document.getElementById(`desc-btn-${post._id}`).contains(e.target)) { // Else = If user has clicked on the image.
-      if (imgClicked === "undefined") {
-        setImgClicked(styles.imgClicked)
-        document.body.style.overflow = "hidden"
-      } else {
-        setImgClicked("undefined")
-        document.body.style = "none"
+    if (!document.getElementById(`desc-btn-${post._id}`).contains(e.target)) {
+      if (e.target.nodeName.toLowerCase() === "path" || e.target.nodeName.toLowerCase() === "svg") {
+        if (heartClicked === "undefined") {
+          setHeartClicked(styles.heartClicked)
+          updateFavourites(user, setUser, post, "add", history)
+        } else {
+          setHeartClicked("undefined")
+          updateFavourites(user, setUser, post, "remove", history)
+        }
+      } else { // Else = If user has clicked on the image.
+        if (imgClicked === "undefined") {
+          setImgClicked(styles.imgClicked)
+          document.body.style.overflow = "hidden"
+        } else {
+          setImgClicked("undefined")
+          document.body.style = "none"
+        }
       }
     }
   }
@@ -78,7 +80,7 @@ const PhotoCard = ({ user, setUser, post, history }) => {
         {!edit && !del && <div className={styles.hoverOverlay}>
           <div className={styles.top}>
             <h5>{post.title}</h5>
-            {!isAuthor && <Heart className={heartClicked}/>}
+            {!isAuthor && <Heart className={heartClicked} id={`fav-btn-${post._id}`}/>}
           </div>
           {post.description && <div className={styles.bottom}>
             <Button text="Description" icon={descClicked ? <ChevronDown/> : <ChevronUp/>} id={`desc-btn-${post._id}`} onClick={() => setDescClicked(!descClicked)} iconRight/>
