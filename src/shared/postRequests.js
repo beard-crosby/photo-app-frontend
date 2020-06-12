@@ -84,13 +84,13 @@ export const allPosts = (user, setUser) => {
   })
 }
 
-export const updateTitle = (post, user, setUser, setSpinner, switchEditDel, history) => {
+export const updateTitle = (post, user, setUser, setSpinner, setOverlay, history) => {
   setSpinner(true) // NOT spinner in context. UseState in PhotoCard.
   const newPosts = user.posts.map((p, i) => { // Find the post and mutate the title.
     if (user.posts.findIndex(x => x._id === post._id) !== i) {
       return p
     } else {
-      return { ...p, title: post.title.length > 0 ? post.title : p.title }
+      return { ...p, title: post.title }
     }
   })
 
@@ -114,7 +114,7 @@ export const updateTitle = (post, user, setUser, setSpinner, switchEditDel, hist
     } else {
       setUser({ ...removeKey(user, "formErrors"), posts: newPosts })
       localStorage.setItem('posts', JSON.stringify(newPosts))
-      switchEditDel(false)
+      setOverlay(null)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setSpinner(false)
@@ -125,7 +125,7 @@ export const updateTitle = (post, user, setUser, setSpinner, switchEditDel, hist
   })
 }
 
-export const updateDescription = (post, user, setUser, setSpinner, switchEditDel, history) => {
+export const updateDescription = (post, user, setUser, setSpinner, setOverlay, history) => {
   setSpinner(true) // NOT spinner in context. UseState in PhotoCard.
   const newPosts = user.posts.map((p, i) => { // Find the post and mutate the description.
     if (user.posts.findIndex(x => x._id === post._id) !== i) {
@@ -155,7 +155,7 @@ export const updateDescription = (post, user, setUser, setSpinner, switchEditDel
     } else {
       setUser({ ...removeKey(user, "formErrors"), posts: newPosts })
       localStorage.setItem('posts', JSON.stringify(newPosts))
-      switchEditDel(false)
+      setOverlay(null)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setSpinner(false)
@@ -166,7 +166,7 @@ export const updateDescription = (post, user, setUser, setSpinner, switchEditDel
   })
 }
 
-export const deletePost = (post, user, setUser, history, setDel) => {
+export const deletePost = (post, user, setUser, history, setOverlay) => {
   axios.post('', {
     variables: {
       _id: post._id
@@ -183,7 +183,7 @@ export const deletePost = (post, user, setUser, history, setDel) => {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`DeletePost Error: ${res.data.errors[0].message}`)
     } else {
-      setDel(false)
+      setOverlay(null)
       const newPosts = user.posts.filter(x => x._id !== post._id)
       setUser({ ...removeKey(user, "postClicked"), posts: newPosts })
       localStorage.setItem('posts', JSON.stringify(newPosts))

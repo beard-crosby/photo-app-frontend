@@ -23,56 +23,6 @@
       width: 100%;
     }
 
-    .hoverOverlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-flow: column nowrap;
-      justify-content: space-between;
-      padding: 15px 20px;
-      box-sizing: border-box;
-      opacity: 0;
-      transition: 0.3s;
-      cursor: pointer;
-
-      h5, p, svg {
-        color: $white;
-      }
-
-      h5 {
-        font-weight: 600;
-      }
-
-      .top {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-
-        svg {
-          color: $white;
-          fill: $white;
-        }
-
-        .heartClicked {
-          color: $favourite;
-          fill: $favourite;
-        }
-      }
-
-      .bottom {
-        width: fit-content;
-        display: flex;
-        flex-flow: column nowrap;
-
-        button {
-          font-family: inherit;
-        }
-      }
-    }
-
     .edit, .del {
       position: absolute;
       top: 0;
@@ -98,13 +48,6 @@
     .del {
       justify-content: center;
       align-items: center;
-    }
-
-    &:hover {
-      .hoverOverlay {
-        opacity: 1;
-        transition: 0.3s;
-      }
     }
 
     @media (max-width: 700px) {
@@ -194,13 +137,13 @@
       }
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 700px) {
       max-height: 250px;
       width: 100%;
     }
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 700px) {
     width: 100%;
     flex-flow: column nowrap;
     border: none;
@@ -225,7 +168,7 @@
     z-index: 99999;
 
     img {
-      border-radius: 0px !important;
+      border-radius: 0px;
       max-width: 100vw;
       max-height: 100vh;
       object-fit: contain;

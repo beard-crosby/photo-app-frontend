@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: $background;
 
   .skFoldingCube {
     margin: 20px auto;
@@ -102,6 +103,10 @@
       opacity: 0; 
     }
   }
+}
+
+.noBG {
+  background: none;
 }
 
 .darkModeBG {
