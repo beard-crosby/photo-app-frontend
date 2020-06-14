@@ -12,7 +12,7 @@
   letter-spacing:inherit;
   cursor: pointer;
 
-  img, svg, h5 {
+  img, svg, h5, p {
     color: $color-3;
     cursor: pointer;
   }
@@ -27,20 +27,20 @@
   &:disabled {
     cursor: default;
 
-    img, svg, h5 {
+    img, svg, h5, p {
       color: $disabled;
       cursor: default;
     }
 
     &:hover {
-      h5, svg {
+      h5, p, svg {
         color: $disabled;
       }
     }
   }
 
   &:hover {
-    h5, svg {
+    h5, p, svg {
       color: $black;
     }
   }

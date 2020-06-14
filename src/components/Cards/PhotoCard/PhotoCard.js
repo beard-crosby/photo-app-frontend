@@ -3,7 +3,7 @@ import ProfileCard from '../ProfileCard'
 import { withRouter } from 'react-router-dom'
 import styles from './_PhotoCard.module.scss'
 import PropTypes from 'prop-types'
-import { Heart } from 'react-feather'
+import { MoreHorizontal, Heart, ChevronDown, ChevronUp } from 'react-feather'
 import { updateFavourites } from '../../../shared/authRequests'
 import { textareaGrow, removeKey } from '../../../shared/utility'
 import FormSection from '../../UI/FormSection'
@@ -61,6 +61,11 @@ const PhotoCard = ({ user, setUser, post, history }) => {
       <div className={styles.sidebar}>
         <div className={styles.sidebarWrapper}>
           <ProfileCard user={post.author} style={{ padding: 10 }} sidebar/>
+          <div className={styles.uiBar}>
+            <Button text="Details" icon={<ChevronDown/>} iconRight p/>
+            <Heart/>
+            <MoreHorizontal/>
+          </div>
           <div className={styles.comments}>
           {/* comments section code */}
           </div>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 
 
-const Button = ({ text, style, submit, disabled, onClick, icon, iconRight, redirect, border, boxShadow, id, history }) => 
+const Button = ({ text, style, submit, disabled, onClick, icon, iconRight, redirect, border, boxShadow, id, p, history }) => 
   <button 
     disabled={disabled}
     type={submit ? "submit" : "button"} 
@@ -13,7 +13,7 @@ const Button = ({ text, style, submit, disabled, onClick, icon, iconRight, redir
     style={style} 
     onClick={redirect ? () => history.push(redirect) : onClick}>
       {icon && !iconRight && icon}
-      <h5>{text}</h5>
+      {p ? <p>{text}</p> : <h5>{text}</h5>}
       {icon && iconRight && icon}
   </button>
 
@@ -28,6 +28,7 @@ Button.propTypes = {
   border: PropTypes.bool,     // True = display border and background.
   boxShadow: PropTypes.bool,  // True = display box-shadow.
   id: PropTypes.string,       // Pass up id.
+  p: PropTypes.bool,          // True = display P text
 }
 
 export default withRouter(Button)
