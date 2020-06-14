@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import styles from './_UserInfo.module.scss'
+import styles from './_InfoCard.module.scss'
 import { withRouter } from 'react-router-dom'
-import { updateInfo } from '../../shared/authRequests'
+import { updateInfo } from '../../../shared/authRequests'
 import { MoreHorizontal, Edit2 } from 'react-feather'
 import PropTypes from 'prop-types'
 
-const UserInfo = ({ user, setUser, history }) => {
+const InfoCard = ({ user, setUser, history }) => {
   const [ wrapperHeight, setWrapperHeight ] = useState(null)
 
   const growHandler = () => { // Grow component to 100% of the containers height and focus the textarea.
@@ -37,12 +37,12 @@ const UserInfo = ({ user, setUser, history }) => {
   }, [wrapperHeight])
 
   return (
-    <div className={styles.userInfoWrapper} id="user-info-wrapper" style={{ height: wrapperHeight }}>
+    <div className={styles.infoCardWrapper} id="user-info-wrapper" style={{ height: wrapperHeight }}>
       <div className={styles.top}>
         {wrapperHeight ? <h5>WRITE ABOUT YOU</h5> : <h5>ABOUT</h5>}
         {!wrapperHeight ? <MoreHorizontal/> : <h5 onClick={() => shrinkHandler()}>DONE</h5>}
       </div>
-      <div className={styles.userInfo}>
+      <div className={styles.infoCard}>
         <textarea 
           type="text"
           name="about"
@@ -56,9 +56,9 @@ const UserInfo = ({ user, setUser, history }) => {
   )
 }
 
-UserInfo.propTypes = {
+InfoCard.propTypes = {
   user: PropTypes.object.isRequired,  // User object from context.
   setUser: PropTypes.func.isRequired, // setUser function from context.
 }
 
-export default withRouter(UserInfo)
+export default withRouter(InfoCard)

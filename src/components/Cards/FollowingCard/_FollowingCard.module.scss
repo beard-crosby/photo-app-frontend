@@ -1,6 +1,6 @@
-@import '../../scss/variables';
+@import '../../../scss/variables';
 
-.followingWrapper {
+.followingCardWrapper {
   width: 178px;
   height: 360px;
   display: flex;
@@ -36,7 +36,7 @@
     }
   }
 
-  .following {
+  .followingCard {
     height: 320px;
     display: flex;
     flex-flow: column nowrap;

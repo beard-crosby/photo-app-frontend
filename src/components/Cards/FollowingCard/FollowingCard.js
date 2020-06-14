@@ -1,17 +1,17 @@
 import React from 'react'
-import styles from './_Following.module.scss'
-import ProfileCard from '../Cards/ProfileCard'
+import styles from './_FollowingCard.module.scss'
+import ProfileCard from '../ProfileCard'
 import { MoreHorizontal } from 'react-feather'
 
-const Following = ({ user }) => 
-  <div className={styles.followingWrapper}>
+const FollowingCard = ({ user }) => 
+  <div className={styles.followingCardWrapper}>
     <div className={styles.top}>
       <h5>FOLLOWING</h5>
       <MoreHorizontal/>
     </div>
-    <div className={styles.following}>
+    <div className={styles.followingCard}>
     {user.following.map((followed, i) => <ProfileCard key={i} user={followed} style={{ padding: "5px 15px" }} sidebar/>)}
     </div>
   </div>
 
-export default Following
+export default FollowingCard

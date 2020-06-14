@@ -5,7 +5,7 @@ import Footer from './components/Footer'
 import Router from './Router'
 import Spinner from './components/Spinner'
 import { checkLocalStorage } from './shared/localStorage'
-import OuterMain from './components/OuterMain'
+import Overlay from './components/Overlay'
 
 const UserContext = React.createContext()
 
@@ -19,7 +19,7 @@ const App = () => {
   return (
     <UserContext.Provider value={{ loading, setLoading, user, setUser }}>
       <Nav user={user} setUser={setUser}/>
-      <OuterMain user={user}/>
+      <Overlay user={user}/>
       <main>
         {loading && <Spinner user={user}/>}
         <Router/>

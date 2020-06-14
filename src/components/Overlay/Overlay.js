@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import styles from './_OuterMain.module.scss'
+import styles from './_Overlay.module.scss'
 import Button from '../UI/Button'
 import { Upload } from 'react-feather'
 import { withRouter } from 'react-router-dom'
 
-const OuterMain = ({ user, history }) => {
+const Overlay = ({ user, history }) => {
   const [ display, setDisplay ] = useState(false)
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const OuterMain = ({ user, history }) => {
   }, [history.location.pathname, setDisplay])
 
   return display && user.token ? (
-    <div className={styles.outerMain}>
+    <div className={styles.overlay}>
       <div className={styles.left}>
 
       </div>
@@ -29,4 +29,4 @@ const OuterMain = ({ user, history }) => {
   ) : null
 }
 
-export default withRouter(OuterMain)
+export default withRouter(Overlay)
