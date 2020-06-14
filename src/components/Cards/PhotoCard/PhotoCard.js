@@ -16,7 +16,7 @@ import Comment from './Comment'
 const PhotoCard = ({ user, setUser, post, history }) => {
   const [ favClicked, setFavClicked ] = useState("undefined")
   const [ imgClicked, setImgClicked ] = useState(false)
-  const [ details, setDetails ] = useState(false)
+  const [ sidebar, setSidebar ] = useState(null)
   const [ overlay, setOverlay ] = useState(null)
   const [ spinner, setSpinner ] = useState(false)
   const [ form, setForm ] = useState({
@@ -75,17 +75,23 @@ const PhotoCard = ({ user, setUser, post, history }) => {
         <div className={styles.sidebarWrapper}>
           <ProfileCard user={post.author} style={{ padding: 10 }} sidebar/>
           <div className={styles.uiBar}>
-            <Button text="Details" icon={details ? <ChevronUp/> : <ChevronDown/>} onClick={() => setDetails(!details)} iconRight p/>
+            <Button text="Details" icon={sidebar === "details" ? <ChevronUp/> : <ChevronDown/>} onClick={() => sidebar === "details" ? setSidebar(null) : setSidebar("details")} iconRight p/>
             <Heart className={favClicked} onClick={() => favClickedHandler()}/>
-            <MoreHorizontal/>
+            <MoreHorizontal onClick={() => sidebar === "more" ? setSidebar(null) : setSidebar("more")}/>
           </div>
           <div className={styles.sidebarMain}>
-            {details && 
+            {sidebar === "details" && 
               <>
                 <Comment user={user} header="Created:" text={moment(post.created_at).fromNow()}/>
                 <Comment user={user} header="Title:" text={post.title}/>
                 {post.description && <Comment user={user} header="Description:" text={post.description}/>}
               </>}
+            {sidebar === "more" && 
+            <div className={styles.more}>
+              <p>Report Inappropriate</p>
+              <p>Unfollow</p>
+              <p onClick={() => setSidebar(null)}>Close</p>
+            </div>}
             {/* comments section code */}
           </div>
           {!isAuthor ? <input type="text" name="comment" placeholder="Write a comment"/> :

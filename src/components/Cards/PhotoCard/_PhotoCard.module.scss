@@ -125,6 +125,28 @@
         flex-flow: column nowrap;
         box-sizing: border-box;
         overflow-y: scroll;
+
+        .more {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-flow: column nowrap;
+          justify-content: center;
+          align-items: center;
+  
+          p {
+            color: $favourite;
+  
+            &:nth-child(n+2) {
+              color: $color-3;
+              margin-top: 10px;
+  
+              &:hover {
+                color: $black;
+              }
+            }
+          }
+        }
       }
 
       .postSettings {
