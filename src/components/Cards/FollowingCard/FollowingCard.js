@@ -10,7 +10,7 @@ const FollowingCard = ({ user }) =>
       <MoreHorizontal/>
     </div>
     <div className={styles.followingCard}>
-    {user.following.map((followed, i) => <ProfileCard key={i} user={followed} style={{ padding: "5px 15px" }} sidebar/>)}
+      {user.following.map((followed, i) => <ProfileCard key={i} user={followed} style={{ padding: "5px 10px" }} sidebar/>)}
     </div>
   </div>
 

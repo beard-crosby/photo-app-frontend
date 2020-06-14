@@ -3,6 +3,7 @@ import ProfileCard from '../ProfileCard'
 import { withRouter } from 'react-router-dom'
 import styles from './_PhotoCard.module.scss'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 import { MoreHorizontal, Heart, ChevronDown, ChevronUp } from 'react-feather'
 import { updateFavourites } from '../../../shared/authRequests'
 import { textareaGrow, removeKey } from '../../../shared/utility'
@@ -10,10 +11,12 @@ import FormSection from '../../UI/FormSection'
 import { updateTitle, updateDescription, deletePost } from '../../../shared/postRequests'
 import Button from '../../UI/Button'
 import Spinner from '../../Spinner'
+import Comment from './Comment'
 
 const PhotoCard = ({ user, setUser, post, history }) => {
   const [ favClicked, setFavClicked ] = useState("undefined")
   const [ imgClicked, setImgClicked ] = useState(false)
+  const [ details, setDetails ] = useState(false)
   const [ overlay, setOverlay ] = useState(null)
   const [ spinner, setSpinner ] = useState(false)
   const [ form, setForm ] = useState({
@@ -72,11 +75,17 @@ const PhotoCard = ({ user, setUser, post, history }) => {
         <div className={styles.sidebarWrapper}>
           <ProfileCard user={post.author} style={{ padding: 10 }} sidebar/>
           <div className={styles.uiBar}>
-            <Button text="Details" icon={<ChevronDown/>} iconRight p/>
+            <Button text="Details" icon={details ? <ChevronUp/> : <ChevronDown/>} onClick={() => setDetails(!details)} iconRight p/>
             <Heart className={favClicked} onClick={() => favClickedHandler()}/>
             <MoreHorizontal/>
           </div>
-          <div className={styles.comments}>
+          <div className={styles.sidebarMain}>
+            {details && 
+              <>
+                <Comment user={user} header="Created:" text={moment(post.created_at).fromNow()}/>
+                <Comment user={user} header="Title:" text={post.title}/>
+                {post.description && <Comment user={user} header="Description:" text={post.description}/>}
+              </>}
             {/* comments section code */}
           </div>
           {!isAuthor ? <input type="text" name="comment" placeholder="Write a comment"/> :
@@ -95,9 +104,9 @@ const PhotoCard = ({ user, setUser, post, history }) => {
 }
 
 PhotoCard.propTypes = {
-  user: PropTypes.object,  // User Object from context.
-  setUser: PropTypes.func, // setUser function from contet.
-  post: PropTypes.object,  // Post Object.
+  user: PropTypes.object.isRequired,  // User Object from context.
+  setUser: PropTypes.func.isRequired, // setUser function from contet.
+  post: PropTypes.object.isRequired,  // Post Object.
 }
 
 export default withRouter(PhotoCard)

@@ -62,7 +62,7 @@
   }
 
   .sidebar {
-    width: 175px;
+    width: 178px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
@@ -95,6 +95,7 @@
         svg {
           height: 15px;
           width: 15px;
+          stroke-width: 1.5px;
 
           &:nth-child(n+3) {
             margin-left: 10px;
@@ -117,11 +118,14 @@
         }
       }
 
-      .comments {
+      .sidebarMain {
         width: 100%;
         flex-grow: 1;
         padding: 5px 10px;
+        display: flex;
+        flex-flow: column nowrap;
         box-sizing: border-box;
+        overflow-y: scroll;
       }
 
       .postSettings {
