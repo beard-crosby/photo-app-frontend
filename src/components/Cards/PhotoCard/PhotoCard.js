@@ -77,7 +77,7 @@ const PhotoCard = ({ user, setUser, post, history }) => {
             <MoreHorizontal/>
           </div>
           <div className={styles.comments}>
-          {/* comments section code */}
+            {/* comments section code */}
           </div>
           {!isAuthor ? <input type="text" name="comment" placeholder="Write a comment"/> :
           <div className={styles.postSettings}>

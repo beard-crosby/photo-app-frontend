@@ -17,9 +17,9 @@ const ProfileCard = ({ user, style, sidebar }) =>
   </div>
 
 ProfileCard.propTypes = {
-  user: PropTypes.object,  // User Object in context.
-  style: PropTypes.object, // Can change style on Component call.
-  sidebar: PropTypes.bool, // Style for the top of a comments section.
+  user: PropTypes.object.isRequired,  // User Object in context.
+  style: PropTypes.object,            // Can change style on Component call.
+  sidebar: PropTypes.bool,            // Style for the top of a comments section.
 }
 
 export default ProfileCard

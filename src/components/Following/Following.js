@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './_Following.module.scss'
-import FollowingCard from '../Cards/FollowingCard'
+import ProfileCard from '../Cards/ProfileCard'
 import { MoreHorizontal } from 'react-feather'
 
 const Following = ({ user }) => 
@@ -10,7 +10,7 @@ const Following = ({ user }) =>
       <MoreHorizontal/>
     </div>
     <div className={styles.following}>
-      {user.following.map((followed, i) => <FollowingCard key={i} followed={followed}/>)}
+    {user.following.map((followed, i) => <ProfileCard key={i} user={followed} style={{ padding: "5px 15px" }} sidebar/>)}
     </div>
   </div>
 
