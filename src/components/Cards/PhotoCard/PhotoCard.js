@@ -12,7 +12,7 @@ import Button from '../../UI/Button'
 import Spinner from '../../Spinner'
 
 const PhotoCard = ({ user, setUser, post, history }) => {
-  const [ heartClicked, setHeartClicked ] = useState("undefined")
+  const [ favClicked, setFavClicked ] = useState("undefined")
   const [ imgClicked, setImgClicked ] = useState(false)
   const [ overlay, setOverlay ] = useState(null)
   const [ spinner, setSpinner ] = useState(false)
@@ -24,13 +24,23 @@ const PhotoCard = ({ user, setUser, post, history }) => {
   const isAuthor = user._id === post.author._id // Ditermine if the user is the author of this post.
 
   useEffect(() => {
-    user.favourites.forEach(fav => post._id === fav._id && setHeartClicked(styles.heartClicked)) // Check if this post is in user.favourites. If it is, setHeartClicked().
+    user.favourites.forEach(fav => post._id === fav._id && setFavClicked(styles.favClicked)) // Check if this post is in user.favourites. If it is, setFavClicked().
     imgClicked ? document.body.style.overflow = "hidden" : document.body.style = "none" // If img is fullscreen, disable scrolling. 
     if (user.updateFavouritesError === post._id) { // Check if the _id in updateFavouritesError matches this post.
-      setHeartClicked("undefined") // Remove class from setHeartClicked().
+      setFavClicked("undefined") // Remove class from setFavClicked().
       setUser(removeKey(user, "updateFavouritesError")) // Remove "updateFavouritesError" from user context.
     }
   }, [user, setUser, post, imgClicked])
+
+  const favClickedHandler = () => {
+    if (favClicked === "undefined") {
+      setFavClicked(styles.favClicked)
+      updateFavourites(user, setUser, post, "add", history)
+    } else {
+      setFavClicked("undefined")
+      updateFavourites(user, setUser, post, "remove", history)
+    }
+  }
 
   const overlayBtnsHandler = passed => {
     if (overlay === "edit") { // If Title or Description have changed, send the relevant request.
@@ -63,7 +73,7 @@ const PhotoCard = ({ user, setUser, post, history }) => {
           <ProfileCard user={post.author} style={{ padding: 10 }} sidebar/>
           <div className={styles.uiBar}>
             <Button text="Details" icon={<ChevronDown/>} iconRight p/>
-            <Heart/>
+            <Heart className={favClicked} onClick={() => favClickedHandler()}/>
             <MoreHorizontal/>
           </div>
           <div className={styles.comments}>

@@ -101,6 +101,11 @@
           }
         }
 
+        .favClicked {
+          color: $favourite;
+          fill: $favourite;
+        }
+
         button {
           font-family: inherit;
           flex-grow: 1;
