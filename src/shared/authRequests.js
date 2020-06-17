@@ -288,10 +288,16 @@ export const updatePP = (user, setUser, history, setLoading) => {
 }
 
 export const updateFavourites = (user, setUser, post, action, history) => {
-  const backupUser = user // Use backupUser if request fails so action can be reverted.
-  action === "add" ?
-  setUser({ ...user, favourites: [ ...user.favourites, post ] }) :
-  setUser({ ...removeKey(user, "postClicked"), favourites: user.favourites.filter(x => x._id !== post._id) })
+  let newFavs = null
+  if (action === "add") {
+    const addFav = { ...user, favourites: [ ...user.favourites, post ] }
+    setUser(addFav)
+    newFavs = addFav
+  } else {
+    const removeFav = { ...removeKey(user, "postClicked"), favourites: user.favourites.filter(x => x._id !== post._id) }
+    setUser(removeFav)
+    newFavs = removeFav
+  }
   
   axios.post('', {
     variables: {
@@ -303,35 +309,20 @@ export const updateFavourites = (user, setUser, post, action, history) => {
       mutation UpdateFavourites($_id: ID!, $post: ID!, $action: String!) {
         updateFavourites(_id: $_id, post: $post, action: $action) {
           _id
-          favourites {
-            _id
-            img
-            title
-            description
-            created_at
-            updated_at
-            author {
-              _id
-              name
-              email
-              website
-              profile_picture
-            }
-          }
         }
       }
     `
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
-      res.data.errors[0].message === "Duplicate Favourite!" && setUser({ ...user, favourites: backupUser.favourites, updateFavouritesError: post._id })
+      res.data.errors[0].message === "Duplicate Favourite!" && setUser({ ...user, favourites: user.favourites, updateFavouritesError: post._id })
       process.env.NODE_ENV === 'development' && console.log(`UpdateFavourites Error: ${res.data.errors[0].message}`)
     } else {
-      localStorage.setItem('favourites', JSON.stringify(res.data.data.updateFavourites.favourites))
+      localStorage.setItem('favourites', JSON.stringify(newFavs.favourites))
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
-    setUser({ ...user, favourites: backupUser.favourites, updateFavouritesError: post._id })
+    setUser({ ...user, favourites: user.favourites, updateFavouritesError: post._id })
     process.env.NODE_ENV === 'development' && console.log(`UpdateFavourites Error: ${err}`)
   })
 }

@@ -83,7 +83,8 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
           <ProfileCard user={post.author} style={{ padding: 10 }} sidebar/>
           <div className={styles.uiBar}>
             <Button text="Details" icon={sidebar === "details" ? <ChevronUp/> : <ChevronDown/>} onClick={() => sidebar === "details" ? setSidebar(null) : setSidebar("details")} iconRight p/>
-            {!isAuthor && <Heart className={favClicked} onClick={() => favClickedHandler()}/>}
+            {/* {!isAuthor && <Heart className={favClicked} onClick={() => favClickedHandler()}/>} */}
+            <Heart className={favClicked} onClick={() => favClickedHandler()}/>
             <MoreHorizontal onClick={() => sidebar === "more" ? setSidebar(null) : setSidebar("more")}/>
           </div>
           <div className={styles.sidebarMain}>
