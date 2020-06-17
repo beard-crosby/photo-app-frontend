@@ -83,7 +83,7 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
           <ProfileCard user={post.author} style={{ padding: 10 }} sidebar/>
           <div className={styles.uiBar}>
             <Button text="Details" icon={sidebar === "details" ? <ChevronUp/> : <ChevronDown/>} onClick={() => sidebar === "details" ? setSidebar(null) : setSidebar("details")} iconRight p/>
-            <Heart className={favClicked} onClick={() => favClickedHandler()}/>
+            {!isAuthor && <Heart className={favClicked} onClick={() => favClickedHandler()}/>}
             <MoreHorizontal onClick={() => sidebar === "more" ? setSidebar(null) : setSidebar("more")}/>
           </div>
           <div className={styles.sidebarMain}>
@@ -95,9 +95,17 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
             </>}
             {sidebar === "more" && 
             <div className={styles.more}>
-              <p>Report Inappropriate</p>
-              <p>Unfollow</p>
-              <p onClick={() => setSidebar(null)}>Close</p>
+              {isAuthor ? 
+                <>
+                  <p onClick={() => !spinner && overlayBtnsHandler("del")}>Delete Post</p>
+                  <p>Disable Comments</p>
+                  <p onClick={() => setSidebar(null)}>Close</p>
+                </> : 
+                <>
+                  <p>Report Inappropriate</p>
+                  <p>Unfollow</p>
+                  <p onClick={() => setSidebar(null)}>Close</p>
+                </>}
             </div>}
             {!sidebar && post.comments.map((comment, i) => <Comment key={i} user={comment.author} text={comment.comment}/>)}
           </div>
