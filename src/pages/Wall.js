@@ -9,7 +9,10 @@ const Wall = () => { // Render posts of followed users in order of date time.
   const wallArr = [] // Array of posts to be rendered. This updates every page load.
 
   useEffect(() => { // If wallArr length is different from wall length in context, setWall(wallArr).
-    wallArr.length !== wall.length && setWall(wallArr) // From context the wall can then be mutated.
+    if (wallArr.length !== wall.length) {
+      setWall(wallArr) // From context the wall can then be mutated.
+      localStorage.setItem('wall', JSON.stringify(wallArr))
+    }
   }, [wallArr, wall, setWall])
 
   for (let i = 1; i <= 10; i++) { // Populate wallArr with x amount of posts.

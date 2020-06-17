@@ -43,7 +43,7 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
         re_render_form: form.re_render_form = form.re_render_form + 1, // Re-render edit form using the key prop.
       })
     }
-  }, [user, setUser, post, imgClicked])
+  }, [user, setUser, post, imgClicked]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const favClickedHandler = () => {
     if (favClicked === "undefined") {
