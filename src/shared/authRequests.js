@@ -290,7 +290,7 @@ export const updatePP = (user, setUser, history, setLoading) => {
 export const updateFavourites = (user, setUser, post, action, history) => {
   let newFavs = null
   if (action === "add") {
-    const addFav = { ...user, favourites: [ ...user.favourites, post ] }
+    const addFav = { ...user, favourites: [ post, ...user.favourites ] }
     setUser(addFav)
     newFavs = addFav
   } else {
