@@ -1,10 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Masonry from 'react-masonry-component'
 import './_Masonry.scss'
 import PropTypes from 'prop-types'
+import { removeKey } from '../../shared/utility'
 
 const MasonryComp = ({ array, user, setUser, contained, noInteract }) => {
-  const [ layoutComplete, setLayoutComplete ] = useState(null)
+  const [ layoutComplete, setLayoutComplete ] = useState(false)
+  const [ imgsLoaded, setimgsLoaded ] = useState(false)
+  const [ display, setDisplay ] = useState(null)
+
+  useEffect(() => {
+    layoutComplete && imgsLoaded && setDisplay("masonry-complete")
+  }, [layoutComplete, imgsLoaded, setDisplay])
   
   let itemWidth = "20%" // Change width of images and thus how many colums there are based on how many images are in the array.
   if (contained && array.length < 20) {
@@ -15,9 +22,21 @@ const MasonryComp = ({ array, user, setUser, contained, noInteract }) => {
     }
   }
 
+  const masonryClickedHandler = async post => {
+    if (user.postClicked) {
+      if (post !== user.postClicked) {
+        await setUser(removeKey(user, "postClicked"))
+        setUser({ ...user, postClicked: post })
+      }
+    } else {
+      await setUser(removeKey(user, "postClicked"))
+      setUser({ ...user, postClicked: post })
+    }
+  }
+
   return (
     <Masonry 
-      className={`${contained ? `masonry-contained` : `masonry`} ${layoutComplete}`}
+      className={`${contained ? `masonry-contained` : `masonry`} ${display}`}
       options={contained ? {
         transitionDuration: 0,
         percentPosition: true,
@@ -28,7 +47,8 @@ const MasonryComp = ({ array, user, setUser, contained, noInteract }) => {
         columnWidth: ".grid-sizer",
         gutter: ".gutter-sizer", 
       }}
-      onLayoutComplete={() => setLayoutComplete("masonry-complete")}>
+      onLayoutComplete={() => setLayoutComplete(true)}
+      onImagesLoaded={() => setimgsLoaded(true)}>
       {!contained && 
       <>
         <div className="grid-sizer"/>
@@ -41,7 +61,7 @@ const MasonryComp = ({ array, user, setUser, contained, noInteract }) => {
           key={post._id} 
           className="grid-item" 
           style={contained && { width: itemWidth }} 
-          onClick={() => setUser({ ...user, postClicked: post})}>
+          onClick={() => masonryClickedHandler(post)}>
           <img alt="A Post" src={post.img}/>
         </div>
       )}

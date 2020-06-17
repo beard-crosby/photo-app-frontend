@@ -6,7 +6,6 @@ import Masonry from '../components/Masonry'
 
 const Splash = () => {
   const { user, setUser } = useContext(UserContext)
-
   useEffect(() => allPosts(user, setUser), []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

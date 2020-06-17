@@ -72,7 +72,32 @@ export const removeKey = (obj, prop) => {
   return res
 }
 
-// on focus increase textarea height to 100px.
+// On focus increase textarea height to 100px.
 export const textareaGrow = e => {
   if (e.target.clientHeight < 100) e.target.style.height = "100px"
+}
+
+// Itterate through an array, find the index of the post in that array, if post index === i then change key of that object.
+export const newArrObjValue = (arr, post, key, comment, user) => {
+  return arr.map((p, i) => { // Find the post and mutate the title.
+    if (arr.findIndex(x => x._id === post._id) !== i) {
+      return p
+    } else {
+      if (comment) {
+        p.comments.unshift({ 
+          author: { 
+            _id: user._id, 
+            name: user.name, 
+            profile_picture: user.profile_picture,
+          }, 
+          comment: comment,
+          created_at: moment().format(),
+          updated_at: moment().format(),
+        })
+        return { ...p, comments: p.comments }
+      } else {
+        return { ...p, [key]: post[key] }
+      }
+    }
+  })
 }

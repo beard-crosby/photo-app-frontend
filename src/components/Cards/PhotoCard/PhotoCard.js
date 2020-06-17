@@ -9,21 +9,23 @@ import { updateFavourites } from '../../../shared/authRequests'
 import { textareaGrow, removeKey } from '../../../shared/utility'
 import FormSection from '../../UI/FormSection'
 import { updateTitle, updateDescription, deletePost } from '../../../shared/postRequests'
+import { createComment } from '../../../shared/commentRequests'
 import Button from '../../UI/Button'
 import Spinner from '../../Spinner'
 import Comment from './Comment'
 
-const PhotoCard = ({ user, setUser, post, history }) => {
+const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
   const [ favClicked, setFavClicked ] = useState("undefined")
   const [ imgClicked, setImgClicked ] = useState(false)
   const [ sidebar, setSidebar ] = useState(null)
   const [ overlay, setOverlay ] = useState(null)
   const [ spinner, setSpinner ] = useState(false)
+  const [ comment, setComment ] = useState("")
   const [ form, setForm ] = useState({
     title: post.title,
     description: post.description,
   })
-  
+
   const isAuthor = user._id === post.author._id // Ditermine if the user is the author of this post.
 
   useEffect(() => {
@@ -48,11 +50,16 @@ const PhotoCard = ({ user, setUser, post, history }) => {
   const overlayBtnsHandler = passed => {
     if (overlay === "edit") { // If Title or Description have changed, send the relevant request.
       post.title === form.title && post.description === form.description && passed === overlay ? setOverlay(null) : setOverlay(passed)
-      post.title !== form.title && updateTitle({ ...post, title: form.title }, user, setUser, setSpinner, setOverlay, history)
-      post.description !== form.description && updateDescription({ ...post, description: form.description }, user, setUser, setSpinner, setOverlay, history)
+      post.title !== form.title && updateTitle({ ...post, title: form.title }, user, setUser, wall, setWall, setSpinner, setOverlay, history)
+      post.description !== form.description && updateDescription({ ...post, description: form.description }, user, setUser, wall, setWall, setSpinner, setOverlay, form.title, history)
     } else {
       passed === overlay ? setOverlay(null) : setOverlay(passed)
     }
+  }
+
+  const commentHandler = e => {
+    e.preventDefault()
+    createComment(user, setUser, wall, setWall, post, comment, setComment, e.target.childNodes[0], history)
   }
 
   return (
@@ -62,12 +69,12 @@ const PhotoCard = ({ user, setUser, post, history }) => {
         {spinner ? <Spinner user={user} noBG/> : 
         <>
           {overlay === "edit" && <div className={styles.edit}>
-            <FormSection text={"Title"} user={user} form={form} setForm={setForm} maxLength="60" defaultValue={post.title}/>
-            <FormSection text={"Description"} user={user} form={form} setForm={setForm} onFocus={e => textareaGrow(e)} defaultValue={post.description} maxLength="300" textarea/>
+            <FormSection text={"Title"} user={user} form={form} setForm={setForm} maxLength="60" defaultValue={form.title}/>
+            <FormSection text={"Description"} user={user} form={form} setForm={setForm} onFocus={e => textareaGrow(e)} defaultValue={form.description} maxLength="300" textarea/>
           </div>}
           {overlay === "del" && <div className={styles.del}>
             <h5 style={{ marginBottom: 10 }}>Are you sure?</h5>
-            <Button text="Delete" onClick={() => deletePost(post, user, setUser, history, setOverlay)} border boxShadow/>
+            <Button text="Delete" onClick={() => deletePost(post, user, setUser, wall, setWall, setOverlay, setSpinner, history)} border boxShadow/>
           </div>}
         </>}
       </div>
@@ -81,20 +88,23 @@ const PhotoCard = ({ user, setUser, post, history }) => {
           </div>
           <div className={styles.sidebarMain}>
             {sidebar === "details" && 
-              <>
-                <Comment user={user} header="Created:" text={moment(post.created_at).fromNow()}/>
-                <Comment user={user} header="Title:" text={post.title}/>
-                {post.description && <Comment user={user} header="Description:" text={post.description}/>}
-              </>}
+            <>
+              <Comment user={user} header="Created:" text={moment(post.created_at).fromNow()}/>
+              <Comment user={user} header="Title:" text={post.title}/>
+              {post.description && <Comment user={user} header="Description:" text={post.description}/>}
+            </>}
             {sidebar === "more" && 
             <div className={styles.more}>
               <p>Report Inappropriate</p>
               <p>Unfollow</p>
               <p onClick={() => setSidebar(null)}>Close</p>
             </div>}
-            {/* comments section code */}
+            {!sidebar && post.comments.map((comment, i) => <Comment key={i} user={comment.author} text={comment.comment}/>)}
           </div>
-          {!isAuthor ? <input type="text" name="comment" placeholder="Write a comment"/> :
+          {!isAuthor ? 
+          <form onSubmit={e => commentHandler(e)}>
+            <input type="text" name="comment" placeholder="Write a comment" value={comment} onChange={e => setComment(e.target.value)}/> 
+          </form> :
           <div className={styles.postSettings}>
             <div className={styles.editBtn} onClick={() => !spinner && overlayBtnsHandler("edit")}>
               {overlay === "edit" ? <p>Done</p> : <p>Edit</p>}
@@ -112,6 +122,8 @@ const PhotoCard = ({ user, setUser, post, history }) => {
 PhotoCard.propTypes = {
   user: PropTypes.object.isRequired,  // User Object from context.
   setUser: PropTypes.func.isRequired, // setUser function from contet.
+  wall: PropTypes.array.isRequired,   // wall Array from context.
+  setWall: PropTypes.func.isRequired, // setWall function from contet.
   post: PropTypes.object.isRequired,  // Post Object.
 }
 

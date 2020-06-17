@@ -104,12 +104,13 @@ export const login = (data, user, setUser, setLoading, history) => {
               profile_picture
             }
             comments {
-              _id
               comment
               created_at
               updated_at
               author {
                 _id
+                name
+                profile_picture
               }
             }
           }
@@ -135,12 +136,13 @@ export const login = (data, user, setUser, setLoading, history) => {
                 profile_picture
               }
               comments {
-                _id
                 comment
                 created_at
                 updated_at
                 author {
                   _id
+                  name
+                  profile_picture
                 }
               }
             }
@@ -160,12 +162,13 @@ export const login = (data, user, setUser, setLoading, history) => {
               profile_picture
             }
             comments {
-              _id
               comment
               created_at
               updated_at
               author {
                 _id
+                name
+                profile_picture
               }
             }
           }

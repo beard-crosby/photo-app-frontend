@@ -1,7 +1,7 @@
 import axios from "axios"
-import { headers, checkAuth, removeKey } from './utility'
+import { headers, checkAuth, removeKey, newArrObjValue } from './utility'
 
-export const createPost = (form, user, setUser, setLoading, history) => {
+export const createPost = (form, user, setUser, wall, setWall, setLoading, history) => {
   setLoading(true)
   axios.post('', {
     variables: {
@@ -44,19 +44,17 @@ export const createPost = (form, user, setUser, setLoading, history) => {
       setUser({...user, formErrors: res.data.errors[0].message})
       process.env.NODE_ENV === 'development' && console.log(`CreatePost Error: ${res.data.errors[0].message}`)
     } else {
-      setUser({ 
-        ...removeKey(user, "formErrors"), 
-        posts: [ ...user.posts, res.data.data.createPost ], 
-        file: { ...res.data.data.createPost, uploaded: false },
-      })
-      localStorage.setItem('posts', JSON.stringify([ ...user.posts, res.data.data.createPost ]))
-      history.push("/")
       process.env.NODE_ENV === 'development' && console.log(res)
-    }
+      setUser({ ...removeKey(user, "formErrors"), posts: [ ...user.posts, res.data.data.createPost ], file: { uploaded: false } })
+      setWall([ res.data.data.createPost, ...wall.slice(0, -1) ])
+      localStorage.setItem('posts', JSON.stringify([ ...user.posts, res.data.data.createPost ]))
+      localStorage.setItem('wall', JSON.stringify([ res.data.data.createPost, ...wall.slice(0, -1) ]))
+      history.push("/")
+    } 
     setLoading(false)
   }).catch(err => {
-    setUser({ ...user, formErrors: err.response.data.errors[0].message, file: { uploaded: false }})
     process.env.NODE_ENV === 'development' && console.log(`CreatePost Error: ${err}`)
+    setUser({ ...user, formErrors: err.response.data.errors[0].message, file: { uploaded: false }})
     setLoading(false)
   })
 }
@@ -84,15 +82,10 @@ export const allPosts = (user, setUser) => {
   })
 }
 
-export const updateTitle = (post, user, setUser, setSpinner, setOverlay, history) => {
-  setSpinner(true) // NOT spinner in context. UseState in PhotoCard.
-  const newPosts = user.posts.map((p, i) => { // Find the post and mutate the title.
-    if (user.posts.findIndex(x => x._id === post._id) !== i) {
-      return p
-    } else {
-      return { ...p, title: post.title }
-    }
-  })
+export const updateTitle = (post, user, setUser, wall, setWall, setSpinner, setOverlay, history) => {
+  setSpinner(true) // NOT spinner in context. useState in PhotoCard.
+  const newPosts = newArrObjValue(user.posts, post, "title")
+  const newWall = newArrObjValue(wall, post, "title")
 
   axios.post('', {
     variables: {
@@ -112,8 +105,12 @@ export const updateTitle = (post, user, setUser, setSpinner, setOverlay, history
       setUser({...user, posts: newPosts, formErrors: res.data.errors[0].message})
       process.env.NODE_ENV === 'development' && console.log(`UpdateTitle Error: ${res.data.errors[0].message}`)
     } else {
-      setUser({ ...removeKey(user, "formErrors"), posts: newPosts })
+      user.postClicked ? 
+      setUser({ ...removeKey(user, "formErrors"), posts: newPosts, postClicked: post }) :
+      setUser({ ...removeKey(user, "formErrors"), posts: newPosts, })
+      setWall(newWall)
       localStorage.setItem('posts', JSON.stringify(newPosts))
+      localStorage.setItem('wall', JSON.stringify(newWall))
       setOverlay(null)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
@@ -125,16 +122,11 @@ export const updateTitle = (post, user, setUser, setSpinner, setOverlay, history
   })
 }
 
-export const updateDescription = (post, user, setUser, setSpinner, setOverlay, history) => {
-  setSpinner(true) // NOT spinner in context. UseState in PhotoCard.
-  const newPosts = user.posts.map((p, i) => { // Find the post and mutate the description.
-    if (user.posts.findIndex(x => x._id === post._id) !== i) {
-      return p
-    } else {
-      return { ...p, description: post.description }
-    }
-  })
-  
+export const updateDescription = (post, user, setUser, wall, setWall, setSpinner, setOverlay, title, history) => {
+  setSpinner(true) // NOT spinner in context. useState in PhotoCard.
+  const newPosts = newArrObjValue(user.posts, post, "description")
+  const newWall = newArrObjValue(wall, post, "description")
+
   axios.post('', {
     variables: {
       _id: post._id,
@@ -153,9 +145,13 @@ export const updateDescription = (post, user, setUser, setSpinner, setOverlay, h
       setUser({...user, posts: newPosts, formErrors: res.data.errors[0].message})
       process.env.NODE_ENV === 'development' && console.log(`UpdateDescription Error: ${res.data.errors[0].message}`)
     } else {
-      setUser({ ...removeKey(user, "formErrors"), posts: newPosts })
+      user.postClicked ? 
+      setUser({ ...title.length === 0 ? user : removeKey(user, "formErrors"), posts: newPosts, postClicked: post }) :
+      setUser({ ...title.length === 0 ? user : removeKey(user, "formErrors"), posts: newPosts, })
+      setWall(newWall)
       localStorage.setItem('posts', JSON.stringify(newPosts))
-      setOverlay(null)
+      localStorage.setItem('wall', JSON.stringify(newWall))
+      title.length > 0 && setOverlay(null)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setSpinner(false)
@@ -166,7 +162,9 @@ export const updateDescription = (post, user, setUser, setSpinner, setOverlay, h
   })
 }
 
-export const deletePost = (post, user, setUser, history, setOverlay) => {
+export const deletePost = (post, user, setUser, wall, setWall, setOverlay, setSpinner, history) => {
+  setSpinner(true) // NOT spinner in context. useState in PhotoCard.
+
   axios.post('', {
     variables: {
       _id: post._id
@@ -183,13 +181,18 @@ export const deletePost = (post, user, setUser, history, setOverlay) => {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`DeletePost Error: ${res.data.errors[0].message}`)
     } else {
-      setOverlay(null)
       const newPosts = user.posts.filter(x => x._id !== post._id)
+      const newWall = wall.filter(x => x._id !== post._id)
       setUser({ ...removeKey(user, "postClicked"), posts: newPosts })
+      setWall(newWall)
       localStorage.setItem('posts', JSON.stringify(newPosts))
+      localStorage.setItem('wall', JSON.stringify(newWall))
+      setOverlay(null)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
+    setSpinner(false)
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(`DeletePost Error: ${err}`)
+    setSpinner(false)
   })
 }

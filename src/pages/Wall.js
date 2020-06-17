@@ -2,55 +2,41 @@ import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../App'
 import PhotoCard from '../components/Cards/PhotoCard'
 import moment from 'moment'
-import { removeKey } from '../shared/utility'
 
-const Wall = () => {
-  const { user, setUser } = useContext(UserContext)
-  useEffect(() => user.formErrors && setUser(removeKey(user, "formErrors")), []) // eslint-disable-line react-hooks/exhaustive-deps
-  
-  const photoCardsArr = [] // Array of photoCards to be rendered.
+const Wall = () => { // Render posts of followed users in order of date time.
+  const { user, setUser, wall, setWall } = useContext(UserContext)
 
-  // Render posts of followed users in order of date time.
-  for (let i = 0; i <= 9; i++) { // Loop and render 10 photoCards.
+  const wallArr = [] // Array of posts to be rendered. This updates every page load.
+
+  useEffect(() => { // If wallArr length is different from wall length in context, setWall(wallArr).
+    console.log(wallArr.length !== wall.length)
+    wallArr.length !== wall.length && setWall(wallArr) // From context the wall can then be mutated.
+  }, [wallArr, wall, setWall])
+
+  for (let i = 1; i <= 10; i++) { // Populate wallArr with x amount of posts.
     let earliestPost = { created_at: moment().format() }
-    if (photoCardsArr.length > 0) {
-      earliestPost = photoCardsArr.slice(-1)[0] // Get the created_at of the last element in photoCardsArr.
-    }
+    if (wallArr.length > 0) earliestPost = wallArr.slice(-1)[0] // Get the created_at of the last element in wall.
 
-    let temp = { created_at: '1800-01-01T00:00:00+01:00' }
+    let temp = { created_at: '1000-01-01T00:00:00+01:00' } // Init temp with a date before any other post.
 
-    user.following.map(followed => // Loop through all of the users that the user is following and then loop through all the posts that user has.
-      followed.posts.map(post => { // eslint-disable-line array-callback-return 
-        if (moment(post.created_at).isAfter(temp.created_at) && moment(post.created_at).isBefore(earliestPost.created_at)) { // If post.created_at is later than temp.created_at AND earlier than earliestDate.created_at.
+    user.following.forEach(followed => // Loop through all of the users that the user is following.
+      followed.posts.forEach(post => { // Loop through all the posts each user has.
+        if (moment(post.created_at).isAfter(temp.created_at) && moment(post.created_at).isBefore(earliestPost.created_at)) {
           temp = post
         } 
       })
     )
 
-    user.posts.map(post => { // eslint-disable-line array-callback-return 
+    user.posts.forEach(post => { // Loop through all of the posts the users has.
       if (moment(post.created_at).isAfter(temp.created_at) && moment(post.created_at).isBefore(earliestPost.created_at)) {
         temp = post
       }
     })
 
-    temp.img && photoCardsArr.push(temp) // If temp obj has an img key, push to photoCardsArr. I.E. don't try and render the temp init data.
+    temp.img && wallArr.push(temp) // If temp obj has an img key, push to wallArr. I.E. don't try and render the temp init data.
   }
 
-  if (user.file._id && photoCardsArr.length > 0) { // When user posts an image and redirects here, make sure the post is a the top of the wall.
-    user.file._id !== photoCardsArr[0]._id && photoCardsArr.unshift(user.file)
-  } else if (user.file._id) {
-    photoCardsArr.unshift(user.file)
-  }
-  
-  return (
-    photoCardsArr.map((post, i) => 
-      <PhotoCard 
-        key={i} 
-        user={user}
-        setUser={setUser}
-        post={post}/>
-    )
-  )
+  return wall.map((post, i) => <PhotoCard key={i} user={user} setUser={setUser} wall={wall} setWall={setWall} post={post}/>)
 }
 
 export default Wall

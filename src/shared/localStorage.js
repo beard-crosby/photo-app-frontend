@@ -61,6 +61,7 @@ export const logout = () => {
   localStorage.removeItem('geolocation')
   localStorage.removeItem('settings')
   localStorage.removeItem('favourites')
+  localStorage.removeItem('wall')
 
   const userData = {
     settings: { dark_mode: false },

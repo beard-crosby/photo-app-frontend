@@ -88,7 +88,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 5px 10px 0;
+        padding: 5px 10px;
         border-top: 1px solid $color-1;
         box-sizing: border-box;
 
@@ -131,12 +131,11 @@
           height: 100%;
           display: flex;
           flex-flow: column nowrap;
-          justify-content: center;
           align-items: center;
   
           p {
             color: $favourite;
-  
+
             &:nth-child(n+2) {
               color: $color-3;
               margin-top: 10px;

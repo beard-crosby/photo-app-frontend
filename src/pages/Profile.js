@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../App'
 import ProfileCard from '../components/Cards/ProfileCard'
 import PhotoCard from '../components/Cards/PhotoCard'
@@ -6,9 +6,11 @@ import FollowingCard from '../components/Cards/FollowingCard'
 import InfoCard from '../components/Cards/InfoCard'
 import FavouritesCard from '../components/Cards/FavouritesCard'
 import Masonry from '../components/Masonry'
+import { removeKey } from '../shared/utility'
 
-const Profile = ({ history }) => {
-  const { user, setUser } = useContext(UserContext)
+const Profile = () => {
+  const { user, setUser, wall, setWall } = useContext(UserContext)
+  useEffect(() => setUser(removeKey(user, "postClicked")), []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="flex-col">
@@ -22,7 +24,7 @@ const Profile = ({ history }) => {
           <FavouritesCard user={user} setUser={setUser}/>
         </div>
       </div>
-      {user.postClicked && <PhotoCard user={user} setUser={setUser} post={user.postClicked} history={history}/>} 
+      {user.postClicked && <PhotoCard user={user} setUser={setUser} wall={wall} setWall={setWall} post={user.postClicked}/>} 
       <Masonry array={user.posts} user={user} setUser={setUser}/>
     </div>
   )

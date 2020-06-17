@@ -10,7 +10,7 @@ import { createPost } from '../shared/postRequests'
 import { Upload } from 'react-feather'
 
 const Post = ({ history }) => {
-  const { user, setUser, setLoading } = useContext(UserContext)
+  const { user, setUser, wall, setWall, setLoading } = useContext(UserContext)
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
     title: "",
@@ -24,7 +24,7 @@ const Post = ({ history }) => {
 
   const onPostClicked = event => {
     event.preventDefault()
-    createPost(form, user, setUser, setLoading, history)
+    createPost(form, user, setUser, wall, setWall, setLoading, history)
   }
   
   return (
