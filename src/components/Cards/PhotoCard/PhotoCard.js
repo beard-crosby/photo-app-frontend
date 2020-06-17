@@ -24,6 +24,7 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
   const [ form, setForm ] = useState({
     title: post.title,
     description: post.description,
+    re_render_form: 0,
   })
 
   const isAuthor = user._id === post.author._id // Ditermine if the user is the author of this post.
@@ -34,6 +35,13 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
     if (user.updateFavouritesError === post._id) { // Check if the _id in updateFavouritesError matches this post.
       setFavClicked("undefined") // Remove class from setFavClicked().
       setUser(removeKey(user, "updateFavouritesError")) // Remove "updateFavouritesError" from user context.
+    }
+    if (user.postClicked) { // If user.postClicked is mutated, re-render form with new context data.
+      setForm({
+        title: post.title,
+        description: post.description,
+        re_render_form: form.re_render_form = form.re_render_form + 1, // Re-render edit form using the key prop.
+      })
     }
   }, [user, setUser, post, imgClicked])
 
@@ -47,7 +55,8 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
     }
   }
 
-  const overlayBtnsHandler = passed => {
+  const overlayBtnsHandler = (passed, e) => {
+    e && e.preventDefault()
     if (overlay === "edit") { // If Title or Description have changed, send the relevant request.
       post.title === form.title && post.description === form.description && passed === overlay ? setOverlay(null) : setOverlay(passed)
       post.title !== form.title && updateTitle({ ...post, title: form.title }, user, setUser, wall, setWall, setSpinner, setOverlay, history)
@@ -68,11 +77,13 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
         <img alt="Post" src={post.img}/>
         {spinner ? <Spinner user={user} noBG/> : 
         <>
-          {overlay === "edit" && <div className={styles.edit}>
+          {overlay === "edit" && 
+          <form className={styles.edit} onSubmit={e => overlayBtnsHandler("edit", e)} key={form.re_render_form}>
             <FormSection text={"Title"} user={user} form={form} setForm={setForm} maxLength="60" defaultValue={form.title}/>
             <FormSection text={"Description"} user={user} form={form} setForm={setForm} onFocus={e => textareaGrow(e)} defaultValue={form.description} maxLength="300" textarea/>
-          </div>}
-          {overlay === "del" && <div className={styles.del}>
+          </form>}
+          {overlay === "del" && 
+          <div className={styles.del}>
             <h5 style={{ marginBottom: 10 }}>Are you sure?</h5>
             <Button text="Delete" onClick={() => deletePost(post, user, setUser, wall, setWall, setOverlay, setSpinner, history)} border boxShadow/>
           </div>}

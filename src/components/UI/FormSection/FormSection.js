@@ -34,7 +34,8 @@ const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeh
           onFocus={onFocus}
           placeholder={placeholder}
           defaultValue={defaultValue}
-          maxLength={maxLength}/> 
+          maxLength={maxLength}
+        /> 
       :
         <input 
           type={type.toLowerCase()} 
@@ -43,7 +44,8 @@ const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeh
           onChange={e => onChangeHandler(e)}
           placeholder={placeholder}
           defaultValue={defaultValue}
-          maxLength={maxLength}/>
+          maxLength={maxLength}
+        />
       }
     </>
   )

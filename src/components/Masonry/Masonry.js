@@ -22,14 +22,10 @@ const MasonryComp = ({ array, user, setUser, contained, noInteract }) => {
     }
   }
 
-  const masonryClickedHandler = async post => {
+  const masonryClickedHandler = post => {
     if (user.postClicked) {
-      if (post !== user.postClicked) {
-        await setUser(removeKey(user, "postClicked"))
-        setUser({ ...user, postClicked: post })
-      }
+      post !== user.postClicked && setUser({ ...user, postClicked: post })
     } else {
-      await setUser(removeKey(user, "postClicked"))
       setUser({ ...user, postClicked: post })
     }
   }
