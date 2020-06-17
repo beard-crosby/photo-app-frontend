@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import Masonry from 'react-masonry-component'
 import './_Masonry.scss'
 import PropTypes from 'prop-types'
-import { removeKey } from '../../shared/utility'
 
 const MasonryComp = ({ array, user, setUser, contained, noInteract }) => {
   const [ layoutComplete, setLayoutComplete ] = useState(false)

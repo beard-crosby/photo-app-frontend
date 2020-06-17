@@ -37,13 +37,13 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
       setUser(removeKey(user, "updateFavouritesError")) // Remove "updateFavouritesError" from user context.
     }
     if (user.postClicked) { // If user.postClicked is mutated, re-render form with new context data.
-      setForm({
+      form.title !== user.postClicked.title && setForm({
         title: post.title,
         description: post.description,
         re_render_form: form.re_render_form = form.re_render_form + 1, // Re-render edit form using the key prop.
       })
     }
-  }, [user, setUser, post, imgClicked])
+  }, [user, setUser, post, imgClicked, form])
 
   const favClickedHandler = () => {
     if (favClicked === "undefined") {
