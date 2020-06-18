@@ -256,7 +256,7 @@ export const updateInfo = (user, setUser, history) => {
   })
 }
 
-export const updatePP = (user, setUser, history, setLoading) => {
+export const updatePP = (user, setUser, wall, setWall, history, setLoading) => {
   setLoading(true)
   axios.post('', {
     variables: {
@@ -275,8 +275,34 @@ export const updatePP = (user, setUser, history, setLoading) => {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`UpdatePP Error: ${res.data.errors[0].message}`)
     } else {
-      setUser({ ...user, profile_picture: res.data.data.updatePP.profile_picture, file: { uploaded: false }})
+      const newPosts = user.posts.map(post => {
+        return { ...post, author: { ...post.author, profile_picture: res.data.data.updatePP.profile_picture }}
+      })
+      const newWall = wall.map(wallPost => {
+        user.posts.forEach(post => {
+          if (wallPost._id === post._id) {
+            wallPost = { ...wallPost, author: { ...wallPost.author, profile_picture: res.data.data.updatePP.profile_picture }}
+          }
+        })
+        wallPost.comments = wallPost.comments.map(comment => {
+          if (comment.author._id === user._id) {
+            return { ...comment, author: { ...comment.author, profile_picture: res.data.data.updatePP.profile_picture }}
+          } else {
+            return comment
+          }
+        })
+        return wallPost
+      })
+      setUser({ 
+        ...user, 
+        profile_picture: res.data.data.updatePP.profile_picture,
+        posts: newPosts,
+        file: { uploaded: false },
+      })
+      setWall(newWall)
       localStorage.setItem('profile_picture', res.data.data.updatePP.profile_picture)
+      localStorage.setItem('posts', JSON.stringify(newPosts))
+      localStorage.setItem('wall', JSON.stringify(newWall))
       history.push("/")
       process.env.NODE_ENV === 'development' && console.log(res)
     }

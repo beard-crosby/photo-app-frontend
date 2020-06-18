@@ -8,12 +8,12 @@ import { updatePP } from '../shared/authRequests'
 import { Upload } from 'react-feather'
 
 const ChangePP = ({ history }) => {
-  const { user, setUser, setLoading } = useContext(UserContext)
+  const { user, setUser, wall, setWall, setLoading } = useContext(UserContext)
   const [ formValid, setFormValid ] = useState(false)
 
   const onChangePPClicked = event => {
     event.preventDefault()
-    updatePP(user, setUser, history, setLoading)
+    updatePP(user, setUser, wall, setWall, history, setLoading)
   }
 
   useEffect(() => { 
