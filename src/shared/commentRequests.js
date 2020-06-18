@@ -19,7 +19,7 @@ export const createComment = (user, setUser, wall, setWall, post, comment, setCo
     if (res.data.errors) {
       checkAuth(res, setUser, history)
       setUser({...user, formErrors: res.data.errors[0].message})
-      process.env.NODE_ENV === 'development' && console.log(`CreateComment Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(`CreateComment: ${res.data.errors[0].message}`)
     } else {
       const newWall = newArrObjValue(wall, post, null, comment, user)
       setWall(newWall)
@@ -36,7 +36,7 @@ export const createComment = (user, setUser, wall, setWall, post, comment, setCo
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(`CreateComment Error: ${err}`)
+    process.env.NODE_ENV === 'development' && console.log(`CreateComment: ${err.response.data.errors[0].message}`)
     setUser({ ...user, formErrors: err.response.data.errors[0].message})
   })
 }

@@ -21,6 +21,7 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
   const [ overlay, setOverlay ] = useState(null)
   const [ spinner, setSpinner ] = useState(false)
   const [ comment, setComment ] = useState("")
+  const [ err, setErr ] = useState(null)
   const [ form, setForm ] = useState({
     title: post.title,
     description: post.description,
@@ -31,10 +32,10 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
 
   useEffect(() => {
     user.favourites.forEach(fav => post._id === fav._id && setFavClicked(styles.favClicked)) // Check if this post is in user.favourites. If it is, setFavClicked().
-    imgClicked ? document.body.style.overflow = "hidden" : document.body.style = "none" // If img is fullscreen, disable scrolling. 
-    if (user.updateFavouritesError === post._id) { // Check if the _id in updateFavouritesError matches this post.
-      setFavClicked("undefined") // Remove class from setFavClicked().
-      setUser(removeKey(user, "updateFavouritesError")) // Remove "updateFavouritesError" from user context.
+    imgClicked ? document.body.style.overflow = "hidden" : document.body.style = "none" // If img is fullscreen, disable scrolling.
+    if (user.formErrors && user.formErrors.substring(0, user.formErrors.indexOf(" ")) === post._id) { // If formErrors starts with post._id.
+      setErr(user.formErrors.substr(user.formErrors.indexOf(" ") + 1)) // setErr with everything after the first " " in the string.
+      setSidebar("more") // Show sidebar "more".
     }
     if (user.postClicked) { // If user.postClicked is mutated, re-render form with new context data.
       setForm({
@@ -106,17 +107,25 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
             </>}
             {sidebar === "more" && 
             <div className={styles.more}>
-              {isAuthor ? 
-                <>
-                  <p onClick={() => !spinner && overlayBtnsHandler("del")}>Delete Post</p>
-                  <p>Disable Comments</p>
-                  <p onClick={() => setSidebar(null)}>Close</p>
-                </> : 
-                <>
-                  <p>Report Inappropriate</p>
-                  <p>Unfollow</p>
-                  <p onClick={() => setSidebar(null)}>Close</p>
-                </>}
+              {err ?
+              <>
+                <p>{err}</p>
+                <p onClick={() => {
+                  setSidebar(null)
+                  setErr(null)
+                }}>Close</p>
+              </>
+              : isAuthor ? 
+              <>
+                <p onClick={() => !spinner && overlayBtnsHandler("del")}>Delete Post</p>
+                <p>Disable Comments</p>
+                <p onClick={() => setSidebar(null)}>Close</p>
+              </> :
+              <>
+                <p>Report Inappropriate</p>
+                <p>Unfollow</p>
+                <p onClick={() => setSidebar(null)}>Close</p>
+              </>}
             </div>}
             {!sidebar && post.comments.map((comment, i) => <Comment key={i} user={comment.author} text={comment.comment}/>)}
           </div>

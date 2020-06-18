@@ -37,7 +37,6 @@ export const checkLocalStorage = () => {
         geolocation: geolocation,
         settings: settings,
         favourites: favourites,
-        formErrors: {},
         file: { uploaded: false },
       }
 
@@ -90,7 +89,6 @@ export const logInSuccess = userData => {
   return {
     ...userData, 
     status: "online",
-    formErrors: {},
     file: { uploaded: false },
   }
 }

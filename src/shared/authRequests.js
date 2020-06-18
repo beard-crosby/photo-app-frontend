@@ -43,7 +43,7 @@ export const createUser = (data, user, setUser, setLoading, history) => {
   }).then(async (res) => {
     if (res.data.errors) {
       setUser({...user, formErrors: res.data.errors[0].message, data: res.data.errors[0].message === "oAuth Login" ? data : null})
-      process.env.NODE_ENV === 'development' && console.log(`CreateUser Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(`CreateUser: ${res.data.errors[0].message}`)
     } else {
       const userData = {
         ...res.data.data.createUser, 
@@ -60,7 +60,7 @@ export const createUser = (data, user, setUser, setLoading, history) => {
     }
     setLoading(false)
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(`CreateUser Error: ${err.response.data.errors[0].message}`)
+    process.env.NODE_ENV === 'development' && console.log(`CreateUser: ${err.response.data.errors[0].message}`)
     setUser({...user, formErrors: err.response.data.errors[0].message})
     setLoading(false)
   })
@@ -178,7 +178,7 @@ export const login = (data, user, setUser, setLoading, history) => {
   }).then(res => {
     if (res.data.errors) {
       setUser({...user, formErrors: res.data.errors[0].message})
-      process.env.NODE_ENV === 'development' && console.log(`Login Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(`Login: ${res.data.errors[0].message}`)
     } else {
       const userData = {
         ...res.data.data.login,
@@ -195,7 +195,7 @@ export const login = (data, user, setUser, setLoading, history) => {
     }
     setLoading(false)
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(`Login Error: ${err.response.data.errors[0].message}`)
+    process.env.NODE_ENV === 'development' && console.log(`Login: ${err.response.data.errors[0].message}`)
     setUser({...user, formErrors: err.response.data.errors[0].message})
     setLoading(false)
   })
@@ -217,7 +217,7 @@ export const deleteAccount = (user, setUser, setLoading, history) => {
   }, { headers: headers(user.token) }).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
-      process.env.NODE_ENV === 'development' && console.log(`DeleteAccount Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(`DeleteAccount: ${res.data.errors[0].message}`)
     } else {
       setUser(logout())
       history.push("/")
@@ -225,7 +225,7 @@ export const deleteAccount = (user, setUser, setLoading, history) => {
     }
     setLoading(false)
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(`DeleteAccount Error: ${err}`)
+    process.env.NODE_ENV === 'development' && console.log(`DeleteAccount: ${err.response.data.errors[0].message}`)
     setLoading(false)
   })
 }
@@ -243,16 +243,16 @@ export const updateInfo = (user, setUser, history) => {
         }
       }
     `
-  }, { headers: headers(user.token) }).then(res => {
+  }, {headers: headers(user.token)}).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
-      process.env.NODE_ENV === 'development' && console.log(`UpdateInfo Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(`UpdateInfo: ${res.data.errors[0].message}`)
     } else {
       localStorage.setItem('info', res.data.data.updateInfo.info)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(`UpdateInfo Error: ${err}`)
+    process.env.NODE_ENV === 'development' && console.log(`UpdateInfo: ${err.response.data.errors[0].message}`)
   })
 }
 
@@ -270,10 +270,10 @@ export const updatePP = (user, setUser, wall, setWall, history, setLoading) => {
         }
       }
     `
-  }, { headers: headers(user.token) }).then(res => {
+  }, {headers: headers(user.token)}).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
-      process.env.NODE_ENV === 'development' && console.log(`UpdatePP Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(`UpdatePP: ${res.data.errors[0].message}`)
     } else {
       const newPosts = user.posts.map(post => {
         return { ...post, author: { ...post.author, profile_picture: res.data.data.updatePP.profile_picture }}
@@ -309,11 +309,15 @@ export const updatePP = (user, setUser, wall, setWall, history, setLoading) => {
     setLoading(false)
   }).catch(err => {
     setLoading(false)
-    process.env.NODE_ENV === 'development' && console.log(`UpdatePP Error: ${err}`)
+    process.env.NODE_ENV === 'development' && console.log(`UpdatePP: ${err.response.data.errors[0].message}`)
   })
 }
 
 export const updateFavourites = (user, setUser, post, action, history) => {
+  if (post.author._id === user._id) {
+    return setUser({ ...user, formErrors: `${post._id} You can't favourite your own post!` })
+  }
+
   let newFavs = null
   if (action === "add") {
     const addFav = { ...user, favourites: [ post, ...user.favourites ] }
@@ -338,17 +342,18 @@ export const updateFavourites = (user, setUser, post, action, history) => {
         }
       }
     `
-  }, { headers: headers(user.token) }).then(res => {
+  }, {headers: headers(user.token)}).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
-      res.data.errors[0].message === "Duplicate Favourite!" && setUser({ ...user, favourites: user.favourites, updateFavouritesError: post._id })
-      process.env.NODE_ENV === 'development' && console.log(`UpdateFavourites Error: ${res.data.errors[0].message}`)
+      setUser({ ...user, formErrors: `${post._id} ${res.data.errors[0].message}` })
+      process.env.NODE_ENV === 'development' && console.log(`UpdateFavourites: ${res.data.errors[0].message}`)
     } else {
+      user.formErrors && setUser(removeKey(user, "formErrors"))
       localStorage.setItem('favourites', JSON.stringify(newFavs.favourites))
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
-    setUser({ ...user, favourites: user.favourites, updateFavouritesError: post._id })
-    process.env.NODE_ENV === 'development' && console.log(`UpdateFavourites Error: ${err}`)
+    setUser({ ...user, formErrors: `${post._id} ${err.response.data.errors[0].message}` })
+    process.env.NODE_ENV === 'development' && console.log(`UpdateFavourites: ${err.response.data.errors[0].message}`)
   })
 }

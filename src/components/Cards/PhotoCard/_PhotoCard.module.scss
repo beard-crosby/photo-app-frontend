@@ -135,6 +135,7 @@
   
           p {
             color: $favourite;
+            text-align: center;
 
             &:nth-child(n+2) {
               color: $color-3;

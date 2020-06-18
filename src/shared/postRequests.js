@@ -42,7 +42,7 @@ export const createPost = (form, user, setUser, wall, setWall, setLoading, histo
     if (res.data.errors) {
       checkAuth(res, setUser, history)
       setUser({...user, formErrors: res.data.errors[0].message})
-      process.env.NODE_ENV === 'development' && console.log(`CreatePost Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(`CreatePost: ${res.data.errors[0].message}`)
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
       setUser({ ...removeKey(user, "formErrors"), posts: [ ...user.posts, res.data.data.createPost ], file: { uploaded: false } })
@@ -53,8 +53,8 @@ export const createPost = (form, user, setUser, wall, setWall, setLoading, histo
     } 
     setLoading(false)
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(`CreatePost Error: ${err}`)
     setUser({ ...user, formErrors: err.response.data.errors[0].message, file: { uploaded: false }})
+    process.env.NODE_ENV === 'development' && console.log(`CreatePost: ${err.response.data.errors[0].message}`)
     setLoading(false)
   })
 }
@@ -72,13 +72,13 @@ export const allPosts = (user, setUser) => {
     `
   }).then(res => {
     if (res.data.errors) {
-      process.env.NODE_ENV === 'development' && console.log(`allPosts Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(`allPosts: ${res.data.errors[0].message}`)
     } else {
       setUser({ settings: user.settings, allPosts: res.data.data.allPosts })
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(`allPosts Error: ${err}`)
+    process.env.NODE_ENV === 'development' && console.log(`allPosts: ${err.response.data.errors[0].message}`)
   })
 }
 
@@ -103,7 +103,7 @@ export const updateTitle = (post, user, setUser, wall, setWall, setSpinner, setO
     if (res.data.errors) {
       checkAuth(res, setUser, history)
       setUser({...user, posts: newPosts, formErrors: res.data.errors[0].message})
-      process.env.NODE_ENV === 'development' && console.log(`UpdateTitle Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(`UpdateTitle: ${res.data.errors[0].message}`)
     } else {
       user.postClicked ? 
       setUser({ ...removeKey(user, "formErrors"), posts: newPosts, postClicked: post }) :
@@ -117,7 +117,7 @@ export const updateTitle = (post, user, setUser, wall, setWall, setSpinner, setO
     setSpinner(false)
   }).catch(err => {
     setUser({ ...user, posts: newPosts, formErrors: err.response.data.errors[0].message})
-    process.env.NODE_ENV === 'development' && console.log(`UpdateTitle Error: ${err}`)
+    process.env.NODE_ENV === 'development' && console.log(`UpdateTitle: ${err.response.data.errors[0].message}`)
     setSpinner(false)
   })
 }
@@ -143,7 +143,7 @@ export const updateDescription = (post, user, setUser, wall, setWall, setSpinner
     if (res.data.errors) {
       checkAuth(res, setUser, history)
       setUser({...user, posts: newPosts, formErrors: res.data.errors[0].message})
-      process.env.NODE_ENV === 'development' && console.log(`UpdateDescription Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(`UpdateDescription: ${res.data.errors[0].message}`)
     } else {
       user.postClicked ? 
       setUser({ ...title.length === 0 ? user : removeKey(user, "formErrors"), posts: newPosts, postClicked: post }) :
@@ -157,7 +157,7 @@ export const updateDescription = (post, user, setUser, wall, setWall, setSpinner
     setSpinner(false)
   }).catch(err => {
     setUser({ ...user, posts: newPosts, formErrors: err.response.data.errors[0].message})
-    process.env.NODE_ENV === 'development' && console.log(`UpdateDescription Error: ${err}`)
+    process.env.NODE_ENV === 'development' && console.log(`UpdateDescription: ${err.response.data.errors[0].message}`)
     setSpinner(false)
   })
 }
@@ -179,7 +179,7 @@ export const deletePost = (post, user, setUser, wall, setWall, setOverlay, setSp
   }, {headers: headers(user.token)}).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
-      process.env.NODE_ENV === 'development' && console.log(`DeletePost Error: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(`DeletePost: ${res.data.errors[0].message}`)
     } else {
       const newPosts = user.posts.filter(x => x._id !== post._id)
       const newWall = wall.filter(x => x._id !== post._id)
@@ -192,7 +192,7 @@ export const deletePost = (post, user, setUser, wall, setWall, setOverlay, setSp
     }
     setSpinner(false)
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(`DeletePost Error: ${err}`)
+    process.env.NODE_ENV === 'development' && console.log(`DeletePost: ${err.response.data.errors[0].message}`)
     setSpinner(false)
   })
 }
