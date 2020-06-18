@@ -68,6 +68,11 @@ export const createUser = (data, user, setUser, setLoading, history) => {
 
 export const login = (data, user, setUser, setLoading, history) => {
   setLoading(true)
+
+  if (!data.password && !data.token) {
+    return setUser({...user, formErrors: "Please enter your password."})
+  }
+
   axios.post('', {
     variables: {
       email: data.email,
@@ -317,6 +322,12 @@ export const updateFavourites = (user, setUser, post, action, history) => {
   if (post.author._id === user._id) {
     return setUser({ ...user, formErrors: `${post._id} You can't favourite your own post!` })
   }
+
+  user.favourites.forEach(fav => {
+    if (post._id === fav._id) {
+      return setUser({ ...user, formErrors: `${post._id} Duplicate Favourite!` })
+    }
+  })
 
   let newFavs = null
   if (action === "add") {

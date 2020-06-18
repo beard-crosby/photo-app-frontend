@@ -1,7 +1,11 @@
 import axios from "axios"
-import { headers, checkAuth, removeKey, newArrObjValue } from './utility'
+import { headers, checkAuth, removeKey, newArrObjValue, isDuplicatePost } from './utility'
 
 export const createPost = (form, user, setUser, wall, setWall, setLoading, history) => {
+  if (isDuplicatePost(user)) {
+    return setUser({...user, formErrors: "Duplicate Post!", file: { uploaded: false }})
+  }
+
   setLoading(true)
   axios.post('', {
     variables: {

@@ -52,9 +52,9 @@ export const checkGeolocation = (userData, setUser, history) => {
 }
 
 // Format name of all files to be uploaded to s3.
-export const formatFilename = (username, filename) => {
-  const cleanFilename = `${moment().format()}-${filename}`
-  const newFilename = `${username.toLowerCase().replace(/[^a-z0-9]/g, "-")}/${cleanFilename.toLowerCase().replace(/[^a-z0-9]/g, "-")}`
+export const formatFilename = (user_id, filename, type) => {
+  const date = moment().format().toLowerCase().replace(/[^a-z0-9]/g, "-")
+  const newFilename = `${user_id}/${type}${date}/${filename.toLowerCase().replace(/[^a-z0-9]/g, "-")}`
   return newFilename
 }
 
@@ -100,4 +100,21 @@ export const newArrObjValue = (arr, post, key, comment, user) => {
       }
     }
   })
+}
+
+export const isDuplicatePost = (user, preUpload) => {
+  let isDuplicate = false
+  let newFile = null
+  if (preUpload) {
+    newFile = preUpload.substring(preUpload.lastIndexOf("/") + 1)
+  } else {
+    newFile = user.file.url.substring(user.file.url.lastIndexOf("/") + 1)
+  }
+  user.posts.forEach(post => {
+    const fileInPosts = post.img.substring(post.img.lastIndexOf("/") + 1)
+    if (newFile === fileInPosts) {
+      isDuplicate = true
+    }
+  })
+  return isDuplicate
 }

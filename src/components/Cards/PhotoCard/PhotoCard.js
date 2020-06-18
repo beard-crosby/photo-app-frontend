@@ -33,7 +33,7 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
     user.favourites.forEach(fav => post._id === fav._id && setFavClicked(styles.favClicked)) // Check if this post is in user.favourites. If it is, setFavClicked().
     imgClicked ? document.body.style.overflow = "hidden" : document.body.style = "none" // If img is fullscreen, disable scrolling.
     if (user.formErrors && user.formErrors.substring(0, user.formErrors.indexOf(" ")) === post._id) { // If formErrors starts with post._id.
-      setSidebar(user.formErrors.substr(user.formErrors.indexOf(" ") + 1)) // setSidebar with everything after the first " " in the string.
+      setSidebar(user.formErrors.substring(user.formErrors.indexOf(" ") + 1)) // setSidebar with everything after the first " " in the string.
     }
     if (user.postClicked) { // If user.postClicked is mutated, re-render form with new context data.
       setForm({
@@ -92,7 +92,7 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
           <p onClick={() => setSidebar(null)}>Close</p>
         </div>
       )
-      case `${user.formErrors && user.formErrors.substr(user.formErrors.indexOf(" ") + 1)}`: return (
+      case `${user.formErrors && user.formErrors.substring(user.formErrors.indexOf(" ") + 1)}`: return (
         <div className={styles.more}>
           <p>{user.formErrors && sidebar}</p>
           <p onClick={() => setSidebar(null)}>Close</p>

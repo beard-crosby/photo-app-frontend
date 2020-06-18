@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 
 const UploadBox = ({ user, setUser, style, history }) => {
   const [ thumb, setThumb ] = useState("")
+  const [ err, setErr ] = useState(null)
 
   // Determine if the window has drag and drop capabilities.
   const canDragDrop = () => {
@@ -35,6 +36,13 @@ const UploadBox = ({ user, setUser, style, history }) => {
     }
   }, [acceptedFiles]) // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    if (user.formErrors === "Duplicate Post!") {
+      setErr(<h1>Duplicate Post!<br/>You have already posted this image.</h1>)
+      setThumb("")
+    }
+  }, [user, setErr])
+
   let text = <h1>Choose an image<br/>{canDragDrop && `or drag it here`}</h1>
 
   // Check for all concerning errors/rejections.
@@ -42,18 +50,13 @@ const UploadBox = ({ user, setUser, style, history }) => {
     text = <h1>Multiple files<br/>Please select one image</h1>
   } else if (fileRejections.length > 0) {
     switch (fileRejections[0].errors[0].code) {
-      case "too-many-files": 
-        text = <h1>Multiple files<br/>Please select one image</h1>
-        break
-      case "file-invalid-type":
-        text = <h1>Unsupported file type<br/>Please use JPEG or PNG</h1>
-        break
-      case "file-too-large":
-        text = <h1>File size too large<br/>10MB maximum</h1>
-        break
-      default:
-        text = <h1>Choose an image<br/>{canDragDrop && `or drag it here`}</h1>
+      case "too-many-files": text = <h1>Multiple files<br/>Please select one image</h1>; break
+      case "file-invalid-type": text = <h1>Unsupported file type<br/>Please use JPEG or PNG</h1>; break
+      case "file-too-large": text = <h1>File size too large<br/>10MB maximum</h1>; break
+      default: text = <h1>Choose an image<br/>{canDragDrop && `or drag it here`}</h1>
     }
+  } else if (err) {
+    text = err
   }
 
   return (

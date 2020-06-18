@@ -1,11 +1,12 @@
 import axios from "axios"
-import { headers, checkAuth } from './utility'
-import { formatFilename } from './utility'
+import { headers, checkAuth, formatFilename, isDuplicatePost } from './utility'
 
 export const signS3 = (file, user, setUser, history) => {
   axios.post('', {
     variables: {
-      filename: formatFilename(user.name, file.name),
+      filename: history.location.pathname === "/changepp" ? 
+        formatFilename(user._id, file.name, "profile-picture/") : 
+        formatFilename(user._id, file.name, ""),
       filetype: file.type,
     },
     query: `
@@ -21,8 +22,11 @@ export const signS3 = (file, user, setUser, history) => {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`SignS3 Error: ${res.data.errors[0].message}`)
     } else {
-      process.env.NODE_ENV === 'development' && console.log(res)
+      if (isDuplicatePost(user, res.data.data.signS3.url)) {
+        return setUser({...user, formErrors: "Duplicate Post!", file: { uploaded: false }})
+      }
       uploadToS3(res.data.data.signS3, file, user, setUser)
+      process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(`SignS3 Error: ${err}`)
