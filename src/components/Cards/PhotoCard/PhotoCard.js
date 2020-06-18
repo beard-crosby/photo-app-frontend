@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { MoreHorizontal, Heart, ChevronDown, ChevronUp } from 'react-feather'
 import { updateFavourites } from '../../../shared/authRequests'
-import { textareaGrow, removeKey } from '../../../shared/utility'
+import { textareaGrow } from '../../../shared/utility'
 import FormSection from '../../UI/FormSection'
 import { updateTitle, updateDescription, deletePost } from '../../../shared/postRequests'
 import { createComment } from '../../../shared/commentRequests'
@@ -21,7 +21,6 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
   const [ overlay, setOverlay ] = useState(null)
   const [ spinner, setSpinner ] = useState(false)
   const [ comment, setComment ] = useState("")
-  const [ err, setErr ] = useState(null)
   const [ form, setForm ] = useState({
     title: post.title,
     description: post.description,
@@ -34,8 +33,7 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
     user.favourites.forEach(fav => post._id === fav._id && setFavClicked(styles.favClicked)) // Check if this post is in user.favourites. If it is, setFavClicked().
     imgClicked ? document.body.style.overflow = "hidden" : document.body.style = "none" // If img is fullscreen, disable scrolling.
     if (user.formErrors && user.formErrors.substring(0, user.formErrors.indexOf(" ")) === post._id) { // If formErrors starts with post._id.
-      setErr(user.formErrors.substr(user.formErrors.indexOf(" ") + 1)) // setErr with everything after the first " " in the string.
-      setSidebar("more") // Show sidebar "more".
+      setSidebar(user.formErrors.substr(user.formErrors.indexOf(" ") + 1)) // setSidebar with everything after the first " " in the string.
     }
     if (user.postClicked) { // If user.postClicked is mutated, re-render form with new context data.
       setForm({
@@ -72,6 +70,38 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
     createComment(user, setUser, wall, setWall, post, comment, setComment, e.target.childNodes[0], history)
   }
 
+  const sidebarJSX = sidebar => {
+    switch (sidebar) {
+      case "details": return (
+        <>
+          <Comment user={user} header="Created:" text={moment(post.created_at).fromNow()}/>
+          <Comment user={user} header="Title:" text={post.title}/>
+          {post.description && <Comment user={user} header="Description:" text={post.description}/>}
+        </>
+      )
+      case "more": return isAuthor ? (
+        <div className={styles.more}>
+          <p onClick={() => !spinner && overlayBtnsHandler("del")}>Delete Post</p>
+          <p>Disable Comments</p>
+          <p onClick={() => setSidebar(null)}>Close</p>
+        </div>
+      ) : (
+        <div className={styles.more}>
+          <p>Report Inappropriate</p>
+          <p>Unfollow</p>
+          <p onClick={() => setSidebar(null)}>Close</p>
+        </div>
+      )
+      case `${user.formErrors && user.formErrors.substr(user.formErrors.indexOf(" ") + 1)}`: return (
+        <div className={styles.more}>
+          <p>{user.formErrors && sidebar}</p>
+          <p onClick={() => setSidebar(null)}>Close</p>
+        </div>
+      )
+      default: return post.comments.map((comment, i) => <Comment key={i} user={comment.author} text={comment.comment}/>)
+    }
+  }
+
   return (
     <div className={`${styles.photoCard} ${imgClicked && styles.imgClicked} ${!isAuthor && styles.postSettings} ${user.settings.dark_mode && styles.darkMode}`}>
       <div className={`${styles.imgWrapper} ${overlay && styles.imgOpacity}`} onClick={() => overlay === null && setImgClicked(!imgClicked)}>
@@ -99,35 +129,7 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
             <MoreHorizontal onClick={() => sidebar === "more" ? setSidebar(null) : setSidebar("more")}/>
           </div>
           <div className={styles.sidebarMain}>
-            {sidebar === "details" && 
-            <>
-              <Comment user={user} header="Created:" text={moment(post.created_at).fromNow()}/>
-              <Comment user={user} header="Title:" text={post.title}/>
-              {post.description && <Comment user={user} header="Description:" text={post.description}/>}
-            </>}
-            {sidebar === "more" && 
-            <div className={styles.more}>
-              {err ?
-              <>
-                <p>{err}</p>
-                <p onClick={() => {
-                  setSidebar(null)
-                  setErr(null)
-                }}>Close</p>
-              </>
-              : isAuthor ? 
-              <>
-                <p onClick={() => !spinner && overlayBtnsHandler("del")}>Delete Post</p>
-                <p>Disable Comments</p>
-                <p onClick={() => setSidebar(null)}>Close</p>
-              </> :
-              <>
-                <p>Report Inappropriate</p>
-                <p>Unfollow</p>
-                <p onClick={() => setSidebar(null)}>Close</p>
-              </>}
-            </div>}
-            {!sidebar && post.comments.map((comment, i) => <Comment key={i} user={comment.author} text={comment.comment}/>)}
+            {sidebarJSX(sidebar)}
           </div>
           {!isAuthor ? 
           <form onSubmit={e => commentHandler(e)}>

@@ -314,9 +314,9 @@ export const updatePP = (user, setUser, wall, setWall, history, setLoading) => {
 }
 
 export const updateFavourites = (user, setUser, post, action, history) => {
-  if (post.author._id === user._id) {
+  // if (post.author._id === user._id) {
     return setUser({ ...user, formErrors: `${post._id} You can't favourite your own post!` })
-  }
+  // }
 
   let newFavs = null
   if (action === "add") {
