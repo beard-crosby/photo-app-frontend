@@ -14,7 +14,7 @@ export const updateSettings = (user, setUser, history) => {
         }
       }
     `
-  }, { headers: headers(user.token) }).then(res => {
+  }, {headers: headers(user.token)}).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`UpdateSettings Error: ${res.data.errors[0].message}`)
@@ -39,7 +39,7 @@ export const updateGeolocation = (user, setUser, geolocation, history) => {
         }
       }
     `
-  }, { headers: headers(user.token) }).then(res => {
+  }, {headers: headers(user.token)}).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`UpdateGeolocation Error: ${res.data.errors[0].message}`)

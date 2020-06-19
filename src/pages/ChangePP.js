@@ -5,6 +5,7 @@ import '../scss/_model.scss'
 import Button from '../components/UI/Button'
 import UploadBox from '../components/UI/UploadBox'
 import { updatePP } from '../shared/authRequests'
+import { deleteS3 } from '../shared/bucketRequests'
 import { Upload } from 'react-feather'
 
 const ChangePP = ({ history }) => {
@@ -18,7 +19,8 @@ const ChangePP = ({ history }) => {
 
   useEffect(() => { 
     user.file.uploaded && setFormValid(true)
-  }, [user])
+    // return () => user.file.url && deleteS3(user.file.url, user, setUser, history)
+  }, [user, setUser, history])
 
   return (
     <>

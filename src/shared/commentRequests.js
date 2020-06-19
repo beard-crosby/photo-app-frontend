@@ -27,7 +27,7 @@ export const createComment = (user, setUser, wall, setWall, post, comment, setCo
       user.favourites.forEach(fav => {
         if (fav._id === post._id) {
           const newFavs = newArrObjValue(user.favourites, post, null, comment, user)
-          setUser({ ...removeKey(user, "formErrors"), favourites: newFavs })
+          setUser({...removeKey(user, "formErrors"), favourites: newFavs})
           localStorage.setItem('favourites', JSON.stringify(newFavs))
         }
       })      
@@ -37,6 +37,6 @@ export const createComment = (user, setUser, wall, setWall, post, comment, setCo
     }
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(`CreateComment: ${err.response.data.errors[0].message}`)
-    setUser({ ...user, formErrors: err.response.data.errors[0].message})
+    setUser({...user, formErrors: err.response.data.errors[0].message})
   })
 }

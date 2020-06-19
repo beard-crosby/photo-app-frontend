@@ -1,8 +1,8 @@
 import axios from "axios"
-import { headers, checkAuth, removeKey, newArrObjValue, isDuplicatePost } from './utility'
+import { headers, checkAuth, removeKey, newArrObjValue, isDuplicateFile } from './utility'
 
 export const createPost = (form, user, setUser, wall, setWall, setLoading, history) => {
-  if (isDuplicatePost(user)) {
+  if (isDuplicateFile(user)) { // Check for a user.posts duplicate.
     return setUser({...user, formErrors: "Duplicate Post!", file: { uploaded: false }})
   }
 
@@ -49,7 +49,11 @@ export const createPost = (form, user, setUser, wall, setWall, setLoading, histo
       process.env.NODE_ENV === 'development' && console.log(`CreatePost: ${res.data.errors[0].message}`)
     } else {
       process.env.NODE_ENV === 'development' && console.log(res)
-      setUser({ ...removeKey(user, "formErrors"), posts: [ ...user.posts, res.data.data.createPost ], file: { uploaded: false } })
+      setUser({
+        ...removeKey(user, "formErrors"), 
+        posts: [ ...user.posts, res.data.data.createPost ], 
+        file: { uploaded: false },
+      })
       setWall([ res.data.data.createPost, ...wall.slice(0, -1) ])
       localStorage.setItem('posts', JSON.stringify([ ...user.posts, res.data.data.createPost ]))
       localStorage.setItem('wall', JSON.stringify([ res.data.data.createPost, ...wall.slice(0, -1) ]))
@@ -57,7 +61,7 @@ export const createPost = (form, user, setUser, wall, setWall, setLoading, histo
     } 
     setLoading(false)
   }).catch(err => {
-    setUser({ ...user, formErrors: err.response.data.errors[0].message, file: { uploaded: false }})
+    setUser({...user, formErrors: err.response.data.errors[0].message, file: { uploaded: false }})
     process.env.NODE_ENV === 'development' && console.log(`CreatePost: ${err.response.data.errors[0].message}`)
     setLoading(false)
   })
@@ -110,8 +114,8 @@ export const updateTitle = (post, user, setUser, wall, setWall, setSpinner, setO
       process.env.NODE_ENV === 'development' && console.log(`UpdateTitle: ${res.data.errors[0].message}`)
     } else {
       user.postClicked ? 
-      setUser({ ...removeKey(user, "formErrors"), posts: newPosts, postClicked: post }) :
-      setUser({ ...removeKey(user, "formErrors"), posts: newPosts, })
+      setUser({...removeKey(user, "formErrors"), posts: newPosts, postClicked: post}) :
+      setUser({...removeKey(user, "formErrors"), posts: newPosts})
       setWall(newWall)
       localStorage.setItem('posts', JSON.stringify(newPosts))
       localStorage.setItem('wall', JSON.stringify(newWall))
@@ -120,7 +124,7 @@ export const updateTitle = (post, user, setUser, wall, setWall, setSpinner, setO
     }
     setSpinner(false)
   }).catch(err => {
-    setUser({ ...user, posts: newPosts, formErrors: err.response.data.errors[0].message})
+    setUser({...user, posts: newPosts, formErrors: err.response.data.errors[0].message})
     process.env.NODE_ENV === 'development' && console.log(`UpdateTitle: ${err.response.data.errors[0].message}`)
     setSpinner(false)
   })
@@ -150,8 +154,8 @@ export const updateDescription = (post, user, setUser, wall, setWall, setSpinner
       process.env.NODE_ENV === 'development' && console.log(`UpdateDescription: ${res.data.errors[0].message}`)
     } else {
       user.postClicked ? 
-      setUser({ ...title.length === 0 ? user : removeKey(user, "formErrors"), posts: newPosts, postClicked: post }) :
-      setUser({ ...title.length === 0 ? user : removeKey(user, "formErrors"), posts: newPosts, })
+      setUser({...title.length === 0 ? user : removeKey(user, "formErrors"), posts: newPosts, postClicked: post}) :
+      setUser({...title.length === 0 ? user : removeKey(user, "formErrors"), posts: newPosts})
       setWall(newWall)
       localStorage.setItem('posts', JSON.stringify(newPosts))
       localStorage.setItem('wall', JSON.stringify(newWall))
@@ -160,7 +164,7 @@ export const updateDescription = (post, user, setUser, wall, setWall, setSpinner
     }
     setSpinner(false)
   }).catch(err => {
-    setUser({ ...user, posts: newPosts, formErrors: err.response.data.errors[0].message})
+    setUser({...user, posts: newPosts, formErrors: err.response.data.errors[0].message})
     process.env.NODE_ENV === 'development' && console.log(`UpdateDescription: ${err.response.data.errors[0].message}`)
     setSpinner(false)
   })
@@ -187,7 +191,7 @@ export const deletePost = (post, user, setUser, wall, setWall, setOverlay, setSp
     } else {
       const newPosts = user.posts.filter(x => x._id !== post._id)
       const newWall = wall.filter(x => x._id !== post._id)
-      setUser({ ...removeKey(user, "postClicked"), posts: newPosts })
+      setUser({...removeKey(user, "postClicked"), posts: newPosts})
       setWall(newWall)
       localStorage.setItem('posts', JSON.stringify(newPosts))
       localStorage.setItem('wall', JSON.stringify(newWall))

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { logout, logInSuccess } from './localStorage'
-import { headers, timeout, checkGeolocation, checkAuth, removeKey } from './utility'
+import { headers, timeout, checkGeolocation, checkAuth, removeKey, isDuplicateFile } from './utility'
 
 export const createUser = (data, user, setUser, setLoading, history) => {
   setLoading(true)
@@ -262,15 +262,20 @@ export const updateInfo = (user, setUser, history) => {
 }
 
 export const updatePP = (user, setUser, wall, setWall, history, setLoading) => {
+  if (isDuplicateFile(user, false, true)) { // Check for a user.profile_picture duplicate.
+    return setUser({...user, formErrors: "Duplicate Profile Picture!", file: { uploaded: false }})
+  }
+
   setLoading(true)
   axios.post('', {
     variables: {
       _id: user._id,
       profile_picture: user.file.url,
+      old_PP: user.profile_picture,
     },
     query: `
-      mutation UpdatePP($_id: ID!, $profile_picture: String!) {
-        updatePP(_id: $_id, profile_picture: $profile_picture) {
+      mutation UpdatePP($_id: ID!, $profile_picture: String!, $old_PP: String!) {
+        updatePP(_id: $_id, profile_picture: $profile_picture, old_PP: $old_PP) {
           profile_picture
         }
       }
@@ -320,26 +325,26 @@ export const updatePP = (user, setUser, wall, setWall, history, setLoading) => {
 
 export const updateFavourites = (user, setUser, post, action, history) => {
   if (post.author._id === user._id) {
-    return setUser({ ...user, formErrors: `${post._id} You can't favourite your own post!` })
+    return setUser({...user, formErrors: `${post._id} You can't favourite your own post!`})
   }
 
   user.favourites.forEach(fav => {
     if (post._id === fav._id) {
-      return setUser({ ...user, formErrors: `${post._id} Duplicate Favourite!` })
+      return setUser({...user, formErrors: `${post._id} Duplicate Favourite!`})
     }
   })
 
   let newFavs = null
   if (action === "add") {
-    const addFav = { ...user, favourites: [ post, ...user.favourites ] }
+    const addFav = {...user, favourites: [ post, ...user.favourites ]}
     setUser(addFav)
     newFavs = addFav
   } else {
-    const removeFav = { ...removeKey(user, "postClicked"), favourites: user.favourites.filter(x => x._id !== post._id) }
+    const removeFav = {...removeKey(user, "postClicked"), favourites: user.favourites.filter(x => x._id !== post._id)}
     setUser(removeFav)
     newFavs = removeFav
   }
-  
+
   axios.post('', {
     variables: {
       _id: user._id,
@@ -356,7 +361,7 @@ export const updateFavourites = (user, setUser, post, action, history) => {
   }, {headers: headers(user.token)}).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
-      setUser({ ...user, formErrors: `${post._id} ${res.data.errors[0].message}` })
+      setUser({...user, formErrors: `${post._id} ${res.data.errors[0].message}`})
       process.env.NODE_ENV === 'development' && console.log(`UpdateFavourites: ${res.data.errors[0].message}`)
     } else {
       user.formErrors && setUser(removeKey(user, "formErrors"))
@@ -364,7 +369,7 @@ export const updateFavourites = (user, setUser, post, action, history) => {
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
-    setUser({ ...user, formErrors: `${post._id} ${err.response.data.errors[0].message}` })
+    setUser({...user, formErrors: `${post._id} ${err.response.data.errors[0].message}`})
     process.env.NODE_ENV === 'development' && console.log(`UpdateFavourites: ${err.response.data.errors[0].message}`)
   })
 }

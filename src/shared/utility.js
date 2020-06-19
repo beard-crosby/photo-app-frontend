@@ -102,19 +102,32 @@ export const newArrObjValue = (arr, post, key, comment, user) => {
   })
 }
 
-export const isDuplicatePost = (user, preUpload) => {
+// Check if a file is a duplicate of another in the s3 bucket. Returns true if it is.
+// preUpload = if preUpload is passed, perform check with pre-uploaded file.
+// isPP = if isPP is true, check for a duplicate profile-picture rather than a post.
+export const isDuplicateFile = (user, preUpload, isPP) => {
   let isDuplicate = false
   let newFile = null
+
   if (preUpload) {
     newFile = preUpload.substring(preUpload.lastIndexOf("/") + 1)
   } else {
     newFile = user.file.url.substring(user.file.url.lastIndexOf("/") + 1)
   }
-  user.posts.forEach(post => {
-    const fileInPosts = post.img.substring(post.img.lastIndexOf("/") + 1)
-    if (newFile === fileInPosts) {
+
+  if (isPP) {
+    const oldFile = user.profile_picture.substring(user.profile_picture.lastIndexOf("/") + 1)
+    if (newFile === oldFile) {
       isDuplicate = true
     }
-  })
+  } else {
+    user.posts.forEach(post => {
+      const fileInPosts = post.img.substring(post.img.lastIndexOf("/") + 1)
+      if (newFile === fileInPosts) {
+        isDuplicate = true
+      }
+    })
+  }
+  
   return isDuplicate
 }
