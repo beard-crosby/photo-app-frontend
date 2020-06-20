@@ -27,7 +27,7 @@ const InfoCard = ({ user, setUser, history }) => {
   const clickListener = e => { // If clickEvent outside of the wrapper, setWrapperHeight.
     const wrapper = document.getElementById("user-info-wrapper")
     if (e.target.tagName !== "svg" && e.target.tagName !== "path" && !wrapper.contains(e.target) && wrapper.style.height === "100%") {
-      setWrapperHeight(null)
+      shrinkHandler()
     }
   }
 
