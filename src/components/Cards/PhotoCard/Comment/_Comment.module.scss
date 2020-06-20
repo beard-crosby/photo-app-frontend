@@ -10,3 +10,11 @@
     }
   }
 }
+
+.noHover {
+  cursor: default;
+
+  p, img {
+    cursor: default;
+  }
+}

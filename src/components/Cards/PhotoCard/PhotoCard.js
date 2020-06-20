@@ -98,7 +98,7 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
           <p onClick={() => setSidebar(null)}>Close</p>
         </div>
       )
-      default: return post.comments.map((comment, i) => <Comment key={i} user={comment.author} text={comment.comment}/>)
+      default: return post.comments.map((comment, i) => <Comment key={i} user={user} comment={comment}/>)
     }
   }
 
