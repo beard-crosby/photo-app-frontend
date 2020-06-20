@@ -48,7 +48,7 @@ const UploadBox = ({ user, setUser, style, history }) => {
 
   useEffect(() => {
     return () => redundantFilesCheck(user, setUser, history)
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   let text = <h1>Choose an image<br/>{canDragDrop && `or drag it here`}</h1>
 

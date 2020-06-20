@@ -34,7 +34,7 @@ const InfoCard = ({ user, setUser, history }) => {
   useEffect(() => { // add eventListener onLoad and cleanup eventListener on when component unmounts.
     document.addEventListener("click", clickListener)
     return () => document.removeEventListener("click", clickListener)
-  }, [wrapperHeight])
+  }, [wrapperHeight]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className={styles.infoCardWrapper} id="user-info-wrapper" style={{ height: wrapperHeight }}>
