@@ -32,6 +32,10 @@
   align-items: center;
   cursor: pointer;
 
+  p {
+    cursor: pointer;
+  }
+
   .profileInfo {
     height: 40px;
     display: flex;
