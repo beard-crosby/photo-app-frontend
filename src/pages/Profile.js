@@ -10,7 +10,10 @@ import { removeKey } from '../shared/utility'
 
 const Profile = () => {
   const { user, setUser, wall, setWall } = useContext(UserContext)
-  useEffect(() => setUser(removeKey(user, "postClicked")), []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    return () => user.postClicked && setUser(removeKey(user, "postClicked"))
+  }, [user]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="flex-col">

@@ -1,8 +1,8 @@
 import axios from "axios"
-import { headers, checkAuth, removeKey, newArrObjValue, isDuplicateFile } from './utility'
+import { headers, checkAuth, removeKey, newArrObjValue, isDuplicatePost } from './utility'
 
 export const createPost = (form, user, setUser, wall, setWall, setLoading, history) => {
-  if (isDuplicateFile(user)) { // Check for a user.posts duplicate.
+  if (isDuplicatePost(user, user.file.url)) {
     return setUser({...user, formErrors: "Duplicate Post!", file: { uploaded: false }})
   }
 

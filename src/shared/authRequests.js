@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { logout, logInSuccess } from './localStorage'
-import { headers, timeout, checkGeolocation, checkAuth, removeKey, isDuplicateFile } from './utility'
+import { headers, timeout, checkGeolocation, checkAuth, removeKey, isDuplicateProfilePicture } from './utility'
 
 export const createUser = (data, user, setUser, setLoading, history) => {
   setLoading(true)
@@ -262,8 +262,8 @@ export const updateInfo = (user, setUser, history) => {
 }
 
 export const updatePP = (user, setUser, wall, setWall, history, setLoading) => {
-  if (isDuplicateFile(user, false, true)) { // Check for a user.profile_picture duplicate.
-    return setUser({...user, formErrors: "Duplicate Profile Picture!", file: { uploaded: false }})
+  if (isDuplicateProfilePicture(user, user.file.url)) {
+    return setUser({...user, formErrors: "Duplicate Post!", file: { uploaded: false }})
   }
 
   setLoading(true)
@@ -271,11 +271,10 @@ export const updatePP = (user, setUser, wall, setWall, history, setLoading) => {
     variables: {
       _id: user._id,
       profile_picture: user.file.url,
-      old_PP: user.profile_picture,
     },
     query: `
-      mutation UpdatePP($_id: ID!, $profile_picture: String!, $old_PP: String!) {
-        updatePP(_id: $_id, profile_picture: $profile_picture, old_PP: $old_PP) {
+      mutation UpdatePP($_id: ID!, $profile_picture: String!) {
+        updatePP(_id: $_id, profile_picture: $profile_picture) {
           profile_picture
         }
       }

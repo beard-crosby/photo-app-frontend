@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styles from './_UploadBox.module.scss'
 import { Upload } from 'react-feather'
 import { useDropzone } from 'react-dropzone'
-import { signS3 } from '../../../shared/bucketRequests'
+import { signS3, redundantFilesCheck } from '../../../shared/bucketRequests'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -27,21 +27,28 @@ const UploadBox = ({ user, setUser, style, history }) => {
   // Else, nullify user.file context and revert thumbnail state.
   useEffect(() => {
     if (acceptedFiles.length > 0 && fileRejections.length === 0) {
-      setUser({ ...user, file: acceptedFiles[0] })
       setThumb(URL.createObjectURL(acceptedFiles[0]))
       signS3(acceptedFiles[0], user, setUser, history)
-    } else {
+    } else if (thumb) {
       setUser({ ...user, file: { uploaded: false } })
       setThumb("")
     }
   }, [acceptedFiles]) // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Check for errors duplicate errors.
   useEffect(() => {
     if (user.formErrors === "Duplicate Post!") {
       setErr(<h1>Duplicate Post!<br/>You have already posted this image.</h1>)
       setThumb("")
+    } else if (user.formErrors === "Duplicate Profile Picture!") {
+      setErr(<h1>Duplicate Profile Picture!<br/>This is already your Profile Picture.</h1>)
+      setThumb("")
     }
   }, [user, setErr])
+
+  useEffect(() => {
+    return () => redundantFilesCheck(user, setUser, history)
+  }, [])
 
   let text = <h1>Choose an image<br/>{canDragDrop && `or drag it here`}</h1>
 
