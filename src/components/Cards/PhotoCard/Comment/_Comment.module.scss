@@ -1,4 +1,12 @@
+@import "../../../../scss/variables";
+
 .comment {
   width: 100%;
   margin-bottom: 10px;
+
+  &:hover {
+    .text {
+      color: $black;
+    }
+  }
 }

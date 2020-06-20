@@ -8,7 +8,7 @@ const Comment = ({ user, text, header }) =>
     {header ? 
     <p style={{ float: "left", marginRight: 5, color: "black" }}>{header}</p> : 
     <ProfilePicture user={user} heightWidth={18} style={{ float: "left", marginRight: 5 }} disable/>}
-    <p>{text}</p>
+    <p className={styles.text}>{text}</p>
   </div>
 
 Comment.propTypes = {
