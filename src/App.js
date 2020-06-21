@@ -7,7 +7,7 @@ import Spinner from './components/Spinner'
 import { checkLocalStorage } from './shared/localStorage'
 import Overlay from './components/Overlay'
 
-const UserContext = React.createContext()
+const Context = React.createContext()
 
 const App = () => {
   const [ loading, setLoading ] = useState(false)
@@ -22,7 +22,7 @@ const App = () => {
   process.env.NODE_ENV === 'development' && console.log({loading, wall, user})
 
   return (
-    <UserContext.Provider value={{ loading, setLoading, wall, setWall, user, setUser }}>
+    <Context.Provider value={{ loading, setLoading, wall, setWall, user, setUser }}>
       <Nav user={user} setUser={setUser}/>
       <Overlay user={user}/>
       <main>
@@ -30,10 +30,10 @@ const App = () => {
         <Router/>
       </main>
       <Footer/>
-    </UserContext.Provider>
+    </Context.Provider>
   )
 }
 
 export default App
 
-export { UserContext }
+export { Context }

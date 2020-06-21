@@ -2,13 +2,12 @@ import axios from "axios"
 import { headers, checkAuth, formatFilename, isDuplicatePost, isDuplicateProfilePicture } from './utility'
 
 export const signS3 = (file, user, setUser, history) => {
-  const filename = history.location.pathname === "/changepp" ? 
+  const filename = history.location.pathname === "/changepp" || history.location.pathname === "/signedup" ? 
   formatFilename(user._id, file.name, "profile-picture/") : 
   formatFilename(user._id, file.name, "")
 
   if (filename.includes("profile-picture")) {
     if (isDuplicateProfilePicture(user, filename)) {
-      console.log("bucvket")
       return setUser({...user, formErrors: "Duplicate Profile Picture!", file: { uploaded: false }})
     }
   } else {

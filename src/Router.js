@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { UserContext } from './App'
+import { Context } from './App'
 import { Route, Switch } from 'react-router-dom'
 
 import Notfound from './pages/NotFound'
@@ -14,9 +14,10 @@ import Post from './pages/Post'
 import DeleteUser from './pages/DeleteUser'
 import ChangePP from './pages/ChangePP'
 import LoggedOut from './pages/LoggedOut'
+import SignedUp from './pages/SignedUp'
 
 const Router = () => {
-  const { user } = useContext(UserContext)
+  const { user } = useContext(Context)
 
   return (
     <Switch>
@@ -28,7 +29,8 @@ const Router = () => {
           <Route path="/settings" component={Settings}/>
           <Route path="/post" component={Post}/>
           <Route path="/deleteuser" component={DeleteUser}/>
-          <Route path="/changepp" component={ChangePP}/> 
+          <Route path="/changepp" component={ChangePP}/>
+          <Route path="/signedup" component={SignedUp}/>
         </> :
         <>
           <Route exact path="/" component={Splash}/>

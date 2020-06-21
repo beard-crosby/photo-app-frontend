@@ -54,7 +54,7 @@ export const createUser = (data, user, setUser, setLoading, history) => {
       }
       setUser(logInSuccess(userData))
       timeout(userData, setUser, history)
-      history.push("/")
+      history.push("/signedup")
       checkGeolocation(userData, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
@@ -370,5 +370,62 @@ export const updateFavourites = (user, setUser, post, action, history) => {
   }).catch(err => {
     setUser({...user, formErrors: `${post._id} ${err.response.data.errors[0].message}`})
     process.env.NODE_ENV === 'development' && console.log(`UpdateFavourites: ${err.response.data.errors[0].message}`)
+  })
+}
+
+export const updateBasic = (form, user, setUser, history) => {
+  if (form.name) {
+    if (form.name === "delete") {
+      return setUser({...user, formErrors: "You cannot delete your name! Feel free to use a fake name!"})
+    } else if (!/^[a-zA-Z\s-']{6,30}$/.test(form.name)) {
+      return setUser({...user, formErrors: "Your Name must only have letters, spaces, -' characters and be 6-15 characters in length."})
+    } 
+  }
+  
+  if (form.email && form.email !== "delete") {
+    if (!/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(form.email)) { //eslint-disable-line
+      return setUser({...user, formErrors: "Please enter a valid email address."})
+    } 
+  }
+
+  if (form.website && form.website !== "delete") {
+    if (!/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(form.website)) { //eslint-disable-line
+      return setUser({...user, formErrors: "Please enter a valid URL"})
+    }
+  }
+
+  axios.post('', {
+    variables: {
+      _id: user._id,
+      name: form.name && form.name,
+      email: form.email && form.email,
+      website: form.website && form.website,
+    },
+    query: `
+      mutation UpdateBasic($_id: ID!, $name: String, $email: String, $website: String) {
+        updateBasic(_id: $_id, name: $name, email: $email, website: $website) {
+          _id
+          name
+          email
+          website
+        }
+      }
+    `
+  }, {headers: headers(user.token)}).then(res => {
+    if (res.data.errors) {
+      checkAuth(res, setUser, history)
+      process.env.NODE_ENV === 'development' && console.log(`UpdateBasic: ${res.data.errors[0].message}`)
+    } else {
+      setUser({
+        ...removeKey(user, "formErrors"), 
+        name: user.name === res.data.data.updateBasic.name ? user.name : res.data.data.updateBasic.name,
+        email: user.email === res.data.data.updateBasic.email ? user.email : res.data.data.updateBasic.email,
+        website: user.website === res.data.data.updateBasic.website ? user.website : res.data.data.updateBasic.website,
+      })
+      history.location.pathname === "/signedup" && history.push("/")
+      process.env.NODE_ENV === 'development' && console.log(res)
+    }
+  }).catch(err => {
+    process.env.NODE_ENV === 'development' && console.log(`UpdateBasic: ${err.response.data.errors[0].message}`)
   })
 }

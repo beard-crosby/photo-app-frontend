@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { UserContext } from '../App'
+import { Context } from '../App'
 import { Link } from 'react-router-dom'
 import '../scss/_model.scss'
 import Button from '../components/UI/Button'
@@ -8,7 +8,7 @@ import { updatePP } from '../shared/authRequests'
 import { Upload } from 'react-feather'
 
 const ChangePP = ({ history }) => {
-  const { user, setUser, wall, setWall, setLoading } = useContext(UserContext)
+  const { user, setUser, wall, setWall, setLoading } = useContext(Context)
   const [ formValid, setFormValid ] = useState(false)
 
   const onChangePPClicked = event => {

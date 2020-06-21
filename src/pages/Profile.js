@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { UserContext } from '../App'
+import { Context } from '../App'
 import ProfileCard from '../components/Cards/ProfileCard'
 import PhotoCard from '../components/Cards/PhotoCard'
 import FollowingCard from '../components/Cards/FollowingCard'
@@ -9,7 +9,7 @@ import Masonry from '../components/Masonry'
 import { removeKey } from '../shared/utility'
 
 const Profile = () => {
-  const { user, setUser, wall, setWall } = useContext(UserContext)
+  const { user, setUser, wall, setWall } = useContext(Context)
   useEffect(() => user.postClicked && setUser(removeKey(user, "postClicked")), []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

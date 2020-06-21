@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { UserContext } from '../App'
+import { Context } from '../App'
 import { Link } from 'react-router-dom'
 import '../scss/_model.scss'
 import { textareaGrow, removeKey } from '../shared/utility'
@@ -10,7 +10,7 @@ import { createPost } from '../shared/postRequests'
 import { Upload } from 'react-feather'
 
 const Post = ({ history }) => {
-  const { user, setUser, wall, setWall, setLoading } = useContext(UserContext)
+  const { user, setUser, wall, setWall, setLoading } = useContext(Context)
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
     title: "",

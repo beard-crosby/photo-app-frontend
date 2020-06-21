@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { UserContext } from '../App'
+import { Context } from '../App'
 import { removeKey } from '../shared/utility'
 import Button from '../components/UI/Button'
 import '../components/UI/FormSection'
@@ -8,7 +8,7 @@ import FormSection from '../components/UI/FormSection'
 import { Mail } from 'react-feather'
 
 const Forgot = ({ history }) => {
-  const { user, setUser } =  useContext(UserContext)
+  const { user, setUser } =  useContext(Context)
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
     values: {

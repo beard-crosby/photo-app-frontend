@@ -97,6 +97,15 @@
     flex-flow: row nowrap;
     justify-content: space-between;
   }
+
+  .center {
+    label {
+      h5 {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
 }
 
 .below { // Outside of white backgrounds

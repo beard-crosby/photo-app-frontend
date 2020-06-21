@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react'
-import { UserContext } from '../App'
+import { Context } from '../App'
 import PhotoCard from '../components/Cards/PhotoCard'
 import moment from 'moment'
 
 const Wall = () => { // Render posts of followed users in order of date time.
-  const { user, setUser, wall, setWall } = useContext(UserContext)
+  const { user, setUser, wall, setWall } = useContext(Context)
 
   const wallArr = [] // Array of posts to be rendered. This updates every page load.
 

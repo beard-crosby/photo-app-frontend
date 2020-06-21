@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
-import { UserContext } from '../App'
+import { Context } from '../App'
 import '../scss/_model.scss'
 import Button from '../components/UI/Button'
 import { deleteAccount } from '../shared/authRequests'
 import { XSquare } from 'react-feather'
 
 const DeleteUser = ({ history }) => {
-  const { user, setUser, setLoading } = useContext(UserContext)
+  const { user, setUser, setLoading } = useContext(Context)
 
   return (
     <div className="model">

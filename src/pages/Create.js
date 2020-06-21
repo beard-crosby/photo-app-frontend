@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { UserContext } from '../App'
+import { Context } from '../App'
 import { withRouter, Link } from 'react-router-dom'
 import GoogleOAuth from '../components/UI/Button/GoogleOAuth'
 import Button from '../components/UI/Button'
@@ -10,7 +10,7 @@ import FormSection from '../components/UI/FormSection'
 import { LogIn } from 'react-feather'
 
 const Create = ({ history }) => {
-  const { user, setUser, setLoading } = useContext(UserContext)
+  const { user, setUser, setLoading } = useContext(Context)
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
     values: {
@@ -38,7 +38,7 @@ const Create = ({ history }) => {
 
   const onSignUp = event => {
     event.preventDefault()
-    createUser(form.values, user, setUser, setLoading, history) // request
+    createUser(form.values, user, setUser, setLoading, history)
   }
   
   return (

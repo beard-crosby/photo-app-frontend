@@ -11,6 +11,7 @@ const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeh
     case "Password Check": type = "password"; break
     case "Title": type = "text"; break
     case "Description": type = "text"; break
+    case "Add a Website": type = "url"; break
     default: type = text
   }
 

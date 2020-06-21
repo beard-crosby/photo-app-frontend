@@ -20,6 +20,11 @@ export const updateForm = (event, form, setForm) => {
     } else {
       setForm({...form, values: { ...form.values, passConfirm: event.target.value }, errors: { ...form.errors, passConfirmError: "Passwords must be the same." }})
     }; break
+    case "add a website": if (/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(event.target.value) || event.target.value.trim() === "") { //eslint-disable-line
+      setForm({...form, values: { ...form.values, website: event.target.value }, errors: { ...form.errors, websiteError: "" }})
+    } else {
+      setForm({...form, values: { ...form.values, website: event.target.value }, errors: { ...form.errors, websiteError: "Please enter a valid URL" }})
+    }; break
     default: setForm({...form, [event.target.name]: event.target.value })
   }
 }
@@ -35,6 +40,7 @@ export const backendError = (user, passed) => {
       case "The account for this email wasn't created with Google.": return user.formErrors
       case "Sign up with Google failed. Please try another method.": return user.formErrors
       case "Login with Google failed. Please try again.": return user.formErrors
+      case "Please enter a valid email address.": return user.formErrors
       default: return passed
     }
   } else if (passed === "Password") {
@@ -42,6 +48,7 @@ export const backendError = (user, passed) => {
       case "Incorrect Password.": return user.formErrors
       case "Please enter your password.": return user.formErrors
       case "Passwords do not match.": return user.formErrors
+      case "Your Password must have at least one letter, one number and be 8-20 characters in length. Special characters are optional.": return user.formErrors
       default: return passed
     }
   } else if (passed === "Title") {
@@ -53,6 +60,17 @@ export const backendError = (user, passed) => {
   } else if (passed === "Description") {
     switch (user.formErrors) {
       case "Description must be a maximum of 300 characters.": return user.formErrors
+      default: return passed
+    }
+  } else if (passed === "Add a Website") {
+    switch (user.formErrors) {
+      case "Please enter a valid URL": return user.formErrors
+      default: return passed
+    }
+  } else if (passed === "Name") {
+    switch (user.formErrors) {
+      case "You cannot delete your name! Feel free to use a fake name!": return user.formErrors
+      case "Your Name must only have letters, spaces, -' characters and be 6-15 characters in length.": return user.formErrors
       default: return passed
     }
   } else {

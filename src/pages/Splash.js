@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react'
-import { UserContext } from '../App'
+import { Context } from '../App'
 import Create from './Create'
 import { allPosts } from '../shared/postRequests'
 import Masonry from '../components/Masonry'
 
 const Splash = () => {
-  const { user, setUser } = useContext(UserContext)
+  const { user, setUser } = useContext(Context)
   useEffect(() => allPosts(user, setUser), []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
