@@ -4,12 +4,11 @@ import { headers, checkAuth, useTokens } from './utility'
 export const updateSettings = (user, setUser, history) => {
   axios.post('', {
     variables: {
-      _id: user._id,
       settings: JSON.stringify(user.settings),
     },
     query: `
-      mutation UpdateSettings($_id: ID!, $settings: String!) {
-        updateSettings(_id: $_id, settings: $settings) {
+      mutation UpdateSettings($settings: String!) {
+        updateSettings(settings: $settings) {
           tokens
         }
       }
