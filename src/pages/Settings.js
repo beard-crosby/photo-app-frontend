@@ -4,7 +4,7 @@ import { updateStatus } from '../shared/miscRequests'
 import Button from '../components/UI/Button'
 import { logout } from '../shared/localStorage'
 import ProfileCard from '../components/Cards/ProfileCard'
-import { LogOut, XSquare, GitHub, Edit2 } from 'react-feather'
+import { LogOut, XSquare, GitHub } from 'react-feather'
 import Toggle from '../components/UI/Toggle/Toggle'
 
 const Settings = ({ history }) => {
