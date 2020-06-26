@@ -56,17 +56,16 @@ export const updateGeolocation = (user, setUser, geolocation, history) => {
 export const updateStatus = (user, status) => {
   axios.post('', {
     variables: {
-      _id: user._id,
       status: status,
     },
     query: `
-      mutation UpdateStatus($_id: ID!, $status: String!) {
-        updateStatus(_id: $_id, status: $status) {
+      mutation UpdateStatus($status: String!) {
+        updateStatus(status: $status) {
           status
         }
       }
     `
-  }).then(res => {
+  }, {headers: headers(user.token)}).then(res => {
     if (res.data.errors) {
       process.env.NODE_ENV === 'development' && console.log(`UpdateStatus Error: ${res.data.errors[0].message}`)
     } else {
