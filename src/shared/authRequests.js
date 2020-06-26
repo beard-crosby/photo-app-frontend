@@ -406,15 +406,13 @@ export const updateBasic = (form, user, setUser, history) => {
 
   axios.post('', {
     variables: {
-      _id: user._id,
       name: form.name && form.name,
       email: form.email && form.email,
       website: form.website && form.website,
     },
     query: `
-      mutation UpdateBasic($_id: ID!, $name: String, $email: String, $website: String) {
-        updateBasic(_id: $_id, name: $name, email: $email, website: $website) {
-          _id
+      mutation UpdateBasic($name: String, $email: String, $website: String) {
+        updateBasic(name: $name, email: $email, website: $website) {
           name
           email
           website
