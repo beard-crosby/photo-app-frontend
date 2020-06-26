@@ -30,12 +30,11 @@ export const updateSettings = (user, setUser, history) => {
 export const updateGeolocation = (user, setUser, geolocation, history) => {
   axios.post('', {
     variables: {
-      _id: user._id,
       geo: geolocation,
     },
     query: `
-      mutation UpdateGeolocation($_id: ID!, $geo: String!) {
-        updateGeolocation(_id: $_id, geolocation: $geo) {
+      mutation UpdateGeolocation($geo: String!) {
+        updateGeolocation(geolocation: $geo) {
           tokens
         }
       }
