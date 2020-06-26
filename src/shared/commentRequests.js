@@ -6,11 +6,10 @@ export const createComment = (user, setUser, wall, setWall, post, comment, setCo
     variables: {
       post: post._id,
       comment: comment,
-      author: user._id,
     },
     query: `
-      mutation CreateComment($post: ID!, $comment: String!, $author: ID!) {
-        createComment(post: $post, comment: $comment, author: $author) {
+      mutation CreateComment($post: ID!, $comment: String!) {
+        createComment(post: $post, comment: $comment) {
           tokens
         }
       }
