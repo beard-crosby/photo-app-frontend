@@ -273,8 +273,8 @@ export const updatePP = (user, setUser, wall, setWall, history, setLoading) => {
       profile_picture: user.file.url,
     },
     query: `
-      mutation UpdatePP($_id: ID!, $profile_picture: String!) {
-        updatePP(_id: $_id, profile_picture: $profile_picture) {
+      mutation UpdatePP($profile_picture: String!) {
+        updatePP(profile_picture: $profile_picture) {
           profile_picture
           tokens
         }
