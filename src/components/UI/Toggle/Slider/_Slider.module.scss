@@ -1,0 +1,34 @@
+@import '../../../../scss/variables';
+
+.slider {
+  width: 22px;
+  height: 13px;
+  border-radius: 15px;
+  border: 1px solid $color-1;
+  background: $favourite;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  transition: 0.3s;
+  cursor: pointer;
+
+  .switch {
+    width: 13px;
+    height: 13px;
+    border-radius: 15px;
+    border: 1px solid $color-1;
+    background: $white;
+    transform: translateX(-1px);
+    transition: 0.3s;
+  }
+}
+
+.slide {
+  background: $green;
+  transition: 0.3s;
+
+  .switch {
+    transform: translateX(8px);
+    transition: 0.3s;
+  }
+}

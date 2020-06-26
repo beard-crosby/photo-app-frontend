@@ -1,0 +1,14 @@
+.toggle {
+  width: fit-content;
+  height: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin: 10px 0;
+
+  h5 {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+}
