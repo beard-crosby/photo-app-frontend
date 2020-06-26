@@ -348,13 +348,12 @@ export const updateFavourites = (user, setUser, post, action, history) => {
 
   axios.post('', {
     variables: {
-      _id: user._id,
       post: post._id,
       action: action
     },
     query: `
-      mutation UpdateFavourites($_id: ID!, $post: ID!, $action: String!) {
-        updateFavourites(_id: $_id, post: $post, action: $action) {
+      mutation UpdateFavourites($post: ID!, $action: String!) {
+        updateFavourites(post: $post, action: $action) {
           tokens
         }
       }
