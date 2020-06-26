@@ -46,6 +46,12 @@
   p {
     font-size: 0.6em;
   }
+
+  &:hover {
+    h1, h4, p {
+      opacity: 0;
+    }
+  }
 }
 
 .disable {
