@@ -236,12 +236,11 @@ export const deleteAccount = (user, setUser, setLoading, history) => {
 export const updateInfo = (user, setUser, history) => {
   axios.post('', {
     variables: {
-      _id: user._id,
       info: JSON.stringify(user.info),
     },
     query: `
-      mutation UpdateInfo($_id: ID!, $info: String!) {
-        updateInfo(_id: $_id, info: $info) {
+      mutation UpdateInfo($info: String!) {
+        updateInfo(info: $info) {
           info
           tokens
         }
