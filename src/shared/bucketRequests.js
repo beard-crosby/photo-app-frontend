@@ -56,13 +56,9 @@ const uploadToS3 = (signS3, file, user, setUser) => {
 
 export const redundantFilesCheck = (user, setUser, history) => {
   axios.post('', {
-    variables: {
-      _id: user._id
-    },
     query: `
-      mutation RedundantFilesCheck($_id: ID!) {
-        redundantFilesCheck(_id: $_id) {
-          _id
+      mutation {
+        redundantFilesCheck {
           tokens
         }
       }
