@@ -1,5 +1,5 @@
 import axios from "axios"
-import { headers, checkAuth, formatFilename, isDuplicatePost, isDuplicateProfilePicture } from './utility'
+import { useTokens, headers, checkAuth, formatFilename, isDuplicatePost, isDuplicateProfilePicture } from './utility'
 
 export const signS3 = (file, user, setUser, history) => {
   const filename = history.location.pathname === "/changepp" || history.location.pathname === "/signedup" ? 
@@ -26,6 +26,7 @@ export const signS3 = (file, user, setUser, history) => {
         signS3(filename: $filename, filetype: $filetype) {
           url
           signedRequest
+          tokens
         }
       }
     `
@@ -34,6 +35,8 @@ export const signS3 = (file, user, setUser, history) => {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`SignS3: ${res.data.errors[0].message}`)
     } else {
+      const tokens = res.data.data.signS3.tokens
+      tokens && setUser({...user, token: useTokens(tokens, user)})
       uploadToS3(res.data.data.signS3, file, user, setUser)    
       process.env.NODE_ENV === 'development' && console.log(res)
     }
@@ -60,6 +63,7 @@ export const redundantFilesCheck = (user, setUser, history) => {
       mutation RedundantFilesCheck($_id: ID!) {
         redundantFilesCheck(_id: $_id) {
           _id
+          tokens
         }
       }
     `
@@ -67,7 +71,9 @@ export const redundantFilesCheck = (user, setUser, history) => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`RedundantFilesCheck: ${res.data.errors[0].message}`)
-    } else {  
+    } else {
+      const tokens = res.data.data.redundantFilesCheck.tokens
+      tokens && setUser({...user, token: useTokens(tokens, user)})
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {

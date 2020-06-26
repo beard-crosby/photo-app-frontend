@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { headers, checkAuth } from './utility'
+import { headers, checkAuth, useTokens } from './utility'
 
 export const updateSettings = (user, setUser, history) => {
   axios.post('', {
@@ -10,7 +10,7 @@ export const updateSettings = (user, setUser, history) => {
     query: `
       mutation UpdateSettings($_id: ID!, $settings: String!) {
         updateSettings(_id: $_id, settings: $settings) {
-          settings
+          tokens
         }
       }
     `
@@ -19,6 +19,8 @@ export const updateSettings = (user, setUser, history) => {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`UpdateSettings Error: ${res.data.errors[0].message}`)
     } else {
+      const tokens = res.data.data.updateSettings.tokens
+      tokens && setUser({...user, token: useTokens(tokens, user)})
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
@@ -35,7 +37,7 @@ export const updateGeolocation = (user, setUser, geolocation, history) => {
     query: `
       mutation UpdateGeolocation($_id: ID!, $geo: String!) {
         updateGeolocation(_id: $_id, geolocation: $geo) {
-          geolocation
+          tokens
         }
       }
     `
@@ -44,6 +46,8 @@ export const updateGeolocation = (user, setUser, geolocation, history) => {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`UpdateGeolocation Error: ${res.data.errors[0].message}`)
     } else {
+      const tokens = res.data.data.updateGeolocation.tokens
+      tokens && setUser({...user, token: useTokens(tokens, user)})
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {

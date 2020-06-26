@@ -1,5 +1,5 @@
 import axios from "axios"
-import { headers, checkAuth, removeKey, newArrObjValue } from './utility'
+import { useTokens, headers, checkAuth, removeKey, newArrObjValue } from './utility'
 
 export const createComment = (user, setUser, wall, setWall, post, comment, setComment, input, history) => {
   axios.post('', {
@@ -11,7 +11,7 @@ export const createComment = (user, setUser, wall, setWall, post, comment, setCo
     query: `
       mutation CreateComment($post: ID!, $comment: String!, $author: ID!) {
         createComment(post: $post, comment: $comment, author: $author) {
-          comment
+          tokens
         }
       }
     `
@@ -21,6 +21,8 @@ export const createComment = (user, setUser, wall, setWall, post, comment, setCo
       setUser({...user, formErrors: res.data.errors[0].message})
       process.env.NODE_ENV === 'development' && console.log(`CreateComment: ${res.data.errors[0].message}`)
     } else {
+      const tokens = res.data.data.createComment.tokens
+      tokens && setUser({...user, token: useTokens(tokens, user)})
       const newWall = newArrObjValue(wall, post, null, comment, user)
       setWall(newWall)
       localStorage.setItem('wall', JSON.stringify(newWall))

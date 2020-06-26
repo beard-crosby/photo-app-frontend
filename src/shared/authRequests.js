@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { logout, logInSuccess } from './localStorage'
-import { headers, timeout, checkGeolocation, checkAuth, removeKey, isDuplicateProfilePicture } from './utility'
+import { useTokens, headers, checkGeolocation, checkAuth, removeKey, isDuplicateProfilePicture } from './utility'
 
 export const createUser = (data, user, setUser, setLoading, history) => {
   setLoading(true)
@@ -18,8 +18,7 @@ export const createUser = (data, user, setUser, setLoading, history) => {
         createUser(userInput: {name: $name, email: $email, password: $password, pass_confirm: $passConfirm, profile_picture: $profile_picture, oAuthToken: $oAuthToken}) {
           _id
           status
-          token
-          token_expiry
+          tokens
           logged_in_at
           name
           email
@@ -46,14 +45,14 @@ export const createUser = (data, user, setUser, setLoading, history) => {
       process.env.NODE_ENV === 'development' && console.log(`CreateUser: ${res.data.errors[0].message}`)
     } else {
       const userData = {
-        ...res.data.data.createUser, 
+        ...res.data.data.createUser,
+        token: useTokens(res.data.data.createUser.tokens, user),
         info: JSON.parse(res.data.data.createUser.info),
         geolocation: JSON.parse(res.data.data.createUser.geolocation), 
         settings: JSON.parse(res.data.data.createUser.settings),
         file: { uploaded: false },
       }
       setUser(logInSuccess(userData))
-      timeout(userData, setUser, history)
       history.push("/signedup")
       checkGeolocation(userData, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(res)
@@ -84,8 +83,7 @@ export const login = (data, user, setUser, setLoading, history) => {
         login(email: $email, password: $password, oAuthToken: $oAuthToken) {
           _id
           status
-          token
-          token_expiry
+          tokens
           logged_in_at
           geolocation
           name
@@ -187,13 +185,13 @@ export const login = (data, user, setUser, setLoading, history) => {
     } else {
       const userData = {
         ...res.data.data.login,
+        token: useTokens(res.data.data.login.tokens, user),
         info: JSON.parse(res.data.data.login.info),
         geolocation: JSON.parse(res.data.data.login.geolocation), 
         settings: JSON.parse(res.data.data.login.settings),
         file: { uploaded: false },
       }
       setUser(logInSuccess(userData))
-      timeout(userData, setUser, history)
       history.push("/")
       checkGeolocation(userData, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(res)
@@ -219,7 +217,7 @@ export const deleteAccount = (user, setUser, setLoading, history) => {
         }
       }
     `
-  }, { headers: headers(user.token) }).then(res => {
+  }, {headers: headers(user.token)}).then(res => {
     if (res.data.errors) {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`DeleteAccount: ${res.data.errors[0].message}`)
@@ -245,6 +243,7 @@ export const updateInfo = (user, setUser, history) => {
       mutation UpdateInfo($_id: ID!, $info: String!) {
         updateInfo(_id: $_id, info: $info) {
           info
+          tokens
         }
       }
     `
@@ -253,6 +252,8 @@ export const updateInfo = (user, setUser, history) => {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`UpdateInfo: ${res.data.errors[0].message}`)
     } else {
+      const tokens = res.data.data.updateInfo.tokens
+      tokens && setUser({...user, token: useTokens(tokens, user)})
       localStorage.setItem('info', res.data.data.updateInfo.info)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
@@ -276,6 +277,7 @@ export const updatePP = (user, setUser, wall, setWall, history, setLoading) => {
       mutation UpdatePP($_id: ID!, $profile_picture: String!) {
         updatePP(_id: $_id, profile_picture: $profile_picture) {
           profile_picture
+          tokens
         }
       }
     `
@@ -303,7 +305,8 @@ export const updatePP = (user, setUser, wall, setWall, history, setLoading) => {
         return wallPost
       })
       setUser({ 
-        ...user, 
+        ...user,
+        token: useTokens(res.data.data.updatePP.tokens, user),
         profile_picture: res.data.data.updatePP.profile_picture,
         posts: newPosts,
         file: { uploaded: false },
@@ -353,7 +356,7 @@ export const updateFavourites = (user, setUser, post, action, history) => {
     query: `
       mutation UpdateFavourites($_id: ID!, $post: ID!, $action: String!) {
         updateFavourites(_id: $_id, post: $post, action: $action) {
-          _id
+          tokens
         }
       }
     `
@@ -363,7 +366,14 @@ export const updateFavourites = (user, setUser, post, action, history) => {
       setUser({...user, formErrors: `${post._id} ${res.data.errors[0].message}`})
       process.env.NODE_ENV === 'development' && console.log(`UpdateFavourites: ${res.data.errors[0].message}`)
     } else {
-      user.formErrors && setUser(removeKey(user, "formErrors"))
+      const tokens = res.data.data.updateFavourites.tokens
+      if (user.formErrors && tokens) {
+        setUser({...removeKey(user, "formErrors"), token: useTokens(tokens, user)})
+      } else if (tokens) {
+        setUser({...user, token: useTokens(tokens, user)})
+      } else if (user.formErrors) {
+        setUser(removeKey(user, "formErrors"))
+      }
       localStorage.setItem('favourites', JSON.stringify(newFavs.favourites))
       process.env.NODE_ENV === 'development' && console.log(res)
     }
@@ -408,6 +418,7 @@ export const updateBasic = (form, user, setUser, history) => {
           name
           email
           website
+          tokens
         }
       }
     `
@@ -417,7 +428,8 @@ export const updateBasic = (form, user, setUser, history) => {
       process.env.NODE_ENV === 'development' && console.log(`UpdateBasic: ${res.data.errors[0].message}`)
     } else {
       setUser({
-        ...removeKey(user, "formErrors"), 
+        ...removeKey(user, "formErrors"),
+        token: useTokens(res.data.data.updateBasic.tokens, user),
         name: user.name === res.data.data.updateBasic.name ? user.name : res.data.data.updateBasic.name,
         email: user.email === res.data.data.updateBasic.email ? user.email : res.data.data.updateBasic.email,
         website: user.website === res.data.data.updateBasic.website ? user.website : res.data.data.updateBasic.website,
@@ -427,5 +439,28 @@ export const updateBasic = (form, user, setUser, history) => {
     }
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(`UpdateBasic: ${err.response.data.errors[0].message}`)
+  })
+}
+
+export const invalidateTokens = (user, setUser, history) => {
+  axios.post('', {
+    query: `
+      query {
+        invalidateTokens {
+          tokens
+        }
+      }
+    `
+  }, {headers: headers(user.token)}).then(res => {
+    if (res.data.errors) {
+      checkAuth(res, setUser, history)
+      process.env.NODE_ENV === 'development' && console.log(`InvalidateTokens: ${res.data.errors[0].message}`)
+    } else {
+      const tokens = res.data.data.invalidateTokens.tokens
+      tokens && setUser({...user, token: useTokens(tokens, user)})
+      process.env.NODE_ENV === 'development' && console.log(res)
+    }
+  }).catch(err => {
+    process.env.NODE_ENV === 'development' && console.log(`InvalidateTokens: ${err}`)
   })
 }

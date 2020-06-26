@@ -18,20 +18,33 @@ export const switchDarkMode = (user, setUser, Onload, history) => {
   }
 }
 
-// If logged in for 1h (3600000ms), then logout().
-export const timeout = (user, setUser, history) => {
-  setTimeout(() => {
-    setUser(logout())
-    history.push("/loggedout")
-    process.env.NODE_ENV === 'development' && console.log("Token Expired!")
-  }, user.token_expiry * 3600000)
+// If req res has tokens, use them. If not, return current token.
+export const useTokens = (tokens, user) => {
+  if (tokens) {
+    const parsedTokens = JSON.parse(tokens)
+    localStorage.setItem("token", parsedTokens.access_token)
+    localStorage.setItem("refresh_token", parsedTokens.refresh_token)
+    return parsedTokens.access_token
+  } else {
+    return user.token
+  }
 }
 
 // Add headers to a request
 export const headers = token => {
+  const refreshToken = localStorage.getItem("refresh_token")
   return {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
+    accessToken: `Bearer ${token}`,
+    refreshToken: `Bearer ${refreshToken}`,
+  }
+}
+
+// If no authentication, logout and redirect.
+export const checkAuth = (res, setUser, history) => {
+  if (res.data.errors[0].message === "Not Authenticated!") {
+    setUser(logout())
+    history.push("/loggedout")
   }
 }
 
@@ -56,14 +69,6 @@ export const formatFilename = (user_id, filename, type) => {
   const date = moment().format().toLowerCase().replace(/[^a-z0-9]/g, "-")
   const newFilename = `${user_id}/${type}${date}/${filename.toLowerCase().replace(/[^a-z0-9]/g, "-")}`
   return newFilename
-}
-
-// If no authentication, logout and redirect.
-export const checkAuth = (res, setUser, history) => {
-  if (res.data.errors[0].message === "Not Authenticated!") {
-    setUser(logout())
-    history.push("/loggedout")
-  }
 }
 
 // Remove a key: value pair from context.

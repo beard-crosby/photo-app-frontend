@@ -1,5 +1,5 @@
 import axios from "axios"
-import { headers, checkAuth, removeKey, newArrObjValue, isDuplicatePost } from './utility'
+import { useTokens, headers, checkAuth, removeKey, newArrObjValue, isDuplicatePost } from './utility'
 
 export const createPost = (form, user, setUser, wall, setWall, setLoading, history) => {
   if (isDuplicatePost(user, user.file.url)) {
@@ -18,6 +18,7 @@ export const createPost = (form, user, setUser, wall, setWall, setLoading, histo
       mutation CreatePost($img: String!, $title: String!, $description: String!, $author: ID!) {
         createPost(postInput: { img: $img, title: $title, description: $description, author: $author }) {
           _id
+          tokens
           img
           title
           description
@@ -51,6 +52,7 @@ export const createPost = (form, user, setUser, wall, setWall, setLoading, histo
       process.env.NODE_ENV === 'development' && console.log(res)
       setUser({
         ...removeKey(user, "formErrors"), 
+        token: useTokens(res.data.data.createPost.tokens, user),
         posts: [ ...user.posts, res.data.data.createPost ], 
         file: { uploaded: false },
       })
@@ -103,7 +105,7 @@ export const updateTitle = (post, user, setUser, wall, setWall, setSpinner, setO
     query: `
       mutation UpdateTitle($_id: ID!, $title: String!) {
         updateTitle(_id: $_id, title: $title) {
-          title
+          tokens
         }
       }
     `
@@ -114,8 +116,17 @@ export const updateTitle = (post, user, setUser, wall, setWall, setSpinner, setO
       process.env.NODE_ENV === 'development' && console.log(`UpdateTitle: ${res.data.errors[0].message}`)
     } else {
       user.postClicked ? 
-      setUser({...removeKey(user, "formErrors"), posts: newPosts, postClicked: post}) :
-      setUser({...removeKey(user, "formErrors"), posts: newPosts})
+      setUser({
+        ...removeKey(user, "formErrors"),
+        token: useTokens(res.data.data.updateTitle.tokens, user),
+        posts: newPosts, 
+        postClicked: post,
+      }) :
+      setUser({
+        ...removeKey(user, "formErrors"), 
+        token: useTokens(res.data.data.updateTitle.tokens, user),
+        posts: newPosts,
+      })
       setWall(newWall)
       localStorage.setItem('posts', JSON.stringify(newPosts))
       localStorage.setItem('wall', JSON.stringify(newWall))
@@ -143,7 +154,7 @@ export const updateDescription = (post, user, setUser, wall, setWall, setSpinner
     query: `
       mutation UpdateDescription($_id: ID!, $description: String!) {
         updateDescription(_id: $_id, description: $description) {
-          description
+          tokens
         }
       }
     `
@@ -154,8 +165,17 @@ export const updateDescription = (post, user, setUser, wall, setWall, setSpinner
       process.env.NODE_ENV === 'development' && console.log(`UpdateDescription: ${res.data.errors[0].message}`)
     } else {
       user.postClicked ? 
-      setUser({...title.length === 0 ? user : removeKey(user, "formErrors"), posts: newPosts, postClicked: post}) :
-      setUser({...title.length === 0 ? user : removeKey(user, "formErrors"), posts: newPosts})
+      setUser({
+        ...title.length === 0 ? user : removeKey(user, "formErrors"),
+        token: useTokens(res.data.data.updateDescription.tokens, user), 
+        posts: newPosts, 
+        postClicked: post,
+      }) :
+      setUser({
+        ...title.length === 0 ? user : removeKey(user, "formErrors"),
+        token: useTokens(res.data.data.updateDescription.tokens, user), 
+        posts: newPosts,
+      })
       setWall(newWall)
       localStorage.setItem('posts', JSON.stringify(newPosts))
       localStorage.setItem('wall', JSON.stringify(newWall))
@@ -180,7 +200,7 @@ export const deletePost = (post, user, setUser, wall, setWall, setOverlay, setSp
     query: `
       mutation DeletePost($_id: ID!) {
         deletePost(_id: $_id) {
-          _id
+          tokens
         }
       }
     `
@@ -191,7 +211,11 @@ export const deletePost = (post, user, setUser, wall, setWall, setOverlay, setSp
     } else {
       const newPosts = user.posts.filter(x => x._id !== post._id)
       const newWall = wall.filter(x => x._id !== post._id)
-      setUser({...removeKey(user, "postClicked"), posts: newPosts})
+      setUser({
+        ...removeKey(user, "postClicked"),
+        token: useTokens(res.data.data.deletePost.tokens, user),
+        posts: newPosts,
+      })
       setWall(newWall)
       localStorage.setItem('posts', JSON.stringify(newPosts))
       localStorage.setItem('wall', JSON.stringify(newWall))
