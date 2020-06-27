@@ -207,12 +207,9 @@ export const login = (data, user, setUser, setLoading, history) => {
 export const deleteAccount = (user, setUser, setLoading, history) => {
   setLoading(true)
   axios.post('', {
-    variables: {
-      _id: user._id,
-    },
     query: `
-      mutation DeleteUser($_id: ID!) {
-        deleteUser(_id: $_id) {
+      mutation {
+        deleteUser {
           _id
         }
       }
