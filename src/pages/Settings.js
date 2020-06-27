@@ -30,7 +30,7 @@ const Settings = ({ history }) => {
             </div>
             <div className="middle">
               <Toggle text="Dark Mode" Default={user.settings.dark_mode} onClick={() => switchDarkMode(user, setUser, false, history)}/>
-              <Toggle text="Disable Overlay" Default={false}/>
+              <Toggle text="Overlay" Default={user.settings.overlay}/>
             </div>
           </div>
           <div className="model" style={{ width: 340, marginBottom: 20 }}>
@@ -38,9 +38,9 @@ const Settings = ({ history }) => {
               <h5 className="title-left">WALL</h5>
             </div>
             <div className="middle">
-              <Toggle text="Exclude own posts" Default={false}/>
-              <Toggle text="Exclude random posts" Default={false}/>
-              <Toggle text="Collage style default" Default={false}/>
+              <Toggle text="Own posts" Default={user.settings.own_posts}/>
+              <Toggle text="Random posts" Default={user.settings.random_posts}/>
+              <Toggle text="Collage style" Default={user.settings.collage_style}/>
             </div>
           </div>
           <div className="model" style={{ width: 340, marginBottom: 20 }}>
@@ -48,8 +48,8 @@ const Settings = ({ history }) => {
               <h5 className="title-left">POSTS</h5>
             </div>
             <div className="middle">
-              <Toggle text="Always disable comments" Default={false}/>
-              <Toggle text="Always watermark" Default={false}/>
+              <Toggle text="Always disable comments" Default={user.settings.post_comments}/>
+              <Toggle text="Always watermark" Default={user.settings.post_watermark}/>
             </div>
           </div>
         </div>
@@ -63,9 +63,10 @@ const Settings = ({ history }) => {
               <Button text="Change Name"/>
               <Button text="Change Email"/>
               <Button text="Change Website"/>
-              <Toggle text="Display Email" Default={false}/>
-              <Toggle text="Display Website" Default={false}/>
-              <Toggle text="Display Contact Me" Default={false}/>
+              <Button text="Change Password"/>
+              <Toggle text="Display Email" Default={user.settings.display_email}/>
+              <Toggle text="Display Website" Default={user.settings.display_website}/>
+              <Toggle text="Display Contact Me" Default={user.settings.display_contact_me}/>
             </div>
           </div>
           <div className="model" style={{ width: 340 }}>
@@ -73,10 +74,10 @@ const Settings = ({ history }) => {
               <h5 className="title-left">PRIVACY</h5>
             </div>
             <div className="middle">
-              <Toggle text="Disable location services" Default={false}/>
-              <Toggle text="Disable online status" Default={false}/>
-              <Toggle text="Make posts private" Default={false}/>
-              <Toggle text="Make profile private" Default={false}/>
+              <Toggle text="Location services" Default={user.settings.location_services}/>
+              <Toggle text="Online status" Default={user.settings.online_status}/>
+              <Toggle text="Make profile private" Default={user.settings.private_profile}/>
+              <Toggle text="Make posts private" Default={user.settings.private_posts}/>
             </div>
           </div>
         </div>
