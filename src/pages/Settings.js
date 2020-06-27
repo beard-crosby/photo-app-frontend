@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Context } from '../App'
-import { updateStatus } from '../shared/miscRequests'
+import { updateStatus, updateSettings } from '../shared/miscRequests'
 import Button from '../components/UI/Button'
 import { logout } from '../shared/localStorage'
 import ProfileCard from '../components/Cards/ProfileCard'
@@ -17,6 +17,11 @@ const Settings = ({ history }) => {
     history.push("/auth")
   }
 
+  const overlayClickedHandler = () => {
+    setUser({...user, settings: {...user.settings, overlay: !user.settings.overlay}})
+    updateSettings({...user, settings: {...user.settings, overlay: !user.settings.overlay}}, setUser, history)
+  }
+
   return (
     <div className="flex-col">
       <div className="flex-row">
@@ -30,7 +35,7 @@ const Settings = ({ history }) => {
             </div>
             <div className="middle">
               <Toggle text="Dark Mode" Default={user.settings.dark_mode} onClick={() => switchDarkMode(user, setUser, false, history)}/>
-              <Toggle text="Overlay" Default={user.settings.overlay}/>
+              <Toggle text="Overlay" Default={user.settings.overlay} onClick={() => overlayClickedHandler()}/>
             </div>
           </div>
           <div className="model" style={{ width: 340, marginBottom: 20 }}>

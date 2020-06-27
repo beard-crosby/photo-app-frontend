@@ -24,7 +24,7 @@ const App = () => {
   return (
     <Context.Provider value={{ loading, setLoading, wall, setWall, user, setUser }}>
       <Nav user={user} setUser={setUser}/>
-      <Overlay user={user}/>
+      {user.settings.overlay && <Overlay user={user}/>}
       <main>
         {loading && <Spinner user={user}/>}
         <Router/>

@@ -20,6 +20,7 @@ export const updateSettings = (user, setUser, history) => {
     } else {
       const tokens = res.data.data.updateSettings.tokens
       tokens && setUser({...user, token: useTokens(tokens, user)})
+      localStorage.setItem('settings', JSON.stringify(user.settings))
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
