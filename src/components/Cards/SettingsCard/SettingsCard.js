@@ -2,6 +2,7 @@ import React from 'react'
 import Button from '../../UI/Button'
 import Toggle from '../../UI/Toggle'
 import { updateSettingsHandler } from '../../../shared/utility'
+import PropTypes from 'prop-types'
 
 const SettingsCard = ({ user, setUser, history }) => {
 
@@ -22,6 +23,12 @@ const SettingsCard = ({ user, setUser, history }) => {
       </div>
     </div>
   )
+}
+
+SettingsCard.propTypes = {
+  user: PropTypes.object.isRequired,    // User object from context.
+  setUser: PropTypes.func.isRequired,   // setUser function from context.
+  history: PropTypes.object.isRequired, // history object from react-router-dom.
 }
 
 export default SettingsCard
