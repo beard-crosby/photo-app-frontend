@@ -6,6 +6,7 @@ import { logout } from '../shared/localStorage'
 import ProfileCard from '../components/Cards/ProfileCard'
 import { LogOut, XSquare, GitHub } from 'react-feather'
 import Toggle from '../components/UI/Toggle/Toggle'
+import { switchDarkMode } from '../shared/utility'
 
 const Settings = ({ history }) => {
   const { user, setUser } = useContext(Context)
@@ -28,7 +29,7 @@ const Settings = ({ history }) => {
               <h5 className="title-left">GENERAL</h5>
             </div>
             <div className="middle">
-              <Toggle text="Dark Mode" Default={user.settings.dark_mode}/>
+              <Toggle text="Dark Mode" Default={user.settings.dark_mode} onClick={() => switchDarkMode(user, setUser, false, history)}/>
               <Toggle text="Disable Overlay" Default={false}/>
             </div>
           </div>
