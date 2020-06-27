@@ -1,11 +1,13 @@
 import React, { useContext } from 'react'
 import { Context } from '../App'
-import { updateStatus, updateSettings } from '../shared/miscRequests'
+import { updateStatus } from '../shared/miscRequests'
 import Button from '../components/UI/Button'
 import { logout } from '../shared/localStorage'
 import ProfileCard from '../components/Cards/ProfileCard'
 import { LogOut, XSquare, GitHub } from 'react-feather'
 import Toggle from '../components/UI/Toggle/Toggle'
+import SettingsCard from '../components/Cards/SettingsCard/SettingsCard'
+import { updateSettingsHandler } from '../shared/utility'
 
 const Settings = ({ history }) => {
   const { user, setUser } = useContext(Context)
@@ -14,11 +16,6 @@ const Settings = ({ history }) => {
     updateStatus(user, "offline")
     setUser(logout())
     history.push("/auth")
-  }
-
-  const updateSettingsHandler = passed => {
-    setUser({...user, settings: {...user.settings, [passed]: !user.settings[passed]}})
-    updateSettings({...user, settings: {...user.settings, [passed]: !user.settings[passed]}}, setUser, history)
   }
 
   return (
@@ -33,8 +30,8 @@ const Settings = ({ history }) => {
               <h5 className="title-left">GENERAL</h5>
             </div>
             <div className="middle">
-              <Toggle text="Dark Mode" Default={user.settings.dark_mode} onClick={() => updateSettingsHandler("dark_mode")}/>
-              <Toggle text="Overlay" Default={user.settings.overlay} onClick={() => updateSettingsHandler("overlay")}/>
+              <Toggle text="Dark Mode" Default={user.settings.dark_mode} onClick={() => updateSettingsHandler(user, setUser, "dark_mode", history)}/>
+              <Toggle text="Overlay" Default={user.settings.overlay} onClick={() => updateSettingsHandler(user, setUser, "overlay", history)}/>
             </div>
           </div>
           <div className="model" style={{ width: 340, marginBottom: 20 }}>
@@ -42,7 +39,7 @@ const Settings = ({ history }) => {
               <h5 className="title-left">WALL</h5>
             </div>
             <div className="middle">
-              <Toggle text="Own posts" Default={user.settings.own_posts} onClick={() => updateSettingsHandler("own_posts")}/>
+              <Toggle text="Own posts" Default={user.settings.own_posts} onClick={() => updateSettingsHandler(user, setUser, "own_posts", history)}/>
               <Toggle text="Random posts" Default={user.settings.random_posts}/>
               <Toggle text="Collage style" Default={user.settings.collage_style}/>
             </div>
@@ -58,21 +55,7 @@ const Settings = ({ history }) => {
           </div>
         </div>
         <div className="flex-col" style={{ alignItems: "flex-end" }}>
-          <div className="model" style={{ width: 340, marginBottom: 20 }}>
-            <div className="top">
-              <h5 className="title-left">PROFILE</h5>
-            </div>
-            <div className="middle">
-              <Button text="Change Profile Picture" redirect={"/changepp"}/>
-              <Button text="Change Name"/>
-              <Button text="Change Email"/>
-              <Button text="Change Website"/>
-              <Button text="Change Password"/>
-              <Toggle text="Display Email" Default={user.settings.display_email}/>
-              <Toggle text="Display Website" Default={user.settings.display_website}/>
-              <Toggle text="Display Contact Me" Default={user.settings.display_contact_me}/>
-            </div>
-          </div>
+          <SettingsCard user={user} setUser={setUser} history={history}/>
           <div className="model" style={{ width: 340 }}>
             <div className="top">
               <h5 className="title-left">PRIVACY</h5>

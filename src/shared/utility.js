@@ -140,3 +140,8 @@ export const getInitials = user => {
   }
   return initials
 }
+
+export const updateSettingsHandler = (user, setUser, passed, history) => {
+  setUser({...user, settings: {...user.settings, [passed]: !user.settings[passed]}})
+  updateSettings({...user, settings: {...user.settings, [passed]: !user.settings[passed]}}, setUser, history)
+}
