@@ -29,7 +29,7 @@ const Wall = () => { // Render posts of followed users in order of date time.
       })
     )
 
-    user.posts.forEach(post => { // Loop through all of the posts the users has.
+    user.settings.own_posts && user.posts.forEach(post => { // Loop through all of the posts the users has.
       if (moment(post.created_at).isAfter(temp.created_at) && moment(post.created_at).isBefore(earliestPost.created_at)) {
         temp = post
       }

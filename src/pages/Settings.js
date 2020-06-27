@@ -6,7 +6,6 @@ import { logout } from '../shared/localStorage'
 import ProfileCard from '../components/Cards/ProfileCard'
 import { LogOut, XSquare, GitHub } from 'react-feather'
 import Toggle from '../components/UI/Toggle/Toggle'
-import { switchDarkMode } from '../shared/utility'
 
 const Settings = ({ history }) => {
   const { user, setUser } = useContext(Context)
@@ -17,9 +16,9 @@ const Settings = ({ history }) => {
     history.push("/auth")
   }
 
-  const overlayClickedHandler = () => {
-    setUser({...user, settings: {...user.settings, overlay: !user.settings.overlay}})
-    updateSettings({...user, settings: {...user.settings, overlay: !user.settings.overlay}}, setUser, history)
+  const updateSettingsHandler = passed => {
+    setUser({...user, settings: {...user.settings, [passed]: !user.settings[passed]}})
+    updateSettings({...user, settings: {...user.settings, [passed]: !user.settings[passed]}}, setUser, history)
   }
 
   return (
@@ -34,8 +33,8 @@ const Settings = ({ history }) => {
               <h5 className="title-left">GENERAL</h5>
             </div>
             <div className="middle">
-              <Toggle text="Dark Mode" Default={user.settings.dark_mode} onClick={() => switchDarkMode(user, setUser, false, history)}/>
-              <Toggle text="Overlay" Default={user.settings.overlay} onClick={() => overlayClickedHandler()}/>
+              <Toggle text="Dark Mode" Default={user.settings.dark_mode} onClick={() => updateSettingsHandler("dark_mode")}/>
+              <Toggle text="Overlay" Default={user.settings.overlay} onClick={() => updateSettingsHandler("overlay")}/>
             </div>
           </div>
           <div className="model" style={{ width: 340, marginBottom: 20 }}>
@@ -43,7 +42,7 @@ const Settings = ({ history }) => {
               <h5 className="title-left">WALL</h5>
             </div>
             <div className="middle">
-              <Toggle text="Own posts" Default={user.settings.own_posts}/>
+              <Toggle text="Own posts" Default={user.settings.own_posts} onClick={() => updateSettingsHandler("own_posts")}/>
               <Toggle text="Random posts" Default={user.settings.random_posts}/>
               <Toggle text="Collage style" Default={user.settings.collage_style}/>
             </div>
