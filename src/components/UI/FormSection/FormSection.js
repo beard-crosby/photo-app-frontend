@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { updateForm, backendError } from '../../../shared/formValidation'
 import PropTypes from 'prop-types'
 
-const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeholder, defaultValue, maxLength }) => {
+const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeholder, defaultValue, minLength, maxLength }) => {
   const [ targetValue, setTargetValue ] = useState(null)
+  const [ minLen, setMinLen ] = useState(null)
 
   let type = text
   switch (text) {
@@ -16,15 +17,26 @@ const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeh
   }
 
   const onChangeHandler = e => {
-    setTargetValue(e.target.value.length)
+    if (e.target.name === "add a website") {
+      e.target.name = "website"
+    }
+
+    const length = e.target.value.length
+    setTargetValue(length)
     updateForm(e, form, setForm)
+
+    if (length > 0 && length < minLength) {
+      setMinLen(<p>{`${minLength} characters min`}</p>)
+    } else {
+      setMinLen(null)
+    }
   }
 
   return (
     <>
       <label htmlFor={text.toLowerCase()}>
         <h5>{err ? err : backendError(user, text)}</h5>
-        {maxLength && targetValue > maxLength - 20 && backendError(user, text) === text && <p>{`${maxLength - targetValue} characters left`}</p>}
+        {minLen ? minLen : maxLength && targetValue > maxLength - 20 && backendError(user, text) === text && <p>{`${maxLength - targetValue} characters left`}</p>}
       </label>
       {textarea ? 
         <textarea 
@@ -35,6 +47,7 @@ const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeh
           onFocus={onFocus}
           placeholder={placeholder}
           defaultValue={defaultValue}
+          minLength={minLength}
           maxLength={maxLength}
         /> 
       :
@@ -45,6 +58,7 @@ const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeh
           onChange={e => onChangeHandler(e)}
           placeholder={placeholder}
           defaultValue={defaultValue}
+          minLength={minLength}
           maxLength={maxLength}
         />
       }
@@ -62,6 +76,7 @@ FormSection.propTypes = {
   onFocus: PropTypes.func,            // pass up the onFocus event.
   placeholder: PropTypes.string,      // placeholder passed up.
   defaultValue: PropTypes.string,     // defaultValue passed up.
+  minLength: PropTypes.string,        // minLength passed up.
   maxLength: PropTypes.string,        // maxLength passed up.
 }
 

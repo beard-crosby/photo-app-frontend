@@ -47,10 +47,10 @@ const Create = ({ history }) => {
         <h5>CREATE AN ACCOUNT</h5>
       </div>
       <div className="middle">
-        <FormSection text={"Name"} err={form.errors.nameError} user={user} form={form} setForm={setForm}/>
+        <FormSection text={"Name"} err={form.errors.nameError} user={user} form={form} setForm={setForm} maxLength="30"/>
         <FormSection text={"Email"} err={form.errors.emailError} user={user} form={form} setForm={setForm}/>
-        <FormSection text={"Password"} err={form.errors.passwordError} user={user} form={form} setForm={setForm}/>
-        <FormSection text={"Password Check"} err={form.errors.passConfirmError} user={user} form={form} setForm={setForm}/>
+        <FormSection text={"Password"} err={form.errors.passwordError} user={user} form={form} setForm={setForm} minLength="8" maxLength="20"/>
+        <FormSection text={"Password Check"} err={form.errors.passConfirmError} user={user} form={form} setForm={setForm} minLength="8" maxLength="20"/>
         <Link to="/termsandconditions"><h6 className="terms-and-conditions">I agree to the <u><strong>Terms and Conditions</strong></u></h6></Link>
         <Button text="Sign Up" submit disabled={!formValid} icon={<LogIn/>}/>
         <GoogleOAuth text="Sign up with Google" user={user} setUser={setUser} setLoading={setLoading} history={history} create/>

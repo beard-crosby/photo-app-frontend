@@ -29,7 +29,7 @@ const Post = ({ history }) => {
   
   return (
     <>
-      <form className="model" onSubmit={event => onPostClicked(event)} style={{ width: 450 }}>
+      <form className="model" onSubmit={event => onPostClicked(event)}>
         <div className="top">
           <h5 className="title">CREATE A POST</h5>
           <h5 onClick={() => history.goBack()}>BACK</h5>

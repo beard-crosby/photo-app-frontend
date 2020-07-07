@@ -22,9 +22,9 @@ const ChangePP = ({ history }) => {
 
   return (
     <>
-      <form className="model" onSubmit={event => onChangePPClicked(event)} style={{ width: 450 }}>
+      <form className="model" onSubmit={event => onChangePPClicked(event)}>
         <div className="top">
-          <h5 className="title">CHANGE PROFILE PICTURE</h5>
+          <h5 className="title">PROFILE PICTURE</h5>
           <h5 className="pointer" onClick={() => history.goBack()}>BACK</h5>
         </div>
         <div className="middle">
