@@ -92,7 +92,7 @@ export const allPosts = (user, setUser) => {
   })
 }
 
-export const updateTitle = (post, user, setUser, wall, setWall, setSpinner, setOverlay, history) => {
+export const updateTitle = (post, user, setUser, wall, setWall, setSpinner, setOverlay, setPostClicked, history) => {
   setSpinner(true) // NOT spinner in context. useState in PhotoCard.
   const newPosts = newArrObjValue(user.posts, post, "title")
   const newWall = newArrObjValue(wall, post, "title")
@@ -115,13 +115,7 @@ export const updateTitle = (post, user, setUser, wall, setWall, setSpinner, setO
       setUser({...user, posts: newPosts, formErrors: res.data.errors[0].message})
       process.env.NODE_ENV === 'development' && console.log(`UpdateTitle: ${res.data.errors[0].message}`)
     } else {
-      user.postClicked ? 
-      setUser({
-        ...removeKey(user, "formErrors"),
-        token: useTokens(res.data.data.updateTitle.tokens, user),
-        posts: newPosts, 
-        postClicked: post,
-      }) :
+      setPostClicked(post)
       setUser({
         ...removeKey(user, "formErrors"), 
         token: useTokens(res.data.data.updateTitle.tokens, user),
@@ -141,7 +135,7 @@ export const updateTitle = (post, user, setUser, wall, setWall, setSpinner, setO
   })
 }
 
-export const updateDescription = (post, user, setUser, wall, setWall, setSpinner, setOverlay, title, history) => {
+export const updateDescription = (post, user, setUser, wall, setWall, setSpinner, setOverlay, title, setPostClicked, history) => {
   setSpinner(true) // NOT spinner in context. useState in PhotoCard.
   const newPosts = newArrObjValue(user.posts, post, "description")
   const newWall = newArrObjValue(wall, post, "description")
@@ -164,13 +158,7 @@ export const updateDescription = (post, user, setUser, wall, setWall, setSpinner
       setUser({...user, posts: newPosts, formErrors: res.data.errors[0].message})
       process.env.NODE_ENV === 'development' && console.log(`UpdateDescription: ${res.data.errors[0].message}`)
     } else {
-      user.postClicked ? 
-      setUser({
-        ...title.length === 0 ? user : removeKey(user, "formErrors"),
-        token: useTokens(res.data.data.updateDescription.tokens, user), 
-        posts: newPosts, 
-        postClicked: post,
-      }) :
+      setPostClicked(post)
       setUser({
         ...title.length === 0 ? user : removeKey(user, "formErrors"),
         token: useTokens(res.data.data.updateDescription.tokens, user), 
@@ -190,7 +178,7 @@ export const updateDescription = (post, user, setUser, wall, setWall, setSpinner
   })
 }
 
-export const deletePost = (post, user, setUser, wall, setWall, setOverlay, setSpinner, history) => {
+export const deletePost = (post, user, setUser, wall, setWall, setOverlay, setSpinner, setPostClicked, history) => {
   setSpinner(true) // NOT spinner in context. useState in PhotoCard.
 
   axios.post('', {
@@ -209,22 +197,27 @@ export const deletePost = (post, user, setUser, wall, setWall, setOverlay, setSp
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`DeletePost: ${res.data.errors[0].message}`)
     } else {
+      if (post.postClicked) {
+        setPostClicked(null)
+      } else {
+        setOverlay(null)
+      }
+      
       const newPosts = user.posts.filter(x => x._id !== post._id)
       const newWall = wall.filter(x => x._id !== post._id)
       setUser({
-        ...removeKey(user, "postClicked"),
+        ...user,
         token: useTokens(res.data.data.deletePost.tokens, user),
         posts: newPosts,
       })
       setWall(newWall)
       localStorage.setItem('posts', JSON.stringify(newPosts))
       localStorage.setItem('wall', JSON.stringify(newWall))
-      setOverlay(null)
       process.env.NODE_ENV === 'development' && console.log(res)
     }
     setSpinner(false)
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(`DeletePost: ${err.response.data.errors[0].message}`)
+    process.env.NODE_ENV === 'development' && console.log(`DeletePost: ${err}`)
     setSpinner(false)
   })
 }

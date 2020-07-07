@@ -4,7 +4,7 @@ import { ChevronUp, ChevronDown } from 'react-feather'
 import Masonry from '../../Masonry'
 import PropTypes from 'prop-types'
 
-const Favourites = ({ user, setUser }) => {
+const Favourites = ({ user, postClicked, setPostClicked }) => {
   const [ wrapperHeight, setWrapperHeight ] = useState(null)
 
   const clickListener = e => { // If clickEvent outside of the wrapper, setWrapperHeight.
@@ -34,7 +34,7 @@ const Favourites = ({ user, setUser }) => {
         <ChevronDown onClick={() => setWrapperHeight(null)}/>}
       </div>
       <div className={styles.favourites}>
-        <Masonry array={user.favourites} user={user} setUser={setUser} contained/>
+        <Masonry array={user.favourites} postClicked={postClicked} setPostClicked={setPostClicked} contained/>
       </div>
     </div>
   )
@@ -42,7 +42,6 @@ const Favourites = ({ user, setUser }) => {
 
 Favourites.propTypes = {
   user: PropTypes.object.isRequired,  // User object from context.
-  setUser: PropTypes.func.isRequired, // setUser function from context.
 }
 
 export default Favourites

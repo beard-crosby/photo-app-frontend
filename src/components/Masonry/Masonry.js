@@ -3,7 +3,7 @@ import Masonry from 'react-masonry-component'
 import './_Masonry.scss'
 import PropTypes from 'prop-types'
 
-const MasonryComp = ({ array, user, setUser, contained, noInteract }) => {
+const MasonryComp = ({ array, postClicked, setPostClicked, contained, noInteract }) => {
   const [ layoutComplete, setLayoutComplete ] = useState(false)
   const [ imgsLoaded, setimgsLoaded ] = useState(false)
   const [ display, setDisplay ] = useState(null)
@@ -22,10 +22,10 @@ const MasonryComp = ({ array, user, setUser, contained, noInteract }) => {
   }
 
   const masonryClickedHandler = post => {
-    if (user.postClicked) {
-      post !== user.postClicked && setUser({ ...user, postClicked: post })
+    if (postClicked) {
+      post !== postClicked && setPostClicked({...post, postClicked: true})
     } else {
-      setUser({ ...user, postClicked: post })
+      setPostClicked({...post, postClicked: true})
     }
   }
 

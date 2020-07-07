@@ -14,7 +14,7 @@ import Button from '../../UI/Button'
 import Spinner from '../../Spinner'
 import Comment from './Comment'
 
-const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
+const PhotoCard = ({ user, setUser, wall, setWall, post, setPostClicked, history }) => {
   const [ favClicked, setFavClicked ] = useState("undefined")
   const [ imgClicked, setImgClicked ] = useState(false)
   const [ sidebar, setSidebar ] = useState(null)
@@ -30,12 +30,20 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
   const isAuthor = user._id === post.author._id // Ditermine if the user is the author of this post.
 
   useEffect(() => {
-    user.favourites.forEach(fav => post._id === fav._id && setFavClicked(styles.favClicked)) // Check if this post is in user.favourites. If it is, setFavClicked().
+    user.favourites.forEach(fav => { // Check if this post is in user.favourites. If it is, setFavClicked().
+      if (post._id === fav._id) {
+        setFavClicked(styles.favClicked)
+        post.postClicked && setOverlay(null)
+      }
+    })
+
     imgClicked ? document.body.style.overflow = "hidden" : document.body.style = "none" // If img is fullscreen, disable scrolling.
+
     if (user.formErrors && user.formErrors.substring(0, user.formErrors.indexOf(" ")) === post._id) { // If formErrors starts with post._id.
       setSidebar(user.formErrors.substring(user.formErrors.indexOf(" ") + 1)) // setSidebar with everything after the first " " in the string.
     }
-    if (user.postClicked) { // If user.postClicked is mutated, re-render form with new context data.
+
+    if (post.postClicked) { // If user.postClicked is mutated, re-render form with new context data.
       setForm({
         title: post.title,
         description: post.description,
@@ -47,10 +55,10 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
   const favClickedHandler = () => {
     if (favClicked === "undefined") {
       setFavClicked(styles.favClicked)
-      updateFavourites(user, setUser, post, "add", history)
+      updateFavourites(user, setUser, post, "add", setPostClicked, history)
     } else {
       setFavClicked("undefined")
-      updateFavourites(user, setUser, post, "remove", history)
+      updateFavourites(user, setUser, post, "remove", setPostClicked, history)
     }
   }
 
@@ -58,8 +66,8 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
     e && e.preventDefault()
     if (overlay === "edit") { // If Title or Description have changed, send the relevant request.
       post.title === form.title && post.description === form.description && passed === overlay ? setOverlay(null) : setOverlay(passed)
-      post.title !== form.title && updateTitle({ ...post, title: form.title }, user, setUser, wall, setWall, setSpinner, setOverlay, history)
-      post.description !== form.description && updateDescription({ ...post, description: form.description }, user, setUser, wall, setWall, setSpinner, setOverlay, form.title, history)
+      post.title !== form.title && updateTitle({ ...post, title: form.title }, user, setUser, wall, setWall, setSpinner, setOverlay, setPostClicked, history)
+      post.description !== form.description && updateDescription({ ...post, description: form.description }, user, setUser, wall, setWall, setSpinner, setOverlay, form.title, setPostClicked, history)
     } else {
       passed === overlay ? setOverlay(null) : setOverlay(passed)
     }
@@ -116,7 +124,7 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, history }) => {
           {overlay === "del" && 
           <div className={styles.del}>
             <h5 style={{ marginBottom: 10 }}>Are you sure?</h5>
-            <Button text="Delete" onClick={() => deletePost(post, user, setUser, wall, setWall, setOverlay, setSpinner, history)} border boxShadow/>
+            <Button text="Delete" onClick={() => deletePost(post, user, setUser, wall, setWall, setOverlay, setSpinner, setPostClicked, history)} border boxShadow/>
           </div>}
         </>}
       </div>

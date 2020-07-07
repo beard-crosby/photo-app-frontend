@@ -321,7 +321,7 @@ export const updatePP = (user, setUser, wall, setWall, history, setLoading) => {
   })
 }
 
-export const updateFavourites = (user, setUser, post, action, history) => {
+export const updateFavourites = (user, setUser, post, action, setPostClicked, history) => {
   if (post.author._id === user._id) {
     return setUser({...user, formErrors: `${post._id} You can't favourite your own post!`})
   }
@@ -338,8 +338,9 @@ export const updateFavourites = (user, setUser, post, action, history) => {
     setUser(addFav)
     newFavs = addFav
   } else {
-    const removeFav = {...removeKey(user, "postClicked"), favourites: user.favourites.filter(x => x._id !== post._id)}
+    const removeFav = {...user, favourites: user.favourites.filter(x => x._id !== post._id)}
     setUser(removeFav)
+    setPostClicked(null)
     newFavs = removeFav
   }
 
