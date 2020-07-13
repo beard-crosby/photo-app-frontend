@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { updateForm, backendError } from '../../../shared/formValidation'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeholder, defaultValue, minLength, maxLength }) => {
-  const [ targetValue, setTargetValue ] = useState(null)
+const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeholder, defaultValue, minLength, maxLength, forgot }) => {
+  const [ targetValue, setTargetValue ] = useState(0)
   const [ minLen, setMinLen ] = useState(null)
 
   let type = text
@@ -36,6 +37,7 @@ const FormSection = ({ text, err, user, form, setForm, textarea, onFocus, placeh
     <>
       <label htmlFor={text.toLowerCase()}>
         <h5>{err ? err : backendError(user, text)}</h5>
+        {forgot && targetValue === 0 && <Link to="/forgot"><h6>Forgot?</h6></Link>}
         {minLen ? minLen : maxLength && targetValue > maxLength - 20 && backendError(user, text) === text && <p>{`${maxLength - targetValue} characters left`}</p>}
       </label>
       {textarea ? 

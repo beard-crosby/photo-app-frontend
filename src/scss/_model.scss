@@ -86,6 +86,14 @@
         align-items: flex-end;
         margin: 0 0 0 10px;
       }
+
+      h6 {
+        cursor: pointer;
+
+        &:hover {
+          color: $black;
+        }
+      }
     }
 
     p {
