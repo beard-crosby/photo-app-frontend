@@ -17,7 +17,10 @@ const Nav = ({ user, setUser, history }) => {
           {user.settings.dark_mode ? 
             <Sun onClick={() => switchDarkMode(user, setUser, false, history)}/> : 
             <Moon onClick={() => switchDarkMode(user, setUser, false, history)}/>}
-          {user.token ? <Link to="/post"><Upload/></Link> : <Link to="/auth"><h5>LOGIN</h5></Link>}
+          {user.token ? <Link to="/post"><Upload/></Link> : 
+            history.location.pathname === "/auth" ? 
+            <Link to="/"><h5>CREATE AN ACCOUNT</h5></Link> : 
+            <Link to="/auth"><h5>LOGIN</h5></Link> }
           {user.token && <Link to="/profile"><ProfilePicture user={user} heightWidth={25} disable/></Link>}
         </div>
       </div>
