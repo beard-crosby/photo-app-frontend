@@ -49,11 +49,11 @@ const MasonryComp = ({ array, postClicked, setPostClicked, contained, noInteract
         <div className="grid-sizer"/>
         <div className="gutter-sizer"/>
       </>}
-      {array.map(post => noInteract ? 
-        <img key={post._id} alt="A Post" src={post.img} className="grid-item no-interact"/> 
+      {array.map((post, i) => noInteract ? 
+        <img key={i} alt="A Post" src={post.img} className="grid-item no-interact"/> 
         :
         <div 
-          key={post._id} 
+          key={i} 
           className="grid-item" 
           style={contained && { width: itemWidth }} 
           onClick={() => masonryClickedHandler(post)}>

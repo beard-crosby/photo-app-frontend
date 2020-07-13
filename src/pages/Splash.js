@@ -1,17 +1,17 @@
 import React, { useContext, useEffect } from 'react'
 import { Context } from '../App'
-import Create from './Create'
-import { allPosts } from '../shared/postRequests'
+import { posts } from '../shared/postRequests'
+import CreateCard from '../components/Cards/CreateCard'
 import Masonry from '../components/Masonry'
 
-const Splash = () => {
-  const { user, setUser } = useContext(Context)
-  useEffect(() => allPosts(user, setUser), []) // eslint-disable-line react-hooks/exhaustive-deps
+const Splash = ({ history }) => {
+  const { user, setUser, setLoading } = useContext(Context)
+  useEffect(() => posts(user, setUser, 20, 1), []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="flex-col">
-      <Create/>
-      {user.allPosts && <Masonry array={user.allPosts} noInteract/>}
+      <CreateCard user={user} setUser={setUser} setLoading={setLoading} history={history} style={{ marginBottom: 20 }}/>
+      {user.posts && <Masonry array={user.posts[0]}/>}
     </div>
   )
 }

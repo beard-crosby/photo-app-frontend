@@ -69,11 +69,15 @@ export const createPost = (form, user, setUser, wall, setWall, setLoading, histo
   })
 }
 
-export const allPosts = (user, setUser) => {
+export const posts = (user, setUser, amount, iterations) => {
   axios.post('', {
+    variables: {
+      amount: amount,
+      iterations: iterations,
+    },
     query: `
-      query {
-        allPosts {
+      query Posts($amount: Int!, $iterations: Int) {
+        posts(amount: $amount, iterations: $iterations) {
           _id
           img
           title
@@ -82,13 +86,13 @@ export const allPosts = (user, setUser) => {
     `
   }).then(res => {
     if (res.data.errors) {
-      process.env.NODE_ENV === 'development' && console.log(`allPosts: ${res.data.errors[0].message}`)
+      process.env.NODE_ENV === 'development' && console.log(`Posts: ${res.data.errors[0].message}`)
     } else {
-      setUser({ settings: user.settings, allPosts: res.data.data.allPosts })
+      setUser({ settings: user.settings, posts: res.data.data.posts })
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
-    process.env.NODE_ENV === 'development' && console.log(`allPosts: ${err.response.data.errors[0].message}`)
+    process.env.NODE_ENV === 'development' && console.log(`Posts: ${err.response.data.errors[0].message}`)
   })
 }
 
