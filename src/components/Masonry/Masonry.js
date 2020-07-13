@@ -3,7 +3,7 @@ import Masonry from 'react-masonry-component'
 import './_Masonry.scss'
 import PropTypes from 'prop-types'
 
-const MasonryComp = ({ array, postClicked, setPostClicked, contained, noInteract }) => {
+const MasonryComp = ({ array, postClicked, setPostClicked, contained, noInteract, style, itemStyle, cols, originTop }) => {
   const [ layoutComplete, setLayoutComplete ] = useState(false)
   const [ imgsLoaded, setimgsLoaded ] = useState(false)
   const [ display, setDisplay ] = useState(null)
@@ -21,6 +21,21 @@ const MasonryComp = ({ array, postClicked, setPostClicked, contained, noInteract
     }
   }
 
+  let gridItem = "grid-item"
+  let gridSizer = "grid-sizer"
+  let gutterSizer = "gutter-sizer"
+  
+  if (cols === 1) {
+    gridItem = "grid-item-100"
+    gridSizer = "grid-sizer-100"
+    gutterSizer = "gutter-sizer-0"
+  } else if (cols === 2) {
+    gridItem = "grid-item-48"
+    gridSizer = "grid-sizer-48"
+    gutterSizer = "gutter-sizer-3"
+  }
+  
+
   const masonryClickedHandler = post => {
     if (postClicked) {
       post !== postClicked && setPostClicked({...post, postClicked: true})
@@ -32,29 +47,37 @@ const MasonryComp = ({ array, postClicked, setPostClicked, contained, noInteract
   return (
     <Masonry 
       className={`${contained ? `masonry-contained` : `masonry`} ${display}`}
+      style={style}
       options={contained ? {
         transitionDuration: 0,
         percentPosition: true,
+        originTop: originTop ? false : true,
       } : {
         transitionDuration: 0,
         percentPosition: true,
-        itemSelector: ".grid-item", 
-        columnWidth: ".grid-sizer",
-        gutter: ".gutter-sizer", 
+        itemSelector: `.${gridItem}`, 
+        columnWidth: `.${gridSizer}`,
+        gutter: `.${gutterSizer}`,
+        originTop: originTop ? false : true,
       }}
       onLayoutComplete={() => setLayoutComplete(true)}
       onImagesLoaded={() => setimgsLoaded(true)}>
       {!contained && 
       <>
-        <div className="grid-sizer"/>
-        <div className="gutter-sizer"/>
+        <div className={gridSizer}/>
+        <div className={gutterSizer}/>
       </>}
       {array.map((post, i) => noInteract ? 
-        <img key={i} alt="A Post" src={post.img} className="grid-item no-interact"/> 
+        <img 
+          key={i}
+          style={itemStyle}
+          className={`${gridItem} no-interact`}
+          alt="A Post" src={post.img}/>
         :
-        <div 
-          key={i} 
-          className="grid-item" 
+        <div
+          key={i}
+          style={itemStyle}
+          className={gridItem}
           style={contained && { width: itemWidth }} 
           onClick={() => masonryClickedHandler(post)}>
           <img alt="A Post" src={post.img}/>
@@ -65,11 +88,15 @@ const MasonryComp = ({ array, postClicked, setPostClicked, contained, noInteract
 }
 
 MasonryComp.propTypes = {
-  array: PropTypes.array,     // Array of posts in which to loop through.
-  user: PropTypes.object,     // User object in context.
-  setUser: PropTypes.func,    // setUser function context function.
-  contained: PropTypes.bool,  // Style Masonry in such a way that suits being visually contained.
-  noInteract: PropTypes.bool, // Render just images. No user interaction intended.
+  array: PropTypes.array,      // Array of posts in which to loop through.
+  user: PropTypes.object,      // User object in context.
+  setUser: PropTypes.func,     // setUser function context function.
+  contained: PropTypes.bool,   // Style Masonry in such a way that suits being visually contained.
+  noInteract: PropTypes.bool,  // Render just images. No user interaction intended.
+  style: PropTypes.object,     // Pass up style.
+  styleItem: PropTypes.object, // Pass up style on item.
+  cols: PropTypes.number,      // Amount of columns.
+  originTop: PropTypes.bool,   // Masonry starts from the bottom of the container.
 }
 
 export default MasonryComp

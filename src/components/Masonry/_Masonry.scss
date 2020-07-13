@@ -7,12 +7,28 @@
   .grid-sizer, .grid-item {
     width: 24.25%;
   }
+
+  .grid-sizer-100, .grid-item-100 {
+    width: 100%;
+  }
+
+  .grid-sizer-48, .grid-item-48 {
+    width: 48.75%;
+  }
   
   .gutter-sizer {
     width: 1%;
   }
+
+  .gutter-sizer-0 {
+    width: 0%;
+  }
+
+  .gutter-sizer-3 {
+    width: 2.5%;
+  }
   
-  .grid-item {
+  .grid-item, .grid-item-100, .grid-item-48 {
     float: left;
     margin-bottom: 7px;
     border-radius: 6px;

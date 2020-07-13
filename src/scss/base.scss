@@ -119,11 +119,17 @@ body {
       justify-content: center;
       align-items: center;
       box-sizing: border-box;
-      padding-top: 20px;
+      margin-top: 20px;
 
       @media (max-width: 700px) {
         width: 100%;
       }
+    }
+
+    .main-row {
+      flex-flow: row nowrap;
+      align-items: flex-start;
+      margin: 0;
     }
 
     nav {
@@ -215,7 +221,7 @@ body {
     }
     
     footer {
-      width: 900px;
+      width: 700px;
       box-sizing: border-box;
       height: 60px;
       display: flex;
@@ -231,6 +237,10 @@ body {
       }
     }
   }
+}
+
+.absolute {
+  position: absolute !important;
 }
 
 .dark-mode {
