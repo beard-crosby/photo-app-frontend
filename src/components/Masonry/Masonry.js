@@ -3,7 +3,7 @@ import Masonry from 'react-masonry-component'
 import './_Masonry.scss'
 import PropTypes from 'prop-types'
 
-const MasonryComp = ({ array, postClicked, setPostClicked, contained, noInteract, style, itemStyle, cols, originTop }) => {
+const MasonryComp = ({ array, postClicked, setPostClicked, contained, noInteract, style, cols, originTop }) => {
   const [ layoutComplete, setLayoutComplete ] = useState(false)
   const [ imgsLoaded, setimgsLoaded ] = useState(false)
   const [ display, setDisplay ] = useState(null)
@@ -70,13 +70,11 @@ const MasonryComp = ({ array, postClicked, setPostClicked, contained, noInteract
       {array.map((post, i) => noInteract ? 
         <img 
           key={i}
-          style={itemStyle}
           className={`${gridItem} no-interact`}
           alt="A Post" src={post.img}/>
         :
         <div
           key={i}
-          style={itemStyle}
           className={gridItem}
           style={contained && { width: itemWidth }} 
           onClick={() => masonryClickedHandler(post)}>
@@ -94,7 +92,6 @@ MasonryComp.propTypes = {
   contained: PropTypes.bool,   // Style Masonry in such a way that suits being visually contained.
   noInteract: PropTypes.bool,  // Render just images. No user interaction intended.
   style: PropTypes.object,     // Pass up style.
-  styleItem: PropTypes.object, // Pass up style on item.
   cols: PropTypes.number,      // Amount of columns.
   originTop: PropTypes.bool,   // Masonry starts from the bottom of the container.
 }

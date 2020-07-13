@@ -31,7 +31,7 @@ const CreateCard = ({ user, setUser, setLoading, history, style }) => {
     user.formErrors === "oAuth Login" && login(user.data, user, setUser, setLoading, history)
   }, [user, setUser, setLoading, history, form])
 
-  useEffect(() => () => user.formErrors && setUser(removeKey(user, "formErrors")), [])
+  useEffect(() => () => user.formErrors && setUser(removeKey(user, "formErrors")), []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const onSignUp = event => {
     event.preventDefault()
@@ -45,7 +45,7 @@ const CreateCard = ({ user, setUser, setLoading, history, style }) => {
       </div>
       <div className="middle">
         <FormSection text={"Name"} err={form.errors.nameError} user={user} form={form} setForm={setForm} maxLength="30"/>
-        <FormSection text={"Email"} err={form.errors.emailError} user={user} form={form} setForm={setForm} setForm={setForm}/>
+        <FormSection text={"Email"} err={form.errors.emailError} user={user} form={form} setForm={setForm}/>
         <FormSection text={"Password"} err={form.errors.passwordError} user={user} form={form} setForm={setForm} minLength="8" maxLength="20"/>
         <FormSection text={"Password Check"} err={form.errors.passwordCheckError} user={user} form={form} setForm={setForm} minLength="8" maxLength="20"/>
         <Link to="/termsandconditions"><h6 className="terms-and-conditions">I agree to the <u><strong>Terms and Conditions</strong></u></h6></Link>
