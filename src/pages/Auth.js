@@ -11,7 +11,7 @@ const Auth = ({ history }) => {
   return (
     <div className="flex-col">
       <AuthCard user={user} setUser={setUser} setLoading={setLoading} history={history} style={{ width: 400, marginBottom: 20 }}/>
-      {user.posts && <Masonry array={user.posts[0]}/>}
+      {user.posts && <Masonry array={user.posts[0]} noInteract/>}
     </div>
   )
 }

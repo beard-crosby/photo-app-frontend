@@ -11,7 +11,7 @@ const Splash = ({ history }) => {
   return (
     <div className="flex-col">
       <CreateCard user={user} setUser={setUser} setLoading={setLoading} history={history} style={{ marginBottom: 20 }}/>
-      {user.posts && <Masonry array={user.posts[0]}/>}
+      {user.posts && <Masonry array={user.posts[0]} noInteract/>}
     </div>
   )
 }
