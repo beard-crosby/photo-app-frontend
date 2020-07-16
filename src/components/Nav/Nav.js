@@ -10,7 +10,7 @@ const Nav = ({ user, setUser, history }) => {
   switchDarkMode(user, setUser, true, history)
 
   return (
-    <nav className={!user.token && "absolute"}>
+    <nav className={`${!user.token && "absolute"}`}>
       <div className="nav-top">
         <Link to="/"><h1>PHOTO APP</h1></Link>
         <div className="nav-top-right">

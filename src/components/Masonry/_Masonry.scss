@@ -68,3 +68,17 @@
   opacity: 1;
   transition: 0.3s; 
 }
+
+.masonry-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+
+  .masonry-top-mid {
+    width: 100%;
+    height: 25vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+}

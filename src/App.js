@@ -14,7 +14,9 @@ const App = () => {
   const [ user, setUser ] = useState(checkLocalStorage())
   const [ wall, setWall ] = useState(localStorage.getItem('wall') ? JSON.parse(localStorage.getItem('wall')) : [])
   
-  useEffect(() => !user.token && setWall([]), [user])
+  useEffect(() => {
+    !user.token && setWall([])
+  }, [user])
   
   // If in develop mode, console log every time any state used in context is mutated. 
   process.env.NODE_ENV === 'development' && console.log({loading, wall, user})
@@ -23,7 +25,7 @@ const App = () => {
     <Context.Provider value={{ loading, setLoading, wall, setWall, user, setUser }}>
       <Nav user={user} setUser={setUser}/>
       {user.settings.overlay && <Overlay user={user}/>}
-      <main className={!user.token && "main-row"}>
+      <main>
         {loading && <Spinner user={user}/>}
         <Router/>
       </main>
