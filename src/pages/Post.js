@@ -8,10 +8,12 @@ import UploadBox from '../components/UI/UploadBox'
 import FormSection from '../components/UI/FormSection'
 import { createPost } from '../shared/postRequests'
 import { Upload } from 'react-feather'
+import ErrorCard from '../components/Cards/ErrorCard'
 
 const Post = ({ history }) => {
   const { user, setUser, wall, setWall, setLoading } = useContext(Context)
   const [ formValid, setFormValid ] = useState(false)
+  const [ formErrors, setFormErrors ] = useState("")
   const [ form, setForm ] = useState({
     title: "",
     description: "",
@@ -35,12 +37,13 @@ const Post = ({ history }) => {
           <h5 onClick={() => history.goBack()}>BACK</h5>
         </div>
         <div className="middle">
-          <FormSection text={"Title"} user={user} form={form} maxLength="60" setForm={setForm}/>
-          <FormSection text={"Description"} user={user} form={form} setForm={setForm} onFocus={e => textareaGrow(e)} maxLength="300" textarea/>
+          <FormSection label={"Title"} form={form} setForm={setForm} maxLength="60"/>
+          <FormSection label={"Description"} form={form} setForm={setForm} onFocus={e => textareaGrow(e)} maxLength="300" textarea/>
           <UploadBox user={user} setUser={setUser} style={{ margin: "20px 0"}}/>
           <Button submit disabled={!formValid} icon={<Upload/>} text="Post"/>
         </div>
       </form>
+      {formErrors && <ErrorCard formErrors={formErrors} setFormErrors={setFormErrors}/>}
       <Link className="below" to="/termsandconditions"><h6>Terms and Conditions</h6></Link>
     </>
   )

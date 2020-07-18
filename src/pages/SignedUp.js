@@ -10,14 +10,10 @@ import { updatePP, updateBasic } from '../shared/authRequests'
 
 const SignedUp = ({ history }) => {
   const { user, setUser, wall, setWall, setLoading } = useContext(Context)
+  const [ formErrors, setFormErrors ] = useState("")
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
-    values: {
-      website: "",
-    },
-    errors: {
-      websiteError: "",
-    },
+    website: "",
   })
 
   useEffect(() => {
@@ -33,14 +29,17 @@ const SignedUp = ({ history }) => {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    !user.file.url && checkFormValid(form, setFormValid)
-    user.file.url && user.file.url.includes("profile-picture") && setFormValid(true)
-  }, [user, setUser, form])
+    if (user.file.url) {
+      user.file.url.includes("profile-picture") && setFormValid(true)
+    } else {
+      checkFormValid(user, form, formErrors, setFormValid)
+    }
+  }, [user, setUser, form, formErrors])
 
   const onDoneClicked = e => {
     e.preventDefault()
     user.file.url && user.file.url.includes("profile-picture") && updatePP(user, setUser, wall, setWall, history, setLoading)
-    form.values.website && updateBasic(form.values, user, setUser, history)
+    form.website && updateBasic(form, user, setUser, history)
   }
 
   return (
@@ -52,7 +51,7 @@ const SignedUp = ({ history }) => {
         <div className="middle center">
           <label><h5>Add a Profile Picture</h5></label>
           <UploadBox user={user} setUser={setUser} style={{ marginBottom: 20 }}/>
-          <FormSection text={"Add a Website"} err={form.errors.websiteError} user={user} form={form} setForm={setForm}/>
+          <FormSection label={"Add a Website"} form={form} setForm={setForm} setFormErrors={setFormErrors}/>
           <Button text="Done" submit disabled={!formValid} onClick={e => onDoneClicked(e)}/>
         </div>
       </form>

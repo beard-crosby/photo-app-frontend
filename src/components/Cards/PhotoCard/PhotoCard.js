@@ -118,8 +118,8 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, setPostClicked, history
         <>
           {overlay === "edit" && 
           <form className={styles.edit} onSubmit={e => overlayBtnsHandler("edit", e)} key={form.re_render_form}>
-            <FormSection text={"Title"} user={user} form={form} setForm={setForm} maxLength="60" defaultValue={form.title}/>
-            <FormSection text={"Description"} user={user} form={form} setForm={setForm} onFocus={e => textareaGrow(e)} defaultValue={form.description} maxLength="300" textarea/>
+            <FormSection label={"Title"} form={form} setForm={setForm} maxLength="60" defaultValue={form.title}/>
+            <FormSection label={"Description"} form={form} setForm={setForm} onFocus={e => textareaGrow(e)} defaultValue={form.description} maxLength="300" textarea/>
           </form>}
           {overlay === "del" && 
           <div className={styles.del}>

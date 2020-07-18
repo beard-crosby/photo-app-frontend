@@ -4,6 +4,7 @@ import { useTokens, headers, checkGeolocation, checkAuth, removeKey, isDuplicate
 
 export const createUser = (data, user, setUser, setLoading, history) => {
   setLoading(true)
+
   axios.post('', {
     variables: {
       name: data.name,
@@ -41,7 +42,9 @@ export const createUser = (data, user, setUser, setLoading, history) => {
     `
   }).then(async (res) => {
     if (res.data.errors) {
-      setUser({...user, formErrors: res.data.errors[0].message, data: res.data.errors[0].message === "oAuth Login" ? data : null})
+      res.data.errors[0].message === "oAuth Login" ?
+      setUser({...user, formErrors: res.data.errors[0].message, data: data}) : 
+      setUser({...user, formErrors: res.data.errors[0].message})
       process.env.NODE_ENV === 'development' && console.log(`CreateUser: ${res.data.errors[0].message}`)
     } else {
       const userData = {

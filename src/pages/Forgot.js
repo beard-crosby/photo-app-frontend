@@ -8,25 +8,22 @@ import FormSection from '../components/UI/FormSection'
 import { Mail } from 'react-feather'
 import MasonryWrapper from '../components/Masonry/MasonryWrapper'
 import { posts } from '../shared/postRequests'
+import ErrorCard from '../components/Cards/ErrorCard'
 
 const Forgot = ({ history }) => {
   const { user, setUser } =  useContext(Context)
   const [ formValid, setFormValid ] = useState(false)
+  const [ formErrors, setFormErrors ] = useState("")
   const [ form, setForm ] = useState({
-    values: {
-      email: "",
-    },
-    errors: {
-      emailError: "",
-    },
+    email: "",
   })
 
-  useEffect(() => {
-    checkFormValid(form, setFormValid)
-    return () => user.formErrors && setUser(removeKey(user, "formErrors"))
-  }, [user, setUser, form])
-
   useEffect(() => posts(user, setUser, 20, 4), []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    checkFormValid(user, form, formErrors, setFormValid)
+    return () => user.formErrors && setUser(removeKey(user, "formErrors"))
+  }, [user, setUser, form, formErrors])
 
   const onSubmit = event => {
     event.preventDefault()
@@ -41,10 +38,11 @@ const Forgot = ({ history }) => {
           <h5 onClick={() => history.goBack()}>BACK</h5>
         </div>
         <div className="middle">
-          <FormSection text={"Email"} err={form.errors.emailError} user={user} form={form} setForm={setForm}/>
+          <FormSection label={"Email"} form={form} setForm={setForm} setFormErrors={setFormErrors}/>
           <Button text="Submit" submit disabled={!formValid} icon={<Mail/>}/>
         </div>
       </form>
+      {formErrors && <ErrorCard formErrors={formErrors} setFormErrors={setFormErrors}/>}
     </MasonryWrapper>
   )
 }

@@ -8,27 +8,21 @@ import FormSection from '../../UI/FormSection'
 import { LogIn } from 'react-feather'
 import PropTypes from 'prop-types'
 
-const AuthCard = ({ user, setUser, setLoading, history, style }) => {
+const AuthCard = ({ user, setUser, setLoading, formErrors, setFormErrors, history, style }) => {
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
-    values: {
-      email: "",
-      password: "",
-    },
-    errors: {
-      emailError: "",
-      passwordError: "",
-    },
+    email: "",
+    password: "",
   })
 
   useEffect(() => {
-    checkFormValid(form, setFormValid)
+    checkFormValid(user, form, formErrors, setFormValid)
     return () => user.formErrors && setUser(removeKey(user, "formErrors"))
-  }, [user, setUser, form])
+  }, [user, setUser, form, formErrors])
 
   const onLoginClicked = event => {
     event.preventDefault()
-    login(form.values, user, setUser, setLoading, history) // request
+    login(form, user, setUser, setLoading, history)
   }
 
   return (
@@ -39,8 +33,8 @@ const AuthCard = ({ user, setUser, setLoading, history, style }) => {
           <h5 onClick={() => history.goBack()}>BACK</h5>
         </div>
         <div className="middle">
-          <FormSection text={"Email"} err={form.errors.emailError} user={user} form={form} setForm={setForm}/>
-          <FormSection text={"Password"} user={user} form={form} setForm={setForm} forgot/>
+          <FormSection label={"Email"} form={form} setForm={setForm}/>
+          <FormSection label={"Password"} form={form} setForm={setForm} forgot/>
           <Button text="Login" submit disabled={!formValid} icon={<LogIn/>}/>
           <GoogleOAuth text="Login With Google" user={user} setUser={setUser} setLoading={setLoading} history={history}/>
         </div>
@@ -50,11 +44,13 @@ const AuthCard = ({ user, setUser, setLoading, history, style }) => {
 }
 
 AuthCard.propTypes = {
-  user: PropTypes.object,     // user object from context.
-  setUser: PropTypes.func,    // setUser function from context.
-  setLoading: PropTypes.func, // setLoading function from context.
-  history: PropTypes.object,  // history object from react-router-dom.
-  style: PropTypes.object,    // pass up style.
+  user: PropTypes.object.isRequired,        // user object from context.
+  setUser: PropTypes.func.isRequired,       // setUser function from context.
+  setLoading: PropTypes.func.isRequired,    // setLoading function from context.
+  formErrors: PropTypes.string.isRequired,  // setForm function on which this component is called for.
+  setFormErrors: PropTypes.func.isRequired, // setFormErrors on which page this component is called for.
+  history: PropTypes.object,                // history object from react-router-dom.
+  style: PropTypes.object,                  // pass up style.
 }
 
 export default AuthCard

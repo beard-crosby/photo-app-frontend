@@ -17,11 +17,11 @@
   box-sizing: border-box;
   cursor: pointer;
 
-  h1, svg {
+  h2, svg {
     text-align: center;
     font-weight: 300;
     letter-spacing: 2px;
-    font-size: 1.7em;
+    font-size: 1.2em;
     color: $color-2 !important;
     cursor: pointer;
   }
@@ -57,7 +57,7 @@
   outline: none;
 
   img {
-    width: 113%;
+    width: 120%;
     height: 280px;
     object-fit: cover;
   }

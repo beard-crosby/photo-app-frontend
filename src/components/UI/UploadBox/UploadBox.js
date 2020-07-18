@@ -38,10 +38,10 @@ const UploadBox = ({ user, setUser, style, history }) => {
   // Check for errors duplicate errors.
   useEffect(() => {
     if (user.formErrors === "Duplicate Post!") {
-      setErr(<h1>Duplicate Post!<br/>You have already posted this image.</h1>)
+      setErr(<h2>Duplicate Post!<br/>You have already posted this image.</h2>)
       setThumb("")
     } else if (user.formErrors === "Duplicate Profile Picture!") {
-      setErr(<h1>Duplicate Profile Picture!<br/>This is already your Profile Picture.</h1>)
+      setErr(<h2>Duplicate Profile Picture!<br/>This is already your Profile Picture.</h2>)
       setThumb("")
     }
   }, [user, setErr])
@@ -50,17 +50,17 @@ const UploadBox = ({ user, setUser, style, history }) => {
     return () => redundantFilesCheck(user, setUser, history)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  let text = <h1>Choose an image<br/>{canDragDrop && `or drag it here`}</h1>
+  let text = <h2>Choose an image<br/>{canDragDrop && `or drag it here`}</h2>
 
   // Check for all concerning errors/rejections.
   if (acceptedFiles.length > 0 && fileRejections.length > 0) {
-    text = <h1>Multiple files<br/>Please select one image</h1>
+    text = <h2>Multiple files<br/>Please select one image</h2>
   } else if (fileRejections.length > 0) {
     switch (fileRejections[0].errors[0].code) {
-      case "too-many-files": text = <h1>Multiple files<br/>Please select one image</h1>; break
-      case "file-invalid-type": text = <h1>Unsupported file type<br/>Please use JPEG or PNG</h1>; break
-      case "file-too-large": text = <h1>File size too large<br/>10MB maximum</h1>; break
-      default: text = <h1>Choose an image<br/>{canDragDrop && `or drag it here`}</h1>
+      case "too-many-files": text = <h2>Multiple files<br/>Please select one image</h2>; break
+      case "file-invalid-type": text = <h2>Unsupported file type<br/>Please use JPEG or PNG</h2>; break
+      case "file-too-large": text = <h2>File size too large<br/>10MB maximum</h2>; break
+      default: text = <h2>Choose an image<br/>{canDragDrop && `or drag it here`}</h2>
     }
   } else if (err) {
     text = err

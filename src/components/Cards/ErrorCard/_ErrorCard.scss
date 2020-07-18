@@ -1,0 +1,28 @@
+@import '../../../scss/variables';
+
+.error-card {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  background: $white;
+  border: 1px solid $color-1;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 7px;
+  text-align: center;
+  
+  h5 {
+    color: $favourite;
+  }
+
+  button {
+    margin-top: 10px;
+    
+    h5 {
+      color: $color-3;
+    }
+  }
+}
