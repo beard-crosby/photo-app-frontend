@@ -8,7 +8,7 @@ import FormSection from '../../UI/FormSection'
 import { LogIn } from 'react-feather'
 import PropTypes from 'prop-types'
 
-const AuthCard = ({ user, setUser, setLoading, formErrors, setFormErrors, history, style }) => {
+const AuthCard = ({ user, setUser, setLoading, formErrors, history, style }) => {
   const [ formValid, setFormValid ] = useState(false)
   const [ form, setForm ] = useState({
     email: "",
@@ -48,7 +48,6 @@ AuthCard.propTypes = {
   setUser: PropTypes.func.isRequired,       // setUser function from context.
   setLoading: PropTypes.func.isRequired,    // setLoading function from context.
   formErrors: PropTypes.string.isRequired,  // setForm function on which this component is called for.
-  setFormErrors: PropTypes.func.isRequired, // setFormErrors on which page this component is called for.
   history: PropTypes.object,                // history object from react-router-dom.
   style: PropTypes.object,                  // pass up style.
 }

@@ -21,8 +21,7 @@ const Auth = ({ history }) => {
         user={user} 
         setUser={setUser} 
         setLoading={setLoading}
-        formErrors={formErrors} 
-        setFormErrors={setFormErrors} 
+        formErrors={formErrors}
         history={history} 
         style={{ width: 343, marginBottom: 7 }}/>
       {formErrors && <ErrorCard formErrors={formErrors} setFormErrors={setFormErrors}/>}
