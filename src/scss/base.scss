@@ -56,6 +56,10 @@ label {
   display: flex;
   justify-content: space-between;
 
+  .error {
+    color: $favourite;
+  }
+
   p {
     animation: 0.3s ease-out fadeIn;
   }

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 const FormSection = ({ label, form, setForm, setFormErrors, textarea, onFocus, placeholder, defaultValue, minLength, maxLength, forgot }) => {
   const [ targetLength, setTargetLength ] = useState(0)
   const [ minLen, setMinLen ] = useState(null)
+  const [ error, setError ] = useState(null)
 
   let type = label
   switch (label) {
@@ -28,7 +29,11 @@ const FormSection = ({ label, form, setForm, setFormErrors, textarea, onFocus, p
 
     const length = e.target.value.length
     setTargetLength(length)
-    updateForm(e, form, setFormErrors)
+
+    if (setFormErrors) {
+      setFormErrors(updateForm(e, form))
+      updateForm(e, form) !== "" ? setError("error") : setError(null)
+    }
 
     if (length > 0 && length < minLength) {
       setMinLen(<p>{`${minLength} characters minimum`}</p>)
@@ -40,7 +45,7 @@ const FormSection = ({ label, form, setForm, setFormErrors, textarea, onFocus, p
   return (
     <>
       <label htmlFor={label.toLowerCase()}>
-        <h5>{label}</h5>
+        <h5 className={error}>{label}</h5>
         {forgot && targetLength === 0 && <Link to="/forgot"><h6>Forgot?</h6></Link>}
         {minLen ? minLen : maxLength && targetLength > maxLength - 20 && <p>{`${maxLength - targetLength} characters left`}</p>}
       </label>
