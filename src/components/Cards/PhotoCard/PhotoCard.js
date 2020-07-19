@@ -130,7 +130,7 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, setPostClicked, history
       </div>
       <div className={styles.sidebar}>
         <div className={styles.sidebarWrapper}>
-          <ProfileCard user={post.author} style={{ padding: 10 }} sidebar/>
+          <ProfileCard user={post.author} style={{ padding: 10 }} isAuthor={isAuthor} sidebar/>
           <div className={styles.uiBar}>
             <Button text="Details" icon={sidebar === "details" ? <ChevronUp/> : <ChevronDown/>} onClick={() => sidebar === "details" ? setSidebar(null) : setSidebar("details")} iconRight p/>
             {!isAuthor && <Heart className={favClicked} onClick={() => favClickedHandler()}/>}

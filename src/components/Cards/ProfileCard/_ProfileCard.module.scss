@@ -58,3 +58,20 @@
     }
   }
 }
+
+.isAuthor:hover {
+  cursor: default;
+
+  img {
+    cursor: default;
+  }
+
+  p {
+    opacity: 1;
+    cursor: default;
+  }
+
+  .viewProfile {
+    opacity: 0;
+  }
+}
