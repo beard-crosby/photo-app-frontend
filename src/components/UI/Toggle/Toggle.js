@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './_Toggle.module.scss'
 import Slider from './Slider/Slider'
 import PropTypes from 'prop-types'
 
 const Toggle = ({ text, Default, onClick }) => {
   const [ slide, setSlide ] = useState(Default)
+
+  useEffect(() => setSlide(Default), [Default])
 
   const onClickHandler = () => {
     setSlide(!slide)
