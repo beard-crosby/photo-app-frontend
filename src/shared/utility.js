@@ -145,3 +145,100 @@ export const updateSettingsHandler = (user, setUser, passed, history) => {
   setUser({...user, settings: {...user.settings, [passed]: !user.settings[passed]}})
   updateSettings({...user, settings: {...user.settings, [passed]: !user.settings[passed]}}, setUser, history)
 }
+
+export const populatedUser = `
+  _id
+  status
+  tokens
+  logged_in_at
+  geolocation
+  name
+  email
+  website
+  info
+  profile_picture
+  settings
+  posts {
+    _id
+    img
+    title
+    description
+    created_at
+    updated_at
+    author {
+      _id
+      name
+      email
+      website
+      profile_picture
+    }
+    comments {
+      comment
+      created_at
+      updated_at
+      author {
+        _id
+        name
+        profile_picture
+      }
+    }
+  }
+  following {
+    _id
+    status
+    name
+    email
+    website
+    profile_picture
+    posts {
+      _id
+      img
+      title
+      description
+      created_at
+      updated_at
+      author {
+        _id
+        name
+        email
+        website
+        profile_picture
+      }
+      comments {
+        comment
+        created_at
+        updated_at
+        author {
+          _id
+          name
+          profile_picture
+        }
+      }
+    }
+  }
+  favourites {
+    _id
+    img
+    title
+    description
+    created_at
+    updated_at
+    author {
+      _id
+      name
+      email
+      website
+      profile_picture
+    }
+    comments {
+      comment
+      created_at
+      updated_at
+      author {
+        _id
+        name
+        profile_picture
+      }
+    }
+  }
+`

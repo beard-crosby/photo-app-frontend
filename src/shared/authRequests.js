@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { logout, logInSuccess } from './localStorage'
-import { useTokens, headers, checkGeolocation, checkAuth, removeKey, isDuplicateProfilePicture } from './utility'
+import { useTokens, headers, checkGeolocation, checkAuth, removeKey, isDuplicateProfilePicture, populatedUser } from './utility'
 
 export const createUser = (data, user, setUser, setLoading, history) => {
   setLoading(true)
@@ -84,100 +84,7 @@ export const login = (data, user, setUser, setLoading, history) => {
     query: `
       query Login($email: String!, $password: String, $oAuthToken: String) {
         login(email: $email, password: $password, oAuthToken: $oAuthToken) {
-          _id
-          status
-          tokens
-          logged_in_at
-          geolocation
-          name
-          email
-          website
-          info
-          profile_picture
-          settings
-          posts {
-            _id
-            img
-            title
-            description
-            created_at
-            updated_at
-            author {
-              _id
-              name
-              email
-              website
-              profile_picture
-            }
-            comments {
-              comment
-              created_at
-              updated_at
-              author {
-                _id
-                name
-                profile_picture
-              }
-            }
-          }
-          following {
-            _id
-            status
-            name
-            email
-            website
-            profile_picture
-            posts {
-              _id
-              img
-              title
-              description
-              created_at
-              updated_at
-              author {
-                _id
-                name
-                email
-                website
-                profile_picture
-              }
-              comments {
-                comment
-                created_at
-                updated_at
-                author {
-                  _id
-                  name
-                  profile_picture
-                }
-              }
-            }
-          }
-          favourites {
-            _id
-            img
-            title
-            description
-            created_at
-            updated_at
-            author {
-              _id
-              name
-              email
-              website
-              profile_picture
-            }
-            comments {
-              comment
-              created_at
-              updated_at
-              author {
-                _id
-                name
-                profile_picture
-              }
-            }
-          }
+          ${populatedUser}
         }
       }
     `
@@ -456,5 +363,36 @@ export const invalidateTokens = (user, setUser, history) => {
     }
   }).catch(err => {
     process.env.NODE_ENV === 'development' && console.log(`InvalidateTokens: ${err}`)
+  })
+}
+
+export const findUser = (userID, user, setUser, history) => {
+  axios.post('', {
+    variables: {
+      _id: userID,
+    },
+    query: `
+      query User($_id: ID!) {
+        user(_id: $_id) {
+          ${populatedUser}
+        }
+      }
+    `
+  }, {headers: headers(user.token)}).then(res => {
+    if (res.data.errors) {
+      checkAuth(res, setUser, history)
+      process.env.NODE_ENV === 'development' && console.log(`User: ${res.data.errors[0].message}`)
+    } else {
+      setUser({
+        ...user,
+        email: res.data.data.user.email,
+        website: res.data.data.user.website,
+        token: useTokens(res.data.data.user.tokens, user),
+      })
+
+      process.env.NODE_ENV === 'development' && console.log(res)
+    }
+  }).catch(err => {
+    process.env.NODE_ENV === 'development' && console.log(`User: ${err}`)
   })
 }

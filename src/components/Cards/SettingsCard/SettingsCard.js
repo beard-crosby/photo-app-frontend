@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Button from '../../UI/Button'
 import Toggle from '../../UI/Toggle'
 import { updateSettingsHandler } from '../../../shared/utility'
-import { updateBasic } from '../../../shared/authRequests'
+import { updateBasic, findUser } from '../../../shared/authRequests'
 import { checkFormValid } from '../../../shared/formValidation'
 import FormSection from '../../UI/FormSection'
 import PropTypes from 'prop-types'
@@ -19,10 +19,30 @@ const SettingsCard = ({ user, setUser, history }) => {
   }
 
   const [ form, setForm ] = useState(formDefault)
-  
+
   useEffect(() => {
     tab && checkFormValid(user, {[tab]: form[tab]}, formErrors, setFormValid)
   }, [tab, user, form, formErrors])
+  
+  useEffect(() => {
+    if (tab === "email" && user.email === "") {
+      findUser(user._id, user, setUser, history)
+    } else if (tab === "website" && user.website === "") {
+      findUser(user._id, user, setUser, history)
+    }
+  }, [tab, user, setUser, history])
+
+  useEffect(() => {
+    return () => {
+      if (!user.settings.display_email && user.email.length !== 0 && !user.settings.display_website && user.website.length !== 0) {
+        setUser({...user, email: "", website: ""})
+      } else if (!user.settings.display_email && user.email.length !== 0) {
+        setUser({...user, email: ""})
+      } else if (!user.settings.display_website && user.website.length !== 0) {
+        setUser({...user, website: ""})
+      }
+    }
+  }, [user])
 
   const onSubmitHandler = e => {
     e.preventDefault()
