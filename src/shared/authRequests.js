@@ -383,31 +383,23 @@ export const updateFavourites = (user, setUser, post, action, setPostClicked, hi
 }
 
 export const updateBasic = (form, user, setUser, history) => {
-  if (form.name) {
-    if (form.name === "delete") {
-      return setUser({...user, formErrors: "You cannot delete your name! Feel free to use a fake name!"})
-    } else if (!/^[a-zA-Z\s-']{6,30}$/.test(form.name)) {
-      return setUser({...user, formErrors: "Your Name must only have letters, spaces, -' characters and be 6-15 characters in length."})
-    } 
-  }
+  if (form.name && !/^[a-zA-Z\s-']{1,30}$/.test(form.name) && form.name.trim() !== "") {
+    return setUser({...user, formErrors: "Your Name cannot contain numbers or special characters other than hyphens and apostrophes."})
+  } 
   
-  if (form.email && form.email !== "delete") {
-    if (!/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(form.email)) { //eslint-disable-line
-      return setUser({...user, formErrors: "Please enter a valid email address."})
-    } 
-  }
+  if (form.email && !/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(form.email) && form.email.trim() !== "") { //eslint-disable-line
+    return setUser({...user, formErrors: "Please enter a valid email address."})
+  } 
 
-  if (form.website && form.website !== "delete") {
-    if (!/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(form.website)) { //eslint-disable-line
-      return setUser({...user, formErrors: "Please enter a valid URL"})
-    }
+  if (form.website && !/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(form.website) && form.website.trim() !== "") { //eslint-disable-line
+    return setUser({...user, formErrors: "Please enter a valid URL"})
   }
 
   axios.post('', {
     variables: {
-      name: form.name && form.name,
-      email: form.email && form.email,
-      website: form.website && form.website,
+      name: form.name,
+      email: form.email,
+      website: form.website,
     },
     query: `
       mutation UpdateBasic($name: String, $email: String, $website: String) {
@@ -431,6 +423,11 @@ export const updateBasic = (form, user, setUser, history) => {
         email: user.email === res.data.data.updateBasic.email ? user.email : res.data.data.updateBasic.email,
         website: user.website === res.data.data.updateBasic.website ? user.website : res.data.data.updateBasic.website,
       })
+
+      user.name !== res.data.data.updateBasic.name && localStorage.setItem('name', res.data.data.updateBasic.name)
+      user.email !== res.data.data.updateBasic.email && localStorage.setItem('email', res.data.data.updateBasic.email)
+      user.website !== res.data.data.updateBasic.website && localStorage.setItem('website', res.data.data.updateBasic.website)
+
       history.location.pathname === "/signedup" && history.push("/")
       process.env.NODE_ENV === 'development' && console.log(res)
     }

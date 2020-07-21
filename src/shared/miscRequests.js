@@ -20,17 +20,13 @@ export const updateSettings = (user, setUser, history) => {
       checkAuth(res, setUser, history)
       process.env.NODE_ENV === 'development' && console.log(`UpdateSettings Error: ${res.data.errors[0].message}`)
     } else {
-      const tokens = res.data.data.updateSettings.tokens
-      tokens && setUser({...user, token: useTokens(tokens, user)})
-      const email = res.data.data.updateSettings.email
-      const website = res.data.data.updateSettings.website
-      if (email !== "" && email !== user.email && website !== "" && website !== user.website) {
-        setUser({...user, email: email, website: website})
-      } else if (email !== "" && email !== user.email) {
-        setUser({...user, email: email})
-      } else if (website !== "" && website !== user.website) {
-        setUser({...user, website: website})
-      }
+      setUser({
+        ...user, 
+        email: res.data.data.updateSettings.email, 
+        website: res.data.data.updateSettings.website, 
+        token: useTokens(res.data.data.updateSettings.tokens, user)
+      })
+
       localStorage.setItem('settings', JSON.stringify(user.settings))
       process.env.NODE_ENV === 'development' && console.log(res)
     }
