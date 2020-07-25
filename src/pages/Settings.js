@@ -10,7 +10,7 @@ import SettingsCard from '../components/Cards/SettingsCard/SettingsCard'
 import { updateSettingsHandler } from '../shared/utility'
 
 const Settings = ({ history }) => {
-  const { user, setUser } = useContext(Context)
+  const { user, setUser, wall, setWall } = useContext(Context)
 
   const logoutHandler = () => {
     updateStatus(user, "offline")
@@ -21,7 +21,7 @@ const Settings = ({ history }) => {
   return (
     <div className="flex-col">
       <div className="flex-row">
-        <ProfileCard user={user}/>
+        <ProfileCard user={user} setUser={setUser} history={history}/>
       </div>
       <div className="flex-row" style={{ flexGrow: 1, alignItems: "flex-start" }}>
         <div className="flex-col" style={{ alignItems: "flex-start" }}>
@@ -55,7 +55,7 @@ const Settings = ({ history }) => {
           </div>
         </div>
         <div className="flex-col" style={{ alignItems: "flex-end" }}>
-          <SettingsCard user={user} setUser={setUser} history={history}/>
+          <SettingsCard user={user} setUser={setUser} wall={wall} setWall={setWall} history={history}/>
           <div className="model" style={{ width: 340 }}>
             <div className="top">
               <h5 className="title-left">PRIVACY</h5>

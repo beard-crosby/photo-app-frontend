@@ -168,12 +168,12 @@ export const updateInfo = (user, setUser, history) => {
   })
 }
 
-export const updatePP = (user, setUser, wall, setWall, history, setLoading) => {
+export const updatePP = (user, setUser, wall, setWall, history, setSpinner) => {
   if (isDuplicateProfilePicture(user, user.file.url)) {
     return setUser({...user, formErrors: "Duplicate Post!", file: { uploaded: false }})
   }
 
-  setLoading(true)
+  setSpinner(true)
   axios.post('', {
     variables: {
       _id: user._id,
@@ -221,12 +221,11 @@ export const updatePP = (user, setUser, wall, setWall, history, setLoading) => {
       localStorage.setItem('profile_picture', res.data.data.updatePP.profile_picture)
       localStorage.setItem('posts', JSON.stringify(newPosts))
       localStorage.setItem('wall', JSON.stringify(newWall))
-      history.push("/")
       process.env.NODE_ENV === 'development' && console.log(res)
     }
-    setLoading(false)
+    setSpinner(false)
   }).catch(err => {
-    setLoading(false)
+    setSpinner(false)
     process.env.NODE_ENV === 'development' && console.log(`UpdatePP: ${err.response.data.errors[0].message}`)
   })
 }

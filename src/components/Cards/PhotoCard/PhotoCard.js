@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import ProfileCard from '../ProfileCard'
-import { withRouter } from 'react-router-dom'
 import styles from './_PhotoCard.module.scss'
 import PropTypes from 'prop-types'
 import moment from 'moment'
@@ -106,7 +105,7 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, setPostClicked, history
           <p onClick={() => setSidebar(null)}>Close</p>
         </div>
       )
-      default: return post.comments.map((comment, i) => <Comment key={i} user={user} comment={comment}/>)
+      default: return post.comments.map((comment, i) => <Comment key={i} user={user} setUser={setUser} comment={comment} history={history}/>)
     }
   }
 
@@ -130,7 +129,7 @@ const PhotoCard = ({ user, setUser, wall, setWall, post, setPostClicked, history
       </div>
       <div className={styles.sidebar}>
         <div className={styles.sidebarWrapper}>
-          <ProfileCard user={post.author} style={{ padding: 10 }} isAuthor={isAuthor} sidebar/>
+          <ProfileCard user={post.author} setUser={setUser} style={{ padding: 10 }} isAuthor={isAuthor} history={history} sidebar/>
           <div className={styles.uiBar}>
             <Button text="Details" icon={sidebar === "details" ? <ChevronUp/> : <ChevronDown/>} onClick={() => sidebar === "details" ? setSidebar(null) : setSidebar("details")} iconRight p/>
             {!isAuthor && <Heart className={favClicked} onClick={() => favClickedHandler()}/>}
@@ -163,6 +162,7 @@ PhotoCard.propTypes = {
   wall: PropTypes.array.isRequired,   // wall Array from context.
   setWall: PropTypes.func.isRequired, // setWall function from contet.
   post: PropTypes.object.isRequired,  // Post Object.
+  history: PropTypes.object,          // History object from react-router-dom. 
 }
 
-export default withRouter(PhotoCard)
+export default PhotoCard

@@ -2,8 +2,8 @@ import React from 'react'
 import styles from './_Spinner.module.scss'
 import PropTypes from 'prop-types'
 
-const Spinner = ({ user, noBG }) => 
-  <div className={`${styles.spinnerBG} ${user.settings.dark_mode && styles.darkModeBG} ${noBG && styles.noBG}`}>
+const Spinner = ({ user, noBG, whiteBG }) => 
+  <div className={`${styles.spinnerBG} ${user.settings.dark_mode && styles.darkModeBG} ${noBG && styles.noBG} ${whiteBG && styles.whiteBG}`}>
     <div className={styles.skFoldingCube}>
       <div className={`${styles.skCube1} ${styles.skCube} ${user.settings.dark_mode && styles.darkMode}`}/>
       <div className={`${styles.skCube2} ${styles.skCube} ${user.settings.dark_mode && styles.darkMode}`}/>

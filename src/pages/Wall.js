@@ -3,7 +3,7 @@ import { Context } from '../App'
 import PhotoCard from '../components/Cards/PhotoCard'
 import moment from 'moment'
 
-const Wall = () => { // Render posts of followed users in order of date time.
+const Wall = ({ history }) => { // Render posts of followed users in order of date time.
   const { user, setUser, wall, setWall } = useContext(Context)
 
   const wallArr = [] // Array of posts to be rendered. This updates every page load.
@@ -38,7 +38,17 @@ const Wall = () => { // Render posts of followed users in order of date time.
     temp.img && wallArr.push(temp) // If temp obj has an img key, push to wallArr. I.E. don't try and render the temp init data.
   }
 
-  return wall.map((post, i) => <PhotoCard key={i} user={user} setUser={setUser} wall={wall} setWall={setWall} post={post}/>)
+  return wall.map((post, i) => 
+    <PhotoCard 
+      key={i} 
+      user={user} 
+      setUser={setUser} 
+      wall={wall} 
+      setWall={setWall} 
+      post={post}
+      history={history}
+    />
+  )
 }
 
 export default Wall

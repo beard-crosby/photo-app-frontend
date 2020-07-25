@@ -21,7 +21,7 @@ const Nav = ({ user, setUser, history }) => {
             history.location.pathname === "/auth" ? 
             <Link to="/"><h5>CREATE AN ACCOUNT</h5></Link> : 
             <Link to="/auth"><h5>LOGIN</h5></Link> }
-          {user.token && <Link to="/profile"><ProfilePicture user={user} heightWidth={25} disable/></Link>}
+          {user.token && <Link to="/profile"><ProfilePicture user={user} setUser={setUser} heightWidth={25} history={history} disable/></Link>}
         </div>
       </div>
       {user.token &&

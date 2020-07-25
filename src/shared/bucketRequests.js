@@ -2,7 +2,7 @@ import axios from "axios"
 import { useTokens, headers, checkAuth, formatFilename, isDuplicatePost, isDuplicateProfilePicture } from './utility'
 
 export const signS3 = (file, user, setUser, history) => {
-  const filename = history.location.pathname === "/changepp" || history.location.pathname === "/signedup" ? 
+  const filename = history.location.pathname === "/signedup" || history.location.pathname === "/settings" ? 
   formatFilename(user._id, file.name, "profile-picture/") : 
   formatFilename(user._id, file.name, "")
 
