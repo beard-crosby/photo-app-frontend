@@ -10,6 +10,9 @@ import { Upload } from 'react-feather'
 import Spinner from '../../Spinner'
 import PropTypes from 'prop-types'
 
+let tabCount = 0
+let tabStore = null
+
 const SettingsCard = ({ user, setUser, wall, setWall, history }) => {
   const [ tab, setTab ] = useState("")
   const [ formErrors, setFormErrors ] = useState("")
@@ -25,48 +28,54 @@ const SettingsCard = ({ user, setUser, wall, setWall, history }) => {
   const [ form, setForm ] = useState(formDefault)
 
   useEffect(() => {
+    tabStore !== tab && tabCount++
+    tabStore = tab
+
     if (user.changePP) {
       setTab("changepp")
       setUser(removeKey(user, "changePP"))
     }
 
-    tab && tab !== "changepp" && checkFormValid(user, {[tab]: form[tab]}, formErrors, setFormValid)
-  }, [tab, user, setUser, form, formErrors])
-  
-  useEffect(() => {
-    if (tab === "email" && user.email === "") {
-      findUser(user._id, user, setUser, history)
-    } else if (tab === "website" && user.website === "") {
+    if (tab === "email" && user.email === "" || tab === "website" && user.website === "") { // eslint-disable-line no-mixed-operators
       findUser(user._id, user, setUser, history)
     }
-  }, [tab, user, setUser, history])
+    
+    if (tab) {
+      tab !== "changepp" && tab !== "password" && checkFormValid(user, {[tab]: form[tab]}, formErrors, setFormValid)
+    } else {
+      setFormErrors("")
+      user.formErrors && setUser(removeKey(user, "formErrors"))
+    }
+
+    form[tab] === user[tab] && setFormValid(false)
+    user.file.uploaded && setFormValid(true)
+  }, [tab, user, setUser, form, formErrors, history])
 
   useEffect(() => {
-    user.file.uploaded && setFormValid(true)
-
     return () => {
-      if (!user.settings.display_email && user.email.length !== 0 && !user.settings.display_website && user.website.length !== 0) {
-        setUser({...user, email: "", website: ""})
-      } else if (!user.settings.display_email && user.email.length !== 0) {
-        setUser({...user, email: ""})
-      } else if (!user.settings.display_website && user.website.length !== 0) {
-        setUser({...user, website: ""})
+      if (tabStore === tab) {
+        if (!user.settings.display_email && user.email.length !== 0 && !user.settings.display_website && user.website.length !== 0) {
+          setUser({...user, email: "", website: ""})
+        } else if (!user.settings.display_email && user.email.length !== 0) {
+          setUser({...user, email: ""})
+        } else if (!user.settings.display_website && user.website.length !== 0) {
+          setUser({...user, website: ""})
+        }
       }
     }
-  }, [user]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [tab, user, setUser])
 
   const onSubmitHandler = e => {
     e.preventDefault()
 
     if (tab === "changepp") {
-      updatePP(user, setUser, wall, setWall, history, setSpinner)
+      updatePP(user, setUser, wall, setWall, history, setSpinner, setTab)
     } else {
-      updateBasic({[tab]: form[tab]}, user, setUser, history)
+      updateBasic({[tab]: form[tab]}, user, setUser, history, setTab)
     }
 
     setFormValid(false)
-    setForm(formDefault)
-    setTab("")
+    setForm({...formDefault, [tab]: form[tab]})
   }
 
   return (

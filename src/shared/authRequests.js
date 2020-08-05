@@ -168,7 +168,7 @@ export const updateInfo = (user, setUser, history) => {
   })
 }
 
-export const updatePP = (user, setUser, wall, setWall, history, setSpinner) => {
+export const updatePP = (user, setUser, wall, setWall, history, setSpinner, setTab) => {
   if (isDuplicateProfilePicture(user, user.file.url)) {
     return setUser({...user, formErrors: "Duplicate Post!", file: { uploaded: false }})
   }
@@ -223,6 +223,7 @@ export const updatePP = (user, setUser, wall, setWall, history, setSpinner) => {
       localStorage.setItem('wall', JSON.stringify(newWall))
       process.env.NODE_ENV === 'development' && console.log(res)
     }
+    setTab && setTab("")
     setSpinner(false)
   }).catch(err => {
     setSpinner(false)
@@ -288,7 +289,7 @@ export const updateFavourites = (user, setUser, post, action, setPostClicked, hi
   })
 }
 
-export const updateBasic = (form, user, setUser, history) => {
+export const updateBasic = (form, user, setUser, history, setTab) => {
   if (form.name && !/^[a-zA-Z\s-']{1,30}$/.test(form.name) && form.name.trim() !== "") {
     return setUser({...user, formErrors: "Your Name cannot contain numbers or special characters other than hyphens and apostrophes."})
   } 
@@ -335,6 +336,7 @@ export const updateBasic = (form, user, setUser, history) => {
       user.website !== res.data.data.updateBasic.website && localStorage.setItem('website', res.data.data.updateBasic.website)
 
       history.location.pathname === "/signedup" && history.push("/")
+      setTab && setTab("")
       process.env.NODE_ENV === 'development' && console.log(res)
     }
   }).catch(err => {
